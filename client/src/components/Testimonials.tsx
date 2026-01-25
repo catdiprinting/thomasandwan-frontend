@@ -82,7 +82,7 @@ export default function TestimonialsAndResults() {
             <Carousel opts={{ align: "start", loop: true }}>
               <CarouselContent>
                 {testimonials.map((t, idx) => (
-                  <CarouselItem key={idx} className="md:basis-1/2 lg:basis-1/1 pl-6">
+                  <CarouselItem key={idx} className="md:basis-1/2 lg:basis-1/1 pl-8 pt-8 pb-4">
                      <Card className="border-none shadow-lg bg-white h-full relative overflow-visible">
                         <div className="absolute -top-4 -left-4 bg-secondary text-white p-3 rounded-full shadow-lg">
                            <Quote className="w-6 h-6 fill-current" />
