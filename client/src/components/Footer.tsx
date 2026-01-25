@@ -5,9 +5,9 @@ import { Textarea } from "@/components/ui/textarea";
 
 export default function Footer() {
   return (
-    <footer className="bg-primary text-white pt-20 pb-10">
+    <footer className="bg-primary text-white pt-12 pb-8">
       <div className="container mx-auto px-4 md:px-6">
-        <div className="grid lg:grid-cols-2 gap-16 mb-16">
+        <div className="grid lg:grid-cols-2 gap-16 mb-12">
           
           {/* Contact Info */}
           <div className="space-y-8">
@@ -15,7 +15,7 @@ export default function Footer() {
               <img 
                 src="/images/logo.webp" 
                 alt="Thomas & Wan" 
-                className="h-16 md:h-20 w-auto object-contain mb-6 invert brightness-0 grayscale opacity-90"
+                className="h-12 md:h-14 w-auto object-contain mb-4 invert brightness-0 grayscale opacity-90"
               />
               <p className="text-secondary font-alt text-xl italic">Attorneys at Law</p>
             </div>
