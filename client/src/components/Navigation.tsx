@@ -32,8 +32,12 @@ export default function Navigation() {
         <div className="container mx-auto px-4 md:px-6 flex justify-between items-center">
           <div className="flex items-center gap-6">
              <div className="flex items-center gap-2 opacity-80 hover:opacity-100 transition-opacity">
+               <Mail className="w-3 h-3 text-secondary" />
+               <a href="mailto:info@thomasandwan.com" className="tracking-wide hover:text-secondary transition-colors">info@thomasandwan.com</a>
+             </div>
+             <div className="flex items-center gap-2 opacity-80 hover:opacity-100 transition-opacity">
                <Phone className="w-3 h-3 text-secondary" />
-               <span className="tracking-wide">(713) 529-1177</span>
+               <a href="tel:713-529-1177" className="tracking-wide hover:text-secondary transition-colors">(713) 529-1177</a>
              </div>
              <div className="flex items-center gap-2 opacity-80 hover:opacity-100 transition-opacity">
                <MapPin className="w-3 h-3 text-secondary" />
@@ -124,6 +128,14 @@ export default function Navigation() {
                 Contact
               </a>
             </Link>
+            <div className="flex flex-col gap-2 mt-2">
+               <a href="tel:713-529-1177" className="flex items-center gap-2 text-primary font-medium text-lg">
+                 <Phone className="w-5 h-5 text-secondary" /> (713) 529-1177
+               </a>
+               <a href="mailto:info@thomasandwan.com" className="flex items-center gap-2 text-primary font-medium text-lg">
+                 <Mail className="w-5 h-5 text-secondary" /> info@thomasandwan.com
+               </a>
+            </div>
             <Button className="w-full bg-secondary hover:bg-secondary/90 text-white font-bold rounded-none mt-2">
               Call Now
             </Button>
