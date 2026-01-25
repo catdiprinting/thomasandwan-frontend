@@ -11,7 +11,7 @@ export default function TrustBar() {
              <img 
                src="/images/trust-badges.png" 
                alt="Award Badges: Million Dollar Advocates, Super Lawyers, Top 25 Trial Lawyers" 
-               className="h-16 md:h-20 object-contain grayscale opacity-80 hover:grayscale-0 hover:opacity-100 transition-all duration-500"
+               className="h-20 md:h-28 object-contain transition-all duration-500"
              />
           </div>
 

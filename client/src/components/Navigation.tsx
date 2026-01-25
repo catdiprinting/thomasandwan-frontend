@@ -64,7 +64,7 @@ export default function Navigation() {
               <img 
                 src="/images/logo.webp" 
                 alt="Thomas & Wan" 
-                className={cn("w-auto object-contain transition-all duration-300", scrolled ? "h-10" : "h-12 md:h-16")}
+                className={cn("w-auto object-contain transition-all duration-300", scrolled ? "h-8" : "h-10 md:h-12")}
               />
             </a>
           </Link>
