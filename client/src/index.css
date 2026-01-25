@@ -34,43 +34,40 @@
 }
 
 :root {
-  /* Primary: #1C3D5A (Deep Navy) -> 208 53% 23% */
-  /* Secondary: #C5A572 (Elegant Gold) -> 37 45% 61% */
-  /* Accent: #8B4513 (Warm Bronze) -> 25 73% 31% */
-  /* Highlight: #E8D5C4 (Cream) -> 28 39% 84% */
-  /* Text: #2C2C2C (Charcoal) -> 0 0% 17% */
-  /* Background: #FFFFFF (White) -> 0 0% 100% */
-  /* Paper: #F9F7F5 (Off-white/Paper) -> 30 14% 97% */
-
-  --background: 30 14% 97%; 
-  --foreground: 208 53% 23%; /* Navy text for elegance */
+  /* Updated Colors based on feedback */
+  /* Primary: #1F2937 (Dark Grey/Blue) -> 215 28% 17% */
+  /* Secondary: #F59E0B (Vibrant Orange/Gold from original site) -> 35 92% 50% */
+  /* Accent: #0F172B (Darker Navy from JSON) -> 222 47% 11% */
+  
+  --background: 0 0% 100%; 
+  --foreground: 215 28% 17%;
 
   --card: 0 0% 100%;
-  --card-foreground: 208 53% 23%;
+  --card-foreground: 215 28% 17%;
 
   --popover: 0 0% 100%;
-  --popover-foreground: 208 53% 23%;
+  --popover-foreground: 215 28% 17%;
 
-  --primary: 208 53% 23%; /* Navy */
+  --primary: 215 28% 17%; /* Dark Grey */
   --primary-foreground: 0 0% 100%;
 
-  --secondary: 37 45% 61%; /* Gold */
-  --secondary-foreground: 208 53% 23%;
+  --secondary: 35 92% 50%; /* Vibrant Orange/Gold */
+  --secondary-foreground: 215 28% 17%;
 
-  --muted: 28 39% 84%; /* Cream */
-  --muted-foreground: 208 40% 35%;
+  --muted: 215 20% 95%; /* Light Grey */
+  --muted-foreground: 215 28% 40%;
 
-  --accent: 25 73% 31%; /* Bronze */
+  --accent: 222 47% 11%; /* Darker Navy */
   --accent-foreground: 0 0% 100%;
 
   --destructive: 0 84.2% 60.2%;
   --destructive-foreground: 0 0% 98%;
 
-  --border: 37 45% 85%; /* Light Gold/Cream border */
-  --input: 37 45% 85%;
-  --ring: 208 53% 23%;
+  --border: 215 20% 90%;
+  --input: 215 20% 90%;
+  --ring: 215 28% 17%;
 
-  --radius: 0rem; /* Sharp edges for professional look */
+  --radius: 0rem;
 }
 
 @layer base {
@@ -86,20 +83,20 @@
 }
 
 .text-gold {
-    color: hsl(37 45% 61%);
+    color: hsl(35 92% 50%);
 }
 .bg-gold {
-    background-color: hsl(37 45% 61%);
+    background-color: hsl(35 92% 50%);
 }
 .border-gold {
-    border-color: hsl(37 45% 61%);
+    border-color: hsl(35 92% 50%);
 }
 
 .text-navy {
-    color: hsl(208 53% 23%);
+    color: hsl(215 28% 17%);
 }
 .bg-navy {
-    background-color: hsl(208 53% 23%);
+    background-color: hsl(215 28% 17%);
 }
 
 .font-alt {

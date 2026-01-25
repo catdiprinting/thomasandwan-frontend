@@ -1,11 +1,10 @@
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
-import { Link } from "wouter";
 
 export default function Hero() {
   return (
-    <section className="relative min-h-[90vh] flex items-center pt-20 overflow-hidden bg-[#F9F7F5]">
+    <section className="relative min-h-[90vh] flex items-center pt-20 overflow-hidden bg-white">
       <div className="container mx-auto px-4 md:px-6 grid md:grid-cols-2 gap-12 items-center">
         
         {/* Text Content */}
@@ -33,10 +32,10 @@ export default function Hero() {
           </p>
           
           <div className="flex flex-col sm:flex-row gap-4 pt-4">
-            <Button size="lg" className="bg-primary hover:bg-primary/90 text-white rounded-none h-14 px-8 text-base tracking-wide">
+            <Button size="lg" className="bg-secondary hover:bg-secondary/90 text-white rounded-none h-14 px-8 text-base tracking-wide border-0">
               Schedule Free Consultation
             </Button>
-            <Button variant="outline" size="lg" className="border-primary text-primary hover:bg-primary/5 rounded-none h-14 px-8 text-base tracking-wide group">
+            <Button variant="outline" size="lg" className="border-2 border-primary text-primary hover:bg-primary hover:text-white rounded-none h-14 px-8 text-base tracking-wide group">
               View Our Results <ArrowRight className="ml-2 w-4 h-4 transition-transform group-hover:translate-x-1" />
             </Button>
           </div>
@@ -62,7 +61,7 @@ export default function Hero() {
         >
           <div className="relative z-10">
             <div className="absolute -top-6 -right-6 w-full h-full border-2 border-secondary/30 z-0 hidden md:block" />
-            <div className="aspect-[4/5] overflow-hidden shadow-2xl relative bg-white p-2">
+            <div className="aspect-[4/5] overflow-hidden shadow-2xl relative bg-white p-2 border border-gray-100">
                <img 
                  src="/images/partners-hero.jpg" 
                  alt="Linda Thomas and Michelle Wan" 
@@ -72,8 +71,8 @@ export default function Hero() {
           </div>
           
           {/* Decorative Elements */}
-          <div className="absolute -bottom-10 -left-10 w-40 h-40 bg-muted/50 rounded-full blur-3xl -z-10" />
-          <div className="absolute top-10 right-10 w-60 h-60 bg-secondary/10 rounded-full blur-3xl -z-10" />
+          <div className="absolute -bottom-10 -left-10 w-40 h-40 bg-secondary/10 rounded-full blur-3xl -z-10" />
+          <div className="absolute top-10 right-10 w-60 h-60 bg-primary/5 rounded-full blur-3xl -z-10" />
         </motion.div>
       </div>
     </section>

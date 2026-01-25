@@ -36,13 +36,12 @@ export default function Navigation() {
     >
       <div className="container mx-auto px-4 md:px-6 flex items-center justify-between">
         <Link href="/">
-          <a className="flex flex-col">
-            <span className="font-serif text-2xl md:text-3xl text-primary font-bold leading-tight tracking-tight">
-              Thomas & Wan
-            </span>
-            <span className="text-[10px] md:text-xs uppercase tracking-[0.2em] text-gold font-semibold">
-              Attorneys at Law
-            </span>
+          <a className="flex items-center gap-2">
+            <img 
+              src="/images/logo.webp" 
+              alt="Thomas & Wan" 
+              className="h-12 md:h-16 w-auto object-contain"
+            />
           </a>
         </Link>
 
@@ -60,7 +59,7 @@ export default function Navigation() {
               </a>
             </Link>
           ))}
-          <Button className="bg-secondary hover:bg-secondary/90 text-primary font-bold rounded-none px-6">
+          <Button className="bg-secondary hover:bg-secondary/90 text-white font-bold rounded-none px-6">
             <Phone className="w-4 h-4 mr-2" /> (713) 529-1177
           </Button>
         </div>
@@ -87,7 +86,7 @@ export default function Navigation() {
               </a>
             </Link>
           ))}
-          <Button className="w-full bg-secondary hover:bg-secondary/90 text-primary font-bold rounded-none mt-2">
+          <Button className="w-full bg-secondary hover:bg-secondary/90 text-white font-bold rounded-none mt-2">
             Call Now
           </Button>
         </div>

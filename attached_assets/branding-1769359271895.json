@@ -1,0 +1,79 @@
+{
+  "colorScheme": "light",
+  "fonts": [
+    {
+      "family": "Georgia",
+      "count": 73
+    },
+    {
+      "family": "serif",
+      "count": 73
+    }
+  ],
+  "colors": {
+    "primary": "#1F2937",
+    "accent": "#0F172B",
+    "background": "#FFFFFF",
+    "textPrimary": "#0F172B",
+    "link": "#0F172B"
+  },
+  "typography": {
+    "fontFamilies": {
+      "primary": "Georgia",
+      "heading": "Georgia"
+    },
+    "fontStacks": {
+      "body": [
+        "Georgia",
+        "serif"
+      ],
+      "heading": [
+        "Georgia",
+        "serif"
+      ],
+      "paragraph": [
+        "Georgia",
+        "serif"
+      ]
+    },
+    "fontSizes": {
+      "h1": "72px",
+      "h2": "48px",
+      "body": "18px"
+    }
+  },
+  "spacing": {
+    "baseUnit": 8,
+    "borderRadius": "0px"
+  },
+  "components": {},
+  "images": {
+    "logo": "https://www.thomasandwan.com/wp-content/uploads/2022/03/logo-Thomas-and-Wan.png.webp",
+    "favicon": "https://thomasandwan.replit.app/favicon.png",
+    "ogImage": "https://thomasandwan.replit.app/opengraph.jpg"
+  },
+  "__framework_hints": [],
+  "__llm_logo_reasoning": {
+    "selectedIndex": 5,
+    "reasoning": "Strong indicators: header logo linking to homepage, header location, visible, top-left position, src contains logo, reasonable size. Score: 105 (clear winner by 42 points)",
+    "confidence": 0.9
+  },
+  "__llm_button_reasoning": {
+    "primary": {
+      "index": -1,
+      "text": "N/A",
+      "reasoning": "LLM failed"
+    },
+    "secondary": {
+      "index": -1,
+      "text": "N/A",
+      "reasoning": "LLM failed"
+    },
+    "confidence": 0
+  },
+  "confidence": {
+    "buttons": 0,
+    "colors": 0,
+    "overall": 0
+  }
+}
