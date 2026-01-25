@@ -1,5 +1,6 @@
 import Navigation from "@/components/Navigation";
 import Hero from "@/components/Hero";
+import TrustBar from "@/components/TrustBar";
 import WomenOwnedSection from "@/components/WomenOwnedSection";
 import PracticeAreas from "@/components/PracticeAreas";
 import TestimonialsAndResults from "@/components/Testimonials";
@@ -14,6 +15,7 @@ export default function Home() {
       <Navigation />
       <main>
         <Hero />
+        <TrustBar />
         
         {/* Reordered: Practice Areas first */}
         <PracticeAreas />
