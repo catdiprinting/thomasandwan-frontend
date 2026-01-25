@@ -3,6 +3,8 @@ import Hero from "@/components/Hero";
 import WomenOwnedSection from "@/components/WomenOwnedSection";
 import PracticeAreas from "@/components/PracticeAreas";
 import TestimonialsAndResults from "@/components/Testimonials";
+import TeamSection from "@/components/TeamSection";
+import FAQSection from "@/components/FAQSection";
 import BlogSection from "@/components/BlogSection";
 import Footer from "@/components/Footer";
 
@@ -12,8 +14,15 @@ export default function Home() {
       <Navigation />
       <main>
         <Hero />
-        <WomenOwnedSection />
+        
+        {/* Reordered: Practice Areas first */}
         <PracticeAreas />
+        
+        <WomenOwnedSection />
+        
+        {/* New Team Section */}
+        <TeamSection />
+        
         <TestimonialsAndResults />
         
         {/* Simple Stats Banner */}
@@ -33,6 +42,9 @@ export default function Home() {
             </div>
           </div>
         </section>
+
+        {/* New FAQ Section */}
+        <FAQSection />
 
         <BlogSection />
 

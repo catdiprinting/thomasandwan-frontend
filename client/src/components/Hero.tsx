@@ -16,7 +16,7 @@ export default function Hero() {
         >
           <div className="inline-block border-b-2 border-secondary pb-1">
             <span className="text-secondary font-bold tracking-widest uppercase text-xs md:text-sm">
-              Women-Owned Law Firm
+              Medical Malpractice Attorneys
             </span>
           </div>
           
@@ -36,18 +36,18 @@ export default function Hero() {
               Schedule Free Consultation
             </Button>
             <Button variant="outline" size="lg" className="border-2 border-primary text-primary hover:bg-primary hover:text-white rounded-none h-14 px-8 text-base tracking-wide group">
-              View Our Results <ArrowRight className="ml-2 w-4 h-4 transition-transform group-hover:translate-x-1" />
+              Learn More <ArrowRight className="ml-2 w-4 h-4 transition-transform group-hover:translate-x-1" />
             </Button>
           </div>
 
-          <div className="pt-8 flex items-center gap-6 text-sm text-muted-foreground">
+          <div className="pt-8 flex items-center gap-6 text-muted-foreground">
              <div className="flex items-center gap-2">
-               <span className="w-2 h-2 rounded-full bg-secondary"></span>
-               <span>Available 24/7</span>
+               <span className="w-3 h-3 rounded-full bg-secondary"></span>
+               <span className="text-lg font-medium text-primary">Available 24/7</span>
              </div>
              <div className="flex items-center gap-2">
-               <span className="w-2 h-2 rounded-full bg-secondary"></span>
-               <span>No Win, No Fee</span>
+               <span className="w-3 h-3 rounded-full bg-secondary"></span>
+               <span className="text-lg font-medium text-primary">No Win, No Fee</span>
              </div>
           </div>
         </motion.div>
