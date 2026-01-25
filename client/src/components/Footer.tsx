@@ -12,7 +12,11 @@ export default function Footer() {
           {/* Contact Info */}
           <div className="space-y-8">
             <div>
-              <h2 className="text-3xl font-serif mb-2">Thomas & Wan</h2>
+              <img 
+                src="/images/logo.webp" 
+                alt="Thomas & Wan" 
+                className="h-16 md:h-20 w-auto object-contain mb-6 invert brightness-0 grayscale opacity-90"
+              />
               <p className="text-secondary font-alt text-xl italic">Attorneys at Law</p>
             </div>
             
@@ -75,7 +79,7 @@ export default function Footer() {
                  <label className="text-xs uppercase tracking-widest text-secondary font-bold">Message</label>
                  <Textarea className="bg-white/10 border-white/20 text-white placeholder:text-white/30 focus-visible:ring-secondary min-h-[120px]" />
               </div>
-              <Button className="w-full bg-secondary hover:bg-secondary/90 text-primary font-bold py-6 text-lg">
+              <Button className="w-full bg-secondary hover:bg-secondary/90 text-white font-bold py-6 text-lg">
                 Submit Request
               </Button>
             </form>
