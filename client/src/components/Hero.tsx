@@ -22,7 +22,7 @@ export default function Hero() {
           
           <h1 className="text-5xl md:text-6xl lg:text-7xl font-serif text-primary leading-[1.1]">
             Dedicated to <br/>
-            <span className="italic text-secondary font-alt">Justice</span> for <br/>
+            <span className="italic text-secondary">Justice</span> for <br/>
             Your Family.
           </h1>
           
