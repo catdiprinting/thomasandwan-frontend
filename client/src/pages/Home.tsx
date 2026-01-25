@@ -3,6 +3,7 @@ import Hero from "@/components/Hero";
 import WomenOwnedSection from "@/components/WomenOwnedSection";
 import PracticeAreas from "@/components/PracticeAreas";
 import TestimonialsAndResults from "@/components/Testimonials";
+import BlogSection from "@/components/BlogSection";
 import Footer from "@/components/Footer";
 
 export default function Home() {
@@ -32,6 +33,8 @@ export default function Home() {
             </div>
           </div>
         </section>
+
+        <BlogSection />
 
       </main>
       <Footer />

@@ -22,6 +22,7 @@ export default function Navigation() {
     { name: "About Us", href: "/about" },
     { name: "Practice Areas", href: "/practice-areas" },
     { name: "Our Success", href: "/success" },
+    { name: "Blog", href: "/blog" },
     { name: "Contact", href: "/contact" },
   ];
 
@@ -40,7 +41,7 @@ export default function Navigation() {
             <img 
               src="/images/logo.webp" 
               alt="Thomas & Wan" 
-              className="h-12 md:h-16 w-auto object-contain"
+              className="h-8 md:h-12 w-auto object-contain"
             />
           </a>
         </Link>
