@@ -44,7 +44,7 @@ export default function WomenOwnedSection() {
              </div>
              
              {/* Quote Box */}
-             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-primary text-white p-6 md:p-8 max-w-xs w-full shadow-xl z-20 text-center">
+             <div className="md:absolute md:bottom-0 md:left-1/2 md:-translate-x-1/2 md:translate-y-1/2 bg-primary text-white p-6 md:p-8 max-w-xs w-full shadow-xl z-20 text-center mt-8 md:mt-0 mx-auto relative">
                 <span className="text-4xl text-secondary font-serif leading-none">"</span>
                 <p className="font-serif italic text-lg md:text-xl leading-relaxed mb-4">
                   We don't refer cases out. When you hire Thomas & Wan, you get Thomas & Wan.
