@@ -5,7 +5,7 @@ import { Toaster } from "@/components/ui/toaster";
 import Home from "@/pages/Home";
 import About from "@/pages/About";
 import PracticeAreasPage from "@/pages/PracticeAreas";
-import SuccessPage from "@/pages/Success";
+import TestimonialsPage from "@/pages/Testimonials";
 import BlogPage from "@/pages/Blog";
 import ContactPage from "@/pages/Contact";
 import NotFound from "@/pages/not-found";
@@ -16,7 +16,8 @@ function Router() {
       <Route path="/" component={Home} />
       <Route path="/about" component={About} /> 
       <Route path="/practice-areas" component={PracticeAreasPage} />
-      <Route path="/success" component={SuccessPage} />
+      <Route path="/testimonials" component={TestimonialsPage} />
+      <Route path="/success" component={TestimonialsPage} /> {/* Keeping success route for backward compatibility if needed */}
       <Route path="/blog" component={BlogPage} />
       <Route path="/contact" component={ContactPage} />
       <Route component={NotFound} />
