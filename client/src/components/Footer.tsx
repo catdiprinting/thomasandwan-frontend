@@ -1,7 +1,5 @@
 import { Phone, Mail, MapPin, Clock } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
+import ContactForm from "@/components/ContactForm";
 
 export default function Footer() {
   return (
@@ -60,29 +58,7 @@ export default function Footer() {
           {/* Contact Form */}
           <div className="bg-white/5 p-8 border border-white/10 backdrop-blur-sm">
             <h3 className="text-2xl font-serif mb-6">Request Free Consultation</h3>
-            <form className="space-y-4">
-              <div className="grid grid-cols-2 gap-4">
-                <div className="space-y-2">
-                   <label className="text-xs uppercase tracking-widest text-secondary font-bold">First Name</label>
-                   <Input className="bg-white/10 border-white/20 text-white placeholder:text-white/30 focus-visible:ring-secondary" />
-                </div>
-                <div className="space-y-2">
-                   <label className="text-xs uppercase tracking-widest text-secondary font-bold">Last Name</label>
-                   <Input className="bg-white/10 border-white/20 text-white placeholder:text-white/30 focus-visible:ring-secondary" />
-                </div>
-              </div>
-              <div className="space-y-2">
-                 <label className="text-xs uppercase tracking-widest text-secondary font-bold">Email</label>
-                 <Input className="bg-white/10 border-white/20 text-white placeholder:text-white/30 focus-visible:ring-secondary" />
-              </div>
-              <div className="space-y-2">
-                 <label className="text-xs uppercase tracking-widest text-secondary font-bold">Message</label>
-                 <Textarea className="bg-white/10 border-white/20 text-white placeholder:text-white/30 focus-visible:ring-secondary min-h-[120px]" />
-              </div>
-              <Button className="w-full bg-secondary hover:bg-secondary/90 text-white font-bold py-6 text-lg">
-                Submit Request
-              </Button>
-            </form>
+            <ContactForm variant="footer" showCaseType={false} />
           </div>
         </div>
 

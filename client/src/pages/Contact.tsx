@@ -1,9 +1,7 @@
 import { motion } from "framer-motion";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
+import ContactForm from "@/components/ContactForm";
 import { Phone, Mail, MapPin, Clock } from "lucide-react";
 
 export default function ContactPage() {
@@ -112,54 +110,7 @@ export default function ContactPage() {
               {/* Right Column: Form */}
               <div className="bg-white p-8 md:p-12 shadow-2xl border border-gray-100">
                 <h3 className="text-3xl font-serif text-primary mb-8">Free Case Evaluation</h3>
-                <form className="space-y-6">
-                  <div className="grid md:grid-cols-2 gap-6">
-                    <div className="space-y-2">
-                      <label className="text-sm font-bold text-primary uppercase tracking-wide">First Name</label>
-                      <Input className="bg-gray-50 border-gray-200 h-12 focus-visible:ring-secondary" placeholder="John" />
-                    </div>
-                    <div className="space-y-2">
-                      <label className="text-sm font-bold text-primary uppercase tracking-wide">Last Name</label>
-                      <Input className="bg-gray-50 border-gray-200 h-12 focus-visible:ring-secondary" placeholder="Doe" />
-                    </div>
-                  </div>
-                  
-                  <div className="grid md:grid-cols-2 gap-6">
-                    <div className="space-y-2">
-                      <label className="text-sm font-bold text-primary uppercase tracking-wide">Email</label>
-                      <Input className="bg-gray-50 border-gray-200 h-12 focus-visible:ring-secondary" placeholder="john@example.com" />
-                    </div>
-                    <div className="space-y-2">
-                      <label className="text-sm font-bold text-primary uppercase tracking-wide">Phone</label>
-                      <Input className="bg-gray-50 border-gray-200 h-12 focus-visible:ring-secondary" placeholder="(555) 555-5555" />
-                    </div>
-                  </div>
-
-                  <div className="space-y-2">
-                    <label className="text-sm font-bold text-primary uppercase tracking-wide">Case Type</label>
-                    <select className="flex h-12 w-full rounded-md border border-gray-200 bg-gray-50 px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-secondary focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50">
-                      <option value="">Select a practice area...</option>
-                      <option value="birth-injury">Birth Injury</option>
-                      <option value="surgical-error">Surgical Error</option>
-                      <option value="misdiagnosis">Misdiagnosis</option>
-                      <option value="wrongful-death">Wrongful Death</option>
-                      <option value="other">Other</option>
-                    </select>
-                  </div>
-
-                  <div className="space-y-2">
-                    <label className="text-sm font-bold text-primary uppercase tracking-wide">Message</label>
-                    <Textarea className="bg-gray-50 border-gray-200 min-h-[150px] focus-visible:ring-secondary" placeholder="Please describe what happened..." />
-                  </div>
-
-                  <Button className="w-full bg-secondary hover:bg-secondary/90 text-white font-bold py-6 text-lg rounded-none">
-                    Submit Request
-                  </Button>
-                  
-                  <p className="text-xs text-muted-foreground text-center">
-                    By submitting this form, you agree to our privacy policy. Your information is confidential.
-                  </p>
-                </form>
+                <ContactForm variant="default" showCaseType={true} />
               </div>
 
             </div>
