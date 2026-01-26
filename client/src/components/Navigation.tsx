@@ -20,6 +20,7 @@ export default function Navigation() {
   const navLinks = [
     { name: "Home", href: "/" },
     { name: "Practice Areas", href: "/practice-areas" },
+    { name: "Birth Injuries", href: "/practice-areas/birth-injuries" },
     { name: "Testimonials", href: "/testimonials" },
     { name: "Blog", href: "/blog" },
   ];
