@@ -73,8 +73,8 @@ export default function ContactPage() {
                     <div>
                       <h4 className="font-bold text-primary text-xl mb-2">Office Location</h4>
                       <p className="text-slate-600 leading-relaxed">
-                        123 Legal Avenue, Suite 400<br/>
-                        Houston, TX 77002
+                        1710 Sunset Blvd<br/>
+                        Houston, TX 77005
                       </p>
                       <a href="#" className="text-sm font-bold uppercase tracking-wide text-secondary hover:text-primary mt-2 inline-block">
                         Get Directions
@@ -171,7 +171,7 @@ export default function ContactPage() {
            <div className="text-center">
              <MapPin className="w-12 h-12 text-secondary mx-auto mb-4" />
              <h3 className="text-2xl font-serif text-primary">Interactive Map Loading...</h3>
-             <p className="text-muted-foreground">123 Legal Avenue, Houston, TX 77002</p>
+             <p className="text-muted-foreground">1710 Sunset Blvd, Houston, TX 77005</p>
            </div>
         </section>
 

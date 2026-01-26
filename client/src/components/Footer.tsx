@@ -40,8 +40,8 @@ export default function Footer() {
                 <div>
                   <h4 className="font-bold text-lg">Office</h4>
                   <p className="text-white/70">
-                    123 Legal Avenue, Suite 400<br/>
-                    Houston, TX 77002
+                    1710 Sunset Blvd<br/>
+                    Houston, TX 77005
                   </p>
                 </div>
               </div>
