@@ -4,6 +4,10 @@ import { QueryClientProvider } from "@tanstack/react-query";
 import { Toaster } from "@/components/ui/toaster";
 import Home from "@/pages/Home";
 import About from "@/pages/About";
+import PracticeAreasPage from "@/pages/PracticeAreas";
+import SuccessPage from "@/pages/Success";
+import BlogPage from "@/pages/Blog";
+import ContactPage from "@/pages/Contact";
 import NotFound from "@/pages/not-found";
 
 function Router() {
@@ -11,10 +15,10 @@ function Router() {
     <Switch>
       <Route path="/" component={Home} />
       <Route path="/about" component={About} /> 
-      <Route path="/practice-areas" component={Home} />
-      <Route path="/success" component={Home} />
-      <Route path="/blog" component={Home} />
-      <Route path="/contact" component={Home} />
+      <Route path="/practice-areas" component={PracticeAreasPage} />
+      <Route path="/success" component={SuccessPage} />
+      <Route path="/blog" component={BlogPage} />
+      <Route path="/contact" component={ContactPage} />
       <Route component={NotFound} />
     </Switch>
   );
