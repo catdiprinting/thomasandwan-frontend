@@ -1,0 +1,514 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<rss version="2.0"
+	xmlns:excerpt="http://wordpress.org/export/1.2/excerpt/"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:wp="http://wordpress.org/export/1.2/"
+>
+<channel>
+	<title>Thomas &amp; Wan LLP</title>
+	<link>https://thomasandwan.com</link>
+	<description>Medical Malpractice Attorneys in Houston, Texas</description>
+	<pubDate>Mon, 27 Jan 2025 00:00:00 +0000</pubDate>
+	<language>en-US</language>
+	<wp:wxr_version>1.2</wp:wxr_version>
+	<wp:base_site_url>https://thomasandwan.com</wp:base_site_url>
+	<wp:base_blog_url>https://thomasandwan.com</wp:base_blog_url>
+
+	<wp:author>
+		<wp:author_id>1</wp:author_id>
+		<wp:author_login>linda</wp:author_login>
+		<wp:author_email>linda@thomasandwan.com</wp:author_email>
+		<wp:author_display_name><![CDATA[Linda Thomas]]></wp:author_display_name>
+	</wp:author>
+	<wp:author>
+		<wp:author_id>2</wp:author_id>
+		<wp:author_login>michelle</wp:author_login>
+		<wp:author_email>michelle@thomasandwan.com</wp:author_email>
+		<wp:author_display_name><![CDATA[Michelle Wan]]></wp:author_display_name>
+	</wp:author>
+
+	<wp:category>
+		<wp:term_id>1</wp:term_id>
+		<wp:category_nicename>birth-injuries</wp:category_nicename>
+		<wp:category_parent></wp:category_parent>
+		<wp:cat_name><![CDATA[Birth Injuries]]></wp:cat_name>
+	</wp:category>
+	<wp:category>
+		<wp:term_id>2</wp:term_id>
+		<wp:category_nicename>fetal-acidosis</wp:category_nicename>
+		<wp:category_parent></wp:category_parent>
+		<wp:cat_name><![CDATA[Fetal Acidosis]]></wp:cat_name>
+	</wp:category>
+	<wp:category>
+		<wp:term_id>3</wp:term_id>
+		<wp:category_nicename>shoulder-dystocia</wp:category_nicename>
+		<wp:category_parent></wp:category_parent>
+		<wp:cat_name><![CDATA[Shoulder Dystocia]]></wp:cat_name>
+	</wp:category>
+	<wp:category>
+		<wp:term_id>4</wp:term_id>
+		<wp:category_nicename>hie</wp:category_nicename>
+		<wp:category_parent></wp:category_parent>
+		<wp:cat_name><![CDATA[HIE]]></wp:cat_name>
+	</wp:category>
+	<wp:category>
+		<wp:term_id>5</wp:term_id>
+		<wp:category_nicename>medical-malpractice</wp:category_nicename>
+		<wp:category_parent></wp:category_parent>
+		<wp:cat_name><![CDATA[Medical Malpractice]]></wp:cat_name>
+	</wp:category>
+	<wp:category>
+		<wp:term_id>6</wp:term_id>
+		<wp:category_nicename>legal-information</wp:category_nicename>
+		<wp:category_parent></wp:category_parent>
+		<wp:cat_name><![CDATA[Legal Information]]></wp:cat_name>
+	</wp:category>
+	<wp:category>
+		<wp:term_id>7</wp:term_id>
+		<wp:category_nicename>wrong-site-surgery</wp:category_nicename>
+		<wp:category_parent></wp:category_parent>
+		<wp:cat_name><![CDATA[Wrong Site Surgery]]></wp:cat_name>
+	</wp:category>
+
+	<!-- PAGE: Home -->
+	<item>
+		<title>Home</title>
+		<link>https://thomasandwan.com/</link>
+		<pubDate>Mon, 27 Jan 2025 00:00:00 +0000</pubDate>
+		<dc:creator><![CDATA[linda]]></dc:creator>
+		<content:encoded><![CDATA[
+<h2>Fighting for <em>Justice</em> in Medical Malpractice Cases</h2>
+<p>With decades of combined experience, we have helped families across Texas recover millions in compensation for birth injuries, surgical errors, and medical negligence.</p>
+
+<h2>Why Choose Thomas &amp; Wan</h2>
+<p>Thomas &amp; Wan LLP is a women-owned medical malpractice law firm in Houston, Texas. We focus exclusively on medical malpractice cases, bringing specialized knowledge and dedicated advocacy to every client we serve.</p>
+
+<h3>Medical Malpractice Only</h3>
+<p>Unlike general practice firms, we focus 100% of our practice on medical malpractice. This specialization means we understand the complex medical and legal issues involved in these cases.</p>
+
+<h3>No Fee Unless We Win</h3>
+<p>We work on a contingency fee basis. You pay nothing unless we recover compensation for your case.</p>
+
+<h3>Personalized Attention</h3>
+<p>Your case matters to us. You'll work directly with our attorneys throughout your entire case.</p>
+]]></content:encoded>
+		<wp:post_id>100</wp:post_id>
+		<wp:post_type>page</wp:post_type>
+		<wp:status>publish</wp:status>
+		<wp:post_name>home</wp:post_name>
+	</item>
+
+	<!-- PAGE: About -->
+	<item>
+		<title>About Us</title>
+		<link>https://thomasandwan.com/about/</link>
+		<pubDate>Mon, 27 Jan 2025 00:00:00 +0000</pubDate>
+		<dc:creator><![CDATA[linda]]></dc:creator>
+		<content:encoded><![CDATA[
+<h2>A Women-Owned Firm Fighting for Families</h2>
+<p>Thomas &amp; Wan LLP was founded with a singular mission: to provide exceptional legal representation to families affected by medical negligence. As a women-owned law firm, we bring a unique perspective and unwavering dedication to every case we handle.</p>
+
+<h3>Linda Thomas - Founding Partner</h3>
+<p>With over 30 years of experience in medical malpractice law, Linda Thomas has dedicated her career to fighting for families affected by medical negligence. Her expertise in complex birth injury cases has resulted in numerous significant verdicts and settlements for her clients.</p>
+
+<h3>Michelle Wan - Founding Partner</h3>
+<p>Michelle Wan brings extensive experience in medical malpractice litigation and a compassionate approach to client advocacy. Her background in healthcare combined with her legal expertise makes her a formidable advocate for families facing the aftermath of medical errors.</p>
+
+<h2>Our Approach</h2>
+<p>We believe that every family deserves access to experienced legal representation when medical negligence causes harm. Our approach combines thorough investigation, expert medical consultation, and aggressive advocacy to achieve the best possible outcomes for our clients.</p>
+]]></content:encoded>
+		<wp:post_id>101</wp:post_id>
+		<wp:post_type>page</wp:post_type>
+		<wp:status>publish</wp:status>
+		<wp:post_name>about</wp:post_name>
+	</item>
+
+	<!-- PAGE: Practice Areas -->
+	<item>
+		<title>Practice Areas</title>
+		<link>https://thomasandwan.com/practice-areas/</link>
+		<pubDate>Mon, 27 Jan 2025 00:00:00 +0000</pubDate>
+		<dc:creator><![CDATA[linda]]></dc:creator>
+		<content:encoded><![CDATA[
+<h2>Our Areas of Expertise</h2>
+<p>At Thomas &amp; Wan, we focus exclusively on medical malpractice cases. Our specialized practice areas include:</p>
+
+<h3>Birth Injuries</h3>
+<p>We represent families affected by preventable birth injuries, including cerebral palsy, Erb's palsy, hypoxic-ischemic encephalopathy (HIE), and other conditions caused by medical negligence during pregnancy, labor, or delivery.</p>
+
+<h3>Surgical Errors</h3>
+<p>Surgical errors can have devastating consequences. We handle cases involving wrong-site surgery, retained surgical instruments, anesthesia errors, and other preventable surgical mistakes.</p>
+
+<h3>Brain Injuries</h3>
+<p>Medical negligence can result in traumatic brain injuries that affect patients for life. We fight for victims of brain injuries caused by delayed diagnosis, surgical errors, medication mistakes, and birth trauma.</p>
+
+<h3>Misdiagnosis</h3>
+<p>A delayed or incorrect diagnosis can allow a treatable condition to become life-threatening. We hold healthcare providers accountable when diagnostic errors cause harm to patients.</p>
+]]></content:encoded>
+		<wp:post_id>102</wp:post_id>
+		<wp:post_type>page</wp:post_type>
+		<wp:status>publish</wp:status>
+		<wp:post_name>practice-areas</wp:post_name>
+	</item>
+
+	<!-- PAGE: Birth Injuries -->
+	<item>
+		<title>Birth Injuries</title>
+		<link>https://thomasandwan.com/practice-areas/birth-injuries/</link>
+		<pubDate>Mon, 27 Jan 2025 00:00:00 +0000</pubDate>
+		<dc:creator><![CDATA[michelle]]></dc:creator>
+		<content:encoded><![CDATA[
+<h2>Advocating for Families Affected by Birth Injuries</h2>
+<p>The birth of a child should be a joyous occasion. When medical negligence during pregnancy, labor, or delivery causes preventable injuries, the consequences can be devastating and lifelong. At Thomas &amp; Wan, we fight for families whose children have suffered birth injuries due to medical malpractice.</p>
+
+<h3>Types of Birth Injuries We Handle</h3>
+<ul>
+<li><strong>Cerebral Palsy</strong> - A group of disorders affecting movement, muscle tone, and posture, often caused by brain damage during birth</li>
+<li><strong>Hypoxic-Ischemic Encephalopathy (HIE)</strong> - Brain damage caused by oxygen deprivation during labor or delivery</li>
+<li><strong>Erb's Palsy / Brachial Plexus Injuries</strong> - Nerve damage affecting the arm and shoulder, often from excessive force during delivery</li>
+<li><strong>Shoulder Dystocia Injuries</strong> - Complications when the baby's shoulder becomes stuck during delivery</li>
+<li><strong>Fetal Acidosis</strong> - Dangerous acid buildup in the baby's blood from oxygen deprivation</li>
+</ul>
+
+<h3>Common Causes of Birth Injuries</h3>
+<p>Birth injuries often result from preventable medical errors, including:</p>
+<ul>
+<li>Failure to monitor fetal heart rate</li>
+<li>Delayed emergency C-section</li>
+<li>Improper use of forceps or vacuum extractors</li>
+<li>Failure to recognize and respond to fetal distress</li>
+<li>Misuse of labor-inducing drugs like Pitocin</li>
+<li>Failure to manage maternal conditions like preeclampsia</li>
+</ul>
+]]></content:encoded>
+		<wp:post_id>103</wp:post_id>
+		<wp:post_type>page</wp:post_type>
+		<wp:status>publish</wp:status>
+		<wp:post_name>birth-injuries</wp:post_name>
+		<wp:post_parent>102</wp:post_parent>
+	</item>
+
+	<!-- PAGE: Contact -->
+	<item>
+		<title>Contact Us</title>
+		<link>https://thomasandwan.com/contact/</link>
+		<pubDate>Mon, 27 Jan 2025 00:00:00 +0000</pubDate>
+		<dc:creator><![CDATA[linda]]></dc:creator>
+		<content:encoded><![CDATA[
+<h2>Free Case Consultation</h2>
+<p>If you believe you or a loved one has been the victim of medical malpractice, we're here to help. Contact us today for a free, no-obligation consultation to discuss your case.</p>
+
+<h3>Contact Information</h3>
+<p><strong>Phone:</strong> (713) 529-1177</p>
+<p><strong>Email:</strong> info@thomasandwan.com</p>
+
+<h3>Office Location</h3>
+<p>Thomas &amp; Wan LLP<br>
+2600 South Loop West, Suite 535<br>
+Houston, TX 77054</p>
+
+<h3>Office Hours</h3>
+<p>Monday - Friday: 8:00 AM - 6:00 PM<br>
+Saturday - Sunday: By Appointment</p>
+]]></content:encoded>
+		<wp:post_id>104</wp:post_id>
+		<wp:post_type>page</wp:post_type>
+		<wp:status>publish</wp:status>
+		<wp:post_name>contact</wp:post_name>
+	</item>
+
+	<!-- BLOG POSTS -->
+	<item>
+		<title>What Causes Shoulder Dystocia?</title>
+		<link>https://thomasandwan.com/what-causes-shoulder-dystocia/</link>
+		<pubDate>Sat, 01 Feb 2025 00:00:00 +0000</pubDate>
+		<dc:creator><![CDATA[michelle]]></dc:creator>
+		<content:encoded><![CDATA[<p>Shoulder dystocia is a serious childbirth complication that occurs when a baby's shoulders become stuck behind the mother's pelvic bone after the head has been delivered. This condition requires immediate medical intervention, as prolonged delays can lead to birth injuries such as nerve damage, fractures, oxygen deprivation, or cerebral palsy.</p>
+
+<h2>Risk Factors for Shoulder Dystocia</h2>
+<p>Several factors can increase the risk of shoulder dystocia during delivery:</p>
+<ul>
+<li>Fetal macrosomia (large baby, typically over 8 lbs 13 oz)</li>
+<li>Maternal diabetes or gestational diabetes</li>
+<li>Maternal obesity</li>
+<li>Post-term pregnancy (past 40 weeks)</li>
+<li>Previous shoulder dystocia delivery</li>
+<li>Prolonged labor</li>
+</ul>
+
+<h2>Medical Response to Shoulder Dystocia</h2>
+<p>When shoulder dystocia occurs, medical professionals must act quickly using established maneuvers to safely deliver the baby. These include the McRoberts maneuver, suprapubic pressure, and other techniques designed to free the trapped shoulder without causing injury.</p>
+
+<p>If you believe your child was injured due to improperly managed shoulder dystocia, contact Thomas &amp; Wan for a free consultation.</p>]]></content:encoded>
+		<wp:post_id>1</wp:post_id>
+		<wp:post_type>post</wp:post_type>
+		<wp:status>publish</wp:status>
+		<wp:post_name>what-causes-shoulder-dystocia</wp:post_name>
+		<category domain="category" nicename="shoulder-dystocia"><![CDATA[Shoulder Dystocia]]></category>
+	</item>
+
+	<item>
+		<title>Can Doctors Be Liable for Cerebral Palsy?</title>
+		<link>https://thomasandwan.com/can-doctors-be-liable-for-cerebral-palsy/</link>
+		<pubDate>Tue, 21 Jan 2025 00:00:00 +0000</pubDate>
+		<dc:creator><![CDATA[michelle]]></dc:creator>
+		<content:encoded><![CDATA[<p>Cerebral palsy (CP) is a neurological disorder that affects muscle movement, coordination, and posture. It is caused by brain damage or abnormal brain development, often occurring before, during, or shortly after birth. If medical malpractice contributed to the brain injury that caused CP, the responsible doctor can be held legally accountable.</p>
+
+<h2>When Medical Negligence Causes Cerebral Palsy</h2>
+<p>Not all cases of cerebral palsy are caused by medical malpractice. However, when healthcare providers fail to meet the standard of care and that failure results in brain damage, they may be liable. Common examples include:</p>
+<ul>
+<li>Failure to detect and respond to fetal distress</li>
+<li>Delayed emergency C-section when indicated</li>
+<li>Improper use of forceps or vacuum extractors</li>
+<li>Failure to treat infections during pregnancy</li>
+<li>Medication errors during labor and delivery</li>
+</ul>
+
+<h2>Proving Medical Malpractice</h2>
+<p>To establish that a doctor is liable for cerebral palsy, you must prove that the healthcare provider deviated from the accepted standard of care and that this deviation directly caused the brain injury that led to CP.</p>]]></content:encoded>
+		<wp:post_id>2</wp:post_id>
+		<wp:post_type>post</wp:post_type>
+		<wp:status>publish</wp:status>
+		<wp:post_name>can-doctors-be-liable-for-cerebral-palsy</wp:post_name>
+		<category domain="category" nicename="birth-injuries"><![CDATA[Birth Injuries]]></category>
+	</item>
+
+	<item>
+		<title>Can Delayed Delivery Cause Fetal Acidosis?</title>
+		<link>https://thomasandwan.com/can-delayed-delivery-cause-fetal-acidosis/</link>
+		<pubDate>Sat, 18 Jan 2025 00:00:00 +0000</pubDate>
+		<dc:creator><![CDATA[michelle]]></dc:creator>
+		<content:encoded><![CDATA[<p>Fetal acidosis is a serious medical condition that occurs when a baby experiences oxygen deprivation (hypoxia) during labor and delivery, leading to increased acidity in the blood. If left untreated, fetal acidosis can cause severe birth injuries, including hypoxic-ischemic encephalopathy (HIE), cerebral palsy, and organ dysfunction.</p>
+
+<h2>How Delayed Delivery Causes Fetal Acidosis</h2>
+<p>When delivery is delayed despite signs of fetal distress, the baby may continue to experience oxygen deprivation. This leads to a buildup of lactic acid in the blood, causing the pH to drop to dangerous levels.</p>
+
+<h2>Warning Signs Requiring Immediate Action</h2>
+<ul>
+<li>Abnormal fetal heart rate patterns</li>
+<li>Meconium-stained amniotic fluid</li>
+<li>Umbilical cord problems</li>
+<li>Placental abruption</li>
+<li>Prolonged labor</li>
+</ul>
+
+<p>Medical professionals have a duty to recognize these warning signs and take prompt action, including emergency C-section when necessary.</p>]]></content:encoded>
+		<wp:post_id>3</wp:post_id>
+		<wp:post_type>post</wp:post_type>
+		<wp:status>publish</wp:status>
+		<wp:post_name>can-delayed-delivery-cause-fetal-acidosis</wp:post_name>
+		<category domain="category" nicename="fetal-acidosis"><![CDATA[Fetal Acidosis]]></category>
+	</item>
+
+	<item>
+		<title>What Are the Risk Factors for Fetal Acidosis?</title>
+		<link>https://thomasandwan.com/risk-factors-for-fetal-acidosis/</link>
+		<pubDate>Fri, 17 Jan 2025 00:00:00 +0000</pubDate>
+		<dc:creator><![CDATA[michelle]]></dc:creator>
+		<content:encoded><![CDATA[<p>Fetal acidosis is a serious condition in which a baby's blood becomes excessively acidic due to inadequate oxygen supply during labor and delivery. Understanding the risk factors can help healthcare providers take preventive measures and ensure timely intervention.</p>
+
+<h2>Key Risk Factors</h2>
+<ul>
+<li>Umbilical cord compression or prolapse</li>
+<li>Placental insufficiency</li>
+<li>Maternal high blood pressure or preeclampsia</li>
+<li>Prolonged labor</li>
+<li>Uterine rupture</li>
+<li>Maternal infection</li>
+<li>Gestational diabetes</li>
+</ul>
+
+<p>Healthcare providers must carefully monitor pregnancies with these risk factors and be prepared to intervene quickly if signs of fetal distress develop.</p>]]></content:encoded>
+		<wp:post_id>4</wp:post_id>
+		<wp:post_type>post</wp:post_type>
+		<wp:status>publish</wp:status>
+		<wp:post_name>risk-factors-for-fetal-acidosis</wp:post_name>
+		<category domain="category" nicename="fetal-acidosis"><![CDATA[Fetal Acidosis]]></category>
+	</item>
+
+	<item>
+		<title>How Is Fetal Acidosis Treated?</title>
+		<link>https://thomasandwan.com/how-is-fetal-acidosis-treated/</link>
+		<pubDate>Thu, 16 Jan 2025 00:00:00 +0000</pubDate>
+		<dc:creator><![CDATA[michelle]]></dc:creator>
+		<content:encoded><![CDATA[<p>Fetal acidosis is a critical condition that occurs when a baby's blood becomes too acidic due to inadequate oxygen supply during labor and delivery. Early detection and proper treatment are essential to prevent long-term complications such as brain damage and cerebral palsy.</p>
+
+<h2>Treatment Approaches</h2>
+<p>Treatment depends on the severity of the acidosis and when it is detected:</p>
+<ul>
+<li>Intrauterine resuscitation techniques</li>
+<li>Maternal oxygen supplementation</li>
+<li>IV fluid administration</li>
+<li>Repositioning the mother</li>
+<li>Emergency cesarean delivery</li>
+<li>Therapeutic hypothermia (cooling therapy) after birth</li>
+</ul>
+
+<p>The key to preventing permanent injury is early recognition and swift intervention.</p>]]></content:encoded>
+		<wp:post_id>5</wp:post_id>
+		<wp:post_type>post</wp:post_type>
+		<wp:status>publish</wp:status>
+		<wp:post_name>how-is-fetal-acidosis-treated</wp:post_name>
+		<category domain="category" nicename="fetal-acidosis"><![CDATA[Fetal Acidosis]]></category>
+	</item>
+
+	<item>
+		<title>8 Steps to Take After an HIE Diagnosis</title>
+		<link>https://thomasandwan.com/steps-to-take-after-an-hie-diagnosis/</link>
+		<pubDate>Wed, 18 Dec 2024 00:00:00 +0000</pubDate>
+		<dc:creator><![CDATA[michelle]]></dc:creator>
+		<content:encoded><![CDATA[<p>A diagnosis of Hypoxic-Ischemic Encephalopathy (HIE) can be overwhelming for any family. HIE is a serious condition caused by oxygen deprivation to a baby's brain during or near the time of birth.</p>
+
+<h2>Steps to Take After Diagnosis</h2>
+<ol>
+<li>Understand the diagnosis and ask questions</li>
+<li>Request copies of all medical records</li>
+<li>Learn about therapeutic hypothermia treatment</li>
+<li>Connect with support groups</li>
+<li>Research early intervention programs</li>
+<li>Document your child's development</li>
+<li>Consult with a medical malpractice attorney</li>
+<li>Focus on your child's care and your family's wellbeing</li>
+</ol>
+
+<p>If your child's HIE was caused by medical negligence, you may be entitled to compensation to help cover the costs of their care.</p>]]></content:encoded>
+		<wp:post_id>16</wp:post_id>
+		<wp:post_type>post</wp:post_type>
+		<wp:status>publish</wp:status>
+		<wp:post_name>steps-to-take-after-an-hie-diagnosis</wp:post_name>
+		<category domain="category" nicename="hie"><![CDATA[HIE]]></category>
+	</item>
+
+	<item>
+		<title>What Is Wrong Site Surgery and How Does It Happen?</title>
+		<link>https://thomasandwan.com/what-is-wrong-site-surgery/</link>
+		<pubDate>Wed, 06 Nov 2024 00:00:00 +0000</pubDate>
+		<dc:creator><![CDATA[michelle]]></dc:creator>
+		<content:encoded><![CDATA[<p>Wrong site surgery is one of the most alarming forms of medical errors. These preventable mistakes, where a procedure is performed on the wrong body part, wrong side, or even wrong patient, should never happen.</p>
+
+<h2>How Wrong Site Surgery Occurs</h2>
+<ul>
+<li>Inadequate pre-operative verification</li>
+<li>Failure to mark the surgical site</li>
+<li>Communication breakdowns among surgical team</li>
+<li>Rushed procedures</li>
+<li>Inadequate review of patient records</li>
+</ul>
+
+<p>Hospitals are required to follow strict protocols to prevent wrong site surgery, including time-outs and verification checklists. When these protocols are ignored, patients suffer preventable harm.</p>]]></content:encoded>
+		<wp:post_id>30</wp:post_id>
+		<wp:post_type>post</wp:post_type>
+		<wp:status>publish</wp:status>
+		<wp:post_name>what-is-wrong-site-surgery</wp:post_name>
+		<category domain="category" nicename="wrong-site-surgery"><![CDATA[Wrong Site Surgery]]></category>
+	</item>
+
+	<item>
+		<title>Role of Expert Witnesses in Medical Malpractice Cases</title>
+		<link>https://thomasandwan.com/role-of-expert-witnesses/</link>
+		<pubDate>Wed, 06 Nov 2024 00:00:00 +0000</pubDate>
+		<dc:creator><![CDATA[linda]]></dc:creator>
+		<content:encoded><![CDATA[<p>When navigating the complexities of a medical malpractice case, the role of an expert witness is critical. From providing expert testimony to helping establish the standard of care, these professionals play an essential role in proving negligence.</p>
+
+<h2>What Expert Witnesses Do</h2>
+<ul>
+<li>Review medical records and evidence</li>
+<li>Establish the standard of care</li>
+<li>Identify deviations from proper medical practice</li>
+<li>Explain complex medical concepts to juries</li>
+<li>Provide testimony about causation</li>
+</ul>
+
+<p>At Thomas &amp; Wan, we work with leading medical experts in their respective fields to build the strongest possible case for our clients.</p>]]></content:encoded>
+		<wp:post_id>31</wp:post_id>
+		<wp:post_type>post</wp:post_type>
+		<wp:status>publish</wp:status>
+		<wp:post_name>role-of-expert-witnesses</wp:post_name>
+		<category domain="category" nicename="legal-information"><![CDATA[Legal Information]]></category>
+	</item>
+
+	<item>
+		<title>What is Medical Malpractice? An All-Inclusive Guide</title>
+		<link>https://thomasandwan.com/what-is-medical-malpractice-an-all-inclusive-guide/</link>
+		<pubDate>Sat, 06 Jan 2024 00:00:00 +0000</pubDate>
+		<dc:creator><![CDATA[michelle]]></dc:creator>
+		<content:encoded><![CDATA[<p>What happens when healthcare doesn't go as planned? Medical malpractice occurs when a healthcare provider deviates from the accepted standard of care and causes harm to a patient.</p>
+
+<h2>Elements of Medical Malpractice</h2>
+<ol>
+<li><strong>Duty:</strong> A doctor-patient relationship existed</li>
+<li><strong>Breach:</strong> The provider failed to meet the standard of care</li>
+<li><strong>Causation:</strong> The breach directly caused harm</li>
+<li><strong>Damages:</strong> The patient suffered quantifiable harm</li>
+</ol>
+
+<h2>Common Types of Medical Malpractice</h2>
+<ul>
+<li>Surgical errors</li>
+<li>Misdiagnosis or delayed diagnosis</li>
+<li>Medication errors</li>
+<li>Birth injuries</li>
+<li>Anesthesia errors</li>
+<li>Failure to treat</li>
+</ul>]]></content:encoded>
+		<wp:post_id>46</wp:post_id>
+		<wp:post_type>post</wp:post_type>
+		<wp:status>publish</wp:status>
+		<wp:post_name>what-is-medical-malpractice-an-all-inclusive-guide</wp:post_name>
+		<category domain="category" nicename="medical-malpractice"><![CDATA[Medical Malpractice]]></category>
+	</item>
+
+	<item>
+		<title>What is Cerebral Palsy?</title>
+		<link>https://thomasandwan.com/what-is-cerebral-palsy/</link>
+		<pubDate>Sat, 16 Dec 2023 00:00:00 +0000</pubDate>
+		<dc:creator><![CDATA[linda]]></dc:creator>
+		<content:encoded><![CDATA[<p>Cerebral palsy (CP) is a group of neurological disorders that affect movement, muscle tone, and posture. It is caused by damage to the developing brain, often before, during, or shortly after birth.</p>
+
+<h2>Types of Cerebral Palsy</h2>
+<ul>
+<li><strong>Spastic CP:</strong> The most common type, characterized by stiff muscles</li>
+<li><strong>Dyskinetic CP:</strong> Causes uncontrolled movements</li>
+<li><strong>Ataxic CP:</strong> Affects balance and coordination</li>
+<li><strong>Mixed CP:</strong> Combination of different types</li>
+</ul>
+
+<h2>When Medical Negligence Is the Cause</h2>
+<p>While not all cases of cerebral palsy are preventable, many are caused by medical errors during pregnancy, labor, or delivery. If your child's CP was caused by medical malpractice, you may be entitled to compensation.</p>]]></content:encoded>
+		<wp:post_id>49</wp:post_id>
+		<wp:post_type>post</wp:post_type>
+		<wp:status>publish</wp:status>
+		<wp:post_name>what-is-cerebral-palsy</wp:post_name>
+		<category domain="category" nicename="birth-injuries"><![CDATA[Birth Injuries]]></category>
+	</item>
+
+	<item>
+		<title>Are Medical Malpractice Lawyers Expensive?</title>
+		<link>https://thomasandwan.com/are-medical-malpractice-lawyers-expensive/</link>
+		<pubDate>Thu, 06 Jun 2019 00:00:00 +0000</pubDate>
+		<dc:creator><![CDATA[linda]]></dc:creator>
+		<content:encoded><![CDATA[<p>If you're thinking about suing for medical malpractice, you should know how much hiring a lawyer will cost. The good news is that most medical malpractice attorneys, including Thomas &amp; Wan, work on a contingency fee basis.</p>
+
+<h2>What Is a Contingency Fee?</h2>
+<p>A contingency fee means you pay nothing upfront. The attorney only gets paid if you win your case. The fee is typically a percentage of the settlement or verdict.</p>
+
+<h2>Benefits of Contingency Fees</h2>
+<ul>
+<li>No upfront costs to you</li>
+<li>No risk - you don't pay if you don't win</li>
+<li>Access to quality legal representation regardless of financial situation</li>
+<li>Attorney is motivated to maximize your recovery</li>
+</ul>
+
+<p>Contact Thomas &amp; Wan today for a free consultation. There's no cost to discuss your case.</p>]]></content:encoded>
+		<wp:post_id>97</wp:post_id>
+		<wp:post_type>post</wp:post_type>
+		<wp:status>publish</wp:status>
+		<wp:post_name>are-medical-malpractice-lawyers-expensive</wp:post_name>
+		<category domain="category" nicename="legal-information"><![CDATA[Legal Information]]></category>
+	</item>
+
+</channel>
+</rss>
