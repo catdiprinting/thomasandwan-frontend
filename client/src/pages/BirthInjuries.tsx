@@ -204,6 +204,96 @@ export default function BirthInjuriesPage() {
           </div>
         </section>
 
+        {/* Case example – Induction Drugs */}
+        <section className="py-20 bg-white">
+          <div className="container mx-auto px-4 md:px-6 max-w-6xl">
+            <h2 className="text-3xl font-serif text-primary mb-6">
+              Case Example #2: Overuse of Induction Drugs During Labor
+            </h2>
+            <div className="grid lg:grid-cols-2 gap-12">
+              <div className="space-y-4 text-slate-700 leading-relaxed font-light">
+                <p>
+                  At Thomas & Wan, we have the knowledge to pursue cases involving induced labor against hospitals, nurses, midwives, and doctors. There are several drugs commonly used for inducing labor. When these drugs are used in moderation with proper monitoring, they can be safe and effective.
+                </p>
+                <p>
+                  However, when these drugs are given in high doses or without proper monitoring, they can be very dangerous and life-threatening to both mom and baby.
+                </p>
+                <p>
+                  Overusing induction drugs can cause the mother's contractions to become too frequent and/or too strong, also known as uterine hyperstimulation. This can interrupt blood flow to the baby and deprive the infant of vital oxygen. It can also cause life-threatening conditions in the mother, such as a ruptured uterus.
+                </p>
+              </div>
+              <div className="bg-[#F9F7F5] p-8 border-l-4 border-secondary">
+                <h3 className="font-serif text-xl text-primary mb-4">Warning Signs of Improper Induction</h3>
+                <ul className="space-y-3 text-slate-700 text-sm">
+                  <li className="flex items-start gap-2">
+                    <span className="mt-1.5 w-1.5 h-1.5 rounded-full bg-secondary shrink-0" />
+                    <span>Hospital's failure to follow its induction policies</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="mt-1.5 w-1.5 h-1.5 rounded-full bg-secondary shrink-0" />
+                    <span>Nurses' failure to monitor laboring moms and babies for hyperstimulation</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="mt-1.5 w-1.5 h-1.5 rounded-full bg-secondary shrink-0" />
+                    <span>Doctors insisting on inducing labor when it is not medically appropriate</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="mt-1.5 w-1.5 h-1.5 rounded-full bg-secondary shrink-0" />
+                    <span>Emergency C-section becoming necessary due to induction complications</span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Case example – Gestational Diabetes */}
+        <section className="py-20 bg-[#F9F7F5]">
+          <div className="container mx-auto px-4 md:px-6 max-w-6xl">
+            <h2 className="text-3xl font-serif text-primary mb-6">
+              Case Example #3: Improper Management of Gestational Diabetes
+            </h2>
+            <div className="grid lg:grid-cols-2 gap-12">
+              <div className="space-y-4 text-slate-700 leading-relaxed font-light">
+                <p>
+                  Pregnant moms need to take gestational diabetes seriously, and so do doctors and midwives. To prevent birth complications, it is important for doctors to monitor an expectant mother's blood sugar and provide appropriate treatment.
+                </p>
+                <p>
+                  Gestational diabetes typically develops during the later stages of pregnancy and often does not cause any noticeable symptoms. For this reason, it is critical for doctors to be proactive in evaluating your risk for gestational diabetes and providing proper treatment.
+                </p>
+                <p>
+                  The failure to monitor a pregnant mom's blood sugar levels can cause the baby to grow very large, which can be dangerous during a vaginal delivery. A large baby can have problems being delivered, resulting in possible shoulder dystocia, Erb's palsy, subgaleal hemorrhage, and other serious birth injuries.
+                </p>
+              </div>
+              <div className="bg-white p-8 border-l-4 border-secondary shadow-sm">
+                <h3 className="font-serif text-xl text-primary mb-4">Complications from Mismanaged Gestational Diabetes</h3>
+                <ul className="space-y-3 text-slate-700 text-sm">
+                  <li className="flex items-start gap-2">
+                    <span className="mt-1.5 w-1.5 h-1.5 rounded-full bg-secondary shrink-0" />
+                    <span>Excessive birth weight making delivery dangerous</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="mt-1.5 w-1.5 h-1.5 rounded-full bg-secondary shrink-0" />
+                    <span>Early birth and respiratory distress in the newborn</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="mt-1.5 w-1.5 h-1.5 rounded-full bg-secondary shrink-0" />
+                    <span>Low blood sugar (hypoglycemia) in baby, leading to seizures</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="mt-1.5 w-1.5 h-1.5 rounded-full bg-secondary shrink-0" />
+                    <span>Preeclampsia developing in the mother</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="mt-1.5 w-1.5 h-1.5 rounded-full bg-secondary shrink-0" />
+                    <span>Increased risk of Type 2 diabetes later in life for both mother and baby</span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </section>
+
         {/* Call to action */}
         <section className="bg-primary text-white py-24 text-center">
           <div className="container mx-auto px-4 max-w-4xl">

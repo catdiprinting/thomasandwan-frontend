@@ -6,6 +6,8 @@ import Home from "@/pages/Home";
 import About from "@/pages/About";
 import PracticeAreasPage from "@/pages/PracticeAreas";
 import BirthInjuriesPage from "@/pages/BirthInjuries";
+import ChildbirthComplicationsPage from "@/pages/ChildbirthComplications";
+import MedicalMalpracticePage from "@/pages/MedicalMalpractice";
 import TestimonialsPage from "@/pages/Testimonials";
 import BlogPage from "@/pages/Blog";
 import ContactPage from "@/pages/Contact";
@@ -18,8 +20,10 @@ function Router() {
       <Route path="/about" component={About} /> 
       <Route path="/practice-areas" component={PracticeAreasPage} />
       <Route path="/practice-areas/birth-injuries" component={BirthInjuriesPage} />
+      <Route path="/practice-areas/childbirth-complications" component={ChildbirthComplicationsPage} />
+      <Route path="/practice-areas/medical-malpractice" component={MedicalMalpracticePage} />
       <Route path="/testimonials" component={TestimonialsPage} />
-      <Route path="/success" component={TestimonialsPage} /> {/* Keeping success route for backward compatibility if needed */}
+      <Route path="/success" component={TestimonialsPage} />
       <Route path="/blog" component={BlogPage} />
       <Route path="/contact" component={ContactPage} />
       <Route component={NotFound} />

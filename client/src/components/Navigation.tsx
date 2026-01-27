@@ -6,6 +6,8 @@ import { cn } from "@/lib/utils";
 
 const practiceAreaSubmenu = [
   { name: "Birth Injuries", href: "/practice-areas/birth-injuries" },
+  { name: "Childbirth Complications", href: "/practice-areas/childbirth-complications" },
+  { name: "Medical Malpractice", href: "/practice-areas/medical-malpractice" },
 ];
 
 export default function Navigation() {
