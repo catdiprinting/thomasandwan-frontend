@@ -49,5 +49,5 @@ mockupState = "FULLSTACK"
 [userenv]
 
 [userenv.shared]
-VITE_USE_HEADLESS_WP = "true"
+VITE_USE_HEADLESS_WP = "false"
 VITE_WORDPRESS_API_URL = "https://thomasandwan.com/test/wp-json/wp/v2"
