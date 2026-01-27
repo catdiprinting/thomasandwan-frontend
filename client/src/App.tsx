@@ -10,8 +10,12 @@ import ChildbirthComplicationsPage from "@/pages/ChildbirthComplications";
 import MedicalMalpracticePage from "@/pages/MedicalMalpractice";
 import TestimonialsPage from "@/pages/Testimonials";
 import BlogPage from "@/pages/Blog";
+import BlogHeadless from "@/pages/BlogHeadless";
+import BlogPostHeadless from "@/pages/BlogPostHeadless";
 import ContactPage from "@/pages/Contact";
 import NotFound from "@/pages/not-found";
+
+const USE_HEADLESS_WP = import.meta.env.VITE_USE_HEADLESS_WP === 'true';
 
 function Router() {
   return (
@@ -24,7 +28,8 @@ function Router() {
       <Route path="/practice-areas/medical-malpractice" component={MedicalMalpracticePage} />
       <Route path="/testimonials" component={TestimonialsPage} />
       <Route path="/success" component={TestimonialsPage} />
-      <Route path="/blog" component={BlogPage} />
+      <Route path="/blog" component={USE_HEADLESS_WP ? BlogHeadless : BlogPage} />
+      <Route path="/blog/:slug" component={BlogPostHeadless} />
       <Route path="/contact" component={ContactPage} />
       <Route component={NotFound} />
     </Switch>
