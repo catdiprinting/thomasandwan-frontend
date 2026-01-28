@@ -1,34 +1,41 @@
-<?php get_header(); ?>
+<?php
+/**
+ * Page Template
+ */
+get_header();
+?>
 
 <main>
-    <!-- Hero -->
-    <section class="hero-section" style="padding: 120px 0 80px;">
+    <?php while (have_posts()): the_post(); ?>
+    
+    <!-- Page Header -->
+    <section class="blog-header">
         <div class="container">
-            <?php while (have_posts()) : the_post(); ?>
-                <h1 style="color: #fff;"><?php the_title(); ?></h1>
-            <?php endwhile; ?>
+            <h1 class="section-title"><?php the_title(); ?></h1>
         </div>
     </section>
 
-    <!-- Content -->
+    <!-- Page Content -->
     <section class="section">
         <div class="container">
-            <?php while (have_posts()) : the_post(); ?>
-                <div class="entry-content" style="max-width: 800px; margin: 0 auto; font-size: 1.125rem; line-height: 1.9;">
-                    <?php the_content(); ?>
-                </div>
-            <?php endwhile; ?>
+            <div class="single-post-content" style="max-width: 800px; margin: 0 auto;">
+                <?php the_content(); ?>
+            </div>
         </div>
     </section>
+
+    <?php endwhile; ?>
 
     <!-- CTA -->
     <section class="cta-section">
         <div class="container">
             <h2>Do You Have a Medical Malpractice Case?</h2>
             <p>If you or a loved one has been injured due to medical negligence, we are here to help.</p>
-            <div>
-                <a href="tel:713-529-1177" class="btn btn-primary">Call (713) 529-1177</a>
-                <a href="<?php echo home_url('/contact'); ?>" class="btn btn-outline" style="margin-left: 16px; border-color: #fff; color: #fff;">Request Free Case Review</a>
+            <div class="cta-buttons">
+                <a href="tel:<?php echo esc_attr(preg_replace('/[^0-9]/', '', get_theme_mod('contact_phone', '713-529-1177'))); ?>" class="btn btn-primary">
+                    Call (<?php echo esc_html(get_theme_mod('contact_phone', '713-529-1177')); ?>)
+                </a>
+                <a href="<?php echo home_url('/contact/'); ?>" class="btn btn-outline">Request Free Case Review</a>
             </div>
         </div>
     </section>

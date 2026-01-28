@@ -1,105 +1,104 @@
-<?php get_header(); ?>
+<?php
+/**
+ * Blog Archive Template
+ */
+get_header();
+?>
 
 <main>
-    <!-- Hero Section -->
-    <section class="hero-section">
+    <!-- Blog Header -->
+    <section class="blog-header">
         <div class="container">
-            <span class="hero-label">Trusted Medical Malpractice Attorneys</span>
-            <h1>Fighting for <span class="highlight">Justice</span> in Medical Malpractice Cases</h1>
-            <p>With decades of combined experience, we have helped families across Texas recover millions in compensation for birth injuries, surgical errors, and medical negligence.</p>
-            <div style="margin-top: 32px;">
-                <a href="<?php echo home_url('/contact'); ?>" class="btn btn-primary">Schedule Free Consultation</a>
-                <a href="tel:713-529-1177" class="btn btn-white" style="margin-left: 16px;">Call (713) 529-1177</a>
-            </div>
+            <span class="section-label">Insights & News</span>
+            <h1 class="section-title">
+                Legal Resources for <span class="highlight">Empowered</span> Decisions
+            </h1>
+            <p class="section-description">
+                Stay informed with the latest updates on medical malpractice law, birth injuries, and patient safety from Thomas & Wan.
+            </p>
         </div>
     </section>
 
-    <!-- Practice Areas -->
+    <!-- Blog Posts -->
     <section class="section">
         <div class="container">
-            <div class="section-title">
-                <span class="hero-label">Our Expertise</span>
-                <h2>Practice Areas</h2>
-                <p>We focus exclusively on medical malpractice cases, bringing specialized knowledge to every case.</p>
-            </div>
-            
-            <div class="row">
-                <div class="col-md-3">
-                    <div class="practice-card">
-                        <div class="icon">&#9829;</div>
-                        <h4>Birth Injuries</h4>
-                        <p>Representing families affected by preventable birth injuries including cerebral palsy and HIE.</p>
-                        <a href="<?php echo home_url('/practice-areas/birth-injuries'); ?>" class="read-more">Learn More &rarr;</a>
-                    </div>
+            <div class="blog-archive-grid">
+                <div class="blog-posts-list">
+                    <?php if (have_posts()): ?>
+                        <?php while (have_posts()): the_post(); 
+                            $categories = get_the_category();
+                            $category_name = !empty($categories) ? $categories[0]->name : 'Blog';
+                        ?>
+                        <article class="blog-post-item">
+                            <div class="blog-post-meta">
+                                <span class="category"><?php echo esc_html($category_name); ?></span>
+                                <span><?php echo get_the_date('F j, Y'); ?></span>
+                                <span><?php the_author(); ?></span>
+                            </div>
+                            
+                            <h2><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h2>
+                            
+                            <p><?php echo get_the_excerpt(); ?></p>
+                            
+                            <a href="<?php the_permalink(); ?>" class="read-more">
+                                Read Full Article <?php echo thomaswan_icon('arrow-right'); ?>
+                            </a>
+                        </article>
+                        <?php endwhile; ?>
+                        
+                        <div class="pagination">
+                            <?php 
+                            the_posts_pagination(array(
+                                'mid_size' => 2,
+                                'prev_text' => '&larr;',
+                                'next_text' => '&rarr;',
+                            )); 
+                            ?>
+                        </div>
+                    <?php else: ?>
+                        <p>No posts found.</p>
+                    <?php endif; ?>
                 </div>
-                <div class="col-md-3">
-                    <div class="practice-card">
-                        <div class="icon">&#9879;</div>
-                        <h4>Surgical Errors</h4>
-                        <p>Fighting for victims of preventable surgical mistakes and wrong-site surgeries.</p>
-                        <a href="<?php echo home_url('/practice-areas/surgical-errors'); ?>" class="read-more">Learn More &rarr;</a>
+                
+                <aside class="blog-sidebar">
+                    <div class="sidebar-widget">
+                        <h3>Categories</h3>
+                        <ul>
+                            <?php wp_list_categories(array(
+                                'title_li' => '',
+                                'show_count' => true,
+                            )); ?>
+                        </ul>
                     </div>
-                </div>
-                <div class="col-md-3">
-                    <div class="practice-card">
-                        <div class="icon">&#9733;</div>
-                        <h4>Brain Injuries</h4>
-                        <p>Advocating for patients who suffered brain damage due to medical negligence.</p>
-                        <a href="<?php echo home_url('/practice-areas/brain-injuries'); ?>" class="read-more">Learn More &rarr;</a>
+                    
+                    <div class="sidebar-widget sidebar-cta">
+                        <h3>Need Legal Help?</h3>
+                        <p>Contact us today for a free consultation regarding your medical malpractice case.</p>
+                        <a href="<?php echo home_url('/contact/'); ?>" class="btn btn-primary">Contact Us</a>
                     </div>
-                </div>
-                <div class="col-md-3">
-                    <div class="practice-card">
-                        <div class="icon">&#9737;</div>
-                        <h4>Misdiagnosis</h4>
-                        <p>Holding doctors accountable for delayed or incorrect diagnoses.</p>
-                        <a href="<?php echo home_url('/practice-areas/misdiagnosis'); ?>" class="read-more">Learn More &rarr;</a>
+                    
+                    <div class="sidebar-widget">
+                        <h3>Free Case Review</h3>
+                        <p>Call us today for a free consultation. We work on a contingency basis.</p>
+                        <a href="tel:<?php echo esc_attr(preg_replace('/[^0-9]/', '', get_theme_mod('contact_phone', '713-529-1177'))); ?>" class="sidebar-cta phone-link" style="color: var(--tw-secondary); font-weight: 700; font-size: 1.25rem;">
+                            (<?php echo esc_html(get_theme_mod('contact_phone', '713-529-1177')); ?>)
+                        </a>
                     </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Statistics -->
-    <section class="section-alt">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-3">
-                    <div class="stat">
-                        <div class="stat-number">$50M+</div>
-                        <div class="stat-label">Recovered for Clients</div>
-                    </div>
-                </div>
-                <div class="col-md-3">
-                    <div class="stat">
-                        <div class="stat-number">500+</div>
-                        <div class="stat-label">Cases Handled</div>
-                    </div>
-                </div>
-                <div class="col-md-3">
-                    <div class="stat">
-                        <div class="stat-number">30+</div>
-                        <div class="stat-label">Years Experience</div>
-                    </div>
-                </div>
-                <div class="col-md-3">
-                    <div class="stat">
-                        <div class="stat-number">100%</div>
-                        <div class="stat-label">Medical Malpractice Focus</div>
-                    </div>
-                </div>
+                </aside>
             </div>
         </div>
     </section>
 
-    <!-- CTA Section -->
+    <!-- CTA -->
     <section class="cta-section">
         <div class="container">
             <h2>Do You Have a Medical Malpractice Case?</h2>
             <p>If you or a loved one has been injured due to medical negligence, we are here to help. Call us today for a free consultation.</p>
-            <div>
-                <a href="tel:713-529-1177" class="btn btn-primary">Call (713) 529-1177</a>
-                <a href="<?php echo home_url('/contact'); ?>" class="btn btn-outline" style="margin-left: 16px; border-color: #fff; color: #fff;">Request Free Case Review</a>
+            <div class="cta-buttons">
+                <a href="tel:<?php echo esc_attr(preg_replace('/[^0-9]/', '', get_theme_mod('contact_phone', '713-529-1177'))); ?>" class="btn btn-primary">
+                    Call (<?php echo esc_html(get_theme_mod('contact_phone', '713-529-1177')); ?>)
+                </a>
+                <a href="<?php echo home_url('/contact/'); ?>" class="btn btn-outline">Request Free Case Review</a>
             </div>
         </div>
     </section>
