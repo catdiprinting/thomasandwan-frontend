@@ -5,34 +5,35 @@ export default function LandingPage() {
   return (
     <div className="min-h-screen bg-white font-sans">
       {/* Header with Logo and Phone */}
-      <header className="bg-white py-4 shadow-sm">
-        <div className="container mx-auto px-4 flex items-center justify-between">
-          <a href="/">
+      <header className="bg-gradient-to-r from-gray-900 via-gray-800 to-gray-900 relative overflow-hidden">
+        {/* Orange accent line */}
+        <div className="absolute bottom-0 left-0 right-0 h-1" style={{ background: 'linear-gradient(90deg, #d97500 0%, #F48400 50%, #F69118 100%)' }}></div>
+        
+        <div className="container mx-auto px-4 py-3 flex items-center justify-between">
+          <a href="/" className="flex items-center gap-3">
             <img 
               src="https://www.thomasandwan.com/wp-content/uploads/2022/03/logo-Thomas-and-Wan.png.webp" 
-              alt="Thomas & Wan - Medical Malpractice Lawyers" 
-              className="h-16 md:h-20 object-contain"
+              alt="Thomas & Wan" 
+              className="h-10 md:h-12 object-contain"
             />
           </a>
-          <div className="flex items-center gap-4">
-            <div className="hidden md:block text-right">
-              <p className="text-sm text-gray-600">Call Us 24/7</p>
-              <a 
-                href="tel:7135291177" 
-                className="text-2xl font-bold hover:opacity-80 transition-opacity"
-                style={{ color: '#F48400' }}
-              >
-                (713) 529-1177
-              </a>
+          
+          <div className="flex items-center gap-6">
+            <div className="hidden md:flex items-center gap-2 text-white/70">
+              <Phone className="w-4 h-4" />
+              <span className="text-sm font-medium uppercase tracking-wider">Free Consultation</span>
             </div>
-            <a href="tel:7135291177" className="md:hidden">
-              <Button 
-                size="sm" 
-                className="rounded-full"
-                style={{ backgroundColor: '#F48400' }}
-              >
-                <Phone className="w-5 h-5" />
-              </Button>
+            
+            <a 
+              href="tel:7135291177"
+              className="group flex items-center gap-2 px-5 py-2.5 rounded-full font-bold text-white transition-all duration-300 hover:scale-105 shadow-lg hover:shadow-orange-500/30"
+              style={{ 
+                background: 'linear-gradient(135deg, #F48400 0%, #d97500 100%)',
+                boxShadow: '0 4px 15px rgba(244, 132, 0, 0.3)'
+              }}
+            >
+              <Phone className="w-4 h-4 group-hover:animate-pulse" />
+              <span className="text-lg">(713) 529-1177</span>
             </a>
           </div>
         </div>
