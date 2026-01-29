@@ -14,6 +14,7 @@ import BlogHeadless from "@/pages/BlogHeadless";
 import BlogPostHeadless from "@/pages/BlogPostHeadless";
 import ContactPage from "@/pages/Contact";
 import LandingPage from "@/pages/LandingPage";
+import AdWordsLanding from "@/pages/AdWordsLanding";
 import NotFound from "@/pages/not-found";
 
 const USE_HEADLESS_WP = import.meta.env.VITE_USE_HEADLESS_WP === 'true';
@@ -33,6 +34,7 @@ function Router() {
       <Route path="/blog/:slug" component={BlogPostHeadless} />
       <Route path="/contact" component={ContactPage} />
       <Route path="/landing-page" component={LandingPage} />
+      <Route path="/adwords" component={AdWordsLanding} />
       <Route component={NotFound} />
     </Switch>
   );
