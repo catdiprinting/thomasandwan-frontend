@@ -4,6 +4,40 @@ import { Button } from "@/components/ui/button";
 export default function LandingPage() {
   return (
     <div className="min-h-screen bg-white font-sans">
+      {/* Header with Logo and Phone */}
+      <header className="bg-white py-4 shadow-sm">
+        <div className="container mx-auto px-4 flex items-center justify-between">
+          <a href="/">
+            <img 
+              src="https://www.thomasandwan.com/wp-content/uploads/2022/03/logo-Thomas-and-Wan.png.webp" 
+              alt="Thomas & Wan - Medical Malpractice Lawyers" 
+              className="h-16 md:h-20 object-contain"
+            />
+          </a>
+          <div className="flex items-center gap-4">
+            <div className="hidden md:block text-right">
+              <p className="text-sm text-gray-600">Call Us 24/7</p>
+              <a 
+                href="tel:7135291177" 
+                className="text-2xl font-bold hover:opacity-80 transition-opacity"
+                style={{ color: '#F48400' }}
+              >
+                (713) 529-1177
+              </a>
+            </div>
+            <a href="tel:7135291177" className="md:hidden">
+              <Button 
+                size="sm" 
+                className="rounded-full"
+                style={{ backgroundColor: '#F48400' }}
+              >
+                <Phone className="w-5 h-5" />
+              </Button>
+            </a>
+          </div>
+        </div>
+      </header>
+
       {/* Hero Section with Form */}
       <section 
         className="relative min-h-[600px] flex items-stretch"
