@@ -2,10 +2,15 @@ import { motion } from "framer-motion";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
-import { Star, Quote, MessageSquare, ChevronLeft, ChevronRight } from "lucide-react";
-import useEmblaCarousel from "embla-carousel-react";
-import { useCallback, useEffect, useState } from "react";
-import Autoplay from "embla-carousel-autoplay";
+import { Star, Quote, MessageSquare } from "lucide-react";
+import { Card, CardContent } from "@/components/ui/card";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "@/components/ui/carousel";
 
 const testimonials = [
   {
@@ -36,23 +41,6 @@ const testimonials = [
 ];
 
 export default function TestimonialsPage() {
-  const [emblaRef, emblaApi] = useEmblaCarousel(
-    { loop: true, align: "center" },
-    [Autoplay({ delay: 5000, stopOnInteraction: false })]
-  );
-  const [selectedIndex, setSelectedIndex] = useState(0);
-
-  const scrollPrev = useCallback(() => emblaApi?.scrollPrev(), [emblaApi]);
-  const scrollNext = useCallback(() => emblaApi?.scrollNext(), [emblaApi]);
-
-  useEffect(() => {
-    if (!emblaApi) return;
-    const onSelect = () => setSelectedIndex(emblaApi.selectedScrollSnap());
-    emblaApi.on("select", onSelect);
-    onSelect();
-    return () => { emblaApi.off("select", onSelect); };
-  }, [emblaApi]);
-
   return (
     <div className="min-h-screen bg-background font-sans text-foreground overflow-x-hidden selection:bg-secondary selection:text-primary">
       <Navigation />
@@ -98,64 +86,43 @@ export default function TestimonialsPage() {
               <h2 className="text-3xl md:text-4xl font-serif text-primary">What Our Clients Say</h2>
             </div>
             
-            <div className="relative max-w-4xl mx-auto">
-              {/* Navigation Buttons */}
-              <button
-                onClick={scrollPrev}
-                className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 md:-translate-x-12 z-10 w-10 h-10 md:w-12 md:h-12 bg-white rounded-full shadow-lg flex items-center justify-center hover:bg-gray-50 transition-colors border border-gray-200"
-                aria-label="Previous testimonial"
-                data-testid="button-carousel-prev"
-              >
-                <ChevronLeft className="w-5 h-5 md:w-6 md:h-6 text-primary" />
-              </button>
-              <button
-                onClick={scrollNext}
-                className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 md:translate-x-12 z-10 w-10 h-10 md:w-12 md:h-12 bg-white rounded-full shadow-lg flex items-center justify-center hover:bg-gray-50 transition-colors border border-gray-200"
-                aria-label="Next testimonial"
-                data-testid="button-carousel-next"
-              >
-                <ChevronRight className="w-5 h-5 md:w-6 md:h-6 text-primary" />
-              </button>
-
-              {/* Carousel */}
-              <div className="overflow-hidden" ref={emblaRef}>
-                <div className="flex">
+            <div className="max-w-4xl mx-auto">
+              <Carousel opts={{ align: "start", loop: true }}>
+                <CarouselContent>
                   {testimonials.map((t, idx) => (
-                    <div key={idx} className="flex-[0_0_100%] min-w-0 px-4">
-                      <div className="bg-[#F9F7F5] p-8 md:p-12 text-center relative">
-                        <Quote className="w-12 h-12 text-secondary/30 mx-auto mb-6" />
-                        <p className="text-lg md:text-xl text-slate-700 leading-relaxed mb-8 font-light italic max-w-2xl mx-auto">
-                          "{t.text}"
-                        </p>
-                        <div className="flex items-center justify-center gap-3">
-                          <div className="w-12 h-12 bg-primary rounded-full flex items-center justify-center text-white font-serif font-bold text-xl">
-                            {t.name.charAt(0)}
-                          </div>
-                          <div className="text-left">
-                            <div className="font-bold text-primary font-serif text-lg">{t.name}</div>
-                            {t.date && <div className="text-sm text-muted-foreground">{t.date}</div>}
-                          </div>
+                    <CarouselItem key={idx} className="md:basis-1/1 pl-4">
+                      <Card className="border-none shadow-lg bg-[#F9F7F5] relative overflow-visible">
+                        <div className="absolute -top-4 -left-4 bg-secondary text-white p-3 rounded-full shadow-lg">
+                          <Quote className="w-6 h-6 fill-current" />
                         </div>
-                      </div>
-                    </div>
+                        <CardContent className="pt-10 pb-8 px-8 md:px-12 text-center">
+                          <div className="flex justify-center gap-1 mb-6">
+                            {[...Array(5)].map((_, i) => (
+                              <Star key={i} className="w-5 h-5 text-secondary fill-current" />
+                            ))}
+                          </div>
+                          <p className="text-lg md:text-xl text-slate-700 leading-relaxed mb-8 font-light italic max-w-2xl mx-auto">
+                            "{t.text}"
+                          </p>
+                          <div className="flex items-center justify-center gap-3">
+                            <div className="w-12 h-12 bg-primary rounded-full flex items-center justify-center text-white font-serif font-bold text-xl">
+                              {t.name.charAt(0)}
+                            </div>
+                            <div className="text-left">
+                              <div className="font-bold text-primary font-serif text-lg">{t.name}</div>
+                              {t.date && <div className="text-sm text-muted-foreground">{t.date}</div>}
+                            </div>
+                          </div>
+                        </CardContent>
+                      </Card>
+                    </CarouselItem>
                   ))}
+                </CarouselContent>
+                <div className="hidden md:block">
+                  <CarouselPrevious className="-left-12 border-primary text-primary hover:bg-primary hover:text-white" data-testid="button-carousel-prev" />
+                  <CarouselNext className="-right-12 border-primary text-primary hover:bg-primary hover:text-white" data-testid="button-carousel-next" />
                 </div>
-              </div>
-
-              {/* Dots Indicator */}
-              <div className="flex justify-center gap-2 mt-6">
-                {testimonials.map((_, idx) => (
-                  <button
-                    key={idx}
-                    className={`w-2.5 h-2.5 rounded-full transition-all duration-300 ${
-                      idx === selectedIndex ? "bg-secondary w-6" : "bg-gray-300"
-                    }`}
-                    onClick={() => emblaApi?.scrollTo(idx)}
-                    aria-label={`Go to testimonial ${idx + 1}`}
-                    data-testid={`button-carousel-dot-${idx}`}
-                  />
-                ))}
-              </div>
+              </Carousel>
             </div>
           </div>
         </section>
