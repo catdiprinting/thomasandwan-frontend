@@ -7,33 +7,7 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel";
-
-const testimonials = [
-  {
-    name: "Alyssa",
-    label: "Verified Client",
-    text: "I had a hard time coming to terms with what happened to my baby at birth... and as I was looking for a Medical Malpractice attorney, her face was so welcoming. I instantly relaxed and what helped me thru my childbirth complications was she said it wasn't my fault.",
-    rating: 5,
-  },
-  {
-    name: "Lisa A.",
-    label: "Verified Client",
-    text: "Thomas & Wan did a great job representing me and my family. The lawyers went to work right away and through research found out critical information. They were aggressive and fought hard for us. I highly recommend them.",
-    rating: 5,
-  },
-  {
-    name: "Sarah M.",
-    label: "Verified Client",
-    text: "Linda Thomas and Michelle Wan are the dedicated attorneys you need. They explained everything clearly and were always available to answer my questions. Their expertise in birth injury cases is unmatched.",
-    rating: 5,
-  },
-];
-
-const results = [
-  { amount: "$6.5 Million", type: "Birth Injury Settlement", desc: "Settlement for a child who suffered brain damage due to delayed delivery." },
-  { amount: "$2.1 Million", type: "Surgical Error", desc: "Verdict for a patient who suffered permanent nerve damage during routine surgery." },
-  { amount: "$4.8 Million", type: "Wrongful Death", desc: "Settlement for a family who lost a mother due to misdiagnosis of heart condition." },
-];
+import { testimonials, caseResults } from "@/lib/content";
 
 export default function TestimonialsAndResults() {
   return (
@@ -52,7 +26,7 @@ export default function TestimonialsAndResults() {
           </div>
           
           <div className="grid md:grid-cols-3 gap-8">
-            {results.map((result, idx) => (
+            {caseResults.map((result, idx) => (
               <div key={idx} className="border-t-4 border-secondary pt-6 group hover:bg-[#F9F7F5] transition-colors p-6">
                 <div className="text-4xl font-serif text-primary mb-2 group-hover:scale-105 transition-transform origin-left">
                   {result.amount}
@@ -61,7 +35,7 @@ export default function TestimonialsAndResults() {
                   {result.type}
                 </div>
                 <p className="text-muted-foreground leading-relaxed">
-                  {result.desc}
+                  {result.description}
                 </p>
               </div>
             ))}
@@ -74,7 +48,7 @@ export default function TestimonialsAndResults() {
           
           <div className="text-center mb-12 pt-10">
             <h2 className="text-3xl md:text-4xl font-serif text-primary">
-              Client Stories
+              Client Testimonials
             </h2>
           </div>
 
@@ -93,8 +67,8 @@ export default function TestimonialsAndResults() {
                                <Star key={i} className="w-5 h-5 text-secondary fill-current" />
                              ))}
                            </div>
-                           <p className="text-lg text-slate-600 italic font-serif leading-relaxed mb-6 flex-grow">
-                             "{t.text}"
+                           <p className="text-lg text-slate-600 italic font-serif leading-relaxed mb-6 flex-grow line-clamp-6">
+                             "{t.text.substring(0, 300)}..."
                            </p>
                            <div>
                              <div className="font-bold text-primary text-lg">{t.name}</div>
