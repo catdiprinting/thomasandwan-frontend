@@ -69,7 +69,7 @@ export const teamMembers = [
   {
     name: "Linda Laurent Thomas",
     title: "Founding Partner",
-    image: "/images/linda-thomas.jpg",
+    image: "/images/partner-thomas.jpg",
     bio: "Since 1987, Linda Laurent Thomas has pursued aggressive legal representation on behalf of injury victims in cases involving personal injuries and wrongful death, medical malpractice, automobile accidents and transportation injuries, work related injuries, environmental and pollution injuries, and defective products.",
     fullBio: `Whether the wrongdoer is a Fortune 500 corporate giant, or a reckless and negligent driver, Thomas has dedicated her career to fighting for individuals to obtain the maximum amount of damages available under the law. Every case that the firm takes on is handled with the highest level of care and attention.
 
@@ -90,7 +90,7 @@ Linda Laurent Thomas is a cum laude graduate of South Texas College of Law in Ho
   {
     name: "Michelle W. Wan",
     title: "Founding Partner",
-    image: "/images/michelle-wan.jpg",
+    image: "/images/partner-wan.jpg",
     bio: "Michelle W. Wan has worked exclusively representing clients in personal injury matters. She has handled numerous matters involving toxic exposures, medical negligence and product defects. Like Thomas, Wan has dedicated her career to fighting on behalf of persons injured by the negligence, recklessness and carelessness of others.",
     fullBio: `Wan and Thomas work as a team in trial, and Wan enjoys the ability to stand in front of juries and bring her clients' side of the story to the light of a courtroom.
 

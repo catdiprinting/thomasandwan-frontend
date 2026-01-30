@@ -9,6 +9,7 @@ import BirthInjuriesPage from "@/pages/BirthInjuries";
 import ChildbirthComplicationsPage from "@/pages/ChildbirthComplications";
 import MedicalMalpracticePage from "@/pages/MedicalMalpractice";
 import TestimonialsPage from "@/pages/Testimonials";
+import FAQPage from "@/pages/FAQ";
 import BlogPage from "@/pages/Blog";
 import BlogHeadless from "@/pages/BlogHeadless";
 import BlogPostHeadless from "@/pages/BlogPostHeadless";
@@ -29,6 +30,7 @@ function Router() {
       <Route path="/practice-areas/childbirth-complications" component={ChildbirthComplicationsPage} />
       <Route path="/practice-areas/medical-malpractice" component={MedicalMalpracticePage} />
       <Route path="/testimonials" component={TestimonialsPage} />
+      <Route path="/faq" component={FAQPage} />
       <Route path="/success" component={TestimonialsPage} />
       <Route path="/blog" component={USE_HEADLESS_WP ? BlogHeadless : BlogPage} />
       <Route path="/blog/:slug" component={BlogPostHeadless} />
