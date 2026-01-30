@@ -296,7 +296,7 @@ export default function BirthInjuriesPage() {
 
         {/* Call to action */}
         <section className="bg-primary text-white py-24 text-center">
-          <div className="container mx-auto px-4 max-w-4xl">
+          <div className="container mx-auto px-4 md:px-6 lg:px-12 xl:px-24 2xl:px-32 max-w-4xl">
             <h2 className="text-3xl md:text-4xl font-serif mb-6">
               Legal Help for the Youngest Victims
             </h2>

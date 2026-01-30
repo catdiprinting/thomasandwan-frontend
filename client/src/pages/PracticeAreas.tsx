@@ -102,7 +102,7 @@ export default function PracticeAreasPage() {
 
         {/* Introduction */}
         <section className="py-20 bg-white">
-          <div className="container mx-auto px-4 md:px-6">
+          <div className="container mx-auto px-4 md:px-6 lg:px-12 xl:px-24 2xl:px-32">
             <div className="max-w-4xl mx-auto text-center">
               <h2 className="text-4xl font-serif text-primary mb-6">Why Specialization Matters</h2>
               <p className="text-lg text-slate-600 leading-relaxed font-light mb-8">
@@ -116,7 +116,7 @@ export default function PracticeAreasPage() {
 
         {/* Practice Areas Grid */}
         <section className="py-24 bg-[#F9F7F5]">
-          <div className="container mx-auto px-4 md:px-6">
+          <div className="container mx-auto px-4 md:px-6 lg:px-12 xl:px-24 2xl:px-32">
             <div className="space-y-24">
               {practices.map((area, idx) => (
                 <div key={idx} id={area.title.toLowerCase().replace(/\s+/g, '-')} className={`grid lg:grid-cols-2 gap-16 items-center ${idx % 2 === 1 ? 'lg:grid-flow-dense' : ''}`}>
@@ -159,7 +159,7 @@ export default function PracticeAreasPage() {
 
         {/* CTA */}
         <section className="bg-primary text-white py-24 text-center">
-          <div className="container mx-auto px-4 max-w-4xl">
+          <div className="container mx-auto px-4 md:px-6 lg:px-12 xl:px-24 2xl:px-32 max-w-4xl">
             <h2 className="text-4xl md:text-5xl font-serif mb-6">Not Sure If You Have a Case?</h2>
             <p className="text-xl text-white/80 mb-10 leading-relaxed">
               Medical malpractice cases are complex. Let our team review your medical records to determine if negligence occurred.

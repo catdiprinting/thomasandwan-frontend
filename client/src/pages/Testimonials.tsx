@@ -74,7 +74,7 @@ export default function TestimonialsPage() {
 
         {/* Review Carousel */}
         <section className="py-16 bg-white">
-          <div className="container mx-auto px-4 md:px-6">
+          <div className="container mx-auto px-4 md:px-6 lg:px-12 xl:px-24 2xl:px-32">
             <div className="text-center mb-10">
               <div className="flex justify-center mb-4">
                 <div className="flex gap-1">
@@ -129,7 +129,7 @@ export default function TestimonialsPage() {
 
         {/* Introduction */}
         <section className="py-20 bg-white border-t border-gray-100">
-          <div className="container mx-auto px-4 md:px-6">
+          <div className="container mx-auto px-4 md:px-6 lg:px-12 xl:px-24 2xl:px-32">
             <div className="max-w-4xl mx-auto text-center">
               <h2 className="text-4xl font-serif text-primary mb-6">Trusted by Families Across Texas</h2>
               <p className="text-lg text-slate-600 leading-relaxed font-light">
@@ -142,7 +142,7 @@ export default function TestimonialsPage() {
 
         {/* Testimonials Grid */}
         <section className="py-24 bg-[#F9F7F5]">
-          <div className="container mx-auto px-4 md:px-6">
+          <div className="container mx-auto px-4 md:px-6 lg:px-12 xl:px-24 2xl:px-32">
             <div className="grid md:grid-cols-2 gap-8 items-start">
               {testimonials.map((t, idx) => (
                 <div key={idx} className="bg-white p-8 md:p-10 shadow-sm hover:shadow-xl transition-all duration-300 relative group border-t-4 border-secondary">
@@ -197,7 +197,7 @@ export default function TestimonialsPage() {
 
         {/* CTA */}
         <section className="bg-primary text-white py-24 text-center">
-          <div className="container mx-auto px-4 max-w-4xl">
+          <div className="container mx-auto px-4 md:px-6 lg:px-12 xl:px-24 2xl:px-32 max-w-4xl">
             <h2 className="text-4xl md:text-5xl font-serif mb-6">Let Us Fight for Your Family Too</h2>
             <p className="text-xl text-white/80 mb-10 leading-relaxed">
               If you or a loved one has suffered due to medical negligence, we are here to listen.

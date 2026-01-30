@@ -12,12 +12,12 @@ export default function ChildbirthComplicationsPage() {
       <main className="pt-20">
         {/* Hero */}
         <section className="relative overflow-hidden bg-primary text-white">
-          <div className="relative z-10 container mx-auto px-4 md:px-6 py-24 lg:py-28">
+          <div className="relative z-10 container mx-auto px-4 md:px-6 lg:px-12 xl:px-24 2xl:px-32 py-24 lg:py-28">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8 }}
-              className="space-y-6 max-w-xl"
+              className="space-y-6 max-w-xl lg:pl-8 xl:pl-16"
             >
               <div className="inline-flex items-center gap-2 border-b-2 border-secondary pb-1">
                 <Heart className="w-5 h-5 text-secondary" />
@@ -49,7 +49,7 @@ export default function ChildbirthComplicationsPage() {
 
         {/* Intro */}
         <section className="py-20 bg-white">
-          <div className="container mx-auto px-4 md:px-6 max-w-5xl space-y-6 text-lg text-slate-700 leading-relaxed font-light">
+          <div className="container mx-auto px-4 md:px-6 lg:px-12 xl:px-24 2xl:px-32 max-w-5xl space-y-6 text-lg text-slate-700 leading-relaxed font-light">
             <p>
               Childbirth should be a joyous occasion, but when medical professionals fail to provide proper care, mothers can suffer serious, life-altering injuries. At Thomas & Wan, we understand the physical and emotional trauma that can result from complications during childbirth.
             </p>
@@ -64,7 +64,7 @@ export default function ChildbirthComplicationsPage() {
 
         {/* Types of Complications */}
         <section className="py-20 bg-[#F9F7F5] border-y border-gray-100">
-          <div className="container mx-auto px-4 md:px-6 max-w-6xl">
+          <div className="container mx-auto px-4 md:px-6 lg:px-12 xl:px-24 2xl:px-32 max-w-6xl">
             <h2 className="text-3xl md:text-4xl font-serif text-primary mb-6">
               Childbirth Complications We Handle
             </h2>
@@ -97,7 +97,7 @@ export default function ChildbirthComplicationsPage() {
 
         {/* When Negligence Occurs */}
         <section className="py-20 bg-white">
-          <div className="container mx-auto px-4 md:px-6 max-w-6xl grid lg:grid-cols-2 gap-12 items-start">
+          <div className="container mx-auto px-4 md:px-6 lg:px-12 xl:px-24 2xl:px-32 max-w-6xl grid lg:grid-cols-2 gap-12 items-start">
             <div>
               <h2 className="text-3xl font-serif text-primary mb-6">When Medical Negligence Leads to Complications</h2>
               <p className="text-lg text-slate-700 leading-relaxed mb-4 font-light">
@@ -131,7 +131,7 @@ export default function ChildbirthComplicationsPage() {
 
         {/* Preeclampsia Section */}
         <section className="py-20 bg-[#F9F7F5]">
-          <div className="container mx-auto px-4 md:px-6 max-w-6xl">
+          <div className="container mx-auto px-4 md:px-6 lg:px-12 xl:px-24 2xl:px-32 max-w-6xl">
             <h2 className="text-3xl font-serif text-primary mb-6">
               Preeclampsia and Maternal Injury
             </h2>
@@ -178,7 +178,7 @@ export default function ChildbirthComplicationsPage() {
 
         {/* Hemorrhage Section */}
         <section className="py-20 bg-white">
-          <div className="container mx-auto px-4 md:px-6 max-w-6xl">
+          <div className="container mx-auto px-4 md:px-6 lg:px-12 xl:px-24 2xl:px-32 max-w-6xl">
             <h2 className="text-3xl font-serif text-primary mb-6">
               Postpartum Hemorrhage
             </h2>
@@ -225,7 +225,7 @@ export default function ChildbirthComplicationsPage() {
 
         {/* Call to action */}
         <section className="bg-primary text-white py-24 text-center">
-          <div className="container mx-auto px-4 max-w-4xl">
+          <div className="container mx-auto px-4 md:px-6 lg:px-12 xl:px-24 2xl:px-32 max-w-4xl">
             <h2 className="text-3xl md:text-4xl font-serif mb-6">
               Advocating for Mothers
             </h2>

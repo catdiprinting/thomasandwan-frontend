@@ -38,7 +38,7 @@ export default function ContactPage() {
 
         {/* Contact Info & Form */}
         <section className="py-24 bg-white">
-          <div className="container mx-auto px-4 md:px-6">
+          <div className="container mx-auto px-4 md:px-6 lg:px-12 xl:px-24 2xl:px-32">
             <div className="grid lg:grid-cols-2 gap-16 lg:gap-24">
               
               {/* Left Column: Info */}
