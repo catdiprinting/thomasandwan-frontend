@@ -18,8 +18,6 @@ import LandingPage from "@/pages/LandingPage";
 import AdWordsLanding from "@/pages/AdWordsLanding";
 import NotFound from "@/pages/not-found";
 
-const USE_HEADLESS_WP = import.meta.env.VITE_USE_HEADLESS_WP === 'true';
-
 function Router() {
   return (
     <Switch>
@@ -32,7 +30,7 @@ function Router() {
       <Route path="/testimonials" component={TestimonialsPage} />
       <Route path="/faq" component={FAQPage} />
       <Route path="/success" component={TestimonialsPage} />
-      <Route path="/blog" component={USE_HEADLESS_WP ? BlogHeadless : BlogPage} />
+      <Route path="/blog" component={BlogHeadless} />
       <Route path="/blog/:slug" component={BlogPostHeadless} />
       <Route path="/contact" component={ContactPage} />
       <Route path="/landing-page" component={LandingPage} />

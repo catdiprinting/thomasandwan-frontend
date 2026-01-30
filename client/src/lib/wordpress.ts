@@ -3,6 +3,7 @@ const WP_API_URL = import.meta.env.VITE_WORDPRESS_API_URL || 'https://www.thomas
 export interface WPPost {
   id: number;
   date: string;
+  modified: string;
   title: { rendered: string };
   excerpt: { rendered: string };
   content: { rendered: string };
@@ -11,6 +12,7 @@ export interface WPPost {
   _embedded?: {
     author?: Array<{ name: string }>;
     'wp:term'?: Array<Array<{ id: number; name: string; slug: string }>>;
+    'wp:featuredmedia'?: Array<{ source_url: string }>;
   };
 }
 

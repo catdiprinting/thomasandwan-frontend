@@ -10,6 +10,32 @@ import { fetchPosts, fetchCategories, formatDate, stripHtml, getAuthorName, getC
 
 const POSTS_PER_PAGE = 12;
 
+const blogSchema = {
+  "@context": "https://schema.org",
+  "@type": "Blog",
+  "name": "Thomas & Wan Legal Blog",
+  "description": "Legal resources and articles on medical malpractice, birth injuries, and patient safety from Houston's leading medical malpractice attorneys.",
+  "url": "https://www.thomasandwan.com/blog",
+  "publisher": {
+    "@type": "LegalService",
+    "name": "Thomas & Wan, LLP",
+    "url": "https://www.thomasandwan.com",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://www.thomasandwan.com/wp-content/uploads/2022/03/logo-Thomas-and-Wan.png.webp"
+    },
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "1710 Sunset Blvd",
+      "addressLocality": "Houston",
+      "addressRegion": "TX",
+      "postalCode": "77005",
+      "addressCountry": "US"
+    },
+    "telephone": "+1-713-529-1177"
+  }
+};
+
 export default function BlogHeadless() {
   const [currentPage, setCurrentPage] = useState(1);
   const [selectedCategory, setSelectedCategory] = useState<number | null>(null);
@@ -35,6 +61,25 @@ export default function BlogHeadless() {
   };
 
   const selectedCategoryName = categories.find(c => c.id === selectedCategory)?.name;
+
+  // Inject Blog schema
+  useEffect(() => {
+    document.title = "Legal Blog | Thomas & Wan - Medical Malpractice Attorneys";
+    
+    const existingScript = document.getElementById('blog-schema');
+    if (existingScript) existingScript.remove();
+    
+    const script = document.createElement('script');
+    script.id = 'blog-schema';
+    script.type = 'application/ld+json';
+    script.textContent = JSON.stringify(blogSchema);
+    document.head.appendChild(script);
+    
+    return () => {
+      const script = document.getElementById('blog-schema');
+      if (script) script.remove();
+    };
+  }, []);
 
   return (
     <div className="min-h-screen bg-background font-sans text-foreground overflow-x-hidden selection:bg-secondary selection:text-primary">

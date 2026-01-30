@@ -1,11 +1,42 @@
 import { motion } from "framer-motion";
 import { useQuery } from "@tanstack/react-query";
 import { useRoute, Link } from "wouter";
+import { useEffect } from "react";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft, Calendar, User, Tag, Loader2 } from "lucide-react";
-import { fetchPost, formatDate, getAuthorName, getCategoryName } from "@/lib/wordpress";
+import { fetchPost, formatDate, getAuthorName, getCategoryName, stripHtml, type WPPost } from "@/lib/wordpress";
+
+function generateArticleSchema(post: WPPost) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": stripHtml(post.title.rendered),
+    "description": stripHtml(post.excerpt.rendered).substring(0, 160),
+    "image": post._embedded?.["wp:featuredmedia"]?.[0]?.source_url || "https://www.thomasandwan.com/wp-content/uploads/2022/03/logo-Thomas-and-Wan.png.webp",
+    "author": {
+      "@type": "Person",
+      "name": getAuthorName(post)
+    },
+    "publisher": {
+      "@type": "LegalService",
+      "name": "Thomas & Wan, LLP",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://www.thomasandwan.com/wp-content/uploads/2022/03/logo-Thomas-and-Wan.png.webp"
+      }
+    },
+    "datePublished": post.date,
+    "dateModified": post.modified,
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": `https://www.thomasandwan.com/blog/${post.slug}`
+    },
+    "articleSection": getCategoryName(post),
+    "keywords": ["medical malpractice", "birth injury", "Houston lawyer", getCategoryName(post)]
+  };
+}
 
 export default function BlogPostHeadless() {
   const [, params] = useRoute("/blog/:slug");
@@ -16,6 +47,29 @@ export default function BlogPostHeadless() {
     queryFn: () => fetchPost(slug),
     enabled: !!slug,
   });
+
+  // Inject Article schema and update document title
+  useEffect(() => {
+    if (post) {
+      // Update document title
+      document.title = `${stripHtml(post.title.rendered)} | Thomas & Wan`;
+      
+      // Inject JSON-LD schema
+      const existingScript = document.getElementById('article-schema');
+      if (existingScript) existingScript.remove();
+      
+      const script = document.createElement('script');
+      script.id = 'article-schema';
+      script.type = 'application/ld+json';
+      script.textContent = JSON.stringify(generateArticleSchema(post));
+      document.head.appendChild(script);
+      
+      return () => {
+        const script = document.getElementById('article-schema');
+        if (script) script.remove();
+      };
+    }
+  }, [post]);
 
   if (isLoading) {
     return (
