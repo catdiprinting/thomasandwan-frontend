@@ -41,11 +41,12 @@ export default function BlogSection() {
               Legal Resources & News
             </h2>
           </div>
-          <Link href="/blog">
-            <a className="inline-flex items-center text-primary font-bold uppercase tracking-wide hover:text-secondary transition-colors group">
-              View All Articles 
-              <ArrowRight className="ml-2 w-4 h-4 transition-transform group-hover:translate-x-1" />
-            </a>
+          <Link
+            href="/blog"
+            className="inline-flex items-center text-primary font-bold uppercase tracking-wide hover:text-secondary transition-colors group"
+          >
+            View All Articles 
+            <ArrowRight className="ml-2 w-4 h-4 transition-transform group-hover:translate-x-1" />
           </Link>
         </div>
 

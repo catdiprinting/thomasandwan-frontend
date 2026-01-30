@@ -51,11 +51,17 @@ export default function Navigation() {
              </div>
           </div>
           <div className="flex items-center gap-6">
-            <Link href="/about">
-              <a className="hover:text-secondary transition-colors uppercase tracking-wider text-xs font-bold">About Us</a>
+            <Link
+              href="/about"
+              className="hover:text-secondary transition-colors uppercase tracking-wider text-xs font-bold"
+            >
+              About Us
             </Link>
-            <Link href="/contact">
-              <a className="hover:text-secondary transition-colors uppercase tracking-wider text-xs font-bold">Contact</a>
+            <Link
+              href="/contact"
+              className="hover:text-secondary transition-colors uppercase tracking-wider text-xs font-bold"
+            >
+              Contact
             </Link>
           </div>
         </div>
@@ -69,31 +75,28 @@ export default function Navigation() {
         )}
       >
         <div className="container mx-auto px-4 md:px-6 flex items-center justify-between">
-          <Link href="/">
-            <a className="flex items-center gap-2">
-              <img 
-                src="/images/logo.webp" 
-                alt="Thomas & Wan" 
-                className={cn("w-auto object-contain transition-all duration-300", scrolled ? "h-8" : "h-10 md:h-12")}
-              />
-            </a>
+          <Link href="/" className="flex items-center gap-2">
+            <img 
+              src="/images/logo.webp" 
+              alt="Thomas & Wan" 
+              className={cn("w-auto object-contain transition-all duration-300", scrolled ? "h-8" : "h-10 md:h-12")}
+            />
           </Link>
 
           {/* Desktop Nav */}
           <div className="hidden md:flex items-center gap-8">
-            <Link href="/">
-              <a
-                className={cn(
-                  "text-sm font-medium tracking-wide uppercase transition-colors hover:text-secondary relative group",
-                  location === "/" ? "text-secondary" : "text-primary"
-                )}
-              >
-                Home
-                <span className={cn(
-                  "absolute -bottom-1 left-0 w-full h-0.5 bg-secondary transform scale-x-0 transition-transform duration-300 group-hover:scale-x-100",
-                  location === "/" ? "scale-x-100" : ""
-                )} />
-              </a>
+            <Link
+              href="/"
+              className={cn(
+                "text-sm font-medium tracking-wide uppercase transition-colors hover:text-secondary relative group",
+                location === "/" ? "text-secondary" : "text-primary"
+              )}
+            >
+              Home
+              <span className={cn(
+                "absolute -bottom-1 left-0 w-full h-0.5 bg-secondary transform scale-x-0 transition-transform duration-300 group-hover:scale-x-100",
+                location === "/" ? "scale-x-100" : ""
+              )} />
             </Link>
 
             {/* Practice Areas Dropdown */}
@@ -102,20 +105,19 @@ export default function Navigation() {
               onMouseEnter={() => setPracticeAreasOpen(true)}
               onMouseLeave={() => setPracticeAreasOpen(false)}
             >
-              <Link href="/practice-areas">
-                <a
-                  className={cn(
-                    "text-sm font-medium tracking-wide uppercase transition-colors hover:text-secondary relative flex items-center gap-1",
-                    location.startsWith("/practice-areas") ? "text-secondary" : "text-primary"
-                  )}
-                >
-                  Practice Areas
-                  <ChevronDown className={cn("w-4 h-4 transition-transform", practiceAreasOpen ? "rotate-180" : "")} />
-                  <span className={cn(
-                    "absolute -bottom-1 left-0 w-full h-0.5 bg-secondary transform scale-x-0 transition-transform duration-300 group-hover:scale-x-100",
-                    location.startsWith("/practice-areas") ? "scale-x-100" : ""
-                  )} />
-                </a>
+              <Link
+                href="/practice-areas"
+                className={cn(
+                  "text-sm font-medium tracking-wide uppercase transition-colors hover:text-secondary relative flex items-center gap-1",
+                  location.startsWith("/practice-areas") ? "text-secondary" : "text-primary"
+                )}
+              >
+                Practice Areas
+                <ChevronDown className={cn("w-4 h-4 transition-transform", practiceAreasOpen ? "rotate-180" : "")} />
+                <span className={cn(
+                  "absolute -bottom-1 left-0 w-full h-0.5 bg-secondary transform scale-x-0 transition-transform duration-300 group-hover:scale-x-100",
+                  location.startsWith("/practice-areas") ? "scale-x-100" : ""
+                )} />
               </Link>
               
               {/* Dropdown Menu */}
@@ -125,15 +127,15 @@ export default function Navigation() {
               )}>
                 <div className="bg-white shadow-lg border border-gray-100 py-2">
                   {practiceAreaSubmenu.map((item) => (
-                    <Link key={item.name} href={item.href}>
-                      <a
-                        className={cn(
-                          "block px-4 py-3 text-sm font-medium hover:bg-gray-50 hover:text-secondary transition-colors",
-                          location === item.href ? "text-secondary bg-gray-50" : "text-primary"
-                        )}
-                      >
-                        {item.name}
-                      </a>
+                    <Link
+                      key={item.name}
+                      href={item.href}
+                      className={cn(
+                        "block px-4 py-3 text-sm font-medium hover:bg-gray-50 hover:text-secondary transition-colors",
+                        location === item.href ? "text-secondary bg-gray-50" : "text-primary"
+                      )}
+                    >
+                      {item.name}
                     </Link>
                   ))}
                 </div>
@@ -141,30 +143,33 @@ export default function Navigation() {
             </div>
 
             {navLinks.slice(1).map((link) => (
-              <Link key={link.name} href={link.href}>
-                <a
-                  className={cn(
-                    "text-sm font-medium tracking-wide uppercase transition-colors hover:text-secondary relative group",
-                    location === link.href ? "text-secondary" : "text-primary"
-                  )}
-                >
-                  {link.name}
-                  <span className={cn(
-                    "absolute -bottom-1 left-0 w-full h-0.5 bg-secondary transform scale-x-0 transition-transform duration-300 group-hover:scale-x-100",
-                    location === link.href ? "scale-x-100" : ""
-                  )} />
-                </a>
+              <Link
+                key={link.name}
+                href={link.href}
+                className={cn(
+                  "text-sm font-medium tracking-wide uppercase transition-colors hover:text-secondary relative group",
+                  location === link.href ? "text-secondary" : "text-primary"
+                )}
+              >
+                {link.name}
+                <span className={cn(
+                  "absolute -bottom-1 left-0 w-full h-0.5 bg-secondary transform scale-x-0 transition-transform duration-300 group-hover:scale-x-100",
+                  location === link.href ? "scale-x-100" : ""
+                )} />
               </Link>
             ))}
-            <Button className="bg-secondary hover:bg-secondary/90 text-white font-bold rounded-none px-6">
-              Free Case Review
-            </Button>
+            <Link href="/contact">
+              <Button className="bg-secondary hover:bg-secondary/90 text-white font-bold rounded-none px-6 py-2 h-auto">
+                Free Case Review
+              </Button>
+            </Link>
           </div>
 
           {/* Mobile Menu Toggle */}
           <button
-            className="md:hidden text-primary"
+            className="md:hidden text-primary p-2"
             onClick={() => setIsOpen(!isOpen)}
+            aria-label="Toggle menu"
           >
             {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
           </button>
@@ -173,13 +178,12 @@ export default function Navigation() {
         {/* Mobile Nav */}
         {isOpen && (
           <div className="md:hidden absolute top-full left-0 w-full bg-white border-b border-border p-4 shadow-lg flex flex-col gap-4 animate-in slide-in-from-top-5 max-h-[80vh] overflow-y-auto">
-            <Link href="/">
-              <a
-                className="text-primary font-medium text-lg py-2 border-b border-gray-100"
-                onClick={() => setIsOpen(false)}
-              >
-                Home
-              </a>
+            <Link
+              href="/"
+              className="text-primary font-medium text-lg py-2 border-b border-gray-100"
+              onClick={() => setIsOpen(false)}
+            >
+              Home
             </Link>
             
             {/* Practice Areas with submenu on mobile */}
@@ -193,22 +197,21 @@ export default function Navigation() {
               </button>
               {practiceAreasOpen && (
                 <div className="pl-4 pb-2">
-                  <Link href="/practice-areas">
-                    <a
+                  <Link
+                    href="/practice-areas"
+                    className="block text-primary/80 font-medium py-2"
+                    onClick={() => setIsOpen(false)}
+                  >
+                    All Practice Areas
+                  </Link>
+                  {practiceAreaSubmenu.map((item) => (
+                    <Link
+                      key={item.name}
+                      href={item.href}
                       className="block text-primary/80 font-medium py-2"
                       onClick={() => setIsOpen(false)}
                     >
-                      All Practice Areas
-                    </a>
-                  </Link>
-                  {practiceAreaSubmenu.map((item) => (
-                    <Link key={item.name} href={item.href}>
-                      <a
-                        className="block text-primary/80 font-medium py-2"
-                        onClick={() => setIsOpen(false)}
-                      >
-                        {item.name}
-                      </a>
+                      {item.name}
                     </Link>
                   ))}
                 </div>
@@ -216,24 +219,28 @@ export default function Navigation() {
             </div>
 
             {navLinks.slice(1).map((link) => (
-              <Link key={link.name} href={link.href}>
-                <a
-                  className="text-primary font-medium text-lg py-2 border-b border-gray-100"
-                  onClick={() => setIsOpen(false)}
-                >
-                  {link.name}
-                </a>
+              <Link
+                key={link.name}
+                href={link.href}
+                className="text-primary font-medium text-lg py-2 border-b border-gray-100"
+                onClick={() => setIsOpen(false)}
+              >
+                {link.name}
               </Link>
             ))}
-            <Link href="/about">
-              <a className="text-primary font-medium text-lg py-2 border-b border-gray-100" onClick={() => setIsOpen(false)}>
-                About Us
-              </a>
+            <Link
+              href="/about"
+              className="text-primary font-medium text-lg py-2 border-b border-gray-100"
+              onClick={() => setIsOpen(false)}
+            >
+              About Us
             </Link>
-            <Link href="/contact">
-              <a className="text-primary font-medium text-lg py-2 border-b border-gray-100" onClick={() => setIsOpen(false)}>
-                Contact
-              </a>
+            <Link
+              href="/contact"
+              className="text-primary font-medium text-lg py-2 border-b border-gray-100"
+              onClick={() => setIsOpen(false)}
+            >
+              Contact
             </Link>
             <div className="flex flex-col gap-2 mt-2">
                <a href="tel:713-529-1177" className="flex items-center gap-2 text-primary font-medium text-lg">
@@ -243,9 +250,11 @@ export default function Navigation() {
                  <Mail className="w-5 h-5 text-secondary" /> info@thomasandwan.com
                </a>
             </div>
-            <Button className="w-full bg-secondary hover:bg-secondary/90 text-white font-bold rounded-none mt-2">
-              Call Now
-            </Button>
+            <Link href="/contact" onClick={() => setIsOpen(false)}>
+              <Button className="w-full bg-secondary hover:bg-secondary/90 text-white font-bold rounded-none mt-2 py-3 h-auto">
+                Free Case Review
+              </Button>
+            </Link>
           </div>
         )}
       </nav>
