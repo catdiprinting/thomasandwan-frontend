@@ -35,7 +35,7 @@ export default function Navigation() {
       
       {/* Top Utility Bar */}
       <div className="bg-primary text-white py-2 text-sm border-b border-white/10 hidden md:block">
-        <div className="container mx-auto px-4 md:px-6 flex justify-between items-center">
+        <div className="container mx-auto px-4 md:px-6 lg:px-12 xl:px-24 2xl:px-32 flex justify-between items-center">
           <div className="flex items-center gap-6">
              <div className="flex items-center gap-2 opacity-80 hover:opacity-100 transition-opacity">
                <Mail className="w-3 h-3 text-secondary" />
@@ -74,8 +74,8 @@ export default function Navigation() {
           scrolled ? "py-2" : "py-4"
         )}
       >
-        <div className="container mx-auto px-4 md:px-6 flex items-center justify-between">
-          <Link href="/" className="flex items-center gap-2">
+        <div className="container mx-auto px-4 md:px-6 lg:px-12 xl:px-24 2xl:px-32 flex items-center justify-between">
+          <Link href="/" className="flex items-center gap-2 lg:ml-8 xl:ml-16">
             <img 
               src="/images/logo.webp" 
               alt="Thomas & Wan" 
