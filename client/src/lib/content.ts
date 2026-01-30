@@ -151,20 +151,40 @@ export const testimonials = [
 
 export const faqs = [
   {
-    question: "Do I have a case?",
-    answer: "The first step is for us to help you get a copy of all your medical records. Then we work with our team of expert doctors and nurses to review the records to let us know if you have a case.",
+    question: "I think I have a legal claim. What do I do now?",
+    answer: "If you think you have a legal claim, your first step is finding a lawyer to represent you. You can contact Thomas & Wan to discuss your claim by filling out our contact form or by calling us at (713) 529-1177. A lawyer will evaluate your case.",
   },
   {
-    question: "What kind of help can my family receive?",
-    answer: "If we feel you have a case, we will have our team of experts determine how much money it will take to pay for the past medical bills and future quality medical care for you or your loved one for the rest of his or her life.",
+    question: "How do I know which lawyer to use?",
+    answer: "When you're filing a lawsuit, you want to use an attorney who has experience dealing with your type of claim and a proven track record of success. Ask your attorney what kind of experience they have, how long they have been practicing, how much time they spend on cases like yours, and any other questions you may have. Most importantly, ask your attorney whether he or she will be handling the case or will be referring it to another firm.",
   },
   {
-    question: "How much do you charge?",
-    answer: "We work on a contingency basis. This means that you only pay a percentage for our services if we win a verdict or settlement for your family. If no recovery is made, you pay nothing.",
+    question: "Why should I hire Thomas & Wan?",
+    answer: "Linda Laurent Thomas and Michelle Wan have over 55 years of combined experience in handling personal injury cases across the nation. They are routinely asked to handle legal issues and difficult cases by other law firms. Ms. Thomas and Ms. Wan approach practicing law as a profession, not a factory where a client's case is 'flipped' or referred to another law firm. They handle your case with personal service and will be happy to discuss your case with you.",
   },
   {
-    question: "Why should we hire you?",
-    answer: "There are very few attorneys in Texas who specialize in medical malpractice, and those are the only kind of cases we do. Linda Thomas and Michelle Wan have over 55 years of combined experience in medical cases. If we take your case, we work on your case ourselves; we don't 'flip' it to another firm.",
+    question: "How do I pay for an attorney?",
+    answer: "Most personal injury firms, including Thomas & Wan, work on a contingency basis. This means that you only pay for our services if we win a verdict or settlement for you. If no recovery is made, you pay nothing.",
+  },
+  {
+    question: "Thomas & Wan has taken my case. What now?",
+    answer: "The first part of the lawsuit process is called 'discovery.' In this phase, the lawyers for the plaintiff (you) and the defendant (the person or company you are suing) try to discover what evidence exists and how this evidence proves or disproves your claim.",
+  },
+  {
+    question: "What do I have to do during discovery?",
+    answer: "As your lawyers, we have to get as much information from you as possible to prove your case. The lawyers for each side will supply each other with written questions regarding your personal information, the names and addresses of witnesses, your injuries and medical treatment, and the experts each side intends to call to present their case. These questions are called interrogatories.",
+  },
+  {
+    question: "What if I have to give a deposition?",
+    answer: "A deposition is testimony given under oath that is recorded for use in court at a later date. During your deposition, Thomas & Wan will ask the defendant questions, and the defendant's lawyer will ask you questions. A court reporter will be there to record everyone's testimony. We will prepare you for your deposition so you will be familiar with the process and know what to expect, and your attorney will be by your side the whole time.",
+  },
+  {
+    question: "What is mediation?",
+    answer: "Mediation is a meeting with all of the parties in the case. The goal of mediation is to settle your lawsuit. A mediator, generally a retired judge or lawyer who is a neutral person, acts as a communicator between the parties. A mediation takes about a day. You are required to be present to decide whether you want to settle your case or go to trial. Courts often require parties to attend a mediation before going to trial.",
+  },
+  {
+    question: "What if my case goes to trial?",
+    answer: "If your case goes to trial, a judge or jury will determine whether the defendant is responsible for financially compensating you for your injuries or not and what amount the defendant is responsible for. If Thomas & Wan wins a settlement or verdict for you, we will take our fee from there.",
   },
 ];
 
