@@ -19,12 +19,12 @@ export default function BirthInjuriesPage() {
               className="w-full h-full object-cover"
             />
           </div>
-          <div className="relative z-10 container mx-auto px-4 md:px-6 py-24 lg:py-28 grid lg:grid-cols-2 gap-12 items-center">
+          <div className="relative z-10 container mx-auto px-4 md:px-6 lg:px-12 xl:px-24 2xl:px-32 py-24 lg:py-28 grid lg:grid-cols-2 gap-12 items-center">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8 }}
-              className="space-y-6 max-w-xl"
+              className="space-y-6 max-w-xl lg:pl-8 xl:pl-16"
             >
               <div className="inline-flex items-center gap-2 border-b-2 border-secondary pb-1">
                 <Baby className="w-5 h-5 text-secondary" />

@@ -9,7 +9,7 @@ export default function LandingPage() {
         {/* Orange accent line */}
         <div className="absolute bottom-0 left-0 right-0 h-1" style={{ background: 'linear-gradient(90deg, #d97500 0%, #F48400 50%, #F69118 100%)' }}></div>
         
-        <div className="container mx-auto px-4 py-3 flex items-center justify-between">
+        <div className="container mx-auto px-4 md:px-6 lg:px-12 xl:px-24 2xl:px-32 py-3 flex items-center justify-between">
           <a href="/" className="flex items-center gap-3">
             <img 
               src="https://www.thomasandwan.com/wp-content/uploads/2022/03/logo-Thomas-and-Wan.png.webp" 

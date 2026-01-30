@@ -156,12 +156,12 @@ export default function BlogPage() {
         {/* Hero Section */}
         <section className="bg-primary text-white py-24 relative overflow-hidden">
           <div className="absolute bottom-0 left-0 w-full h-1/2 bg-secondary/5" />
-          <div className="container mx-auto px-4 md:px-6 relative z-10">
+          <div className="container mx-auto px-4 md:px-6 lg:px-12 xl:px-24 2xl:px-32 relative z-10">
             <motion.div 
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8 }}
-              className="max-w-3xl"
+              className="max-w-3xl lg:pl-8 xl:pl-16"
             >
               <div className="inline-block border-b-2 border-secondary pb-1 mb-6">
                 <span className="text-secondary font-bold tracking-widest uppercase text-sm">
