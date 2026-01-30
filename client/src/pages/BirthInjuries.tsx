@@ -3,6 +3,7 @@ import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Baby, Activity, AlertTriangle } from "lucide-react";
+import { Link } from "wouter";
 
 export default function BirthInjuriesPage() {
   return (
@@ -43,13 +44,15 @@ export default function BirthInjuriesPage() {
                 <Button className="bg-secondary hover:bg-secondary/90 text-white rounded-none h-12 px-8 font-bold">
                   Call (713) 529-1177
                 </Button>
-                <Button
-                  variant="outline"
-                  className="border-white text-white hover:bg-white hover:text-primary rounded-none h-12 px-8 font-bold flex items-center gap-2"
-                >
-                  Free Case Evaluation
-                  <ArrowRight className="w-4 h-4" />
-                </Button>
+                <Link href="/contact">
+                  <Button
+                    variant="outline"
+                    className="border-white text-white hover:bg-white hover:text-primary rounded-none h-12 px-8 font-bold flex items-center gap-2"
+                  >
+                    Free Case Evaluation
+                    <ArrowRight className="w-4 h-4" />
+                  </Button>
+                </Link>
               </div>
             </motion.div>
           </div>

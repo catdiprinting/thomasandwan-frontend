@@ -4,6 +4,7 @@ import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Baby, Stethoscope, Brain, Activity, HeartPulse } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Link } from "wouter";
 
 const practices = [
   {
@@ -164,9 +165,11 @@ export default function PracticeAreasPage() {
             <p className="text-xl text-white/80 mb-10 leading-relaxed">
               Medical malpractice cases are complex. Let our team review your medical records to determine if negligence occurred.
             </p>
-            <Button size="lg" className="bg-secondary hover:bg-secondary/90 text-white font-bold py-8 px-10 text-xl rounded-none">
-              Request Free Case Review
-            </Button>
+            <Link href="/contact">
+              <Button size="lg" className="bg-secondary hover:bg-secondary/90 text-white font-bold py-8 px-10 text-xl rounded-none">
+                Request Free Case Review
+              </Button>
+            </Link>
           </div>
         </section>
 

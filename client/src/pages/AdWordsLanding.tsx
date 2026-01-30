@@ -34,13 +34,15 @@ export default function AdWordsLanding() {
                   Call (713) 529-1177
                 </Button>
               </a>
-              <Button 
-                size="lg" 
-                variant="outline"
-                className="text-lg px-8 py-6 rounded-full font-bold border-white text-white hover:bg-white hover:text-gray-900"
-              >
-                Free Case Review
-              </Button>
+              <a href="/contact">
+                <Button 
+                  size="lg" 
+                  variant="outline"
+                  className="text-lg px-8 py-6 rounded-full font-bold border-white text-white hover:bg-white hover:text-gray-900"
+                >
+                  Free Case Review
+                </Button>
+              </a>
             </div>
 
             <div className="flex flex-wrap gap-6 text-white/80 text-sm">
