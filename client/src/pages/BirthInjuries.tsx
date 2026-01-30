@@ -297,6 +297,33 @@ export default function BirthInjuriesPage() {
           </div>
         </section>
 
+        {/* Related Practice Areas */}
+        <section className="py-16 bg-gray-50">
+          <div className="container mx-auto px-4 md:px-6 lg:px-12 xl:px-24 2xl:px-32">
+            <h2 className="text-3xl font-serif text-primary mb-8 text-center">Related Practice Areas</h2>
+            <div className="grid md:grid-cols-3 gap-6 max-w-4xl mx-auto">
+              <Link href="/practice-areas/medical-malpractice">
+                <div className="bg-white p-6 border border-gray-200 hover:border-secondary hover:shadow-lg transition-all cursor-pointer">
+                  <h3 className="font-serif text-xl text-primary mb-2">Medical Malpractice</h3>
+                  <p className="text-slate-600 text-sm">When healthcare providers fail to meet the standard of care.</p>
+                </div>
+              </Link>
+              <Link href="/practice-areas/childbirth-complications">
+                <div className="bg-white p-6 border border-gray-200 hover:border-secondary hover:shadow-lg transition-all cursor-pointer">
+                  <h3 className="font-serif text-xl text-primary mb-2">Childbirth Complications</h3>
+                  <p className="text-slate-600 text-sm">Injuries to mothers during labor and delivery.</p>
+                </div>
+              </Link>
+              <Link href="/practice-areas">
+                <div className="bg-white p-6 border border-gray-200 hover:border-secondary hover:shadow-lg transition-all cursor-pointer">
+                  <h3 className="font-serif text-xl text-primary mb-2">All Practice Areas</h3>
+                  <p className="text-slate-600 text-sm">View all cases we handle at Thomas & Wan.</p>
+                </div>
+              </Link>
+            </div>
+          </div>
+        </section>
+
         {/* Call to action */}
         <section className="bg-primary text-white py-24 text-center">
           <div className="container mx-auto px-4 md:px-6 lg:px-12 xl:px-24 2xl:px-32 max-w-4xl">

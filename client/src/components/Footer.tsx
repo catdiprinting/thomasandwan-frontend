@@ -1,11 +1,12 @@
 import { Phone, Mail, MapPin, Clock } from "lucide-react";
 import ContactForm from "@/components/ContactForm";
+import { Link } from "wouter";
 
 export default function Footer() {
   return (
     <footer className="bg-primary text-white pt-12 pb-8">
       <div className="container mx-auto px-4 md:px-6 lg:px-12 xl:px-24 2xl:px-32">
-        <div className="grid lg:grid-cols-2 gap-16 mb-12">
+        <div className="grid lg:grid-cols-3 gap-12 mb-12">
           
           {/* Contact Info */}
           <div className="space-y-8">
@@ -52,6 +53,31 @@ export default function Footer() {
                   <p className="text-white/70">Weekends: By Appointment</p>
                 </div>
               </div>
+            </div>
+          </div>
+
+          {/* Quick Links */}
+          <div className="space-y-8">
+            <div>
+              <h3 className="text-xl font-serif mb-6 text-secondary">Quick Links</h3>
+              <ul className="space-y-3">
+                <li><Link href="/" className="text-white/70 hover:text-white transition-colors">Home</Link></li>
+                <li><Link href="/about" className="text-white/70 hover:text-white transition-colors">About Us</Link></li>
+                <li><Link href="/testimonials" className="text-white/70 hover:text-white transition-colors">Testimonials</Link></li>
+                <li><Link href="/blog" className="text-white/70 hover:text-white transition-colors">Blog</Link></li>
+                <li><Link href="/faq" className="text-white/70 hover:text-white transition-colors">FAQ</Link></li>
+                <li><Link href="/contact" className="text-white/70 hover:text-white transition-colors">Contact</Link></li>
+              </ul>
+            </div>
+            
+            <div>
+              <h3 className="text-xl font-serif mb-6 text-secondary">Practice Areas</h3>
+              <ul className="space-y-3">
+                <li><Link href="/practice-areas" className="text-white/70 hover:text-white transition-colors">All Practice Areas</Link></li>
+                <li><Link href="/practice-areas/birth-injuries" className="text-white/70 hover:text-white transition-colors">Birth Injuries</Link></li>
+                <li><Link href="/practice-areas/medical-malpractice" className="text-white/70 hover:text-white transition-colors">Medical Malpractice</Link></li>
+                <li><Link href="/practice-areas/childbirth-complications" className="text-white/70 hover:text-white transition-colors">Childbirth Complications</Link></li>
+              </ul>
             </div>
           </div>
 
