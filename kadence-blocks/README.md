@@ -1,18 +1,30 @@
-# Thomas & Wan - Kadence Block Code Files
+# Thomas & Wan - Kadence Block Templates
 
-## Quick Start
+Ready-to-use Kadence Block HTML templates for WordPress. Copy and paste into the WordPress Block Editor (Code view).
 
-Each HTML file contains Kadence Block code that you can copy and paste directly into WordPress.
+## Pages Available
 
-## Files Included
+### Core Pages
+| File | Description |
+|------|-------------|
+| `home-page.html` | Homepage with hero, trust bar, practice areas, team, results, stats, and CTA |
+| `about-page.html` | About page with attorney bios (Linda Thomas & Michelle Wan) |
+| `contact-page.html` | Contact page with Contact Form 7 integration and map |
+| `testimonials-page.html` | Client testimonials with carousel and grid layout |
+| `practice-areas-page.html` | Main practice areas overview page |
 
-| File | Page | Content |
-|------|------|---------|
-| `about-page.html` | About Us | Full bios for Linda Thomas & Michelle Wan |
-| `contact-page.html` | Contact Us | Address, phone, map, contact form |
-| `medical-malpractice-page.html` | Medical Malpractice | Cases handled, statistics, expertise |
-| `birth-injuries-page.html` | Birth Injuries | 3000+ words with case examples |
-| `complications-childbirth-page.html` | Complications of Childbirth | Maternal complications cases |
+### Practice Area Pages
+| File | Description |
+|------|-------------|
+| `birth-injuries-page.html` | Birth injuries detailed page (3000+ words of content) |
+| `medical-malpractice-page.html` | Medical malpractice overview page |
+| `complications-childbirth-page.html` | Childbirth complications page |
+
+### Landing Pages
+| File | Description |
+|------|-------------|
+| `landing-page.html` | Main landing page with hero/form, features bar, video section, stats |
+| `adwords-landing-page.html` | Clean AdWords campaign landing page (conversion-focused) |
 
 ## How to Use
 
@@ -34,18 +46,37 @@ Each HTML file contains Kadence Block code that you can copy and paste directly 
 2. You should see the formatted page with all sections
 3. Click **Publish** or **Update**
 
-## Design Colors Used
+## Contact Form 7 Setup
 
-- **Navy Blue**: #1F2937 (headers, dark sections)
-- **Orange/Gold**: #F59E0B (accents, CTAs)
-- **Light Gray**: #f3f4f6 (alternate sections)
-- **White**: #ffffff (text on dark backgrounds)
+Templates use Contact Form 7 shortcodes. After installing Contact Form 7:
+
+1. Create your form in Contact Form 7
+2. Copy the shortcode ID (e.g., `[contact-form-7 id="123"]`)
+3. Replace `YOUR_FORM_ID` in the templates with your actual form ID
+
+## Brand Colors
+
+- **Primary Navy**: `#1F2937`
+- **Orange/Gold**: `#F48400`
+- **Orange Dark**: `#d97500`
+- **Orange Light**: `#F69118`
+- **Background Gray**: `#F9F7F5`
+- **Text Gray**: `#6B7280`
+
+## Typography
+
+- **Headings**: Georgia, serif
+- **Body**: System font stack (sans-serif)
+
+## Image URLs
+
+Templates reference images from thomasandwan.com. After importing:
+1. Upload your own images to WordPress Media Library
+2. Replace image URLs in the templates with your uploaded image URLs
 
 ## Notes
 
 - All content is pulled from the live thomasandwan.com website
-- Images link to existing images on your site
-- Contact form uses shortcode `[contact-form-7 id="465"]` - update if your form ID is different
 - Phone number throughout: (713) 529-1177
 
 ## Customization
@@ -55,3 +86,9 @@ After pasting, you can:
 - Change colors using Kadence block settings
 - Swap images using Media Library
 - Adjust spacing using block controls
+
+## Kadence Blocks Required
+
+These templates require the [Kadence Blocks](https://wordpress.org/plugins/kadence-blocks/) plugin (free version works for most features).
+
+For advanced features like testimonial carousels, consider Kadence Blocks Pro.
