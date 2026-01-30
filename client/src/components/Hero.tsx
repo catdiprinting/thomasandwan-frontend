@@ -5,14 +5,14 @@ import { ArrowRight } from "lucide-react";
 export default function Hero() {
   return (
     <section className="relative min-h-[90vh] flex items-center pt-20 overflow-hidden bg-white">
-      <div className="container mx-auto px-4 md:px-6 grid md:grid-cols-2 gap-12 items-center">
+      <div className="container mx-auto px-4 md:px-6 lg:px-12 xl:px-24 2xl:px-32 grid md:grid-cols-2 gap-12 items-center">
         
         {/* Text Content */}
         <motion.div
           initial={{ opacity: 0, x: -50 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.8, ease: "easeOut" }}
-          className="order-2 md:order-1 space-y-8 relative z-10"
+          className="order-2 md:order-1 space-y-8 relative z-10 lg:pl-8 xl:pl-16"
         >
           <div className="inline-block border-b-2 border-secondary pb-1">
             <span className="text-secondary font-bold tracking-widest uppercase text-xs md:text-sm">
