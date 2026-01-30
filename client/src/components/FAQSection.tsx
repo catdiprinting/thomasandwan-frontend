@@ -9,7 +9,7 @@ import { faqs } from "@/lib/content";
 export default function FAQSection() {
   return (
     <section className="py-24 bg-white">
-      <div className="container mx-auto px-4 md:px-6">
+      <div className="container mx-auto px-4 md:px-6 lg:px-12 xl:px-24 2xl:px-32">
         <div className="grid lg:grid-cols-12 gap-16">
           <div className="lg:col-span-5">
             <span className="text-secondary font-bold tracking-widest uppercase text-sm mb-4 block">

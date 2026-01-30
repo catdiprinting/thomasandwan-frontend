@@ -4,7 +4,7 @@ import ContactForm from "@/components/ContactForm";
 export default function Footer() {
   return (
     <footer className="bg-primary text-white pt-12 pb-8">
-      <div className="container mx-auto px-4 md:px-6">
+      <div className="container mx-auto px-4 md:px-6 lg:px-12 xl:px-24 2xl:px-32">
         <div className="grid lg:grid-cols-2 gap-16 mb-12">
           
           {/* Contact Info */}
