@@ -18,7 +18,7 @@ export default function MedicalMalpracticePage() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8 }}
-              className="space-y-6 max-w-xl lg:pl-8 xl:pl-16"
+              className="space-y-6 max-w-xl "
             >
               <div className="inline-flex items-center gap-2 border-b-2 border-secondary pb-1">
                 <Stethoscope className="w-5 h-5 text-secondary" />

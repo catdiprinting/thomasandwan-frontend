@@ -18,7 +18,7 @@ export default function ContactPage() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8 }}
-              className="max-w-3xl lg:pl-8 xl:pl-16"
+              className="max-w-3xl "
             >
               <div className="inline-block border-b-2 border-secondary pb-1 mb-6">
                 <span className="text-secondary font-bold tracking-widest uppercase text-sm">

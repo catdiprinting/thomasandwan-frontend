@@ -12,7 +12,7 @@ export default function Hero() {
           initial={{ opacity: 0, x: -50 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.8, ease: "easeOut" }}
-          className="order-2 md:order-1 space-y-8 relative z-10 lg:pl-8 xl:pl-16"
+          className="order-2 md:order-1 space-y-8 relative z-10 "
         >
           <div className="inline-block border-b-2 border-secondary pb-1">
             <span className="text-secondary font-bold tracking-widest uppercase text-xs md:text-sm">

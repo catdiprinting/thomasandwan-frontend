@@ -16,7 +16,7 @@ export default function FAQPage() {
       {/* Hero Section */}
       <section className="pt-32 pb-16 bg-primary text-white">
         <div className="container mx-auto px-4 md:px-6 lg:px-12 xl:px-24 2xl:px-32">
-          <div className="max-w-3xl lg:pl-8 xl:pl-16">
+          <div className="max-w-3xl ">
             <span className="text-secondary font-bold tracking-widest uppercase text-sm mb-4 block">
               Get Answers
             </span>
@@ -33,7 +33,7 @@ export default function FAQPage() {
       {/* FAQ Content */}
       <section className="py-20">
         <div className="container mx-auto px-4 md:px-6 lg:px-12 xl:px-24 2xl:px-32">
-          <div className="grid lg:grid-cols-3 gap-12 lg:pl-8 xl:pl-16">
+          <div className="grid lg:grid-cols-3 gap-12 ">
             {/* FAQ Accordion */}
             <div className="lg:col-span-2">
               <div className="space-y-4">

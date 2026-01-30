@@ -14,7 +14,7 @@ export default function AdWordsLanding() {
         }}
       >
         <div className="container mx-auto px-4 md:px-6 lg:px-12 xl:px-24 2xl:px-32 py-16">
-          <div className="max-w-3xl lg:pl-8 xl:pl-16">
+          <div className="max-w-3xl ">
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight mb-6">
               We Sue Doctors & Hospitals for Birth Injuries
             </h1>
