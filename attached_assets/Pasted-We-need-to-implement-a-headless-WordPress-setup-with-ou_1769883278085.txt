@@ -1,0 +1,44 @@
+We need to implement a headless WordPress setup with our existing Replit front-end.
+
+Goal:
+- WordPress is the source of truth for ALL content (Pages + Blog posts).
+- The Replit site renders SERVER-SIDE HTML output (SEO friendly). 
+- When we update/publish content in WordPress, the Replit front-end should display it automatically.
+
+Please confirm which architecture we’ll use and implement the simplest working version first.
+
+OPTIONS (pick 1 to start, but design for future upgrades):
+
+Option A (Fastest proof / MVP):
+- Replit fetches WordPress content via REST API:
+  - Pages: /wp-json/wp/v2/pages?slug=...
+  - Posts: /wp-json/wp/v2/posts?slug=... and /posts?per_page=...
+- Render page.content.rendered and post.content.rendered inside our Replit layout (styled container like “prose”).
+- Must be server-side rendered (Next.js SSR / SSG with revalidate). Output must be full HTML on first load.
+
+Option B (Best long-term / exact design control):
+- Use structured fields in WordPress (ACF or similar) for page sections:
+  - hero_title, hero_subtitle, cards[], faq[], etc.
+- Replit maps these fields into our components (no dumping raw WP HTML except in controlled rich text areas).
+- Still server-side rendered HTML output.
+
+Option C (Advanced / not for phase 1):
+- Parse WP blocks and map blocks -> React components.
+- Only do if we decide we need full block support.
+
+Requirements:
+- Keep URLs the same as current site where possible (slug parity). If slugs change, add 301 redirects.
+- Blog routes:
+  - /blog (index)
+  - /blog/[slug] (single)
+- Pages routes:
+  - /[slug] for basic pages (about, services, etc.)
+  - homepage should pull WP front-page content or a known slug (like “home”).
+- SEO:
+  - Output title/meta tags (use WP SEO fields if available or fallback to WP title/excerpt).
+  - Canonical tags set correctly.
+
+Questions for you:
+1) Is our Replit project Next.js (app router or pages router)? If not, recommend converting to Next for SSR.
+2) Do we need a proxy route to avoid CORS or can we rely on server-side fetch?
+3) Which option (A or B) do you recommend for phase 1 given our timeline (15 pages)?
