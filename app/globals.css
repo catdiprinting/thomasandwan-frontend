@@ -4,84 +4,83 @@
 
 :root {
   --background: 0 0% 100%;
-  --foreground: 222.2 84% 4.9%;
+  --foreground: 215 28% 17%;
   --card: 0 0% 100%;
-  --card-foreground: 222.2 84% 4.9%;
+  --card-foreground: 215 28% 17%;
   --popover: 0 0% 100%;
-  --popover-foreground: 222.2 84% 4.9%;
-  --primary: 222.2 47.4% 11.2%;
-  --primary-foreground: 210 40% 98%;
-  --secondary: 35 80% 45%;
-  --secondary-foreground: 0 0% 100%;
-  --muted: 210 40% 96.1%;
-  --muted-foreground: 215.4 16.3% 46.9%;
-  --accent: 210 40% 96.1%;
-  --accent-foreground: 222.2 47.4% 11.2%;
+  --popover-foreground: 215 28% 17%;
+  --primary: 215 28% 17%;
+  --primary-foreground: 0 0% 100%;
+  --secondary: 35 92% 50%;
+  --secondary-foreground: 215 28% 17%;
+  --muted: 215 20% 95%;
+  --muted-foreground: 215 28% 40%;
+  --accent: 222 47% 11%;
+  --accent-foreground: 0 0% 100%;
   --destructive: 0 84.2% 60.2%;
-  --destructive-foreground: 210 40% 98%;
-  --border: 214.3 31.8% 91.4%;
-  --input: 214.3 31.8% 91.4%;
-  --ring: 222.2 84% 4.9%;
-  --radius: 0.5rem;
+  --destructive-foreground: 0 0% 98%;
+  --border: 215 20% 90%;
+  --input: 215 20% 90%;
+  --ring: 215 28% 17%;
+  --radius: 0rem;
+}
+
+* {
+  border-color: hsl(var(--border));
 }
 
 body {
   font-family: var(--font-source-sans), 'Source Sans 3', system-ui, sans-serif;
   background-color: hsl(var(--background));
   color: hsl(var(--foreground));
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-playfair), 'Playfair Display', Georgia, serif;
+  font-weight: 600;
+  letter-spacing: -0.025em;
 }
+
+.text-gold { color: hsl(35 92% 50%); }
+.bg-gold { background-color: hsl(35 92% 50%); }
+.border-gold { border-color: hsl(35 92% 50%); }
+.text-navy { color: hsl(215 28% 17%); }
+.bg-navy { background-color: hsl(215 28% 17%); }
+.font-alt { font-family: 'Crimson Text', Georgia, serif; }
+
+.bg-primary { background-color: hsl(var(--primary)); }
+.text-primary { color: hsl(var(--primary)); }
+.bg-secondary { background-color: hsl(var(--secondary)); }
+.text-secondary { color: hsl(var(--secondary)); }
+.text-muted-foreground { color: hsl(var(--muted-foreground)); }
+.bg-card { background-color: hsl(var(--card)); }
+.text-card-foreground { color: hsl(var(--card-foreground)); }
+.text-primary-foreground { color: hsl(var(--primary-foreground)); }
+.text-secondary-foreground { color: hsl(var(--secondary-foreground)); }
+.border-border { border-color: hsl(var(--border)); }
 
 .prose {
   max-width: 65ch;
   color: hsl(var(--foreground));
 }
-
 .prose h1, .prose h2, .prose h3, .prose h4 {
   font-family: var(--font-playfair), 'Playfair Display', Georgia, serif;
   color: hsl(var(--primary));
   margin-top: 1.5em;
   margin-bottom: 0.5em;
 }
-
 .prose h1 { font-size: 2.25rem; }
 .prose h2 { font-size: 1.875rem; }
 .prose h3 { font-size: 1.5rem; }
 .prose h4 { font-size: 1.25rem; }
-
-.prose p {
-  margin-bottom: 1.25em;
-  line-height: 1.75;
-}
-
-.prose a {
-  color: hsl(var(--secondary));
-  text-decoration: underline;
-}
-
-.prose a:hover {
-  color: hsl(var(--secondary) / 0.8);
-}
-
-.prose ul, .prose ol {
-  margin: 1em 0;
-  padding-left: 1.5em;
-}
-
-.prose li {
-  margin-bottom: 0.5em;
-}
-
-.prose img {
-  max-width: 100%;
-  height: auto;
-  border-radius: 0.5rem;
-  margin: 1.5em 0;
-}
-
+.prose p { margin-bottom: 1.25em; line-height: 1.75; }
+.prose a { color: hsl(var(--secondary)); text-decoration: underline; }
+.prose a:hover { opacity: 0.8; }
+.prose ul, .prose ol { margin: 1em 0; padding-left: 1.5em; }
+.prose li { margin-bottom: 0.5em; }
+.prose img { max-width: 100%; height: auto; border-radius: 0.5rem; margin: 1.5em 0; }
 .prose blockquote {
   border-left: 4px solid hsl(var(--secondary));
   padding-left: 1em;
