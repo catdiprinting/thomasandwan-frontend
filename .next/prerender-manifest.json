@@ -1,1 +1,11 @@
-{"version":4,"routes":{"/landing-page":{},"/sms-terms-conditions":{},"/privacy-policy-thomas-wan":{},"/silicosis-lawsuit":{},"/what-kind-of-medical-malpractice-cases-do-we-take":{},"/home-old":{},"/complications-of-childbirth":{},"/medical-malpractice":{},"/defective-products":{},"/birth-injuries":{},"/contact-us":{},"/lawsquawker":{},"/cases-we-handle":{},"/about-thomas-wan-llp":{},"/home":{}},"dynamicRoutes":{"/[slug]":{"dataRoute":null,"dataRouteRegex":null,"fallback":null,"fallbackRevalidate":false,"fallbackSourceRoute":"/[slug]","routeRegex":"^\\/([^/]+?)(?:\\/)?$","allowHeader":[]}},"notFoundRoutes":[],"preview":{"previewModeId":"5cf5a61db4f99717f66526112585daff","previewModeSigningKey":"8d671dee56e6e408e86290614f3a135510459a01f77b603f5d6a02d1013d621f","previewModeEncryptionKey":"8ab18454b8b6603f0253203fa52f6cb3afc152ebcb7313613ce9884636435960"}}
+{
+  "version": 4,
+  "routes": {},
+  "dynamicRoutes": {},
+  "notFoundRoutes": [],
+  "preview": {
+    "previewModeId": "52de3875f801bfb37d5198d13e4b0372",
+    "previewModeSigningKey": "2ff2d44d7b5429de63da2a20ca9bf6a571bce84c95a1f8e82004cc3c22dfb92b",
+    "previewModeEncryptionKey": "7b9b4730bad15ce8e64b88e454bf2870575a317a70a7cfadd246dc5ca4324e0e"
+  }
+}
