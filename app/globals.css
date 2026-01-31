@@ -25,41 +25,27 @@
   --radius: 0rem;
 }
 
-* {
-  border-color: hsl(var(--border));
+@layer base {
+  * {
+    border-color: hsl(var(--border));
+  }
+  body {
+    font-family: var(--font-source-sans), 'Source Sans 3', system-ui, sans-serif;
+    background-color: hsl(var(--background));
+    color: hsl(var(--foreground));
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-playfair), 'Playfair Display', Georgia, serif;
+    font-weight: 600;
+    letter-spacing: -0.025em;
+  }
 }
 
-body {
-  font-family: var(--font-source-sans), 'Source Sans 3', system-ui, sans-serif;
-  background-color: hsl(var(--background));
-  color: hsl(var(--foreground));
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+.font-alt {
+  font-family: 'Crimson Text', Georgia, serif;
 }
-
-h1, h2, h3, h4, h5, h6 {
-  font-family: var(--font-playfair), 'Playfair Display', Georgia, serif;
-  font-weight: 600;
-  letter-spacing: -0.025em;
-}
-
-.text-gold { color: hsl(35 92% 50%); }
-.bg-gold { background-color: hsl(35 92% 50%); }
-.border-gold { border-color: hsl(35 92% 50%); }
-.text-navy { color: hsl(215 28% 17%); }
-.bg-navy { background-color: hsl(215 28% 17%); }
-.font-alt { font-family: 'Crimson Text', Georgia, serif; }
-
-.bg-primary { background-color: hsl(var(--primary)); }
-.text-primary { color: hsl(var(--primary)); }
-.bg-secondary { background-color: hsl(var(--secondary)); }
-.text-secondary { color: hsl(var(--secondary)); }
-.text-muted-foreground { color: hsl(var(--muted-foreground)); }
-.bg-card { background-color: hsl(var(--card)); }
-.text-card-foreground { color: hsl(var(--card-foreground)); }
-.text-primary-foreground { color: hsl(var(--primary-foreground)); }
-.text-secondary-foreground { color: hsl(var(--secondary-foreground)); }
-.border-border { border-color: hsl(var(--border)); }
 
 .prose {
   max-width: 65ch;
