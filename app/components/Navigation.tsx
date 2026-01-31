@@ -76,9 +76,11 @@ export default function Navigation() {
       >
         <div className="container mx-auto px-4 md:px-6 lg:px-12 xl:px-24 2xl:px-32 flex items-center justify-between">
           <Link href="/" className="flex items-center gap-2 lg:ml-8 xl:ml-16">
-            <span className={cn("font-serif font-bold text-primary transition-all duration-300", scrolled ? "text-xl" : "text-2xl")}>
-              Thomas & Wan
-            </span>
+            <img 
+              src="/images/logo.webp" 
+              alt="Thomas & Wan" 
+              className={cn("w-auto object-contain transition-all duration-300", scrolled ? "h-8" : "h-10 md:h-12")}
+            />
           </Link>
 
           <div className="hidden md:flex items-center gap-8">

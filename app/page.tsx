@@ -107,13 +107,50 @@ export default function HomePage() {
               <div className="relative z-10">
                 <div className="absolute -top-6 -right-6 w-full h-full border-2 border-secondary/30 z-0 hidden md:block" />
                 <div className="aspect-[4/5] overflow-hidden shadow-2xl relative bg-white p-2 border border-gray-100">
-                   <div className="w-full h-full bg-gradient-to-br from-gray-100 to-gray-200 flex items-center justify-center">
-                     <span className="text-gray-400 text-sm">Partners Photo</span>
-                   </div>
+                   <img 
+                     src="/images/partners-hero.jpg" 
+                     alt="Linda Thomas and Michelle Wan" 
+                     className="w-full h-full object-cover object-top hover:scale-105 transition-transform duration-700"
+                   />
                 </div>
               </div>
               <div className="absolute -bottom-10 -left-10 w-40 h-40 bg-secondary/10 rounded-full blur-3xl -z-10" />
               <div className="absolute top-10 right-10 w-60 h-60 bg-primary/5 rounded-full blur-3xl -z-10" />
+            </div>
+          </div>
+        </section>
+
+        <section className="border-b border-gray-100 bg-white">
+          <div className="container mx-auto px-4 md:px-6 lg:px-12 xl:px-24 2xl:px-32">
+            <div className="flex flex-col md:flex-row items-center justify-between py-8 gap-8">
+              <div className="flex-1 w-full flex justify-center md:justify-start">
+                 <img 
+                   src="/images/trust-badges.png" 
+                   alt="Award Badges: Million Dollar Advocates, Super Lawyers, Top 25 Trial Lawyers" 
+                   className="h-24 md:h-32 object-contain transition-all duration-500"
+                 />
+              </div>
+              <div className="flex items-center gap-8 shrink-0 border-t md:border-t-0 md:border-l border-gray-100 pt-6 md:pt-0 md:pl-8 mt-4 md:mt-0 w-full md:w-auto justify-center md:justify-end">
+                 <div className="flex flex-col items-center md:items-end">
+                   <div className="flex items-center gap-1 mb-1">
+                     <span className="font-bold text-primary text-lg">5.0</span>
+                     <div className="flex text-secondary">
+                       {[...Array(5)].map((_, i) => (
+                         <svg key={i} className="w-4 h-4 fill-current" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                       ))}
+                     </div>
+                   </div>
+                   <span className="text-xs text-muted-foreground uppercase tracking-widest font-semibold">
+                     Google Reviews
+                   </span>
+                 </div>
+                 <div className="hidden sm:flex flex-col items-center md:items-end text-right">
+                    <span className="font-serif font-bold text-primary text-lg leading-none">AV Preeminent®</span>
+                    <span className="text-xs text-muted-foreground uppercase tracking-widest font-semibold mt-1">
+                      Peer Rated for Highest Level of Excellence
+                    </span>
+                 </div>
+              </div>
             </div>
           </div>
         </section>
@@ -187,18 +224,22 @@ export default function HomePage() {
                  <div className="grid grid-cols-2 gap-4">
                    <div className="mt-12">
                      <div className="bg-[#F9F7F5] p-2 shadow-lg rotate-[-2deg] hover:rotate-0 transition-transform duration-500">
-                        <div className="w-full aspect-[3/4] bg-gradient-to-br from-gray-200 to-gray-300 flex items-center justify-center">
-                          <span className="text-gray-500 text-sm">Linda Thomas</span>
-                        </div>
+                        <img 
+                          src="/images/partner-thomas.jpg" 
+                          alt="Linda Thomas" 
+                          className="w-full aspect-[3/4] object-cover grayscale hover:grayscale-0 transition-all duration-500"
+                        />
                         <div className="pt-3 pb-1 text-center font-serif text-lg text-primary">Linda Thomas</div>
                      </div>
                    </div>
 
                    <div>
                      <div className="bg-[#F9F7F5] p-2 shadow-lg rotate-[2deg] hover:rotate-0 transition-transform duration-500">
-                        <div className="w-full aspect-[3/4] bg-gradient-to-br from-gray-200 to-gray-300 flex items-center justify-center">
-                          <span className="text-gray-500 text-sm">Michelle Wan</span>
-                        </div>
+                        <img 
+                          src="/images/partner-wan.jpg" 
+                          alt="Michelle Wan" 
+                          className="w-full aspect-[3/4] object-cover grayscale hover:grayscale-0 transition-all duration-500"
+                        />
                         <div className="pt-3 pb-1 text-center font-serif text-lg text-primary">Michelle Wan</div>
                      </div>
                    </div>

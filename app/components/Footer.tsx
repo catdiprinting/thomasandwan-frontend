@@ -11,7 +11,11 @@ export default function Footer() {
           
           <div className="space-y-8">
             <div>
-              <span className="font-serif text-2xl font-bold text-white mb-4 block">Thomas & Wan</span>
+              <img 
+                src="/images/logo.webp" 
+                alt="Thomas & Wan" 
+                className="h-12 md:h-14 w-auto object-contain mb-4 invert brightness-0 grayscale opacity-90"
+              />
               <p className="text-secondary font-alt text-xl italic">Attorneys at Law</p>
             </div>
             
