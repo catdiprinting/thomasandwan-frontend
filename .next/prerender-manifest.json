@@ -1,11 +1,1 @@
-{
-  "version": 4,
-  "routes": {},
-  "dynamicRoutes": {},
-  "notFoundRoutes": [],
-  "preview": {
-    "previewModeId": "e6d67ca384fe3ea81076215bccc51c5a",
-    "previewModeSigningKey": "03c0122f98f625ea1d98ebd29e37efe3f4e5d18ac9dc53f44c65228f774633e3",
-    "previewModeEncryptionKey": "d98d0157c565f84e1c9ce1d6fbde4c3cfb0718b37557a1fd2236a3655e0f9a63"
-  }
-}
+{"version":4,"routes":{"/landing-page":{},"/sms-terms-conditions":{},"/privacy-policy-thomas-wan":{},"/silicosis-lawsuit":{},"/what-kind-of-medical-malpractice-cases-do-we-take":{},"/home-old":{},"/complications-of-childbirth":{},"/medical-malpractice":{},"/defective-products":{},"/birth-injuries":{},"/contact-us":{},"/lawsquawker":{},"/cases-we-handle":{},"/about-thomas-wan-llp":{},"/home":{}},"dynamicRoutes":{"/[slug]":{"dataRoute":null,"dataRouteRegex":null,"fallback":null,"fallbackRevalidate":false,"fallbackSourceRoute":"/[slug]","routeRegex":"^\\/([^/]+?)(?:\\/)?$","allowHeader":[]}},"notFoundRoutes":[],"preview":{"previewModeId":"e38b5388eb92f28b211abbb8ffbf0f06","previewModeSigningKey":"4c4dbd3fd418517fea8b2e524393f7f7612d7e10648b2c65e3d8b15cfe8f783c","previewModeEncryptionKey":"8513d52d019d9f969517ee9ebe9f1deaf17871e1143e0842f4714fcafd5f23c9"}}
