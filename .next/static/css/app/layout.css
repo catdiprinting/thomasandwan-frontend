@@ -947,6 +947,9 @@
   --tw-gradient-position: to right in oklab;
   background-image: linear-gradient(var(--tw-gradient-stops));
 }
+.bg-\[url\(\'\/pattern\.svg\'\)\] {
+  background-image: url('/pattern.svg');
+}
 .bg-repeat {
   background-repeat: repeat;
 }
@@ -1116,6 +1119,9 @@
 }
 .opacity-0 {
   opacity: 0%;
+}
+.opacity-5 {
+  opacity: 5%;
 }
 .opacity-20 {
   opacity: 20%;
@@ -2241,45 +2247,33 @@
 }
 :root {
   --background: 0 0% 100%;
-  --foreground: 215 28% 17%;
+  --foreground: 222.2 84% 4.9%;
   --card: 0 0% 100%;
-  --card-foreground: 215 28% 17%;
+  --card-foreground: 222.2 84% 4.9%;
   --popover: 0 0% 100%;
-  --popover-foreground: 215 28% 17%;
-  --primary: 215 28% 17%;
-  --primary-foreground: 0 0% 100%;
-  --secondary: 35 92% 50%;
-  --secondary-foreground: 215 28% 17%;
-  --muted: 215 20% 95%;
-  --muted-foreground: 215 28% 40%;
-  --accent: 222 47% 11%;
-  --accent-foreground: 0 0% 100%;
+  --popover-foreground: 222.2 84% 4.9%;
+  --primary: 222.2 47.4% 11.2%;
+  --primary-foreground: 210 40% 98%;
+  --secondary: 35 80% 45%;
+  --secondary-foreground: 0 0% 100%;
+  --muted: 210 40% 96.1%;
+  --muted-foreground: 215.4 16.3% 46.9%;
+  --accent: 210 40% 96.1%;
+  --accent-foreground: 222.2 47.4% 11.2%;
   --destructive: 0 84.2% 60.2%;
-  --destructive-foreground: 0 0% 98%;
-  --border: 215 20% 90%;
-  --input: 215 20% 90%;
-  --ring: 215 28% 17%;
-  --radius: 0rem;
+  --destructive-foreground: 210 40% 98%;
+  --border: 214.3 31.8% 91.4%;
+  --input: 214.3 31.8% 91.4%;
+  --ring: 222.2 84% 4.9%;
+  --radius: 0.5rem;
 }
-@layer base {
-  * {
-    border-color: hsl(var(--border));
-  }
-  body {
-    font-family: var(--font-source-sans), 'Source Sans 3', system-ui, sans-serif;
-    background-color: hsl(var(--background));
-    color: hsl(var(--foreground));
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-  }
-  h1, h2, h3, h4, h5, h6 {
-    font-family: var(--font-playfair), 'Playfair Display', Georgia, serif;
-    font-weight: 600;
-    letter-spacing: -0.025em;
-  }
+body {
+  font-family: var(--font-source-sans), 'Source Sans 3', system-ui, sans-serif;
+  background-color: hsl(var(--background));
+  color: hsl(var(--foreground));
 }
-.font-alt {
-  font-family: 'Crimson Text', Georgia, serif;
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-playfair), 'Playfair Display', Georgia, serif;
 }
 .prose {
   max-width: 65ch;
@@ -2312,7 +2306,7 @@
   text-decoration: underline;
 }
 .prose a:hover {
-  opacity: 0.8;
+  color: hsl(var(--secondary) / 0.8);
 }
 .prose ul, .prose ol {
   margin: 1em 0;

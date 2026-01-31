@@ -1,112 +1,67 @@
 import Link from 'next/link';
-import { Phone, Mail, MapPin, Clock } from "lucide-react";
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="bg-primary text-white pt-12 pb-8">
-      <div className="container mx-auto px-4 md:px-6 lg:px-12 xl:px-24 2xl:px-32">
-        <div className="grid lg:grid-cols-3 gap-12 mb-12">
-          
-          <div className="space-y-8">
-            <div>
-              <img 
-                src="/images/logo.webp" 
-                alt="Thomas & Wan" 
-                className="h-12 md:h-14 w-auto object-contain mb-4 invert brightness-0 grayscale opacity-90"
-              />
-              <p className="text-secondary font-alt text-xl italic">Attorneys at Law</p>
-            </div>
-            
-            <p className="text-white/80 max-w-md leading-relaxed">
-              We work on a contingency basis. This means you only pay a percentage 
-              for our services if we win a verdict or settlement for your family.
+    <footer className="bg-slate-900 text-white">
+      <div className="container mx-auto px-4 md:px-6 lg:px-12 xl:px-24 2xl:px-32 py-16">
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-12">
+          <div>
+            <h3 className="text-xl font-serif mb-4">Thomas & Wan, LLP</h3>
+            <p className="text-slate-400 text-sm leading-relaxed mb-4">
+              Houston&apos;s trusted medical malpractice attorneys. Women-owned law firm dedicated to fighting for victims of medical negligence.
             </p>
-
-            <div className="space-y-6 pt-4">
-              <div className="flex items-start gap-4">
-                <Phone className="w-6 h-6 text-secondary shrink-0 mt-1" />
-                <div>
-                  <h4 className="font-bold text-lg">Phone</h4>
-                  <a href="tel:713-529-1177" className="text-white/70 hover:text-white transition-colors">713-529-1177</a>
-                  <p className="text-white/50 text-sm">Available 24/7 for emergencies</p>
-                </div>
-              </div>
-              
-              <div className="flex items-start gap-4">
-                <MapPin className="w-6 h-6 text-secondary shrink-0 mt-1" />
-                <div>
-                  <h4 className="font-bold text-lg">Office</h4>
-                  <p className="text-white/70">
-                    1710 Sunset Blvd<br/>
-                    Houston, TX 77005
-                  </p>
-                </div>
-              </div>
-
-              <div className="flex items-start gap-4">
-                <Clock className="w-6 h-6 text-secondary shrink-0 mt-1" />
-                <div>
-                  <h4 className="font-bold text-lg">Hours</h4>
-                  <p className="text-white/70">Mon - Fri: 8:00 AM - 6:00 PM</p>
-                  <p className="text-white/70">Weekends: By Appointment</p>
-                </div>
-              </div>
-            </div>
+            <p className="text-slate-400 text-sm">
+              1710 Sunset Blvd<br />
+              Houston, TX 77005<br />
+              <a href="tel:+17135291177" className="hover:text-amber-500 transition-colors">(713) 529-1177</a>
+            </p>
           </div>
 
-          <div className="space-y-8">
-            <div>
-              <h3 className="text-xl font-serif mb-6 text-secondary">Quick Links</h3>
-              <ul className="space-y-3">
-                <li><Link href="/" className="text-white/70 hover:text-white transition-colors">Home</Link></li>
-                <li><Link href="/about" className="text-white/70 hover:text-white transition-colors">About Us</Link></li>
-                <li><Link href="/testimonials" className="text-white/70 hover:text-white transition-colors">Testimonials</Link></li>
-                <li><Link href="/blog" className="text-white/70 hover:text-white transition-colors">Blog</Link></li>
-                <li><Link href="/faq" className="text-white/70 hover:text-white transition-colors">FAQ</Link></li>
-                <li><Link href="/contact" className="text-white/70 hover:text-white transition-colors">Contact</Link></li>
-              </ul>
-            </div>
-            
-            <div>
-              <h3 className="text-xl font-serif mb-6 text-secondary">Practice Areas</h3>
-              <ul className="space-y-3">
-                <li><Link href="/practice-areas" className="text-white/70 hover:text-white transition-colors">All Practice Areas</Link></li>
-                <li><Link href="/practice-areas/birth-injuries" className="text-white/70 hover:text-white transition-colors">Birth Injuries</Link></li>
-                <li><Link href="/practice-areas/medical-malpractice" className="text-white/70 hover:text-white transition-colors">Medical Malpractice</Link></li>
-                <li><Link href="/practice-areas/childbirth-complications" className="text-white/70 hover:text-white transition-colors">Childbirth Complications</Link></li>
-              </ul>
-            </div>
+          <div>
+            <h4 className="font-semibold mb-4">Quick Links</h4>
+            <ul className="space-y-2 text-sm">
+              <li><Link href="/" className="text-slate-400 hover:text-amber-500 transition-colors">Home</Link></li>
+              <li><Link href="/about" className="text-slate-400 hover:text-amber-500 transition-colors">About Us</Link></li>
+              <li><Link href="/testimonials" className="text-slate-400 hover:text-amber-500 transition-colors">Testimonials</Link></li>
+              <li><Link href="/blog" className="text-slate-400 hover:text-amber-500 transition-colors">Blog</Link></li>
+              <li><Link href="/faq" className="text-slate-400 hover:text-amber-500 transition-colors">FAQ</Link></li>
+              <li><Link href="/contact" className="text-slate-400 hover:text-amber-500 transition-colors">Contact</Link></li>
+            </ul>
           </div>
 
-          <div className="bg-white/5 p-8 border border-white/10">
-            <h3 className="text-2xl font-serif mb-6">Request Free Consultation</h3>
-            <p className="text-white/70 mb-6">
-              Contact us today for a free, confidential case evaluation. There&apos;s no obligation.
+          <div>
+            <h4 className="font-semibold mb-4">Practice Areas</h4>
+            <ul className="space-y-2 text-sm">
+              <li><Link href="/practice-areas/birth-injuries" className="text-slate-400 hover:text-amber-500 transition-colors">Birth Injuries</Link></li>
+              <li><Link href="/practice-areas/surgical-errors" className="text-slate-400 hover:text-amber-500 transition-colors">Surgical Errors</Link></li>
+              <li><Link href="/practice-areas/brain-injuries" className="text-slate-400 hover:text-amber-500 transition-colors">Brain Injuries</Link></li>
+              <li><Link href="/practice-areas/misdiagnosis" className="text-slate-400 hover:text-amber-500 transition-colors">Misdiagnosis</Link></li>
+            </ul>
+          </div>
+
+          <div>
+            <h4 className="font-semibold mb-4">Free Case Evaluation</h4>
+            <p className="text-slate-400 text-sm mb-4">
+              Contact us today for a free, confidential consultation about your case.
             </p>
-            <div className="space-y-4">
-              <a 
-                href="tel:713-529-1177" 
-                className="block w-full bg-secondary hover:bg-secondary/90 text-primary font-bold py-3 text-center transition-colors"
-              >
-                Call (713) 529-1177
-              </a>
-              <Link 
-                href="/contact" 
-                className="block w-full border border-white/30 hover:border-white/60 text-white font-bold py-3 text-center transition-colors"
-              >
-                Send a Message
-              </Link>
-            </div>
+            <Link
+              href="/contact"
+              className="inline-block px-6 py-3 bg-amber-600 hover:bg-amber-700 text-white font-semibold rounded-lg transition-colors"
+            >
+              Get Started
+            </Link>
           </div>
         </div>
 
-        <div className="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center text-sm text-white/50">
-          <p>&copy; {currentYear} Thomas & Wan, LLP. All Rights Reserved.</p>
-          <div className="flex gap-6 mt-4 md:mt-0">
-            <Link href="/privacy" className="hover:text-white transition-colors">Privacy Policy</Link>
-            <Link href="/terms" className="hover:text-white transition-colors">Terms of Service</Link>
+        <div className="mt-12 pt-8 border-t border-slate-800 flex flex-col md:flex-row justify-between items-center gap-4">
+          <p className="text-slate-500 text-sm">
+            &copy; {currentYear} Thomas & Wan, LLP. All rights reserved.
+          </p>
+          <div className="flex gap-6 text-sm">
+            <Link href="/privacy" className="text-slate-500 hover:text-slate-400 transition-colors">Privacy Policy</Link>
+            <Link href="/terms" className="text-slate-500 hover:text-slate-400 transition-colors">Terms of Service</Link>
           </div>
         </div>
       </div>
