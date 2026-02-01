@@ -70,8 +70,8 @@ shared/           # Shared code between client/server
 - `GET /api/export/all-posts` - Export all posts as JSON with HTML content
 
 ### SSR Endpoints (SEO-Friendly)
-- `GET /ssr/blog` - Server-rendered blog index with full HTML content and meta tags
-- `GET /ssr/blog/:slug` - Server-rendered blog post with full content, Open Graph tags, and featured images
+- `GET /blog` - Server-rendered blog index with full HTML content and meta tags
+- `GET /blog/:slug` - Server-rendered blog post with full content, Open Graph tags, and featured images
 
 ## External Dependencies
 

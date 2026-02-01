@@ -167,7 +167,7 @@ export async function registerRoutes(
     }
   });
 
-  app.get("/ssr/blog", async (_req: Request, res: Response) => {
+  app.get("/blog", async (_req: Request, res: Response) => {
     try {
       const html = await renderBlogIndex();
       res.setHeader("Content-Type", "text/html");
@@ -178,7 +178,7 @@ export async function registerRoutes(
     }
   });
 
-  app.get("/ssr/blog/:slug", async (req: Request, res: Response) => {
+  app.get("/blog/:slug", async (req: Request, res: Response) => {
     try {
       const slug = req.params.slug as string;
       const html = await renderBlogPost(slug);
