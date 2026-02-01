@@ -12,6 +12,7 @@ import {
   type WPPost,
   type WPPage,
 } from "./wordpress";
+import { renderBlogPost, renderBlogIndex } from "./ssr";
 
 export async function registerRoutes(
   httpServer: Server,
@@ -163,6 +164,33 @@ export async function registerRoutes(
     } catch (error) {
       console.error("Error exporting all posts:", error);
       res.status(500).json({ error: "Failed to export posts" });
+    }
+  });
+
+  app.get("/ssr/blog", async (_req: Request, res: Response) => {
+    try {
+      const html = await renderBlogIndex();
+      res.setHeader("Content-Type", "text/html");
+      res.send(html);
+    } catch (error) {
+      console.error("Error rendering blog index:", error);
+      res.status(500).send("Failed to render blog");
+    }
+  });
+
+  app.get("/ssr/blog/:slug", async (req: Request, res: Response) => {
+    try {
+      const slug = req.params.slug as string;
+      const html = await renderBlogPost(slug);
+      if (!html) {
+        res.status(404).send("Post not found");
+        return;
+      }
+      res.setHeader("Content-Type", "text/html");
+      res.send(html);
+    } catch (error) {
+      console.error("Error rendering blog post:", error);
+      res.status(500).send("Failed to render post");
     }
   });
 
