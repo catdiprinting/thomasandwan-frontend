@@ -167,30 +167,23 @@ export async function registerRoutes(
     }
   });
 
-  app.get("/blog", async (_req: Request, res: Response) => {
-    try {
-      const html = await renderBlogIndex();
-      res.setHeader("Content-Type", "text/html");
-      res.send(html);
-    } catch (error) {
-      console.error("Error rendering blog index:", error);
-      res.status(500).send("Failed to render blog");
-    }
-  });
-
-  app.get("/blog/:slug", async (req: Request, res: Response) => {
+  app.get("/:slug", async (req: Request, res: Response, next: Function) => {
     try {
       const slug = req.params.slug as string;
+      
+      if (slug.includes('.') || ['api', 'assets', 'src', 'node_modules'].includes(slug)) {
+        return next();
+      }
+      
       const html = await renderBlogPost(slug);
       if (!html) {
-        res.status(404).send("Post not found");
-        return;
+        return next();
       }
       res.setHeader("Content-Type", "text/html");
       res.send(html);
     } catch (error) {
       console.error("Error rendering blog post:", error);
-      res.status(500).send("Failed to render post");
+      next();
     }
   });
 
