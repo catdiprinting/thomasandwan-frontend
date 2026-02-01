@@ -19,8 +19,9 @@ export default function Navigation() {
 
   const navLinks = [
     { name: "Home", href: "/" },
-    { name: "Practice Areas", href: "/practice-areas" },
-    { name: "Our Success", href: "/success" },
+    { name: "Cases We Handle", href: "/cases-we-handle" },
+    { name: "Medical Malpractice", href: "/cases-we-handle/medical-malpractice" },
+    { name: "FAQ", href: "/faq" },
     { name: "Blog", href: "/blog" },
   ];
 
@@ -46,7 +47,7 @@ export default function Navigation() {
           </div>
           <div className="flex items-center gap-6">
             <Link href="/about">
-              <a className="hover:text-secondary transition-colors uppercase tracking-wider text-xs font-bold">About Us</a>
+              <a className="hover:text-secondary transition-colors uppercase tracking-wider text-xs font-bold">About</a>
             </Link>
             <Link href="/contact">
               <a className="hover:text-secondary transition-colors uppercase tracking-wider text-xs font-bold">Contact</a>
@@ -120,7 +121,7 @@ export default function Navigation() {
             ))}
             <Link href="/about">
               <a className="text-primary font-medium text-lg py-2 border-b border-gray-100" onClick={() => setIsOpen(false)}>
-                About Us
+                About
               </a>
             </Link>
             <Link href="/contact">
