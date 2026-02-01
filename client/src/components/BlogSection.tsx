@@ -31,7 +31,7 @@ const blogPosts = [
 export default function BlogSection() {
   return (
     <section className="py-24 bg-white">
-      <div className="container mx-auto px-4 md:px-6 lg:px-12 xl:px-24 2xl:px-32">
+      <div className="container mx-auto px-4 md:px-6">
         <div className="flex flex-col md:flex-row justify-between items-end mb-12 gap-6">
           <div className="max-w-2xl">
             <span className="text-secondary font-bold tracking-widest uppercase text-sm mb-4 block">
@@ -41,12 +41,11 @@ export default function BlogSection() {
               Legal Resources & News
             </h2>
           </div>
-          <Link
-            href="/blog"
-            className="inline-flex items-center text-primary font-bold uppercase tracking-wide hover:text-secondary transition-colors group"
-          >
-            View All Articles 
-            <ArrowRight className="ml-2 w-4 h-4 transition-transform group-hover:translate-x-1" />
+          <Link href="/blog">
+            <a className="inline-flex items-center text-primary font-bold uppercase tracking-wide hover:text-secondary transition-colors group">
+              View All Articles 
+              <ArrowRight className="ml-2 w-4 h-4 transition-transform group-hover:translate-x-1" />
+            </a>
           </Link>
         </div>
 

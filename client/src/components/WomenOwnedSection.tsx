@@ -4,7 +4,7 @@ import { CheckCircle2 } from "lucide-react";
 export default function WomenOwnedSection() {
   return (
     <section className="py-24 bg-white relative overflow-hidden">
-      <div className="container mx-auto px-4 md:px-6 lg:px-12 xl:px-24 2xl:px-32">
+      <div className="container mx-auto px-4 md:px-6">
         <div className="grid lg:grid-cols-12 gap-16">
           
           {/* Left Column: Images */}

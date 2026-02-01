@@ -4,18 +4,6 @@ import { QueryClientProvider } from "@tanstack/react-query";
 import { Toaster } from "@/components/ui/toaster";
 import Home from "@/pages/Home";
 import About from "@/pages/About";
-import PracticeAreasPage from "@/pages/PracticeAreas";
-import BirthInjuriesPage from "@/pages/BirthInjuries";
-import ChildbirthComplicationsPage from "@/pages/ChildbirthComplications";
-import MedicalMalpracticePage from "@/pages/MedicalMalpractice";
-import TestimonialsPage from "@/pages/Testimonials";
-import FAQPage from "@/pages/FAQ";
-import BlogPage from "@/pages/Blog";
-import BlogHeadless from "@/pages/BlogHeadless";
-import BlogPostHeadless from "@/pages/BlogPostHeadless";
-import ContactPage from "@/pages/Contact";
-import LandingPage from "@/pages/LandingPage";
-import AdWordsLanding from "@/pages/AdWordsLanding";
 import NotFound from "@/pages/not-found";
 
 function Router() {
@@ -23,18 +11,10 @@ function Router() {
     <Switch>
       <Route path="/" component={Home} />
       <Route path="/about" component={About} /> 
-      <Route path="/practice-areas" component={PracticeAreasPage} />
-      <Route path="/practice-areas/birth-injuries" component={BirthInjuriesPage} />
-      <Route path="/practice-areas/childbirth-complications" component={ChildbirthComplicationsPage} />
-      <Route path="/practice-areas/medical-malpractice" component={MedicalMalpracticePage} />
-      <Route path="/testimonials" component={TestimonialsPage} />
-      <Route path="/faq" component={FAQPage} />
-      <Route path="/success" component={TestimonialsPage} />
-      <Route path="/blog" component={BlogHeadless} />
-      <Route path="/blog/:slug" component={BlogPostHeadless} />
-      <Route path="/contact" component={ContactPage} />
-      <Route path="/landing-page" component={LandingPage} />
-      <Route path="/adwords" component={AdWordsLanding} />
+      <Route path="/practice-areas" component={Home} />
+      <Route path="/success" component={Home} />
+      <Route path="/blog" component={Home} />
+      <Route path="/contact" component={Home} />
       <Route component={NotFound} />
     </Switch>
   );

@@ -4,12 +4,30 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-import { faqs } from "@/lib/content";
+
+const faqs = [
+  {
+    question: "Do I have a case?",
+    answer: "The first step is for us to help you get a copy of all your medical records. Then we work with our team of expert doctors and nurses to review the records to let us know if you have a case."
+  },
+  {
+    question: "What kind of help can my family receive?",
+    answer: "If we feel you have a case, we will have our team of experts determine how much money it will take to pay for the past medical bills and future quality medical care for you or your loved one for the rest of his or her life."
+  },
+  {
+    question: "How much do you charge?",
+    answer: "We work on a contingency basis. This means that you only pay a percentage for our services if we win a verdict or settlement for your family. If no recovery is made, you pay nothing."
+  },
+  {
+    question: "Why should we hire you?",
+    answer: "There are very few attorneys in Texas who specialize in medical malpractice, and those are the only kind of cases we do. Linda Thomas and Michelle Wan have over 55 years of combined experience. If we take your case, we work on your case ourselves; we don’t “flip” it to another firm."
+  }
+];
 
 export default function FAQSection() {
   return (
     <section className="py-24 bg-white">
-      <div className="container mx-auto px-4 md:px-6 lg:px-12 xl:px-24 2xl:px-32">
+      <div className="container mx-auto px-4 md:px-6">
         <div className="grid lg:grid-cols-12 gap-16">
           <div className="lg:col-span-5">
             <span className="text-secondary font-bold tracking-widest uppercase text-sm mb-4 block">

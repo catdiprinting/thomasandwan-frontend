@@ -4,20 +4,22 @@ hidden = [".config", ".git", "generated-icon.png", "node_modules", "dist"]
 
 [nix]
 channel = "stable-24_05"
-packages = ["zip"]
 
 [[ports]]
 localPort = 5000
 externalPort = 80
 
+[[ports]]
+localPort = 5001
+externalPort = 3000
+
 [env]
 PORT = "5000"
 
 [deployment]
-deploymentTarget = "autoscale"
+deploymentTarget = "static"
 build = ["npm", "run", "build"]
 publicDir = "dist/public"
-run = ["node", "./dist/index.cjs"]
 
 [workflows]
 runButton = "Project"
@@ -37,14 +39,8 @@ author = "agent"
 
 [[workflows.workflow.tasks]]
 task = "shell.exec"
-args = "npm run dev"
+args = "npm run dev:client"
 waitForPort = 5000
 
 [agent]
-mockupState = "FULLSTACK"
-
-[userenv]
-
-[userenv.shared]
-VITE_USE_HEADLESS_WP = "false"
-VITE_WORDPRESS_API_URL = "https://thomasandwan.com/test/wp-json/wp/v2"
+mockupState = "MOCKUP"

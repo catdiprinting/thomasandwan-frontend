@@ -1,12 +1,13 @@
 import { Phone, Mail, MapPin, Clock } from "lucide-react";
-import ContactForm from "@/components/ContactForm";
-import { Link } from "wouter";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
 
 export default function Footer() {
   return (
     <footer className="bg-primary text-white pt-12 pb-8">
-      <div className="container mx-auto px-4 md:px-6 lg:px-12 xl:px-24 2xl:px-32">
-        <div className="grid lg:grid-cols-3 gap-12 mb-12">
+      <div className="container mx-auto px-4 md:px-6">
+        <div className="grid lg:grid-cols-2 gap-16 mb-12">
           
           {/* Contact Info */}
           <div className="space-y-8">
@@ -39,8 +40,8 @@ export default function Footer() {
                 <div>
                   <h4 className="font-bold text-lg">Office</h4>
                   <p className="text-white/70">
-                    1710 Sunset Blvd<br/>
-                    Houston, TX 77005
+                    123 Legal Avenue, Suite 400<br/>
+                    Houston, TX 77002
                   </p>
                 </div>
               </div>
@@ -56,35 +57,32 @@ export default function Footer() {
             </div>
           </div>
 
-          {/* Quick Links */}
-          <div className="space-y-8">
-            <div>
-              <h3 className="text-xl font-serif mb-6 text-secondary">Quick Links</h3>
-              <ul className="space-y-3">
-                <li><Link href="/" className="text-white/70 hover:text-white transition-colors">Home</Link></li>
-                <li><Link href="/about" className="text-white/70 hover:text-white transition-colors">About Us</Link></li>
-                <li><Link href="/testimonials" className="text-white/70 hover:text-white transition-colors">Testimonials</Link></li>
-                <li><Link href="/blog" className="text-white/70 hover:text-white transition-colors">Blog</Link></li>
-                <li><Link href="/faq" className="text-white/70 hover:text-white transition-colors">FAQ</Link></li>
-                <li><Link href="/contact" className="text-white/70 hover:text-white transition-colors">Contact</Link></li>
-              </ul>
-            </div>
-            
-            <div>
-              <h3 className="text-xl font-serif mb-6 text-secondary">Practice Areas</h3>
-              <ul className="space-y-3">
-                <li><Link href="/practice-areas" className="text-white/70 hover:text-white transition-colors">All Practice Areas</Link></li>
-                <li><Link href="/practice-areas/birth-injuries" className="text-white/70 hover:text-white transition-colors">Birth Injuries</Link></li>
-                <li><Link href="/practice-areas/medical-malpractice" className="text-white/70 hover:text-white transition-colors">Medical Malpractice</Link></li>
-                <li><Link href="/practice-areas/childbirth-complications" className="text-white/70 hover:text-white transition-colors">Childbirth Complications</Link></li>
-              </ul>
-            </div>
-          </div>
-
           {/* Contact Form */}
           <div className="bg-white/5 p-8 border border-white/10 backdrop-blur-sm">
             <h3 className="text-2xl font-serif mb-6">Request Free Consultation</h3>
-            <ContactForm variant="footer" showCaseType={false} />
+            <form className="space-y-4">
+              <div className="grid grid-cols-2 gap-4">
+                <div className="space-y-2">
+                   <label className="text-xs uppercase tracking-widest text-secondary font-bold">First Name</label>
+                   <Input className="bg-white/10 border-white/20 text-white placeholder:text-white/30 focus-visible:ring-secondary" />
+                </div>
+                <div className="space-y-2">
+                   <label className="text-xs uppercase tracking-widest text-secondary font-bold">Last Name</label>
+                   <Input className="bg-white/10 border-white/20 text-white placeholder:text-white/30 focus-visible:ring-secondary" />
+                </div>
+              </div>
+              <div className="space-y-2">
+                 <label className="text-xs uppercase tracking-widest text-secondary font-bold">Email</label>
+                 <Input className="bg-white/10 border-white/20 text-white placeholder:text-white/30 focus-visible:ring-secondary" />
+              </div>
+              <div className="space-y-2">
+                 <label className="text-xs uppercase tracking-widest text-secondary font-bold">Message</label>
+                 <Textarea className="bg-white/10 border-white/20 text-white placeholder:text-white/30 focus-visible:ring-secondary min-h-[120px]" />
+              </div>
+              <Button className="w-full bg-secondary hover:bg-secondary/90 text-white font-bold py-6 text-lg">
+                Submit Request
+              </Button>
+            </form>
           </div>
         </div>
 

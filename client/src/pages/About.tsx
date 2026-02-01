@@ -13,12 +13,12 @@ export default function About() {
         {/* Hero Section */}
         <section className="bg-primary text-white py-24 relative overflow-hidden">
           <div className="absolute top-0 right-0 w-1/2 h-full bg-secondary/5 -skew-x-12 transform origin-top translate-x-1/4" />
-          <div className="container mx-auto px-4 md:px-6 lg:px-12 xl:px-24 2xl:px-32 relative z-10">
+          <div className="container mx-auto px-4 md:px-6 relative z-10">
             <motion.div 
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8 }}
-              className="max-w-3xl "
+              className="max-w-3xl"
             >
               <div className="inline-block border-b-2 border-secondary pb-1 mb-6">
                 <span className="text-secondary font-bold tracking-widest uppercase text-sm">
@@ -38,7 +38,7 @@ export default function About() {
 
         {/* Mission / Why Choose Us */}
         <section className="py-24 bg-white">
-          <div className="container mx-auto px-4 md:px-6 lg:px-12 xl:px-24 2xl:px-32">
+          <div className="container mx-auto px-4 md:px-6">
             <div className="grid lg:grid-cols-2 gap-16 items-start">
               <div>
                 <h2 className="text-4xl font-serif text-primary mb-6">
@@ -211,7 +211,7 @@ export default function About() {
 
         {/* Call to Action */}
         <section className="bg-primary text-white py-20 text-center">
-          <div className="container mx-auto px-4 md:px-6 lg:px-12 xl:px-24 2xl:px-32 max-w-4xl">
+          <div className="container mx-auto px-4 max-w-4xl">
             <h2 className="text-4xl md:text-5xl font-serif mb-6">Do You Have a Medical Malpractice Case?</h2>
             <p className="text-xl text-white/80 mb-10 leading-relaxed">
               Call us today for a free consultation. If you have the medical records, you can send them to us for a free review with no obligation. Remember, strict deadlines apply.

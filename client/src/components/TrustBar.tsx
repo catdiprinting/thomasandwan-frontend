@@ -3,7 +3,7 @@ import { Star } from "lucide-react";
 export default function TrustBar() {
   return (
     <section className="border-b border-gray-100 bg-white">
-      <div className="container mx-auto px-4 md:px-6 lg:px-12 xl:px-24 2xl:px-32">
+      <div className="container mx-auto px-4 md:px-6">
         <div className="flex flex-col md:flex-row items-center justify-between py-8 gap-8">
           
           {/* Trust Badges Image */}
@@ -11,7 +11,7 @@ export default function TrustBar() {
              <img 
                src="/images/trust-badges.png" 
                alt="Award Badges: Million Dollar Advocates, Super Lawyers, Top 25 Trial Lawyers" 
-               className="h-24 md:h-32 object-contain transition-all duration-500"
+               className="h-20 md:h-28 object-contain transition-all duration-500"
              />
           </div>
 

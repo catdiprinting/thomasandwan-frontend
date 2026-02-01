@@ -5,14 +5,14 @@ import { ArrowRight } from "lucide-react";
 export default function Hero() {
   return (
     <section className="relative min-h-[90vh] flex items-center pt-20 overflow-hidden bg-white">
-      <div className="container mx-auto px-4 md:px-6 lg:px-12 xl:px-24 2xl:px-32 grid md:grid-cols-2 gap-12 items-center">
+      <div className="container mx-auto px-4 md:px-6 grid md:grid-cols-2 gap-12 items-center">
         
         {/* Text Content */}
         <motion.div
           initial={{ opacity: 0, x: -50 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.8, ease: "easeOut" }}
-          className="order-2 md:order-1 space-y-8 relative z-10 "
+          className="order-2 md:order-1 space-y-8 relative z-10"
         >
           <div className="inline-block border-b-2 border-secondary pb-1">
             <span className="text-secondary font-bold tracking-widest uppercase text-xs md:text-sm">
@@ -21,13 +21,14 @@ export default function Hero() {
           </div>
           
           <h1 className="text-5xl md:text-6xl lg:text-7xl font-serif text-primary leading-[1.1]">
-            We Care And <br/>
-            <span className="italic text-secondary">It Shows</span>
+            Dedicated to <br/>
+            <span className="italic text-secondary">Justice</span> for <br/>
+            Your Family.
           </h1>
           
           <p className="text-lg md:text-xl text-muted-foreground font-light max-w-lg leading-relaxed">
-            With over 55 years of combined experience in medical malpractice and birth injury cases, 
-            Linda Thomas and Michelle Wan are the dedicated attorneys you need to protect your family's rights.
+            With over 60+ years of combined experience in medical malpractice, 
+            Linda Thomas and Michelle Wan fight for the answers and compensation you deserve.
           </p>
           
           <div className="flex flex-col sm:flex-row gap-4 pt-4">
