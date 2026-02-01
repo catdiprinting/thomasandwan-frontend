@@ -9,7 +9,7 @@ import MedicalMalpractice from "@/pages/MedicalMalpractice";
 import FAQ from "@/pages/FAQ";
 import Contact from "@/pages/Contact";
 import BlogIndex from "@/pages/BlogIndex";
-import BlogPostTemplate from "@/pages/BlogPostTemplate";
+import BlogPost from "@/pages/BlogPost";
 import NotFound from "@/pages/not-found";
 
 function Router() {
@@ -22,7 +22,7 @@ function Router() {
       <Route path="/faq" component={FAQ} />
       <Route path="/contact" component={Contact} />
       <Route path="/blog" component={BlogIndex} />
-      <Route path="/blog/post-template" component={BlogPostTemplate} />
+      <Route path="/blog/:slug" component={BlogPost} />
       <Route component={NotFound} />
     </Switch>
   );
