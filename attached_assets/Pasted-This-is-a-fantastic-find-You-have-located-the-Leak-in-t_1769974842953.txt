@@ -1,0 +1,73 @@
+This is a fantastic find. You have located the "Leak" in the logic. 🚰
+
+I see two major issues in this code block:
+
+The "Coating Leak" (Line 913):
+
+// STEP 1: Find ALL sibling products ... (ignore coating/spotUV)
+
+The Bug: This is explicitly telling the code to mix data from incompatible products.
+
+The Consequence: If you select Matte (which might be slow to dry), the code grabs the turnaround times from UV (which cures instantly) and shows them to the user. This is why you see "impossible" options.
+
+The "Missing Floor" (Line 1002):
+
+The Sanity Filter has a "Ceiling" (Rules for > 1000), but it has no "Floor" (Rules for < 500).
+
+This allows those leaked options to show up on small orders like 100 cards, where "Next Day" might not be available for that specific finish.
+
+The Fix: Patch the "Sanity Filter" 🩹
+Fixing the "Coating Leak" (Step 1) is complicated because it requires complex SKU parsing. The smarter, faster fix is to simply add the "Floor Rules" to your Sanity Filter. This stops the bad data from reaching the user, regardless of where it came from.
+
+Copy this Code Block. Paste it directly into your LiveConfigurator.tsx file, replacing the "SANITY FILTER" section (roughly lines 1000–1020).
+
+TypeScript
+  // -----------------------------------------------------------
+  // UPDATED SANITY FILTER (Fixes Small Quantity & Large Quantity Bugs)
+  // -----------------------------------------------------------
+  
+  const runSizeNum = targetRunsizeNum;
+  
+  const sanitizedOptions = finalOptions.filter(opt => {
+    const rawDisplayName = opt.option_description || TURNAROUND_MAP[opt.option_name] || opt.option_name || "";
+    const displayName = String(rawDisplayName).toLowerCase().trim();
+    
+    // --- RULES FOR LARGE QUANTITIES (The "Ceiling") ---
+
+    // RULE 1: No "Next Day" or "24 Hour" for runs > 1,000
+    if (runSizeNum > 1000 && (
+      displayName.includes("next") || 
+      displayName.includes("24 hour") ||
+      displayName.includes("same day")
+    )) {
+      if (DEBUG_TURNAROUND_FILTER) console.log("SANITY FILTER: HIDING (Too Big)", rawDisplayName);
+      return false;
+    }
+    
+    // RULE 2: No "2 Day" for runs > 5,000
+    if (runSizeNum > 5000 && displayName.includes("2 day")) {
+      if (DEBUG_TURNAROUND_FILTER) console.log("SANITY FILTER: HIDING (Too Big)", rawDisplayName);
+      return false;
+    }
+
+    // --- RULES FOR SMALL QUANTITIES (The "Floor") ---
+    // Fixes the bug where 100 cards show invalid options stolen from other products.
+
+    // RULE 3: Block "Same Day" on tiny runs (if that's a business rule)
+    // (Adjust the number '250' to your actual cutoff)
+    if (runSizeNum < 250 && displayName.includes("same day")) {
+      if (DEBUG_TURNAROUND_FILTER) console.log("SANITY FILTER: HIDING (Too Small)", rawDisplayName);
+      return false;
+    }
+
+    // RULE 4: General "Bad Option" Cleanup for specific SKUs
+    // If you see other weird options popping up, add them here.
+    
+    return true;
+  });
+What to do next:
+Paste this code.
+
+Test 100 Cards: The "Same Day" option (or whatever invalid option you saw) should disappear because of Rule 3.
+
+Test 10,000 Cards: The "Next Day" options should still appear (because we kept the Magnet logic!), but "Same Day" will disappear (Rule 1).
