@@ -12,7 +12,7 @@ import {
   type WPPost,
   type WPPage,
 } from "./wordpress";
-import { renderBlogPost, renderBlogIndex } from "./ssr";
+import { renderBlogPost, renderBlogIndex, renderHomepage, renderAbout, renderCases, renderContact } from "./ssr";
 
 export async function registerRoutes(
   httpServer: Server,
@@ -164,6 +164,61 @@ export async function registerRoutes(
     } catch (error) {
       console.error("Error exporting all posts:", error);
       res.status(500).json({ error: "Failed to export posts" });
+    }
+  });
+
+  app.get("/", async (_req: Request, res: Response) => {
+    try {
+      const html = renderHomepage();
+      res.setHeader("Content-Type", "text/html");
+      res.send(html);
+    } catch (error) {
+      console.error("Error rendering homepage:", error);
+      res.status(500).send("Failed to render homepage");
+    }
+  });
+
+  app.get("/about", async (_req: Request, res: Response) => {
+    try {
+      const html = renderAbout();
+      res.setHeader("Content-Type", "text/html");
+      res.send(html);
+    } catch (error) {
+      console.error("Error rendering about page:", error);
+      res.status(500).send("Failed to render about page");
+    }
+  });
+
+  app.get("/cases-we-handle", async (_req: Request, res: Response) => {
+    try {
+      const html = renderCases();
+      res.setHeader("Content-Type", "text/html");
+      res.send(html);
+    } catch (error) {
+      console.error("Error rendering cases page:", error);
+      res.status(500).send("Failed to render cases page");
+    }
+  });
+
+  app.get("/contact", async (_req: Request, res: Response) => {
+    try {
+      const html = renderContact();
+      res.setHeader("Content-Type", "text/html");
+      res.send(html);
+    } catch (error) {
+      console.error("Error rendering contact page:", error);
+      res.status(500).send("Failed to render contact page");
+    }
+  });
+
+  app.get("/blog", async (_req: Request, res: Response) => {
+    try {
+      const html = await renderBlogIndex();
+      res.setHeader("Content-Type", "text/html");
+      res.send(html);
+    } catch (error) {
+      console.error("Error rendering blog index:", error);
+      res.status(500).send("Failed to render blog");
     }
   });
 

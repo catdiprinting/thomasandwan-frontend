@@ -1,7 +1,7 @@
 import express, { type Express } from "express";
 import fs from "fs";
 import path from "path";
-import { renderBlogPost } from "./ssr";
+import { renderBlogPost, renderBlogIndex, renderHomepage, renderAbout, renderCases, renderContact } from "./ssr";
 
 export function serveStatic(app: Express) {
   const distPath = path.resolve(__dirname, "public");
@@ -13,13 +13,66 @@ export function serveStatic(app: Express) {
 
   app.use(express.static(distPath));
 
-  // Handle blog posts at root level with SSR
+  app.get("/", async (_req, res) => {
+    try {
+      const html = renderHomepage();
+      res.setHeader("Content-Type", "text/html");
+      res.send(html);
+    } catch (error) {
+      console.error("Error rendering homepage:", error);
+      res.status(500).send("Failed to render homepage");
+    }
+  });
+
+  app.get("/about", async (_req, res) => {
+    try {
+      const html = renderAbout();
+      res.setHeader("Content-Type", "text/html");
+      res.send(html);
+    } catch (error) {
+      console.error("Error rendering about page:", error);
+      res.status(500).send("Failed to render about page");
+    }
+  });
+
+  app.get("/cases-we-handle", async (_req, res) => {
+    try {
+      const html = renderCases();
+      res.setHeader("Content-Type", "text/html");
+      res.send(html);
+    } catch (error) {
+      console.error("Error rendering cases page:", error);
+      res.status(500).send("Failed to render cases page");
+    }
+  });
+
+  app.get("/contact", async (_req, res) => {
+    try {
+      const html = renderContact();
+      res.setHeader("Content-Type", "text/html");
+      res.send(html);
+    } catch (error) {
+      console.error("Error rendering contact page:", error);
+      res.status(500).send("Failed to render contact page");
+    }
+  });
+
+  app.get("/blog", async (_req, res) => {
+    try {
+      const html = await renderBlogIndex();
+      res.setHeader("Content-Type", "text/html");
+      res.send(html);
+    } catch (error) {
+      console.error("Error rendering blog index:", error);
+      res.status(500).send("Failed to render blog");
+    }
+  });
+
   app.get("/:slug", async (req, res, next) => {
     try {
       const slug = req.params.slug as string;
       
-      // Skip static files and known paths
-      if (slug.includes('.') || ['api', 'assets', 'src', 'node_modules', 'about', 'contact', 'cases-we-handle', 'blog'].includes(slug)) {
+      if (slug.includes('.') || ['api', 'assets', 'src', 'node_modules'].includes(slug)) {
         return next();
       }
       
