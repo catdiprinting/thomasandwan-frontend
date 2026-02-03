@@ -6,6 +6,8 @@ import Home from "@/pages/Home";
 import About from "@/pages/About";
 import Cases from "@/pages/Cases";
 import MedicalMalpractice from "@/pages/MedicalMalpractice";
+import BirthInjuries from "@/pages/BirthInjuries";
+import ComplicationsOfChildbirth from "@/pages/ComplicationsOfChildbirth";
 import FAQ from "@/pages/FAQ";
 import Testimonials from "@/pages/Testimonials";
 import Contact from "@/pages/Contact";
@@ -20,6 +22,8 @@ function Router() {
       <Route path="/about" component={About} />
       <Route path="/cases-we-handle" component={Cases} />
       <Route path="/cases-we-handle/medical-malpractice" component={MedicalMalpractice} />
+      <Route path="/cases-we-handle/birth-injuries" component={BirthInjuries} />
+      <Route path="/cases-we-handle/complications-of-childbirth" component={ComplicationsOfChildbirth} />
       <Route path="/testimonials" component={Testimonials} />
       <Route path="/faq" component={FAQ} />
       <Route path="/contact" component={Contact} />

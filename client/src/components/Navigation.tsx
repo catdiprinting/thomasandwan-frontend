@@ -1,12 +1,21 @@
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "wouter";
-import { Menu, X, Phone, Mail, MapPin } from "lucide-react";
+import { Menu, X, Phone, Mail, MapPin, ChevronDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
+
+const casesSubmenu = [
+  { name: "All Cases", href: "/cases-we-handle" },
+  { name: "Medical Malpractice", href: "/cases-we-handle/medical-malpractice" },
+  { name: "Birth Injuries", href: "/cases-we-handle/birth-injuries" },
+  { name: "Complications of Childbirth", href: "/cases-we-handle/complications-of-childbirth" },
+];
 
 export default function Navigation() {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [casesOpen, setCasesOpen] = useState(false);
+  const [mobileSubOpen, setMobileSubOpen] = useState(false);
   const [location] = useLocation();
 
   useEffect(() => {
@@ -20,12 +29,13 @@ export default function Navigation() {
   const navLinks = [
     { name: "Home", href: "/" },
     { name: "About", href: "/about" },
-    { name: "Cases We Handle", href: "/cases-we-handle" },
     { name: "Testimonials", href: "/testimonials" },
     { name: "FAQ", href: "/faq" },
     { name: "Blog", href: "/blog" },
     { name: "Contact", href: "/contact" },
   ];
+
+  const isCasesActive = location.startsWith("/cases-we-handle");
 
   return (
     <div className={cn("fixed top-0 w-full z-50 transition-all duration-300", scrolled ? "shadow-md" : "")}>
@@ -76,8 +86,73 @@ export default function Navigation() {
           </Link>
 
           {/* Desktop Nav */}
-          <div className="hidden md:flex items-center gap-8">
-            {navLinks.map((link) => (
+          <div className="hidden lg:flex items-center gap-6">
+            {/* Home and About */}
+            {navLinks.slice(0, 2).map((link) => (
+              <Link key={link.name} href={link.href}>
+                <span
+                  className={cn(
+                    "text-base font-medium tracking-wide uppercase transition-colors hover:text-secondary relative group cursor-pointer",
+                    location === link.href ? "text-secondary" : "text-primary"
+                  )}
+                >
+                  {link.name}
+                  <span className={cn(
+                    "absolute -bottom-1 left-0 w-full h-0.5 bg-secondary transform scale-x-0 transition-transform duration-300 group-hover:scale-x-100",
+                    location === link.href ? "scale-x-100" : ""
+                  )} />
+                </span>
+              </Link>
+            ))}
+
+            {/* Cases We Handle Dropdown */}
+            <div 
+              className="relative"
+              onMouseEnter={() => setCasesOpen(true)}
+              onMouseLeave={() => setCasesOpen(false)}
+            >
+              <Link href="/cases-we-handle">
+                <span
+                  className={cn(
+                    "text-base font-medium tracking-wide uppercase transition-colors hover:text-secondary relative group cursor-pointer flex items-center gap-1",
+                    isCasesActive ? "text-secondary" : "text-primary"
+                  )}
+                >
+                  Cases We Handle
+                  <ChevronDown className={cn("w-4 h-4 transition-transform", casesOpen ? "rotate-180" : "")} />
+                  <span className={cn(
+                    "absolute -bottom-1 left-0 w-full h-0.5 bg-secondary transform scale-x-0 transition-transform duration-300 group-hover:scale-x-100",
+                    isCasesActive ? "scale-x-100" : ""
+                  )} />
+                </span>
+              </Link>
+              
+              {/* Dropdown Menu */}
+              <div className={cn(
+                "absolute top-full left-0 pt-2 transition-all duration-200",
+                casesOpen ? "opacity-100 visible" : "opacity-0 invisible"
+              )}>
+                <div className="bg-white shadow-xl border border-gray-100 min-w-[280px]">
+                  {casesSubmenu.map((item, index) => (
+                    <Link key={item.name} href={item.href}>
+                      <span
+                        className={cn(
+                          "block px-5 py-3 text-sm font-medium transition-colors cursor-pointer border-l-2",
+                          location === item.href 
+                            ? "bg-secondary/10 text-secondary border-secondary" 
+                            : "text-primary hover:bg-gray-50 hover:text-secondary border-transparent hover:border-secondary"
+                        )}
+                      >
+                        {item.name}
+                      </span>
+                    </Link>
+                  ))}
+                </div>
+              </div>
+            </div>
+
+            {/* Rest of nav links */}
+            {navLinks.slice(2).map((link) => (
               <Link key={link.name} href={link.href}>
                 <span
                   className={cn(
@@ -100,7 +175,7 @@ export default function Navigation() {
 
           {/* Mobile Menu Toggle */}
           <button
-            className="md:hidden text-primary"
+            className="lg:hidden text-primary"
             onClick={() => setIsOpen(!isOpen)}
           >
             {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
@@ -109,8 +184,56 @@ export default function Navigation() {
 
         {/* Mobile Nav */}
         {isOpen && (
-          <div className="md:hidden absolute top-full left-0 w-full bg-white border-b border-border p-4 shadow-lg flex flex-col gap-4 animate-in slide-in-from-top-5 max-h-[80vh] overflow-y-auto">
-            {navLinks.map((link) => (
+          <div className="lg:hidden absolute top-full left-0 w-full bg-white border-b border-border p-4 shadow-lg flex flex-col gap-2 animate-in slide-in-from-top-5 max-h-[80vh] overflow-y-auto">
+            <Link href="/">
+              <span
+                className="text-primary font-medium text-lg py-2 border-b border-gray-100 block cursor-pointer"
+                onClick={() => setIsOpen(false)}
+              >
+                Home
+              </span>
+            </Link>
+            <Link href="/about">
+              <span
+                className="text-primary font-medium text-lg py-2 border-b border-gray-100 block cursor-pointer"
+                onClick={() => setIsOpen(false)}
+              >
+                About
+              </span>
+            </Link>
+            
+            {/* Mobile Cases Dropdown */}
+            <div className="border-b border-gray-100">
+              <button
+                className="text-primary font-medium text-lg py-2 w-full text-left flex items-center justify-between"
+                onClick={() => setMobileSubOpen(!mobileSubOpen)}
+              >
+                Cases We Handle
+                <ChevronDown className={cn("w-5 h-5 transition-transform", mobileSubOpen ? "rotate-180" : "")} />
+              </button>
+              {mobileSubOpen && (
+                <div className="pl-4 pb-2 space-y-1">
+                  {casesSubmenu.map((item) => (
+                    <Link key={item.name} href={item.href}>
+                      <span
+                        className={cn(
+                          "block py-2 text-base cursor-pointer",
+                          location === item.href ? "text-secondary font-medium" : "text-slate-600"
+                        )}
+                        onClick={() => {
+                          setIsOpen(false);
+                          setMobileSubOpen(false);
+                        }}
+                      >
+                        {item.name}
+                      </span>
+                    </Link>
+                  ))}
+                </div>
+              )}
+            </div>
+
+            {navLinks.slice(2).map((link) => (
               <Link key={link.name} href={link.href}>
                 <span
                   className="text-primary font-medium text-lg py-2 border-b border-gray-100 block cursor-pointer"
