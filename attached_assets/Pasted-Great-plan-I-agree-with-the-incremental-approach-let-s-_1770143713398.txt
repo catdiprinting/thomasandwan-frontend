@@ -1,0 +1,38 @@
+Great plan! I agree with the incremental approach - let's start with dryRun only to validate parsing before any DB writes. This is the safest "moment of truth."
+
+My approach:
+
+First, I need to understand the actual structure of raw_json in your products table - specifically how 4over represents option groups
+Build the parser functions (parseOptionGroups, normalizeValue, computeSortOrder) based on real data
+Create the dryRun endpoint that parses but doesn't write
+Validate with Business Cards before any inserts
+Let me first peek at the raw_json structure to see what we're parsing:
+
+Important discovery: The stored raw_json only contains links to option groups, not the actual data:
+
+"product_option_groups":"https://api.4over.com/printproducts/products/.../optiongroups"
+We have two options:
+
+Enhance sync first - Update the sync to fetch and store option groups in raw_json for each product (more API calls during sync, but parsing becomes local/fast)
+
+Fetch during attribute population - Call the optiongroups endpoint when populating attributes (simpler now, but slower/more fragile during population)
+
+My recommendation: Option 1 is cleaner long-term. We'd update the sync to fetch option groups and store the full structure. Then Phase 4B parsing becomes purely local.
+
+Before deciding, let me check what the optiongroups endpoint actually returns:
+
+The API call needs proper auth. Let me check how the existing sync handles this:
+
+Key Finding: The current sync stores only product metadata with links to option groups - not the actual option data. This means we need to enhance the sync to fetch option groups first.
+
+Proposed approach for Phase 4B:
+
+Phase 4B.0 - Add a secondary sync step that fetches option groups for each product and stores them in raw_json (or a new option_groups_json column)
+Then proceed with your Phase 4B plan (parser → dryRun → populate)
+Alternative (faster for testing): Fetch option groups on-demand during dryRun to validate parsing logic first, then decide on storage strategy.
+
+Which approach do you prefer?
+
+A) Enhance sync first (stores option groups permanently, parsing is always local/fast)
+B) Fetch on-demand during dryRun (test parsing logic immediately, decide storage later)
+Here's my proposed task list for Option B (fastest path to validate parsing):
