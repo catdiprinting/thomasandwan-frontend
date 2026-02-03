@@ -12,19 +12,7 @@ import {
   type WPPost,
   type WPPage,
 } from "./wordpress";
-import { 
-  renderBlogPost, 
-  renderBlogIndex, 
-  renderHomepage, 
-  renderAbout, 
-  renderContact, 
-  renderFAQ, 
-  renderTestimonials, 
-  renderCases,
-  renderMedicalMalpractice,
-  renderBirthInjuries,
-  renderComplicationsOfChildbirth
-} from "./ssr";
+import { renderBlogPost } from "./ssr";
 
 export async function registerRoutes(
   httpServer: Server,
@@ -179,118 +167,7 @@ export async function registerRoutes(
     }
   });
 
-  // SSR Routes for all pages
-  app.get("/", async (_req: Request, res: Response, next: Function) => {
-    try {
-      const html = renderHomepage();
-      res.setHeader("Content-Type", "text/html");
-      res.send(html);
-    } catch (error) {
-      console.error("Error rendering homepage:", error);
-      next();
-    }
-  });
-
-  app.get("/about", async (_req: Request, res: Response, next: Function) => {
-    try {
-      const html = renderAbout();
-      res.setHeader("Content-Type", "text/html");
-      res.send(html);
-    } catch (error) {
-      console.error("Error rendering about page:", error);
-      next();
-    }
-  });
-
-  app.get("/contact", async (_req: Request, res: Response, next: Function) => {
-    try {
-      const html = renderContact();
-      res.setHeader("Content-Type", "text/html");
-      res.send(html);
-    } catch (error) {
-      console.error("Error rendering contact page:", error);
-      next();
-    }
-  });
-
-  app.get("/faq", async (_req: Request, res: Response, next: Function) => {
-    try {
-      const html = renderFAQ();
-      res.setHeader("Content-Type", "text/html");
-      res.send(html);
-    } catch (error) {
-      console.error("Error rendering FAQ page:", error);
-      next();
-    }
-  });
-
-  app.get("/testimonials", async (_req: Request, res: Response, next: Function) => {
-    try {
-      const html = renderTestimonials();
-      res.setHeader("Content-Type", "text/html");
-      res.send(html);
-    } catch (error) {
-      console.error("Error rendering testimonials page:", error);
-      next();
-    }
-  });
-
-  app.get("/blog", async (_req: Request, res: Response, next: Function) => {
-    try {
-      const html = await renderBlogIndex();
-      res.setHeader("Content-Type", "text/html");
-      res.send(html);
-    } catch (error) {
-      console.error("Error rendering blog index:", error);
-      next();
-    }
-  });
-
-  app.get("/cases-we-handle", async (_req: Request, res: Response, next: Function) => {
-    try {
-      const html = renderCases();
-      res.setHeader("Content-Type", "text/html");
-      res.send(html);
-    } catch (error) {
-      console.error("Error rendering cases page:", error);
-      next();
-    }
-  });
-
-  app.get("/cases-we-handle/medical-malpractice", async (_req: Request, res: Response, next: Function) => {
-    try {
-      const html = renderMedicalMalpractice();
-      res.setHeader("Content-Type", "text/html");
-      res.send(html);
-    } catch (error) {
-      console.error("Error rendering medical malpractice page:", error);
-      next();
-    }
-  });
-
-  app.get("/cases-we-handle/birth-injuries", async (_req: Request, res: Response, next: Function) => {
-    try {
-      const html = renderBirthInjuries();
-      res.setHeader("Content-Type", "text/html");
-      res.send(html);
-    } catch (error) {
-      console.error("Error rendering birth injuries page:", error);
-      next();
-    }
-  });
-
-  app.get("/cases-we-handle/complications-of-childbirth", async (_req: Request, res: Response, next: Function) => {
-    try {
-      const html = renderComplicationsOfChildbirth();
-      res.setHeader("Content-Type", "text/html");
-      res.send(html);
-    } catch (error) {
-      console.error("Error rendering complications of childbirth page:", error);
-      next();
-    }
-  });
-
-  // Dynamic blog post route (must be after specific routes)
+  // Dynamic blog post route - SSR for blog posts only
   app.get("/:slug", async (req: Request, res: Response, next: Function) => {
     try {
       const slug = req.params.slug as string;
