@@ -1,4 +1,4 @@
-const WP_API_BASE = "https://thomasandwan.com/test/wp-json/wp/v2";
+const WP_API_BASE = process.env.WP_API_BASE || "https://thomasandwan.com/wp-json/wp/v2";
 
 export interface WPPost {
   id: number;
@@ -32,6 +32,15 @@ export interface WPPage {
   featured_media: number;
   parent: number;
   menu_order: number;
+  yoast_head_json?: {
+    title?: string;
+    description?: string;
+    og_title?: string;
+    og_description?: string;
+    og_image?: { url: string }[];
+    canonical?: string;
+    schema?: object;
+  };
 }
 
 export interface WPMedia {
@@ -111,13 +120,24 @@ export async function fetchPages(params?: {
 }
 
 export async function fetchPageBySlug(slug: string): Promise<WPPage | null> {
-  const url = `${WP_API_BASE}/pages?slug=${encodeURIComponent(slug)}`;
+  const url = `${WP_API_BASE}/pages?slug=${encodeURIComponent(slug)}&_embed`;
   const response = await fetch(url);
   if (!response.ok) {
     throw new Error(`Failed to fetch page: ${response.status}`);
   }
   const pages: WPPage[] = await response.json();
   return pages[0] || null;
+}
+
+export async function fetchPageWithMedia(slug: string): Promise<(WPPage & { featured_image?: WPMedia }) | null> {
+  const page = await fetchPageBySlug(slug);
+  if (!page) return null;
+  
+  if (page.featured_media) {
+    const media = await fetchMedia(page.featured_media);
+    return { ...page, featured_image: media || undefined };
+  }
+  return page;
 }
 
 export async function fetchMedia(id: number): Promise<WPMedia | null> {
