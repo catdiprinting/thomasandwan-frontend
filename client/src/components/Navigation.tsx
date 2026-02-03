@@ -19,10 +19,10 @@ export default function Navigation() {
 
   const navLinks = [
     { name: "Home", href: "/" },
+    { name: "About", href: "/about" },
     { name: "Cases We Handle", href: "/cases-we-handle" },
-    { name: "Medical Malpractice", href: "/cases-we-handle/medical-malpractice" },
-    { name: "FAQ", href: "/faq" },
     { name: "Blog", href: "/blog" },
+    { name: "Contact", href: "/contact" },
   ];
 
   return (
@@ -31,7 +31,18 @@ export default function Navigation() {
       {/* Top Utility Bar */}
       <div className="bg-primary text-white py-2 text-sm border-b border-white/10 hidden md:block">
         <div className="container mx-auto px-4 md:px-6 flex justify-between items-center">
+          <div className="flex items-center">
+            <Link href="/contact">
+              <span className="bg-secondary hover:bg-secondary/90 text-white font-bold px-4 py-1.5 uppercase tracking-wider text-xs cursor-pointer transition-colors">
+                Free Consultation
+              </span>
+            </Link>
+          </div>
           <div className="flex items-center gap-6">
+             <div className="flex items-center gap-2 opacity-80 hover:opacity-100 transition-opacity">
+               <MapPin className="w-3 h-3 text-secondary" />
+               <span className="tracking-wide">Houston, TX</span>
+             </div>
              <div className="flex items-center gap-2 opacity-80 hover:opacity-100 transition-opacity">
                <Mail className="w-3 h-3 text-secondary" />
                <a href="mailto:info@thomasandwan.com" className="tracking-wide hover:text-secondary transition-colors">info@thomasandwan.com</a>
@@ -40,18 +51,6 @@ export default function Navigation() {
                <Phone className="w-3 h-3 text-secondary" />
                <a href="tel:713-529-1177" className="tracking-wide hover:text-secondary transition-colors">(713) 529-1177</a>
              </div>
-             <div className="flex items-center gap-2 opacity-80 hover:opacity-100 transition-opacity">
-               <MapPin className="w-3 h-3 text-secondary" />
-               <span className="tracking-wide">Houston, TX</span>
-             </div>
-          </div>
-          <div className="flex items-center gap-6">
-            <Link href="/about">
-              <a className="hover:text-secondary transition-colors uppercase tracking-wider text-xs font-bold">About</a>
-            </Link>
-            <Link href="/contact">
-              <a className="hover:text-secondary transition-colors uppercase tracking-wider text-xs font-bold">Contact</a>
-            </Link>
           </div>
         </div>
       </div>
@@ -65,22 +64,22 @@ export default function Navigation() {
       >
         <div className="container mx-auto px-4 md:px-6 flex items-center justify-between">
           <Link href="/">
-            <a className="flex items-center gap-2">
+            <span className="flex items-center gap-2 cursor-pointer">
               <img 
                 src="/images/logo.webp" 
                 alt="Thomas & Wan" 
                 className={cn("w-auto object-contain transition-all duration-300", scrolled ? "h-8" : "h-10 md:h-12")}
               />
-            </a>
+            </span>
           </Link>
 
           {/* Desktop Nav */}
           <div className="hidden md:flex items-center gap-8">
             {navLinks.map((link) => (
               <Link key={link.name} href={link.href}>
-                <a
+                <span
                   className={cn(
-                    "text-sm font-medium tracking-wide uppercase transition-colors hover:text-secondary relative group",
+                    "text-sm font-medium tracking-wide uppercase transition-colors hover:text-secondary relative group cursor-pointer",
                     location === link.href ? "text-secondary" : "text-primary"
                   )}
                 >
@@ -89,7 +88,7 @@ export default function Navigation() {
                     "absolute -bottom-1 left-0 w-full h-0.5 bg-secondary transform scale-x-0 transition-transform duration-300 group-hover:scale-x-100",
                     location === link.href ? "scale-x-100" : ""
                   )} />
-                </a>
+                </span>
               </Link>
             ))}
             <Button className="bg-secondary hover:bg-secondary/90 text-white font-bold rounded-none px-6">
@@ -111,24 +110,14 @@ export default function Navigation() {
           <div className="md:hidden absolute top-full left-0 w-full bg-white border-b border-border p-4 shadow-lg flex flex-col gap-4 animate-in slide-in-from-top-5 max-h-[80vh] overflow-y-auto">
             {navLinks.map((link) => (
               <Link key={link.name} href={link.href}>
-                <a
-                  className="text-primary font-medium text-lg py-2 border-b border-gray-100"
+                <span
+                  className="text-primary font-medium text-lg py-2 border-b border-gray-100 block cursor-pointer"
                   onClick={() => setIsOpen(false)}
                 >
                   {link.name}
-                </a>
+                </span>
               </Link>
             ))}
-            <Link href="/about">
-              <a className="text-primary font-medium text-lg py-2 border-b border-gray-100" onClick={() => setIsOpen(false)}>
-                About
-              </a>
-            </Link>
-            <Link href="/contact">
-              <a className="text-primary font-medium text-lg py-2 border-b border-gray-100" onClick={() => setIsOpen(false)}>
-                Contact
-              </a>
-            </Link>
             <div className="flex flex-col gap-2 mt-2">
                <a href="tel:713-529-1177" className="flex items-center gap-2 text-primary font-medium text-lg">
                  <Phone className="w-5 h-5 text-secondary" /> (713) 529-1177
@@ -138,7 +127,7 @@ export default function Navigation() {
                </a>
             </div>
             <Button className="w-full bg-secondary hover:bg-secondary/90 text-white font-bold rounded-none mt-2">
-              Call Now
+              Free Consultation
             </Button>
           </div>
         )}
