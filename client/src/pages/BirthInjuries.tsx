@@ -3,6 +3,7 @@ import { AlertTriangle, Baby, Heart, Phone } from "lucide-react";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
+import SEO, { createPracticeAreaSchema } from "@/components/SEO";
 
 const birthInjuryTypes = [
   "Hypoxic ischemic encephalopathy",
@@ -41,8 +42,20 @@ const hieSymptoms = [
 ];
 
 export default function BirthInjuries() {
+  const schema = createPracticeAreaSchema(
+    "Birth Injury Lawyers",
+    "Houston birth injury attorneys representing families whose babies suffered injuries due to medical negligence during labor and delivery. Free consultation.",
+    "https://thomasandwan.com/cases-we-handle/birth-injuries"
+  );
+
   return (
     <div className="min-h-screen bg-background font-sans text-foreground overflow-x-hidden selection:bg-secondary selection:text-primary">
+      <SEO 
+        title="Birth Injury Lawyers in Houston"
+        description="Texas birth injury attorneys at Thomas & Wan represent families whose babies were harmed by medical negligence. We handle HIE, cerebral palsy, Erb's palsy cases. Free consultation."
+        canonical="https://thomasandwan.com/cases-we-handle/birth-injuries"
+        schema={schema}
+      />
       <Navigation />
       
       <main className="pt-20">

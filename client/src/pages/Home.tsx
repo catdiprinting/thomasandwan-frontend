@@ -8,10 +8,17 @@ import TeamSection from "@/components/TeamSection";
 import FAQSection from "@/components/FAQSection";
 import BlogSection from "@/components/BlogSection";
 import Footer from "@/components/Footer";
+import SEO, { lawFirmSchema } from "@/components/SEO";
 
 export default function Home() {
   return (
     <div className="min-h-screen bg-background font-sans text-foreground overflow-x-hidden selection:bg-secondary selection:text-primary">
+      <SEO 
+        title="Houston Medical Malpractice Lawyers"
+        description="Thomas & Wan is a Houston-based medical malpractice law firm representing victims of birth injuries, medical negligence, and hospital malpractice. Free consultation."
+        canonical="https://thomasandwan.com"
+        schema={lawFirmSchema}
+      />
       <Navigation />
       <main>
         <Hero />

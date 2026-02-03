@@ -3,6 +3,7 @@ import { AlertCircle, Heart, Phone } from "lucide-react";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
+import SEO, { createPracticeAreaSchema } from "@/components/SEO";
 
 const complications = [
   "Preeclampsia and eclampsia",
@@ -21,8 +22,20 @@ const complications = [
 ];
 
 export default function ComplicationsOfChildbirth() {
+  const schema = createPracticeAreaSchema(
+    "Childbirth Complications Lawyers",
+    "Houston attorneys representing mothers injured during pregnancy and childbirth due to medical negligence. Preeclampsia, C-section injuries, postpartum hemorrhage cases.",
+    "https://thomasandwan.com/cases-we-handle/complications-of-childbirth"
+  );
+
   return (
     <div className="min-h-screen bg-background font-sans text-foreground overflow-x-hidden selection:bg-secondary selection:text-primary">
+      <SEO 
+        title="Complications of Childbirth Lawyers in Houston"
+        description="Texas attorneys at Thomas & Wan represent mothers who suffered injuries due to medical negligence during pregnancy and childbirth. Free consultation."
+        canonical="https://thomasandwan.com/cases-we-handle/complications-of-childbirth"
+        schema={schema}
+      />
       <Navigation />
       
       <main className="pt-20">

@@ -1,5 +1,6 @@
 import { ArrowRight, ShieldAlert, Stethoscope, Pill, Activity, Scissors, Scale } from "lucide-react";
 import PageShell from "@/components/PageShell";
+import SEO, { createPracticeAreaSchema } from "@/components/SEO";
 
 const examples = [
   { icon: Scissors, title: "Surgical Errors", desc: "Operating on the wrong part of the body, leaving instruments inside the body, or removing the wrong organ." },
@@ -11,8 +12,20 @@ const examples = [
 ];
 
 export default function MedicalMalpractice() {
+  const schema = createPracticeAreaSchema(
+    "Medical Malpractice Lawyers",
+    "Houston medical malpractice attorneys representing victims of surgical errors, misdiagnosis, medication errors, and hospital negligence.",
+    "https://thomasandwan.com/cases-we-handle/medical-malpractice"
+  );
+
   return (
     <PageShell title="Medical Malpractice" subtitle="Cases We Handle">
+      <SEO 
+        title="Medical Malpractice Lawyers in Houston"
+        description="Thomas & Wan medical malpractice attorneys handle surgical errors, misdiagnosis, medication errors, anesthesia negligence, and hospital malpractice cases. Free consultation."
+        canonical="https://thomasandwan.com/cases-we-handle/medical-malpractice"
+        schema={schema}
+      />
       <section className="py-16 md:py-20 bg-white">
         <div className="container mx-auto px-4 md:px-6">
           <div className="grid lg:grid-cols-12 gap-12">
