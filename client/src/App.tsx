@@ -7,6 +7,7 @@ import About from "@/pages/About";
 import Cases from "@/pages/Cases";
 import MedicalMalpractice from "@/pages/MedicalMalpractice";
 import FAQ from "@/pages/FAQ";
+import Testimonials from "@/pages/Testimonials";
 import Contact from "@/pages/Contact";
 import BlogIndex from "@/pages/BlogIndex";
 import BlogPost from "@/pages/BlogPost";
@@ -19,6 +20,7 @@ function Router() {
       <Route path="/about" component={About} />
       <Route path="/cases-we-handle" component={Cases} />
       <Route path="/cases-we-handle/medical-malpractice" component={MedicalMalpractice} />
+      <Route path="/testimonials" component={Testimonials} />
       <Route path="/faq" component={FAQ} />
       <Route path="/contact" component={Contact} />
       <Route path="/blog" component={BlogIndex} />
