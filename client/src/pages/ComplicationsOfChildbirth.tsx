@@ -66,11 +66,8 @@ export default function ComplicationsOfChildbirth() {
               <div className="relative">
                 <img 
                   src="/images/complications-childbirth.jpg" 
-                  alt="Mother and baby" 
+                  alt="Pregnant woman receiving medical care" 
                   className="w-full rounded-lg shadow-xl"
-                  onError={(e) => {
-                    e.currentTarget.style.display = 'none';
-                  }}
                 />
                 <div className="absolute -bottom-4 -right-4 w-full h-full border-4 border-secondary/20 rounded-lg -z-10" />
               </div>

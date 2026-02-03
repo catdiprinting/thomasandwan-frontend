@@ -74,13 +74,23 @@ export default function BirthInjuries() {
         {/* Introduction */}
         <section className="py-20 bg-white">
           <div className="container mx-auto px-4 md:px-6">
-            <div className="max-w-4xl mx-auto">
-              <p className="text-lg text-slate-600 leading-relaxed mb-6">
-                Giving birth is one of the most exciting events in a mother's life. Parents prepare for the big day when their new baby is born, and they hope and pray for a healthy baby. At Thomas & Wan, our lawyers have represented many Texas families who have suffered injuries to their baby as a result of gross negligence and malpractice.
-              </p>
-              <p className="text-lg text-slate-600 leading-relaxed mb-6">
-                We are very familiar with the medicine, the law and the policies of hospitals all across Texas concerning the need for monitoring and possible emergency delivery of laboring moms to prevent injuries to babies. Many times these injuries are preventable if hospitals only ensured that safety policies were followed by their labor nurses, midwives and doctors.
-              </p>
+            <div className="grid lg:grid-cols-2 gap-12 items-center max-w-6xl mx-auto">
+              <div>
+                <p className="text-lg text-slate-600 leading-relaxed mb-6">
+                  Giving birth is one of the most exciting events in a mother's life. Parents prepare for the big day when their new baby is born, and they hope and pray for a healthy baby. At Thomas & Wan, our lawyers have represented many Texas families who have suffered injuries to their baby as a result of gross negligence and malpractice.
+                </p>
+                <p className="text-lg text-slate-600 leading-relaxed mb-6">
+                  We are very familiar with the medicine, the law and the policies of hospitals all across Texas concerning the need for monitoring and possible emergency delivery of laboring moms to prevent injuries to babies. Many times these injuries are preventable if hospitals only ensured that safety policies were followed by their labor nurses, midwives and doctors.
+                </p>
+              </div>
+              <div className="relative">
+                <img 
+                  src="/images/birth-injuries.jpg" 
+                  alt="Newborn baby receiving care" 
+                  className="w-full rounded-lg shadow-xl"
+                />
+                <div className="absolute -bottom-4 -right-4 w-full h-full border-4 border-secondary/20 rounded-lg -z-10" />
+              </div>
             </div>
           </div>
         </section>
@@ -149,33 +159,45 @@ export default function BirthInjuries() {
         {/* Case Example: HIE */}
         <section className="py-20 bg-[#F9F7F5]">
           <div className="container mx-auto px-4 md:px-6">
-            <div className="max-w-4xl mx-auto">
-              <div className="inline-block border-b-2 border-secondary pb-1 mb-6">
-                <span className="text-secondary font-bold tracking-widest uppercase text-sm">
-                  Case Example
-                </span>
-              </div>
-              <h2 className="text-3xl font-serif text-primary mb-6">
-                Lack Of Oxygen To The Brain During Labor
-              </h2>
-              
-              <p className="text-lg text-slate-600 leading-relaxed mb-6">
-                Hypoxic Ischemic Encephalopathy (HIE) is a type of brain damage that occurs when an infant's brain doesn't receive enough oxygen. It is a dangerous condition that requires immediate medical intervention. HIE is the leading cause of infant fatalities in the United States, as well as the primary source of severe impairments.
-              </p>
-
-              <h3 className="font-bold text-xl text-primary mb-4">
-                Symptoms Associated with HIE:
-              </h3>
-              <div className="grid md:grid-cols-2 gap-3 mb-8">
-                {hieSymptoms.map((symptom, index) => (
-                  <div key={index} className="flex gap-3 items-center bg-white p-3 shadow-sm">
-                    <Baby className="w-5 h-5 text-secondary" />
-                    <span className="text-slate-600">{symptom}</span>
+            <div className="max-w-5xl mx-auto">
+              <div className="grid lg:grid-cols-2 gap-12 items-start">
+                <div>
+                  <div className="inline-block border-b-2 border-secondary pb-1 mb-6">
+                    <span className="text-secondary font-bold tracking-widest uppercase text-sm">
+                      Case Example
+                    </span>
                   </div>
-                ))}
+                  <h2 className="text-3xl font-serif text-primary mb-6">
+                    Lack Of Oxygen To The Brain During Labor
+                  </h2>
+                  
+                  <p className="text-lg text-slate-600 leading-relaxed mb-6">
+                    Hypoxic Ischemic Encephalopathy (HIE) is a type of brain damage that occurs when an infant's brain doesn't receive enough oxygen. It is a dangerous condition that requires immediate medical intervention. HIE is the leading cause of infant fatalities in the United States, as well as the primary source of severe impairments.
+                  </p>
+
+                  <h3 className="font-bold text-xl text-primary mb-4">
+                    Symptoms Associated with HIE:
+                  </h3>
+                  <div className="grid gap-3 mb-8">
+                    {hieSymptoms.map((symptom, index) => (
+                      <div key={index} className="flex gap-3 items-center bg-white p-3 shadow-sm">
+                        <Baby className="w-5 h-5 text-secondary" />
+                        <span className="text-slate-600">{symptom}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+                <div className="relative">
+                  <img 
+                    src="/images/newborn-care.jpg" 
+                    alt="Mother holding newborn baby" 
+                    className="w-full rounded-lg shadow-xl"
+                  />
+                  <div className="absolute -bottom-4 -left-4 w-full h-full border-4 border-secondary/20 rounded-lg -z-10" />
+                </div>
               </div>
 
-              <p className="text-slate-600 leading-relaxed">
+              <p className="text-slate-600 leading-relaxed mt-8 max-w-4xl">
                 Effects of HIE may include developmental delays, epilepsy, cognitive issues, motor skill development delays, and neurodevelopment delays. The true severity of HIE generally cannot be determined until the baby reaches three to four years of age.
               </p>
             </div>
