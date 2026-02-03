@@ -12,7 +12,31 @@ import {
   type WPPost,
   type WPPage,
 } from "./wordpress";
-import { renderBlogPost } from "./ssr";
+import { 
+  renderBlogPost, 
+  renderHomepage, 
+  renderAbout, 
+  renderContact, 
+  renderFAQ, 
+  renderTestimonials, 
+  renderCases,
+  renderMedicalMalpractice,
+  renderBirthInjuries,
+  renderComplicationsOfChildbirth,
+  renderBlogIndex
+} from "./ssr";
+
+// Detect search engine crawlers for SSR
+function isBot(userAgent: string): boolean {
+  const bots = [
+    'googlebot', 'bingbot', 'yandexbot', 'duckduckbot', 'slurp', 
+    'baiduspider', 'facebookexternalhit', 'twitterbot', 'linkedinbot',
+    'whatsapp', 'telegram', 'applebot', 'pinterest', 'semrushbot',
+    'ahrefsbot', 'mj12bot', 'dotbot', 'petalbot', 'bytespider'
+  ];
+  const ua = userAgent.toLowerCase();
+  return bots.some(bot => ua.includes(bot));
+}
 
 export async function registerRoutes(
   httpServer: Server,
@@ -167,7 +191,78 @@ export async function registerRoutes(
     }
   });
 
-  // Dynamic blog post route - SSR for blog posts only
+  // SSR Routes - serve to bots only, regular users get React app
+  app.get("/", (req: Request, res: Response, next: Function) => {
+    const ua = req.headers['user-agent'] || '';
+    if (!isBot(ua)) return next();
+    res.setHeader("Content-Type", "text/html");
+    res.send(renderHomepage());
+  });
+
+  app.get("/about", (req: Request, res: Response, next: Function) => {
+    const ua = req.headers['user-agent'] || '';
+    if (!isBot(ua)) return next();
+    res.setHeader("Content-Type", "text/html");
+    res.send(renderAbout());
+  });
+
+  app.get("/contact", (req: Request, res: Response, next: Function) => {
+    const ua = req.headers['user-agent'] || '';
+    if (!isBot(ua)) return next();
+    res.setHeader("Content-Type", "text/html");
+    res.send(renderContact());
+  });
+
+  app.get("/faq", (req: Request, res: Response, next: Function) => {
+    const ua = req.headers['user-agent'] || '';
+    if (!isBot(ua)) return next();
+    res.setHeader("Content-Type", "text/html");
+    res.send(renderFAQ());
+  });
+
+  app.get("/testimonials", (req: Request, res: Response, next: Function) => {
+    const ua = req.headers['user-agent'] || '';
+    if (!isBot(ua)) return next();
+    res.setHeader("Content-Type", "text/html");
+    res.send(renderTestimonials());
+  });
+
+  app.get("/blog", async (req: Request, res: Response, next: Function) => {
+    const ua = req.headers['user-agent'] || '';
+    if (!isBot(ua)) return next();
+    res.setHeader("Content-Type", "text/html");
+    res.send(await renderBlogIndex());
+  });
+
+  app.get("/cases-we-handle", (req: Request, res: Response, next: Function) => {
+    const ua = req.headers['user-agent'] || '';
+    if (!isBot(ua)) return next();
+    res.setHeader("Content-Type", "text/html");
+    res.send(renderCases());
+  });
+
+  app.get("/cases-we-handle/medical-malpractice", (req: Request, res: Response, next: Function) => {
+    const ua = req.headers['user-agent'] || '';
+    if (!isBot(ua)) return next();
+    res.setHeader("Content-Type", "text/html");
+    res.send(renderMedicalMalpractice());
+  });
+
+  app.get("/cases-we-handle/birth-injuries", (req: Request, res: Response, next: Function) => {
+    const ua = req.headers['user-agent'] || '';
+    if (!isBot(ua)) return next();
+    res.setHeader("Content-Type", "text/html");
+    res.send(renderBirthInjuries());
+  });
+
+  app.get("/cases-we-handle/complications-of-childbirth", (req: Request, res: Response, next: Function) => {
+    const ua = req.headers['user-agent'] || '';
+    if (!isBot(ua)) return next();
+    res.setHeader("Content-Type", "text/html");
+    res.send(renderComplicationsOfChildbirth());
+  });
+
+  // Dynamic blog post route - SSR for blog posts (bots get full SSR, users get React)
   app.get("/:slug", async (req: Request, res: Response, next: Function) => {
     try {
       const slug = req.params.slug as string;
