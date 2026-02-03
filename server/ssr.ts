@@ -698,3 +698,389 @@ export function renderContact(): string {
     "Contact Thomas & Wan for a free medical malpractice consultation. Call (713) 529-1177 or email info@thomasandwan.com. No fee unless we win."
   );
 }
+
+export function renderFAQ(): string {
+  const faqs = [
+    { q: "I think I have a legal claim. What do I do now?", a: "If you think you have a legal claim, your first step is finding a lawyer to represent you. You can contact Thomas & Wan to discuss your claim by filling out a form or by calling 713.529.1177. A lawyer will evaluate your case." },
+    { q: "How do I know which lawyer to use?", a: "Use an attorney who has experience dealing with your type of claim and a proven track record of success. Ask about experience, how long they've practiced, how much time they spend on cases like yours, and whether they will personally handle the case or refer it to another firm." },
+    { q: "Why should I hire Thomas & Wan?", a: "Linda Laurent Thomas and Michelle Wan have extensive experience handling personal injury matters and are routinely asked to handle difficult cases by other law firms. They approach practicing law as a profession, not a factory. They handle cases with personal service and focus on results, keeping you informed of your options." },
+    { q: "How do I pay for an attorney?", a: "Most personal injury firms, including Thomas & Wan, work on a contingency basis. This means you only pay for services if there is a verdict or settlement. If no recovery is made, you pay nothing." },
+    { q: "Thomas & Wan has taken my case. What now?", a: "The first part of the lawsuit process is called discovery. In this phase, both sides gather evidence and information that proves or disproves the claim." },
+    { q: "What do I have to do during discovery?", a: "You may answer written questions (interrogatories) regarding personal information, witnesses, injuries, medical treatment, and other details. Your lawyer or paralegal may request additional information to strengthen the case." },
+    { q: "What if I have to give a deposition?", a: "A deposition is testimony under oath recorded for later use in court. The attorneys will ask questions, and a court reporter records testimony. Your attorney will prepare you and be by your side to ensure the process is fair." },
+    { q: "What is mediation?", a: "Mediation is a meeting with all parties to attempt settlement. A neutral mediator helps communicate between sides. Courts often require mediation before trial." },
+    { q: "What if my case goes to trial?", a: "A judge or jury determines responsibility and damages. If Thomas & Wan wins a settlement or verdict, the fee is taken from that recovery." },
+  ];
+
+  const faqHtml = faqs.map(f => `
+    <div class="faq-item">
+      <div class="faq-q">${f.q}</div>
+      <div class="faq-a">${f.a}</div>
+    </div>
+  `).join("");
+
+  const content = `
+    <div class="hero">
+      <div class="container">
+        <div class="meta" style="color: #F59E0B;">What to Expect</div>
+        <h1 style="font-size: 3rem;">Frequently Asked Questions</h1>
+      </div>
+    </div>
+
+    <section class="section section-light">
+      <div class="container">
+        <div class="grid-2" style="gap: 64px;">
+          <div>
+            <div class="card-alt">
+              <h2 style="font-size: 1.5rem; margin-bottom: 16px;">Clear answers. Real guidance.</h2>
+              <p style="color: #64748b; line-height: 1.8;">
+                This page is designed to be easier to scan and more helpful than the typical FAQ. If you don't see your question here, call us.
+              </p>
+              <a href="/contact" class="btn" style="margin-top: 24px;">Contact Us</a>
+            </div>
+            <div class="cta" style="margin-top: 24px;">
+              <div style="font-size: 2.5rem; color: #F59E0B;">24/7</div>
+              <div style="font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.1em; opacity: 0.7;">Available to help</div>
+              <div style="margin-top: 16px;">Call <a href="tel:713-529-1177" style="color: #F59E0B; font-weight: bold;">713-529-1177</a></div>
+            </div>
+          </div>
+          <div>
+            ${faqHtml}
+            <div class="cta" style="margin-top: 48px; text-align: left;">
+              <h3>Call Us Now For a Free Consultation</h3>
+              <p>Call us today for a free consultation—we will discuss what your legal options are for your medical malpractice case. If you have the medical records, you can send them to us for a free review with no obligation.</p>
+              <a href="/contact">Contact Us</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  `;
+
+  return wrapInLayout(
+    content,
+    "Frequently Asked Questions",
+    "Get answers to common questions about medical malpractice cases, hiring a lawyer, discovery, depositions, mediation, and trial. Free consultation available."
+  );
+}
+
+export function renderTestimonials(): string {
+  const testimonials = [
+    { quote: "After a heart transplant in August 2016, Ernest \"Chris\" Keys can't talk or walk. The Houston hospital is under pressure for the quality of its once-renowned heart program. Now it is being sued by Mr. Keys's family.", author: "Houston Chronicle", date: "July 5, 2018" },
+    { quote: "Thomas & Wan represented my baby who was seriously harmed by nurses at a hospital who did not know what they were doing. Linda and Michelle were able to guide us through what to do in getting help for my baby for the rest of his life.", author: "Stephanie S" },
+    { quote: "Linda and Michelle represented me when I was hurt at a refinery. I had tried using a different lawyer, but he never returned my calls or talked to me. Linda and Michelle did a good job and they care about your case.", author: "Rogelio L" },
+    { quote: "After being abandoned by my original lawyer who was greedy for money, Linda was a TRUE answer to my prayers. She is after JUSTICE, not money. She has spent COUNTLESS hours researching my case and asking just the right questions.", author: "Lauren" },
+    { quote: "Thomas & Wan did a great job representing me and my family against the owner of our apartment complex. We have just moved in when our daughter was shot in the head by a stray bullet while she was sleeping in her bed. It was a miracle she survived.", author: "Lisa A" },
+    { quote: "I had a hard time coming to the terms with what happened to my baby at birth..and as I was looking thru and for a Medical Mal Practice attorney and her face was so welcoming I loved what I read and how long she has been an attorney.", author: "Alyssa" }
+  ];
+
+  const testimonialsHtml = testimonials.map(t => `
+    <div class="card-alt" style="padding: 32px; margin-bottom: 24px;">
+      <div style="color: #F59E0B; margin-bottom: 12px;">★★★★★</div>
+      <p style="color: #64748b; font-style: italic; font-size: 1.1rem; line-height: 1.8; margin-bottom: 16px;">"${t.quote}"</p>
+      <div style="border-top: 1px solid #e5e7eb; padding-top: 16px;">
+        <strong style="color: #1F2937;">${t.author}</strong>
+        ${t.date ? `<span style="color: #64748b; font-size: 0.9rem;"> · ${t.date}</span>` : ''}
+      </div>
+    </div>
+  `).join("");
+
+  const content = `
+    <div class="hero">
+      <div class="container">
+        <div class="meta" style="color: #F59E0B;">Client Stories</div>
+        <h1 style="font-size: 3rem;">Voices of <span class="text-secondary" style="font-style: italic;">Justice & Hope</span></h1>
+        <p style="font-size: 1.25rem; margin-top: 16px;">Don't just take our word for it. Read what our clients have to say about their experience working with Thomas & Wan.</p>
+      </div>
+    </div>
+
+    <section class="section section-light">
+      <div class="container">
+        <div class="grid-2" style="gap: 32px;">
+          ${testimonialsHtml}
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-dark" style="text-align: center;">
+      <div class="container" style="max-width: 800px;">
+        <h2 style="font-size: 2.5rem; color: #fff;">Let Us Fight for Your Family Too</h2>
+        <p style="color: rgba(255,255,255,0.8); margin: 16px 0 32px; font-size: 1.125rem;">
+          If you or a loved one has suffered due to medical negligence, we are here to listen. Contact us today for a free, confidential consultation.
+        </p>
+        <a href="/contact" class="btn" style="font-size: 1.25rem; padding: 20px 40px;">Share Your Story With Us</a>
+      </div>
+    </section>
+  `;
+
+  return wrapInLayout(
+    content,
+    "Client Testimonials",
+    "Read testimonials from Thomas & Wan clients. Real stories of families we've helped with medical malpractice, birth injuries, and hospital negligence cases."
+  );
+}
+
+export function renderMedicalMalpractice(): string {
+  const examples = [
+    { title: "Surgical Errors", desc: "Operating on the wrong part of the body, leaving instruments inside the body, or removing the wrong organ." },
+    { title: "Failure to Diagnose", desc: "Failing to diagnose a disease or injury; ignoring obvious signs of infection, stroke, heart attack, or respiratory arrest." },
+    { title: "Medication Errors", desc: "Giving the wrong medication, overdosing a patient, or severe burns from medications." },
+    { title: "Anesthesia Monitoring", desc: "Failing to monitor anesthesia properly and preventable complications during procedures." },
+    { title: "Birth-Related Negligence", desc: "Birth injuries such as cerebral palsy, shoulder dystocia, oxygen deprivation, and umbilical cord strangulation." },
+    { title: "Accountability", desc: "Suit against nurses, doctors, medical techs, pharmacists, and other providers whose negligence caused harm." },
+  ];
+
+  const examplesHtml = examples.map(e => `
+    <div class="card" style="padding: 28px;">
+      <h3 style="font-size: 1.5rem; margin-bottom: 12px;">${e.title}</h3>
+      <p style="color: #64748b;">${e.desc}</p>
+    </div>
+  `).join("");
+
+  const content = `
+    <div class="hero">
+      <div class="container">
+        <div class="meta" style="color: #F59E0B;">Cases We Handle</div>
+        <h1 style="font-size: 3rem;">Medical Malpractice</h1>
+      </div>
+    </div>
+
+    <section class="section section-light">
+      <div class="container">
+        <div class="grid-2" style="gap: 64px;">
+          <div>
+            <p style="font-size: 1.125rem; color: #64748b; line-height: 1.8; margin-bottom: 32px;">
+              We have successfully resolved numerous multi-million dollar matters for serious medical malpractice and wrongful death across the nation.
+            </p>
+            <div class="card-alt">
+              <h3 style="margin-bottom: 16px;">Medical negligence can include:</h3>
+              <p style="color: #64748b; line-height: 1.8;">
+                Claims against negligent hospitals, nurses, doctors, pharmacists, medical technicians, and other providers.
+              </p>
+              <a href="/contact" class="btn" style="margin-top: 24px;">Request Free Consultation</a>
+            </div>
+          </div>
+          <div class="grid-2" style="gap: 20px;">
+            ${examplesHtml}
+          </div>
+        </div>
+
+        <div class="cta" style="margin-top: 64px; text-align: left;">
+          <h3>Call Us Now For a Free Consultation</h3>
+          <p>Call us today for a free consultation—we will discuss what your legal options are for your medical malpractice case. If you have medical records, you can send them to us for a free review with no obligation.</p>
+          <a href="/contact">Contact Us</a>
+        </div>
+      </div>
+    </section>
+  `;
+
+  return wrapInLayout(
+    content,
+    "Medical Malpractice Lawyers in Houston",
+    "Thomas & Wan medical malpractice attorneys handle surgical errors, misdiagnosis, medication errors, anesthesia negligence, and hospital malpractice cases. Free consultation."
+  );
+}
+
+export function renderBirthInjuries(): string {
+  const birthInjuryTypes = [
+    "Hypoxic ischemic encephalopathy", "Cerebral palsy", "Forceps/vacuum injuries", "Induction problems",
+    "Gestational Diabetes mismanagement", "Preeclampsia mismanagement", "Shoulder Dystocia/Erb's palsy",
+    "Fetal heart monitoring problems", "Delay in C-Section", "Delay in delivery", "Fetal acidosis",
+    "Umbilical cord compression", "Infection mismanagement", "Group B Strep mismanagement",
+    "Intubation problems", "Placental abruption"
+  ];
+
+  const preventableCauses = [
+    "Pulling and/or twisting the infant improperly during the delivery period",
+    "Improper handling and use of birth-assisting tools, such as forceps or a vacuum extraction tool",
+    "Administering the wrong amount or the wrong type of medication to the mother during pregnancy and during labor",
+    "Failure to monitor the infant properly for distress, including failure to regularly monitor fetal heartbeat",
+    "Failure to schedule and perform an emergency cesarean surgery (C-section)"
+  ];
+
+  const hieSymptoms = [
+    "Meconium-stained amniotic fluid", "Low heart rate", "Poor muscle tone",
+    "Weak breathing or no breathing at all", "Bluish or pale skin color", "Excessive acid in the blood"
+  ];
+
+  const typesHtml = birthInjuryTypes.map(t => `<div style="background: #fff; padding: 12px 16px; border-left: 4px solid #F59E0B;">${t}</div>`).join("");
+  const causesHtml = preventableCauses.map(c => `<div style="display: flex; gap: 12px; margin-bottom: 12px;"><span style="color: #F59E0B;">⚠</span><p style="color: #64748b;">${c}</p></div>`).join("");
+  const symptomsHtml = hieSymptoms.map(s => `<div style="background: #fff; padding: 12px 16px; display: flex; gap: 12px; align-items: center;"><span style="color: #F59E0B;">●</span>${s}</div>`).join("");
+
+  const content = `
+    <div class="hero">
+      <div class="container">
+        <div class="meta" style="color: #F59E0B;">Cases We Handle</div>
+        <h1 style="font-size: 3rem;">Birth <span class="text-secondary" style="font-style: italic;">Injuries</span></h1>
+        <p style="font-size: 1.25rem; margin-top: 16px;">Sometimes babies are born with medical problems that don't match their parents' expectations. Sometimes it is because the baby is a victim of a birth injury that occurs during labor and delivery.</p>
+      </div>
+    </div>
+
+    <section class="section section-light">
+      <div class="container">
+        <div class="grid-2" style="gap: 64px;">
+          <div>
+            <p style="font-size: 1.125rem; color: #64748b; line-height: 1.8; margin-bottom: 24px;">
+              Giving birth is one of the most exciting events in a mother's life. Parents prepare for the big day when their new baby is born, and they hope and pray for a healthy baby. At Thomas & Wan, our lawyers have represented many Texas families who have suffered injuries to their baby as a result of gross negligence and malpractice.
+            </p>
+            <p style="font-size: 1.125rem; color: #64748b; line-height: 1.8;">
+              We are very familiar with the medicine, the law and the policies of hospitals all across Texas concerning the need for monitoring and possible emergency delivery of laboring moms to prevent injuries to babies. Many times these injuries are preventable if hospitals only ensured that safety policies were followed by their labor nurses, midwives and doctors.
+            </p>
+          </div>
+          <div>
+            <img src="/images/birth-injuries.jpg" alt="Newborn baby receiving care" style="width: 100%; box-shadow: 0 10px 40px rgba(0,0,0,0.15);">
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-alt">
+      <div class="container">
+        <h2 style="font-size: 2.5rem; text-align: center; margin-bottom: 40px;">Types of Birth Injuries We Handle</h2>
+        <div class="grid-2" style="gap: 16px;">
+          ${typesHtml}
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-light">
+      <div class="container" style="max-width: 900px;">
+        <h2 style="font-size: 2.5rem; margin-bottom: 32px;">Birth Defects Versus Birth Negligence</h2>
+        
+        <div class="grid-2" style="gap: 32px; margin-bottom: 48px;">
+          <div class="card" style="border-top: 4px solid #64748b;">
+            <h3 style="margin-bottom: 16px;">Birth Defects</h3>
+            <p style="color: #64748b; line-height: 1.8;">A birth defect is a health problem that affects your baby based on your child's genetic material or DNA. Examples include Down's Syndrome, a cleft palate, or heart murmurs. <strong>A birth defect is generally NOT medical malpractice.</strong></p>
+          </div>
+          <div class="card" style="border-top: 4px solid #F59E0B;">
+            <h3 style="margin-bottom: 16px;">Birth Injuries</h3>
+            <p style="color: #64748b; line-height: 1.8;">A birth injury is a medical issue that an infant is born with that is, in most cases, <strong>completely preventable</strong>. These are often caused by negligence during labor and delivery.</p>
+          </div>
+        </div>
+
+        <h3 style="font-size: 1.5rem; margin-bottom: 24px;">Common Causes of Preventable Birth Injuries:</h3>
+        ${causesHtml}
+      </div>
+    </section>
+
+    <section class="section section-alt">
+      <div class="container" style="max-width: 1000px;">
+        <div class="grid-2" style="gap: 64px;">
+          <div>
+            <div class="meta" style="color: #F59E0B;">Case Example</div>
+            <h2 style="font-size: 2rem; margin-bottom: 24px;">Lack Of Oxygen To The Brain During Labor</h2>
+            <p style="color: #64748b; line-height: 1.8; margin-bottom: 24px;">
+              Hypoxic Ischemic Encephalopathy (HIE) is a type of brain damage that occurs when an infant's brain doesn't receive enough oxygen. It is a dangerous condition that requires immediate medical intervention. HIE is the leading cause of infant fatalities in the United States, as well as the primary source of severe impairments.
+            </p>
+            <h3 style="font-size: 1.25rem; margin-bottom: 16px;">Symptoms Associated with HIE:</h3>
+            <div style="display: grid; gap: 8px;">
+              ${symptomsHtml}
+            </div>
+          </div>
+          <div>
+            <img src="/images/newborn-care.jpg" alt="Mother holding newborn baby" style="width: 100%; box-shadow: 0 10px 40px rgba(0,0,0,0.15);">
+          </div>
+        </div>
+        <p style="color: #64748b; line-height: 1.8; margin-top: 32px;">
+          Effects of HIE may include developmental delays, epilepsy, cognitive issues, motor skill development delays, and neurodevelopment delays. The true severity of HIE generally cannot be determined until the baby reaches three to four years of age.
+        </p>
+      </div>
+    </section>
+
+    <section class="section section-dark" style="text-align: center;">
+      <div class="container" style="max-width: 800px;">
+        <h2 style="font-size: 2.5rem; color: #fff;">Legal Help for The Youngest Victims</h2>
+        <p style="color: rgba(255,255,255,0.8); margin: 16px 0 32px; font-size: 1.125rem;">
+          At Thomas & Wan, we have the training, experience and knowledge to sue grossly negligent hospitals, doctors, nurses and midwives for birth injuries. Please call us today for free—we are here to listen to you.
+        </p>
+        <a href="tel:713-529-1177" class="btn" style="font-size: 1.25rem; padding: 20px 40px;">Call (713) 529-1177</a>
+      </div>
+    </section>
+  `;
+
+  return wrapInLayout(
+    content,
+    "Birth Injury Lawyers in Houston",
+    "Texas birth injury attorneys at Thomas & Wan represent families whose babies were harmed by medical negligence. We handle HIE, cerebral palsy, Erb's palsy cases. Free consultation."
+  );
+}
+
+export function renderComplicationsOfChildbirth(): string {
+  const complications = [
+    "Preeclampsia and eclampsia", "Obstetrical complications for the mother or obstetrical nurse negligence",
+    "C-section injuries", "Postpartum hemorrhage", "Infections", "Prolapsed umbilical cord",
+    "Failure to monitor the infant", "Vaginal tears", "Ruptured uterus", "Abruptio placenta",
+    "Cephalopelvic disproportion", "Delivery trauma or improper resuscitation of the baby",
+    "Other pregnancy-related negligence"
+  ];
+
+  const complicationsHtml = complications.map(c => `
+    <div style="background: #fff; padding: 16px 20px; display: flex; gap: 12px; align-items: center; box-shadow: 0 1px 3px rgba(0,0,0,0.05);">
+      <span style="color: #F59E0B;">●</span>
+      <span style="color: #1F2937; font-weight: 500;">${c}</span>
+    </div>
+  `).join("");
+
+  const content = `
+    <div class="hero">
+      <div class="container">
+        <div class="meta" style="color: #F59E0B;">Cases We Handle</div>
+        <h1 style="font-size: 3rem;">Complications of <span class="text-secondary" style="font-style: italic;">Childbirth</span></h1>
+        <p style="font-size: 1.25rem; margin-top: 16px;">At Thomas & Wan, we have helped families dealing with the devastating loss of a mother or serious permanent brain damage due to gross negligence during pregnancy and childbirth.</p>
+      </div>
+    </div>
+
+    <section class="section section-light">
+      <div class="container">
+        <div class="grid-2" style="gap: 64px;">
+          <div>
+            <p style="font-size: 1.125rem; color: #64748b; line-height: 1.8; margin-bottom: 24px;">
+              For an expectant mother, childbirth is an exciting and nerve-wracking time. Most of the time, doctors, midwives and nurses do an excellent job of keeping mom and baby safe during labor and delivery.
+            </p>
+            <p style="font-size: 1.125rem; color: #64748b; line-height: 1.8;">
+              Sometimes, however, medical providers can be grossly negligent in their medical care to the laboring mother. Thomas & Wan represent mothers who have been injured or made ill due to malpractice by a doctor, midwife, nurse or other health care professional during pregnancy, labor and delivery, or after delivery.
+            </p>
+          </div>
+          <div>
+            <img src="/images/complications-childbirth.jpg" alt="Pregnant woman receiving medical care" style="width: 100%; box-shadow: 0 10px 40px rgba(0,0,0,0.15);">
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-alt">
+      <div class="container">
+        <h2 style="font-size: 2.5rem; text-align: center; margin-bottom: 16px;">Cases We Handle</h2>
+        <p style="font-size: 1.125rem; color: #64748b; text-align: center; margin-bottom: 40px;">We represent mothers and families in cases involving:</p>
+        <div class="grid-3" style="gap: 16px; max-width: 1000px; margin: 0 auto;">
+          ${complicationsHtml}
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-light" style="text-align: center;">
+      <div class="container" style="max-width: 700px;">
+        <h2 style="font-size: 2rem; margin-bottom: 24px;">We're Here to Help Your Family</h2>
+        <p style="font-size: 1.125rem; color: #64748b; line-height: 1.8;">
+          At Thomas & Wan, we have helped families dealing with the devastating loss of a mother or serious permanent brain damage due to gross negligence during pregnancy and childbirth. Please contact us today for a free and candid consultation.
+        </p>
+      </div>
+    </section>
+
+    <section class="section section-dark" style="text-align: center;">
+      <div class="container" style="max-width: 800px;">
+        <h2 style="font-size: 2.5rem; color: #fff;">Call Us Now For a Free Consultation</h2>
+        <p style="color: rgba(255,255,255,0.8); margin: 16px 0 32px; font-size: 1.125rem;">
+          Call us today for a free consultation—we will discuss what your legal options are for your medical malpractice case. If you have the medical records, you can send them to us for a free review with no obligation to you. Remember, in Texas there are strict deadlines for filing a medical malpractice lawsuit.
+        </p>
+        <a href="tel:713-529-1177" class="btn" style="font-size: 1.25rem; padding: 20px 40px;">Call Today - Don't Delay</a>
+      </div>
+    </section>
+  `;
+
+  return wrapInLayout(
+    content,
+    "Complications of Childbirth Lawyers in Houston",
+    "Texas attorneys at Thomas & Wan represent mothers who suffered injuries due to medical negligence during pregnancy and childbirth. Free consultation."
+  );
+}
