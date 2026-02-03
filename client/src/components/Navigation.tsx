@@ -21,6 +21,8 @@ export default function Navigation() {
     { name: "Home", href: "/" },
     { name: "About", href: "/about" },
     { name: "Cases We Handle", href: "/cases-we-handle" },
+    { name: "Testimonials", href: "/testimonials" },
+    { name: "FAQ", href: "/faq" },
     { name: "Blog", href: "/blog" },
     { name: "Contact", href: "/contact" },
   ];
@@ -79,7 +81,7 @@ export default function Navigation() {
               <Link key={link.name} href={link.href}>
                 <span
                   className={cn(
-                    "text-sm font-medium tracking-wide uppercase transition-colors hover:text-secondary relative group cursor-pointer",
+                    "text-base font-medium tracking-wide uppercase transition-colors hover:text-secondary relative group cursor-pointer",
                     location === link.href ? "text-secondary" : "text-primary"
                   )}
                 >
