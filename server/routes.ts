@@ -135,6 +135,15 @@ export async function registerRoutes(
 
       // Create FormData for CF7 submission
       const formData = new FormData();
+      // Required CF7 hidden fields
+      formData.append("_wpcf7", "163");
+      formData.append("_wpcf7_version", "6.1.4");
+      formData.append("_wpcf7_locale", "en_US");
+      formData.append("_wpcf7_unit_tag", "wpcf7-f163-p16-o1");
+      formData.append("_wpcf7_container_post", "16");
+      formData.append("_wpcf7_posted_data_hash", "");
+      formData.append("_wpcf7_recaptcha_response", "");
+      // Form fields
       formData.append("your-name", name);
       formData.append("your-email", email);
       formData.append("phone-no", phone || "");
