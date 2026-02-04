@@ -5,7 +5,7 @@ import { Link } from "wouter";
 
 export default function Hero() {
   return (
-    <section className="relative min-h-[90vh] flex items-start pt-20 md:pt-20 overflow-hidden bg-white">
+    <section className="relative min-h-[90vh] flex items-start pt-20 md:pt-8 overflow-hidden bg-white">
       <div className="container mx-auto px-4 md:px-6 grid md:grid-cols-2 gap-12 items-center">
         
         {/* Text Content */}
