@@ -173,13 +173,19 @@ export default function Navigation() {
             </Button>
           </div>
 
-          {/* Mobile Menu Toggle */}
-          <button
-            className="lg:hidden text-primary"
-            onClick={() => setIsOpen(!isOpen)}
-          >
-            {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-          </button>
+          {/* Mobile Phone & Menu Toggle */}
+          <div className="lg:hidden flex items-center gap-3">
+            <a href="tel:713-529-1177" className="flex items-center gap-1.5 text-primary font-medium text-sm">
+              <Phone className="w-4 h-4 text-secondary" />
+              <span className="hidden sm:inline">(713) 529-1177</span>
+            </a>
+            <button
+              className="text-primary"
+              onClick={() => setIsOpen(!isOpen)}
+            >
+              {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+            </button>
+          </div>
         </div>
 
         {/* Mobile Nav */}
