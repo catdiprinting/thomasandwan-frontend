@@ -1,9 +1,10 @@
 import { useQuery } from "@tanstack/react-query";
 import { useRoute } from "wouter";
-import { ArrowLeft, Calendar, Download, Loader2 } from "lucide-react";
+import { ArrowLeft, Calendar, Download, Loader2, Phone, List } from "lucide-react";
 import { Link } from "wouter";
 import PageShell from "@/components/PageShell";
 import { Button } from "@/components/ui/button";
+import { useEffect, useState } from "react";
 
 interface WPPost {
   id: number;
@@ -19,6 +20,12 @@ interface WPPost {
   };
 }
 
+interface TOCItem {
+  id: string;
+  text: string;
+  level: number;
+}
+
 function formatDate(dateStr: string): string {
   return new Date(dateStr).toLocaleDateString("en-US", {
     day: "2-digit",
@@ -27,9 +34,40 @@ function formatDate(dateStr: string): string {
   });
 }
 
+function extractTOC(html: string): TOCItem[] {
+  const parser = new DOMParser();
+  const doc = parser.parseFromString(html, "text/html");
+  const headings = doc.querySelectorAll("h2, h3");
+  const toc: TOCItem[] = [];
+  
+  headings.forEach((heading, index) => {
+    const id = `heading-${index}`;
+    const text = heading.textContent || "";
+    const level = heading.tagName === "H2" ? 2 : 3;
+    if (text.trim()) {
+      toc.push({ id, text, level });
+    }
+  });
+  
+  return toc;
+}
+
+function addIdsToHeadings(html: string): string {
+  const parser = new DOMParser();
+  const doc = parser.parseFromString(html, "text/html");
+  const headings = doc.querySelectorAll("h2, h3");
+  
+  headings.forEach((heading, index) => {
+    heading.id = `heading-${index}`;
+  });
+  
+  return doc.body.innerHTML;
+}
+
 export default function BlogPost() {
   const [, params] = useRoute("/blog/:slug");
   const slug = params?.slug;
+  const [activeHeading, setActiveHeading] = useState<string>("");
 
   const { data: post, isLoading, error } = useQuery<WPPost>({
     queryKey: ["post", slug],
@@ -41,9 +79,43 @@ export default function BlogPost() {
     enabled: !!slug,
   });
 
+  const toc = post ? extractTOC(post.content.rendered) : [];
+  const contentWithIds = post ? addIdsToHeadings(post.content.rendered) : "";
+
+  useEffect(() => {
+    if (toc.length === 0) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setActiveHeading(entry.target.id);
+          }
+        });
+      },
+      { rootMargin: "-100px 0px -70% 0px" }
+    );
+
+    toc.forEach((item) => {
+      const element = document.getElementById(item.id);
+      if (element) observer.observe(element);
+    });
+
+    return () => observer.disconnect();
+  }, [toc]);
+
   const handleExportHtml = () => {
     if (slug) {
       window.open(`/api/export/post/${slug}`, "_blank");
+    }
+  };
+
+  const scrollToHeading = (id: string) => {
+    const element = document.getElementById(id);
+    if (element) {
+      const offset = 100;
+      const top = element.getBoundingClientRect().top + window.scrollY - offset;
+      window.scrollTo({ top, behavior: "smooth" });
     }
   };
 
@@ -77,69 +149,138 @@ export default function BlogPost() {
     <PageShell title={post.title.rendered} subtitle="Article">
       <section className="py-16 md:py-20 bg-white">
         <div className="container mx-auto px-4 md:px-6">
-          <div className="max-w-3xl mx-auto">
-            <div className="flex items-center justify-between mb-8">
-              <Link
-                href="/blog"
-                className="inline-flex items-center gap-2 text-primary font-bold uppercase tracking-wide hover:text-secondary transition-colors"
-                data-testid="link-back-blog"
-              >
-                <ArrowLeft className="w-4 h-4" /> Back to Blog
-              </Link>
+          <div className="flex items-center justify-between mb-8 max-w-4xl">
+            <Link
+              href="/blog"
+              className="inline-flex items-center gap-2 text-primary font-bold uppercase tracking-wide hover:text-secondary transition-colors"
+              data-testid="link-back-blog"
+            >
+              <ArrowLeft className="w-4 h-4" /> Back to Blog
+            </Link>
 
-              <Button
-                variant="outline"
-                size="sm"
-                onClick={handleExportHtml}
-                className="gap-2"
-                data-testid="button-export-html"
-              >
-                <Download className="w-4 h-4" /> Export HTML
-              </Button>
-            </div>
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={handleExportHtml}
+              className="gap-2"
+              data-testid="button-export-html"
+            >
+              <Download className="w-4 h-4" /> Export HTML
+            </Button>
+          </div>
 
-            <div className="flex flex-wrap gap-4 text-xs uppercase tracking-widest text-muted-foreground">
-              <span className="flex items-center gap-1">
-                <Calendar className="w-3 h-3" /> {formatDate(post.date)}
-              </span>
-            </div>
-
-            <h1
-              className="mt-6 text-3xl md:text-4xl font-serif text-primary leading-tight"
-              dangerouslySetInnerHTML={{ __html: post.title.rendered }}
-              data-testid="text-post-title"
-            />
-
-            {post.featured_image?.source_url && (
-              <div className="mt-8 aspect-[16/9] bg-gray-100 overflow-hidden">
-                <img
-                  src={post.featured_image.source_url}
-                  alt={post.featured_image.alt_text || post.title.rendered}
-                  className="w-full h-full object-cover"
-                  data-testid="img-post-featured"
-                />
+          <div className="grid lg:grid-cols-[1fr_300px] gap-12">
+            <div>
+              <div className="flex flex-wrap gap-4 text-xs uppercase tracking-widest text-muted-foreground">
+                <span className="flex items-center gap-1">
+                  <Calendar className="w-3 h-3" /> {formatDate(post.date)}
+                </span>
               </div>
-            )}
 
-            <div
-              className="mt-10 wp-content max-w-none"
-              dangerouslySetInnerHTML={{ __html: post.content.rendered }}
-              data-testid="content-post-body"
-            />
+              <h1
+                className="mt-6 text-3xl md:text-4xl font-serif text-primary leading-tight"
+                dangerouslySetInnerHTML={{ __html: post.title.rendered }}
+                data-testid="text-post-title"
+              />
 
-            <div className="mt-14 bg-primary text-white p-10 border-t-4 border-secondary">
-              <h3 className="text-2xl md:text-3xl font-serif mb-4">Talk to an attorney</h3>
-              <p className="text-white/80 leading-relaxed mb-8">
-                If you believe medical negligence played a role in your situation, reach out for a free consultation.
-              </p>
-              <Link
-                href="/contact"
-                className="inline-flex items-center justify-center bg-secondary hover:bg-secondary/90 text-white font-bold px-10 py-4 rounded-none uppercase tracking-widest text-sm w-full"
-                data-testid="link-blogpost-cta"
-              >
-                Contact Thomas & Wan
-              </Link>
+              {post.featured_image?.source_url && (
+                <div className="mt-8 aspect-[16/9] bg-gray-100 overflow-hidden">
+                  <img
+                    src={post.featured_image.source_url}
+                    alt={post.featured_image.alt_text || post.title.rendered}
+                    className="w-full h-full object-cover"
+                    data-testid="img-post-featured"
+                  />
+                </div>
+              )}
+
+              <div
+                className="mt-10 wp-content max-w-none"
+                dangerouslySetInnerHTML={{ __html: contentWithIds }}
+                data-testid="content-post-body"
+              />
+
+              <div className="mt-14 bg-primary text-white p-10 border-t-4 border-secondary">
+                <h3 className="text-2xl md:text-3xl font-serif mb-4">Talk to an attorney</h3>
+                <p className="text-white/80 leading-relaxed mb-8">
+                  If you believe medical negligence played a role in your situation, reach out for a free consultation.
+                </p>
+                <Link
+                  href="/contact"
+                  className="inline-flex items-center justify-center bg-secondary hover:bg-secondary/90 text-white font-bold px-10 py-4 rounded-none uppercase tracking-widest text-sm w-full"
+                  data-testid="link-blogpost-cta"
+                >
+                  Contact Thomas & Wan
+                </Link>
+              </div>
             </div>
+
+            <aside className="hidden lg:block">
+              <div className="sticky top-32 space-y-6">
+                {toc.length > 0 && (
+                  <div className="bg-gray-50 border border-gray-100 p-6">
+                    <div className="flex items-center gap-2 mb-4">
+                      <List className="w-5 h-5 text-secondary" />
+                      <h4 className="font-bold text-primary uppercase tracking-wide text-sm">Table of Contents</h4>
+                    </div>
+                    <nav className="space-y-2">
+                      {toc.map((item) => (
+                        <button
+                          key={item.id}
+                          onClick={() => scrollToHeading(item.id)}
+                          className={`block text-left w-full text-sm transition-colors ${
+                            item.level === 3 ? "pl-4" : ""
+                          } ${
+                            activeHeading === item.id
+                              ? "text-secondary font-medium"
+                              : "text-slate-600 hover:text-primary"
+                          }`}
+                        >
+                          {item.text}
+                        </button>
+                      ))}
+                    </nav>
+                  </div>
+                )}
+
+                <div className="bg-primary text-white p-6">
+                  <h4 className="font-bold uppercase tracking-wide text-sm mb-3">Free Consultation</h4>
+                  <p className="text-white/80 text-sm mb-4">
+                    Have questions about your case? We're here to help.
+                  </p>
+                  <a
+                    href="tel:713-529-1177"
+                    className="flex items-center gap-2 text-secondary font-bold text-lg mb-4"
+                  >
+                    <Phone className="w-5 h-5" /> (713) 529-1177
+                  </a>
+                  <Link
+                    href="/contact"
+                    className="block text-center bg-secondary hover:bg-secondary/90 text-white font-bold py-3 px-4 text-sm uppercase tracking-wide"
+                  >
+                    Contact Us
+                  </Link>
+                </div>
+
+                <div className="border border-gray-100 p-6">
+                  <h4 className="font-bold text-primary uppercase tracking-wide text-sm mb-3">Quick Links</h4>
+                  <nav className="space-y-2">
+                    <Link href="/cases-we-handle" className="block text-sm text-slate-600 hover:text-secondary transition-colors">
+                      Cases We Handle
+                    </Link>
+                    <Link href="/about" className="block text-sm text-slate-600 hover:text-secondary transition-colors">
+                      About Our Firm
+                    </Link>
+                    <Link href="/testimonials" className="block text-sm text-slate-600 hover:text-secondary transition-colors">
+                      Client Testimonials
+                    </Link>
+                    <Link href="/faq" className="block text-sm text-slate-600 hover:text-secondary transition-colors">
+                      FAQ
+                    </Link>
+                  </nav>
+                </div>
+              </div>
+            </aside>
           </div>
         </div>
       </section>
