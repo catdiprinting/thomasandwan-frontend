@@ -80,7 +80,7 @@ export default function Navigation() {
               <img 
                 src="/images/logo.webp" 
                 alt="Thomas & Wan" 
-                className={cn("w-auto object-contain transition-all duration-300", scrolled ? "h-8" : "h-10 md:h-12")}
+                className="w-auto h-10 md:h-12 object-contain"
               />
             </span>
           </Link>
