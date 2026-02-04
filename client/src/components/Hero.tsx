@@ -5,7 +5,7 @@ import { Link } from "wouter";
 
 export default function Hero() {
   return (
-    <section className="relative min-h-[90vh] flex items-start pt-28 overflow-hidden bg-white">
+    <section className="relative min-h-[90vh] flex items-start pt-28 md:pt-32 overflow-hidden bg-white">
       <div className="container mx-auto px-4 md:px-6 grid md:grid-cols-2 gap-12 items-center">
         
         {/* Text Content */}
@@ -15,7 +15,7 @@ export default function Hero() {
           transition={{ duration: 0.8, ease: "easeOut" }}
           className="order-2 md:order-1 space-y-6 relative z-10"
         >
-          <div className="inline-block border-b-2 border-secondary pb-1 mb-4">
+          <div className="inline-block border-b-2 border-secondary pb-1 mb-4 md:mb-6">
             <span className="text-secondary font-bold tracking-widest uppercase text-xs md:text-sm">
               Medical Malpractice Attorneys
             </span>
