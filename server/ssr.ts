@@ -919,7 +919,7 @@ export function renderMedicalMalpractice(): string {
     content,
     "Medical Malpractice Lawyers in Houston",
     "Thomas & Wan medical malpractice attorneys handle surgical errors, misdiagnosis, medication errors, anesthesia negligence, and hospital malpractice cases. Free consultation.",
-    { canonicalPath: "/medical-malpractice" }
+    { canonicalPath: "/cases-we-handle/medical-malpractice" }
   );
 }
 
@@ -1044,7 +1044,7 @@ export function renderBirthInjuries(): string {
     content,
     "Birth Injury Lawyers in Houston",
     "Texas birth injury attorneys at Thomas & Wan represent families whose babies were harmed by medical negligence. We handle HIE, cerebral palsy, Erb's palsy cases. Free consultation.",
-    { canonicalPath: "/birth-injuries" }
+    { canonicalPath: "/cases-we-handle/birth-injuries" }
   );
 }
 
@@ -1125,6 +1125,6 @@ export function renderComplicationsOfChildbirth(): string {
     content,
     "Complications of Childbirth Lawyers in Houston",
     "Texas attorneys at Thomas & Wan represent mothers who suffered injuries due to medical negligence during pregnancy and childbirth. Free consultation.",
-    { canonicalPath: "/complications-of-childbirth" }
+    { canonicalPath: "/cases-we-handle/complications-of-childbirth" }
   );
 }

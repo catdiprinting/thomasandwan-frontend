@@ -341,6 +341,9 @@ export async function registerRoutes(
   // Dynamic blog post route - SSR for blog posts (bots get full SSR, users get React)
   app.get("/:slug", async (req: Request, res: Response, next: Function) => {
     try {
+      const ua = req.headers['user-agent'] || '';
+      if (!isBot(ua)) return next();
+      
       const slug = req.params.slug as string;
       
       if (slug.includes('.') || ['api', 'assets', 'src', 'node_modules'].includes(slug)) {
