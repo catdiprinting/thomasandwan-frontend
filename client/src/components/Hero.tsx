@@ -13,9 +13,9 @@ export default function Hero() {
           initial={{ opacity: 0, x: -50 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.8, ease: "easeOut" }}
-          className="order-2 md:order-1 space-y-8 relative z-10"
+          className="order-2 md:order-1 space-y-6 relative z-10"
         >
-          <div className="inline-block border-b-2 border-secondary pb-1">
+          <div className="inline-block border-b-2 border-secondary pb-1 -mb-2">
             <span className="text-secondary font-bold tracking-widest uppercase text-xs md:text-sm">
               Medical Malpractice Attorneys
             </span>
@@ -33,11 +33,11 @@ export default function Hero() {
           </p>
           
           <div className="flex flex-col sm:flex-row gap-4 pt-4">
-            <Button size="lg" className="bg-secondary hover:bg-secondary/90 text-white rounded-none h-14 px-8 text-base tracking-wide border-0">
+            <Button size="lg" className="w-full sm:w-auto bg-secondary hover:bg-secondary/90 text-white rounded-none h-14 px-8 text-base tracking-wide border-0">
               Schedule Free Consultation
             </Button>
-            <Link href="/cases-we-handle">
-              <Button variant="outline" size="lg" className="border-2 border-primary text-primary hover:bg-primary hover:text-white rounded-none h-14 px-8 text-base tracking-wide group">
+            <Link href="/cases-we-handle" className="w-full sm:w-auto">
+              <Button variant="outline" size="lg" className="w-full border-2 border-primary text-primary hover:bg-primary hover:text-white rounded-none h-14 px-8 text-base tracking-wide group">
                 Learn More <ArrowRight className="ml-2 w-4 h-4 transition-transform group-hover:translate-x-1" />
               </Button>
             </Link>
