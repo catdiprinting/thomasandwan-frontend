@@ -122,10 +122,7 @@ export default function BlogPost() {
             )}
 
             <div
-              className="mt-10 prose prose-lg prose-slate max-w-none
-                prose-headings:font-serif prose-headings:text-primary
-                prose-a:text-secondary prose-a:no-underline hover:prose-a:underline
-                prose-img:rounded-lg"
+              className="mt-10 wp-content max-w-none"
               dangerouslySetInnerHTML={{ __html: post.content.rendered }}
               data-testid="content-post-body"
             />

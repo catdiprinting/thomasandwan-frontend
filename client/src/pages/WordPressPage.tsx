@@ -139,7 +139,7 @@ export default function WordPressPage({ slugOverride, category = "Cases We Handl
         <section className="py-20 bg-white">
           <div className="container mx-auto px-4 md:px-6">
             <div 
-              className="max-w-4xl mx-auto prose prose-lg prose-slate prose-headings:font-serif prose-headings:text-primary prose-a:text-secondary prose-strong:text-primary prose-ul:list-disc prose-li:marker:text-secondary"
+              className="max-w-4xl mx-auto wp-content"
               dangerouslySetInnerHTML={{ __html: page.content.rendered }}
             />
           </div>
