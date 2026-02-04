@@ -40,7 +40,17 @@ export default function Navigation() {
   return (
     <div className={cn("fixed top-0 w-full z-50 transition-all duration-300", scrolled ? "shadow-md" : "")}>
       
-      {/* Top Utility Bar */}
+      {/* Mobile Utility Bar */}
+      <div className="bg-primary text-white py-2 text-sm border-b border-white/10 md:hidden">
+        <div className="container mx-auto px-4 flex justify-center">
+          <a href="tel:713-529-1177" className="flex items-center gap-2 font-bold text-base">
+            <Phone className="w-5 h-5 text-secondary" />
+            <span>(713) 529-1177</span>
+          </a>
+        </div>
+      </div>
+
+      {/* Desktop Utility Bar */}
       <div className="bg-primary text-white py-2 text-sm border-b border-white/10 hidden md:block">
         <div className="container mx-auto px-4 md:px-6 flex justify-between items-center">
           <div className="flex items-center">
@@ -173,19 +183,13 @@ export default function Navigation() {
             </Button>
           </div>
 
-          {/* Mobile Phone & Menu Toggle */}
-          <div className="lg:hidden flex items-center gap-4">
-            <a href="tel:713-529-1177" className="flex items-center gap-2 text-primary font-bold text-base">
-              <Phone className="w-5 h-5 text-secondary" />
-              <span>(713) 529-1177</span>
-            </a>
-            <button
-              className="text-primary"
-              onClick={() => setIsOpen(!isOpen)}
-            >
-              {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-            </button>
-          </div>
+          {/* Mobile Menu Toggle */}
+          <button
+            className="lg:hidden text-primary"
+            onClick={() => setIsOpen(!isOpen)}
+          >
+            {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+          </button>
         </div>
 
         {/* Mobile Nav */}
