@@ -15,7 +15,7 @@ export default function Hero() {
           transition={{ duration: 0.8, ease: "easeOut" }}
           className="order-2 md:order-1 space-y-6 relative z-10"
         >
-          <div className="inline-block border-b-2 border-secondary pb-1 -mb-2">
+          <div className="inline-block border-b-2 border-secondary pb-1 mb-4">
             <span className="text-secondary font-bold tracking-widest uppercase text-xs md:text-sm">
               Medical Malpractice Attorneys
             </span>
