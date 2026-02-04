@@ -1,4 +1,4 @@
-import { fetchPosts, fetchPostBySlug, fetchMedia, fetchPostsWithMedia, type WPPost } from "./wordpress";
+import { fetchPosts, fetchPostBySlug, fetchMedia, fetchPostsWithMedia, fetchAuthor, fetchCategoriesByIds, type WPPost, type WPAuthor, type WPCategory } from "./wordpress";
 
 function escapeHtml(text: string): string {
   return text
@@ -87,10 +87,24 @@ const BASE_STYLES = `
   }
 `;
 
-function wrapInLayout(content: string, title: string, description: string, ogImage?: string): string {
+function wrapInLayout(content: string, title: string, description: string, options?: { ogImage?: string; canonicalPath?: string; ogType?: string; author?: string; publishedTime?: string; modifiedTime?: string; tags?: string[] }): string {
   const safeTitle = escapeHtml(title);
   const safeDesc = escapeHtml(description);
-  const image = ogImage || "/images/partners-hero.jpg";
+  const image = options?.ogImage || "/images/partners-hero.jpg";
+  const ogType = options?.ogType || "website";
+  const canonicalUrl = options?.canonicalPath ? `https://thomasandwan.com${options.canonicalPath}` : "";
+  
+  let articleMeta = "";
+  if (ogType === "article") {
+    if (options?.author) articleMeta += `\n  <meta property="article:author" content="${escapeHtml(options.author)}">`;
+    if (options?.publishedTime) articleMeta += `\n  <meta property="article:published_time" content="${options.publishedTime}">`;
+    if (options?.modifiedTime) articleMeta += `\n  <meta property="article:modified_time" content="${options.modifiedTime}">`;
+    if (options?.tags) {
+      options.tags.forEach(tag => {
+        articleMeta += `\n  <meta property="article:tag" content="${escapeHtml(tag)}">`;
+      });
+    }
+  }
   
   return `<!DOCTYPE html>
 <html lang="en">
@@ -99,10 +113,12 @@ function wrapInLayout(content: string, title: string, description: string, ogIma
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>${safeTitle} | Thomas & Wan</title>
   <meta name="description" content="${safeDesc}">
+  ${canonicalUrl ? `<link rel="canonical" href="${canonicalUrl}">` : ""}
   <meta property="og:title" content="${safeTitle}">
   <meta property="og:description" content="${safeDesc}">
-  <meta property="og:type" content="website">
+  <meta property="og:type" content="${ogType}">${articleMeta}
   <meta property="og:image" content="${image}">
+  <meta property="og:site_name" content="Thomas & Wan LLP">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="${safeTitle}">
   <meta name="twitter:description" content="${safeDesc}">
@@ -137,23 +153,34 @@ export async function renderBlogPost(slug: string): Promise<string | null> {
   const post = await fetchPostBySlug(slug);
   if (!post) return null;
 
+  const [media, author, categories] = await Promise.all([
+    post.featured_media ? fetchMedia(post.featured_media) : Promise.resolve(null),
+    post.author ? fetchAuthor(post.author) : Promise.resolve(null),
+    post.categories?.length ? fetchCategoriesByIds(post.categories) : Promise.resolve([]),
+  ]);
+
   let featuredImageHtml = "";
   let ogImage: string | undefined;
-  if (post.featured_media) {
-    const media = await fetchMedia(post.featured_media);
-    if (media) {
-      featuredImageHtml = `<img src="${media.source_url}" alt="${escapeHtml(media.alt_text || post.title.rendered)}" class="featured-image">`;
-      ogImage = media.source_url;
-    }
+  if (media) {
+    featuredImageHtml = `<img src="${media.source_url}" alt="${escapeHtml(media.alt_text || post.title.rendered)}" class="featured-image">`;
+    ogImage = media.source_url;
   }
 
+  const authorName = author?.name || "";
+  const categoryNames = categories.map((c: WPCategory) => c.name);
   const excerpt = stripHtml(post.excerpt.rendered).slice(0, 160);
   const date = formatDate(post.date);
+
+  const authorHtml = authorName ? `<span style="margin-left: 16px;">By ${escapeHtml(authorName)}</span>` : "";
+  const categoriesHtml = categoryNames.length > 0 
+    ? `<div style="margin-top: 12px;">${categoryNames.map((name: string) => `<span style="background: rgba(245,158,11,0.1); color: #F59E0B; padding: 4px 12px; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em; margin-right: 8px;">${escapeHtml(name)}</span>`).join("")}</div>`
+    : "";
 
   const content = `
     <article class="container-narrow" style="padding-top: 100px; padding-bottom: 60px;">
       <a href="/blog" class="back-link">← Back to Blog</a>
-      <div class="meta">${date}</div>
+      <div class="meta">${date}${authorHtml}</div>
+      ${categoriesHtml}
       <h1 class="post-title">${post.title.rendered}</h1>
       ${featuredImageHtml}
       <div class="content">
@@ -167,7 +194,14 @@ export async function renderBlogPost(slug: string): Promise<string | null> {
     </article>
   `;
 
-  return wrapInLayout(content, stripHtml(post.title.rendered), excerpt, ogImage);
+  return wrapInLayout(content, stripHtml(post.title.rendered), excerpt, {
+    ogImage,
+    canonicalPath: `/blog/${slug}`,
+    ogType: "article",
+    author: authorName,
+    publishedTime: post.date,
+    tags: categoryNames,
+  });
 }
 
 export async function renderBlogIndex(): Promise<string> {
@@ -216,7 +250,8 @@ export async function renderBlogIndex(): Promise<string> {
   return wrapInLayout(
     content, 
     "Blog - Medical Malpractice Articles", 
-    "Read the latest articles from Thomas & Wan about medical malpractice, birth injuries, and your legal rights."
+    "Read the latest articles from Thomas & Wan about medical malpractice, birth injuries, and your legal rights.",
+    { canonicalPath: "/blog" }
   );
 }
 
@@ -397,7 +432,8 @@ export function renderHomepage(): string {
   return wrapInLayout(
     content,
     "Medical Malpractice Attorneys | Women-Owned Law Firm",
-    "With over 60+ years of combined experience in medical malpractice, Linda Thomas and Michelle Wan fight for the answers and compensation you deserve."
+    "With over 60+ years of combined experience in medical malpractice, Linda Thomas and Michelle Wan fight for the answers and compensation you deserve.",
+    { canonicalPath: "/" }
   );
 }
 
@@ -534,7 +570,8 @@ export function renderAbout(): string {
   return wrapInLayout(
     content,
     "About Our Firm - Medical Malpractice Attorneys",
-    "Linda Thomas and Michelle Wan are compassionate Texas medical malpractice lawyers with over 55 years of combined experience fighting for families."
+    "Linda Thomas and Michelle Wan are compassionate Texas medical malpractice lawyers with over 55 years of combined experience fighting for families.",
+    { canonicalPath: "/about" }
   );
 }
 
@@ -606,7 +643,8 @@ export function renderCases(): string {
   return wrapInLayout(
     content,
     "Cases We Handle - Medical Malpractice",
-    "Thomas & Wan handles brain injuries, birth injuries, surgical errors, medication errors, misdiagnosis, and other complex medical malpractice cases."
+    "Thomas & Wan handles brain injuries, birth injuries, surgical errors, medication errors, misdiagnosis, and other complex medical malpractice cases.",
+    { canonicalPath: "/cases-we-handle" }
   );
 }
 
@@ -695,7 +733,8 @@ export function renderContact(): string {
   return wrapInLayout(
     content,
     "Contact Us - Free Consultation",
-    "Contact Thomas & Wan for a free medical malpractice consultation. Call (713) 529-1177 or email info@thomasandwan.com. No fee unless we win."
+    "Contact Thomas & Wan for a free medical malpractice consultation. Call (713) 529-1177 or email info@thomasandwan.com. No fee unless we win.",
+    { canonicalPath: "/contact" }
   );
 }
 
@@ -760,7 +799,8 @@ export function renderFAQ(): string {
   return wrapInLayout(
     content,
     "Frequently Asked Questions",
-    "Get answers to common questions about medical malpractice cases, hiring a lawyer, discovery, depositions, mediation, and trial. Free consultation available."
+    "Get answers to common questions about medical malpractice cases, hiring a lawyer, discovery, depositions, mediation, and trial. Free consultation available.",
+    { canonicalPath: "/faq" }
   );
 }
 
@@ -816,7 +856,8 @@ export function renderTestimonials(): string {
   return wrapInLayout(
     content,
     "Client Testimonials",
-    "Read testimonials from Thomas & Wan clients. Real stories of families we've helped with medical malpractice, birth injuries, and hospital negligence cases."
+    "Read testimonials from Thomas & Wan clients. Real stories of families we've helped with medical malpractice, birth injuries, and hospital negligence cases.",
+    { canonicalPath: "/testimonials" }
   );
 }
 
@@ -877,7 +918,8 @@ export function renderMedicalMalpractice(): string {
   return wrapInLayout(
     content,
     "Medical Malpractice Lawyers in Houston",
-    "Thomas & Wan medical malpractice attorneys handle surgical errors, misdiagnosis, medication errors, anesthesia negligence, and hospital malpractice cases. Free consultation."
+    "Thomas & Wan medical malpractice attorneys handle surgical errors, misdiagnosis, medication errors, anesthesia negligence, and hospital malpractice cases. Free consultation.",
+    { canonicalPath: "/medical-malpractice" }
   );
 }
 
@@ -1001,7 +1043,8 @@ export function renderBirthInjuries(): string {
   return wrapInLayout(
     content,
     "Birth Injury Lawyers in Houston",
-    "Texas birth injury attorneys at Thomas & Wan represent families whose babies were harmed by medical negligence. We handle HIE, cerebral palsy, Erb's palsy cases. Free consultation."
+    "Texas birth injury attorneys at Thomas & Wan represent families whose babies were harmed by medical negligence. We handle HIE, cerebral palsy, Erb's palsy cases. Free consultation.",
+    { canonicalPath: "/birth-injuries" }
   );
 }
 
@@ -1081,6 +1124,7 @@ export function renderComplicationsOfChildbirth(): string {
   return wrapInLayout(
     content,
     "Complications of Childbirth Lawyers in Houston",
-    "Texas attorneys at Thomas & Wan represent mothers who suffered injuries due to medical negligence during pregnancy and childbirth. Free consultation."
+    "Texas attorneys at Thomas & Wan represent mothers who suffered injuries due to medical negligence during pregnancy and childbirth. Free consultation.",
+    { canonicalPath: "/complications-of-childbirth" }
   );
 }
