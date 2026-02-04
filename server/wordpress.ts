@@ -1,4 +1,4 @@
-const WP_API_BASE = process.env.WP_API_BASE || "https://thomasandwan.com/wp-json/wp/v2";
+const WP_API_BASE = process.env.WP_API_BASE || "https://wp.thomasandwan.com/wp-json/wp/v2";
 
 export interface WPPost {
   id: number;
