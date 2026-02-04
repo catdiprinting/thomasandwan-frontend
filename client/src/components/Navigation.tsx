@@ -174,10 +174,10 @@ export default function Navigation() {
           </div>
 
           {/* Mobile Phone & Menu Toggle */}
-          <div className="lg:hidden flex items-center gap-3">
-            <a href="tel:713-529-1177" className="flex items-center gap-1.5 text-primary font-medium text-sm">
-              <Phone className="w-4 h-4 text-secondary" />
-              <span className="hidden sm:inline">(713) 529-1177</span>
+          <div className="lg:hidden flex items-center gap-4">
+            <a href="tel:713-529-1177" className="flex items-center gap-2 text-primary font-bold text-base">
+              <Phone className="w-5 h-5 text-secondary" />
+              <span>(713) 529-1177</span>
             </a>
             <button
               className="text-primary"
