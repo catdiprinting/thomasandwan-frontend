@@ -61,6 +61,13 @@ export interface WPCategory {
   count: number;
 }
 
+export interface WPAuthor {
+  id: number;
+  name: string;
+  slug: string;
+  avatar_urls?: Record<string, string>;
+}
+
 export async function fetchPosts(params?: {
   per_page?: number;
   page?: number;
@@ -152,6 +159,26 @@ export async function fetchMedia(id: number): Promise<WPMedia | null> {
 
 export async function fetchCategories(): Promise<WPCategory[]> {
   const url = `${WP_API_BASE}/categories?per_page=100`;
+  const response = await fetch(url);
+  if (!response.ok) {
+    throw new Error(`Failed to fetch categories: ${response.status}`);
+  }
+  return response.json();
+}
+
+export async function fetchAuthor(id: number): Promise<WPAuthor | null> {
+  const url = `${WP_API_BASE}/users/${id}`;
+  const response = await fetch(url);
+  if (!response.ok) {
+    if (response.status === 404) return null;
+    throw new Error(`Failed to fetch author: ${response.status}`);
+  }
+  return response.json();
+}
+
+export async function fetchCategoriesByIds(ids: number[]): Promise<WPCategory[]> {
+  if (ids.length === 0) return [];
+  const url = `${WP_API_BASE}/categories?include=${ids.join(",")}`;
   const response = await fetch(url);
   if (!response.ok) {
     throw new Error(`Failed to fetch categories: ${response.status}`);

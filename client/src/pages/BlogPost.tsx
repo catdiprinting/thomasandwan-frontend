@@ -1,10 +1,21 @@
 import { useQuery } from "@tanstack/react-query";
 import { useRoute } from "wouter";
-import { ArrowLeft, Calendar, Download, Loader2, Phone, List } from "lucide-react";
+import { ArrowLeft, Calendar, Loader2, Phone, List, User, Tag } from "lucide-react";
 import { Link } from "wouter";
 import PageShell from "@/components/PageShell";
-import { Button } from "@/components/ui/button";
 import { useEffect, useState } from "react";
+
+interface WPCategory {
+  id: number;
+  name: string;
+  slug: string;
+}
+
+interface WPAuthor {
+  id: number;
+  name: string;
+  slug: string;
+}
 
 interface WPPost {
   id: number;
@@ -18,6 +29,8 @@ interface WPPost {
     source_url: string;
     alt_text: string;
   };
+  author_info?: WPAuthor;
+  post_categories?: WPCategory[];
 }
 
 interface TOCItem {
@@ -104,12 +117,6 @@ export default function BlogPost() {
     return () => observer.disconnect();
   }, [toc]);
 
-  const handleExportHtml = () => {
-    if (slug) {
-      window.open(`/api/export/post/${slug}`, "_blank");
-    }
-  };
-
   const scrollToHeading = (id: string) => {
     const element = document.getElementById(id);
     if (element) {
@@ -149,7 +156,7 @@ export default function BlogPost() {
     <PageShell title={post.title.rendered} subtitle="Article">
       <section className="py-16 md:py-20 bg-white">
         <div className="container mx-auto px-4 md:px-6">
-          <div className="flex items-center justify-between mb-8 max-w-4xl">
+          <div className="mb-8 max-w-4xl">
             <Link
               href="/blog"
               className="inline-flex items-center gap-2 text-primary font-bold uppercase tracking-wide hover:text-secondary transition-colors"
@@ -157,16 +164,6 @@ export default function BlogPost() {
             >
               <ArrowLeft className="w-4 h-4" /> Back to Blog
             </Link>
-
-            <Button
-              variant="outline"
-              size="sm"
-              onClick={handleExportHtml}
-              className="gap-2"
-              data-testid="button-export-html"
-            >
-              <Download className="w-4 h-4" /> Export HTML
-            </Button>
           </div>
 
           <div className="grid lg:grid-cols-[1fr_300px] gap-12">
@@ -175,7 +172,25 @@ export default function BlogPost() {
                 <span className="flex items-center gap-1">
                   <Calendar className="w-3 h-3" /> {formatDate(post.date)}
                 </span>
+                {post.author_info && (
+                  <span className="flex items-center gap-1">
+                    <User className="w-3 h-3" /> {post.author_info.name}
+                  </span>
+                )}
               </div>
+              
+              {post.post_categories && post.post_categories.length > 0 && (
+                <div className="flex flex-wrap gap-2 mt-3">
+                  {post.post_categories.map((cat) => (
+                    <span
+                      key={cat.id}
+                      className="inline-flex items-center gap-1 bg-secondary/10 text-secondary px-3 py-1 text-xs font-medium uppercase tracking-wide"
+                    >
+                      <Tag className="w-3 h-3" /> {cat.name}
+                    </span>
+                  ))}
+                </div>
+              )}
 
               <h1
                 className="mt-6 text-3xl md:text-4xl font-serif text-primary leading-tight"

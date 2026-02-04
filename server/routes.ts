@@ -9,6 +9,8 @@ import {
   fetchCategories,
   fetchPostsWithMedia,
   fetchMedia,
+  fetchAuthor,
+  fetchCategoriesByIds,
   type WPPost,
   type WPPage,
 } from "./wordpress";
@@ -70,12 +72,13 @@ export async function registerRoutes(
         return;
       }
 
-      let featured_image = undefined;
-      if (post.featured_media) {
-        featured_image = await fetchMedia(post.featured_media);
-      }
+      const [featured_image, author, post_categories] = await Promise.all([
+        post.featured_media ? fetchMedia(post.featured_media) : Promise.resolve(undefined),
+        post.author ? fetchAuthor(post.author) : Promise.resolve(null),
+        post.categories?.length ? fetchCategoriesByIds(post.categories) : Promise.resolve([]),
+      ]);
 
-      res.json({ ...post, featured_image });
+      res.json({ ...post, featured_image, author_info: author, post_categories });
     } catch (error) {
       console.error("Error fetching post:", error);
       res.status(500).json({ error: "Failed to fetch post" });
