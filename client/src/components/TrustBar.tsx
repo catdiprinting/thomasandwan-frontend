@@ -4,7 +4,7 @@ export default function TrustBar() {
   return (
     <section className="border-b border-gray-100 bg-white">
       <div className="container mx-auto px-4 md:px-6">
-        <div className="flex flex-col md:flex-row items-center justify-between py-8 gap-8">
+        <div className="flex flex-col md:flex-row items-center justify-between py-4 md:py-8 gap-6 md:gap-8">
           
           {/* Trust Badges Image */}
           <div className="flex-1 w-full flex justify-center md:justify-start">

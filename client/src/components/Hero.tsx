@@ -43,7 +43,7 @@ export default function Hero() {
             </Link>
           </div>
 
-          <div className="pt-8 flex items-center gap-6 text-muted-foreground">
+          <div className="pt-4 md:pt-8 flex items-center gap-6 text-muted-foreground">
              <div className="flex items-center gap-2">
                <span className="w-3 h-3 rounded-full bg-secondary"></span>
                <span className="text-lg font-medium text-primary">Available 24/7</span>
