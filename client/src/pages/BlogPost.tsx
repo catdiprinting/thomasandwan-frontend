@@ -230,7 +230,7 @@ export default function BlogPost() {
               </div>
             </div>
 
-            <aside className="hidden lg:block">
+            <aside className="hidden lg:block mt-[120px]">
               <div className="sticky top-32 space-y-6">
                 {toc.length > 0 && (
                   <div className="bg-gray-50 border border-gray-100 p-6">
