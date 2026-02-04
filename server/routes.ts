@@ -119,6 +119,70 @@ export async function registerRoutes(
     }
   });
 
+  // Contact form submission - proxies to Contact Form 7 on main site
+  app.post("/api/contact", async (req: Request, res: Response) => {
+    try {
+      const { name, email, phone, address, message } = req.body;
+
+      // Validate required fields
+      if (!name || !email || !message) {
+        res.status(400).json({ 
+          success: false, 
+          message: "Please fill in all required fields (name, email, message)." 
+        });
+        return;
+      }
+
+      // Create FormData for CF7 submission
+      const formData = new FormData();
+      formData.append("your-name", name);
+      formData.append("your-email", email);
+      formData.append("phone-no", phone || "");
+      formData.append("Address", address || "");
+      formData.append("your-message", message);
+
+      // Submit to Contact Form 7 on main site (form ID: 163)
+      const cf7Response = await fetch(
+        "https://www.thomasandwan.com/wp-json/contact-form-7/v1/contact-forms/163/feedback",
+        {
+          method: "POST",
+          body: formData,
+        }
+      );
+
+      const cf7Result = await cf7Response.json();
+
+      if (cf7Result.status === "mail_sent") {
+        res.json({ 
+          success: true, 
+          message: "Your message has been sent successfully." 
+        });
+      } else if (cf7Result.status === "validation_failed") {
+        res.status(400).json({ 
+          success: false, 
+          message: cf7Result.message || "Please check your form and try again." 
+        });
+      } else if (cf7Result.status === "spam") {
+        res.status(400).json({ 
+          success: false, 
+          message: "Your message was flagged as spam. Please try calling us instead." 
+        });
+      } else {
+        console.error("CF7 unexpected response:", cf7Result);
+        res.status(500).json({ 
+          success: false, 
+          message: "Unable to send message. Please try calling us at (713) 529-1177." 
+        });
+      }
+    } catch (error) {
+      console.error("Error submitting contact form:", error);
+      res.status(500).json({ 
+        success: false, 
+        message: "Unable to send message. Please try calling us at (713) 529-1177." 
+      });
+    }
+  });
+
   app.get("/api/export/post/:slug", async (req: Request, res: Response) => {
     try {
       const slug = req.params.slug as string;
