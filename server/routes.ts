@@ -33,6 +33,7 @@ import {
   renderAuthorPage,
   renderCategoryPage
 } from "./ssr";
+import { exportStaticSite } from "./static-export";
 
 // Detect search engine crawlers for SSR
 function isBot(userAgent: string): boolean {
@@ -310,6 +311,63 @@ export async function registerRoutes(
     } catch (error) {
       console.error("Error exporting all posts:", error);
       res.status(500).json({ error: "Failed to export posts" });
+    }
+  });
+
+  app.post("/api/export/static", async (req: Request, res: Response) => {
+    try {
+      console.log("Starting static site export...");
+      const outputDir = "./static-export";
+      const result = await exportStaticSite(outputDir);
+      
+      if (result.success) {
+        res.json({
+          success: true,
+          message: `Successfully exported ${result.files.length} files to ${outputDir}`,
+          files: result.files,
+          errors: result.errors
+        });
+      } else {
+        res.status(500).json({
+          success: false,
+          message: "Export completed with errors",
+          files: result.files,
+          errors: result.errors
+        });
+      }
+    } catch (error) {
+      console.error("Error during static export:", error);
+      res.status(500).json({ error: "Failed to export static site" });
+    }
+  });
+
+  app.get("/api/export/static/status", async (req: Request, res: Response) => {
+    try {
+      const outputDir = "./static-export";
+      const fs = await import("fs");
+      
+      if (!fs.existsSync(outputDir)) {
+        res.json({ exists: false, files: [] });
+        return;
+      }
+      
+      const files: string[] = [];
+      const readDir = (dir: string, prefix: string = "") => {
+        const entries = fs.readdirSync(dir, { withFileTypes: true });
+        for (const entry of entries) {
+          if (entry.isFile()) {
+            files.push(prefix + entry.name);
+          } else if (entry.isDirectory()) {
+            readDir(`${dir}/${entry.name}`, `${prefix}${entry.name}/`);
+          }
+        }
+      };
+      readDir(outputDir);
+      
+      res.json({ exists: true, files });
+    } catch (error) {
+      console.error("Error checking export status:", error);
+      res.status(500).json({ error: "Failed to check export status" });
     }
   });
 
