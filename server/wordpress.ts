@@ -204,3 +204,95 @@ export async function fetchPostsWithMedia(params?: {
   
   return postsWithMedia;
 }
+
+export async function fetchAuthorBySlug(slug: string): Promise<WPAuthor | null> {
+  const url = `${WP_API_BASE}/users?slug=${encodeURIComponent(slug)}`;
+  const response = await fetch(url);
+  if (!response.ok) {
+    throw new Error(`Failed to fetch author: ${response.status}`);
+  }
+  const authors: WPAuthor[] = await response.json();
+  return authors[0] || null;
+}
+
+export async function fetchCategoryBySlug(slug: string): Promise<WPCategory | null> {
+  const url = `${WP_API_BASE}/categories?slug=${encodeURIComponent(slug)}`;
+  const response = await fetch(url);
+  if (!response.ok) {
+    throw new Error(`Failed to fetch category: ${response.status}`);
+  }
+  const categories: WPCategory[] = await response.json();
+  return categories[0] || null;
+}
+
+export async function fetchPostsByAuthor(authorId: number, params?: {
+  per_page?: number;
+  page?: number;
+}): Promise<WPPost[]> {
+  const searchParams = new URLSearchParams();
+  searchParams.set("author", String(authorId));
+  if (params?.per_page) searchParams.set("per_page", String(params.per_page));
+  if (params?.page) searchParams.set("page", String(params.page));
+
+  const url = `${WP_API_BASE}/posts?${searchParams.toString()}`;
+  const response = await fetch(url);
+  if (!response.ok) {
+    throw new Error(`Failed to fetch posts by author: ${response.status}`);
+  }
+  return response.json();
+}
+
+export async function fetchPostsByCategory(categoryId: number, params?: {
+  per_page?: number;
+  page?: number;
+}): Promise<WPPost[]> {
+  const searchParams = new URLSearchParams();
+  searchParams.set("categories", String(categoryId));
+  if (params?.per_page) searchParams.set("per_page", String(params.per_page));
+  if (params?.page) searchParams.set("page", String(params.page));
+
+  const url = `${WP_API_BASE}/posts?${searchParams.toString()}`;
+  const response = await fetch(url);
+  if (!response.ok) {
+    throw new Error(`Failed to fetch posts by category: ${response.status}`);
+  }
+  return response.json();
+}
+
+export async function fetchPostsByAuthorWithMedia(authorId: number, params?: {
+  per_page?: number;
+  page?: number;
+}): Promise<(WPPost & { featured_image?: WPMedia })[]> {
+  const posts = await fetchPostsByAuthor(authorId, params);
+  
+  const postsWithMedia = await Promise.all(
+    posts.map(async (post) => {
+      if (post.featured_media) {
+        const media = await fetchMedia(post.featured_media);
+        return { ...post, featured_image: media || undefined };
+      }
+      return post;
+    })
+  );
+  
+  return postsWithMedia;
+}
+
+export async function fetchPostsByCategoryWithMedia(categoryId: number, params?: {
+  per_page?: number;
+  page?: number;
+}): Promise<(WPPost & { featured_image?: WPMedia })[]> {
+  const posts = await fetchPostsByCategory(categoryId, params);
+  
+  const postsWithMedia = await Promise.all(
+    posts.map(async (post) => {
+      if (post.featured_media) {
+        const media = await fetchMedia(post.featured_media);
+        return { ...post, featured_image: media || undefined };
+      }
+      return post;
+    })
+  );
+  
+  return postsWithMedia;
+}
