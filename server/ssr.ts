@@ -1,4 +1,4 @@
-import { fetchPosts, fetchPostBySlug, fetchMedia, fetchPostsWithMedia, fetchAuthor, fetchCategoriesByIds, type WPPost, type WPAuthor, type WPCategory } from "./wordpress";
+import { fetchPosts, fetchPostBySlug, fetchMedia, fetchPostsWithMedia, fetchAuthor, fetchAuthorBySlug, fetchCategoryBySlug, fetchCategoriesByIds, fetchPostsByAuthorWithMedia, fetchPostsByCategoryWithMedia, type WPPost, type WPAuthor, type WPCategory, type WPMedia } from "./wordpress";
 
 function escapeHtml(text: string): string {
   return text
@@ -1126,5 +1126,99 @@ export function renderComplicationsOfChildbirth(): string {
     "Complications of Childbirth Lawyers in Houston",
     "Texas attorneys at Thomas & Wan represent mothers who suffered injuries due to medical negligence during pregnancy and childbirth. Free consultation.",
     { canonicalPath: "/cases-we-handle/complications-of-childbirth" }
+  );
+}
+
+export async function renderAuthorPage(slug: string): Promise<string | null> {
+  const author = await fetchAuthorBySlug(slug);
+  if (!author) return null;
+
+  const posts = await fetchPostsByAuthorWithMedia(author.id, { per_page: 20 });
+
+  const postsHtml = posts.map((post: WPPost & { featured_image?: WPMedia }) => `
+    <a href="/blog/${post.slug}" class="post-card">
+      ${post.featured_image ? `<img src="${post.featured_image.source_url}" alt="${escapeHtml(post.featured_image.alt_text || stripHtml(post.title.rendered))}" class="post-card-image">` : `<div class="post-card-image" style="display: flex; align-items: center; justify-content: center; color: #94a3b8;">No image</div>`}
+      <div class="post-card-date">${formatDate(post.date)}</div>
+      <h3 class="post-card-title">${post.title.rendered}</h3>
+      <p class="post-card-excerpt">${stripHtml(post.excerpt.rendered).substring(0, 150)}...</p>
+    </a>
+  `).join('');
+
+  const content = `
+    <section class="hero">
+      <div class="container">
+        <a href="/blog" class="back-link" style="color: rgba(255,255,255,0.8);">&larr; Back to Blog</a>
+        <h1>Articles by ${escapeHtml(author.name)}</h1>
+        <p>${posts.length} article${posts.length !== 1 ? 's' : ''} published</p>
+      </div>
+    </section>
+
+    <section class="section section-light">
+      <div class="container">
+        <div class="posts-grid">
+          ${postsHtml}
+        </div>
+      </div>
+    </section>
+
+    <div class="cta container" style="margin-bottom: 48px;">
+      <h3>Need Legal Help?</h3>
+      <p>If you believe medical negligence played a role in your situation, reach out for a free consultation.</p>
+      <a href="/contact">Contact Us Today</a>
+    </div>
+  `;
+
+  return wrapInLayout(
+    content,
+    `Articles by ${author.name} | Thomas & Wan`,
+    `Read ${posts.length} article${posts.length !== 1 ? 's' : ''} by ${author.name} on medical malpractice and birth injuries.`,
+    { canonicalPath: `/author/${slug}` }
+  );
+}
+
+export async function renderCategoryPage(slug: string): Promise<string | null> {
+  const category = await fetchCategoryBySlug(slug);
+  if (!category) return null;
+
+  const posts = await fetchPostsByCategoryWithMedia(category.id, { per_page: 20 });
+
+  const postsHtml = posts.map((post: WPPost & { featured_image?: WPMedia }) => `
+    <a href="/blog/${post.slug}" class="post-card">
+      ${post.featured_image ? `<img src="${post.featured_image.source_url}" alt="${escapeHtml(post.featured_image.alt_text || stripHtml(post.title.rendered))}" class="post-card-image">` : `<div class="post-card-image" style="display: flex; align-items: center; justify-content: center; color: #94a3b8;">No image</div>`}
+      <div class="post-card-date">${formatDate(post.date)}</div>
+      <h3 class="post-card-title">${post.title.rendered}</h3>
+      <p class="post-card-excerpt">${stripHtml(post.excerpt.rendered).substring(0, 150)}...</p>
+    </a>
+  `).join('');
+
+  const content = `
+    <section class="hero">
+      <div class="container">
+        <a href="/blog" class="back-link" style="color: rgba(255,255,255,0.8);">&larr; Back to Blog</a>
+        <h1>${escapeHtml(category.name)}</h1>
+        <p>${category.count} article${category.count !== 1 ? 's' : ''} in this category</p>
+      </div>
+    </section>
+
+    <section class="section section-light">
+      <div class="container">
+        <div class="posts-grid">
+          ${postsHtml}
+        </div>
+      </div>
+    </section>
+
+    <div class="cta container" style="margin-bottom: 48px;">
+      <h3>Need Legal Help?</h3>
+      <p>If you believe medical negligence played a role in your situation, reach out for a free consultation.</p>
+      <a href="/contact">Contact Us Today</a>
+    </div>
+  `;
+
+  return wrapInLayout(
+    content,
+    `${category.name} Articles | Thomas & Wan`,
+    `Browse ${category.count} article${category.count !== 1 ? 's' : ''} about ${category.name}. Learn about your legal rights from Thomas & Wan.`,
+    { canonicalPath: `/category/${slug}` }
   );
 }

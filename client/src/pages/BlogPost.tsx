@@ -173,21 +173,27 @@ export default function BlogPost() {
                   <Calendar className="w-3 h-3" /> {formatDate(post.date)}
                 </span>
                 {post.author_info && (
-                  <span className="flex items-center gap-1">
+                  <Link 
+                    href={`/author/${post.author_info.slug}`}
+                    className="flex items-center gap-1 hover:text-secondary transition-colors"
+                    data-testid="link-post-author"
+                  >
                     <User className="w-3 h-3" /> {post.author_info.name}
-                  </span>
+                  </Link>
                 )}
               </div>
               
               {post.post_categories && post.post_categories.length > 0 && (
                 <div className="flex flex-wrap gap-2 mt-3">
                   {post.post_categories.map((cat) => (
-                    <span
+                    <Link
                       key={cat.id}
-                      className="inline-flex items-center gap-1 bg-secondary/10 text-secondary px-3 py-1 text-xs font-medium uppercase tracking-wide"
+                      href={`/category/${cat.slug}`}
+                      className="inline-flex items-center gap-1 bg-secondary/10 text-secondary px-3 py-1 text-xs font-medium uppercase tracking-wide hover:bg-secondary hover:text-white transition-colors"
+                      data-testid={`link-post-category-${cat.slug}`}
                     >
                       <Tag className="w-3 h-3" /> {cat.name}
-                    </span>
+                    </Link>
                   ))}
                 </div>
               )}

@@ -13,6 +13,8 @@ import Testimonials from "@/pages/Testimonials";
 import Contact from "@/pages/Contact";
 import BlogIndex from "@/pages/BlogIndex";
 import BlogPost from "@/pages/BlogPost";
+import AuthorPage from "@/pages/AuthorPage";
+import CategoryPage from "@/pages/CategoryPage";
 import NotFound from "@/pages/not-found";
 
 function Router() {
@@ -29,6 +31,8 @@ function Router() {
       <Route path="/contact" component={Contact} />
       <Route path="/blog" component={BlogIndex} />
       <Route path="/blog/:slug" component={BlogPost} />
+      <Route path="/author/:slug" component={AuthorPage} />
+      <Route path="/category/:slug" component={CategoryPage} />
       <Route component={NotFound} />
     </Switch>
   );

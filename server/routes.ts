@@ -10,7 +10,11 @@ import {
   fetchPostsWithMedia,
   fetchMedia,
   fetchAuthor,
+  fetchAuthorBySlug,
+  fetchCategoryBySlug,
   fetchCategoriesByIds,
+  fetchPostsByAuthorWithMedia,
+  fetchPostsByCategoryWithMedia,
   type WPPost,
   type WPPage,
 } from "./wordpress";
@@ -25,7 +29,9 @@ import {
   renderMedicalMalpractice,
   renderBirthInjuries,
   renderComplicationsOfChildbirth,
-  renderBlogIndex
+  renderBlogIndex,
+  renderAuthorPage,
+  renderCategoryPage
 } from "./ssr";
 
 // Detect search engine crawlers for SSR
@@ -119,6 +125,46 @@ export async function registerRoutes(
     } catch (error) {
       console.error("Error fetching categories:", error);
       res.status(500).json({ error: "Failed to fetch categories" });
+    }
+  });
+
+  app.get("/api/authors/:slug", async (req: Request, res: Response) => {
+    try {
+      const slug = req.params.slug as string;
+      const author = await fetchAuthorBySlug(slug);
+      if (!author) {
+        res.status(404).json({ error: "Author not found" });
+        return;
+      }
+      
+      const perPage = parseInt(req.query.per_page as string) || 12;
+      const page = parseInt(req.query.page as string) || 1;
+      const posts = await fetchPostsByAuthorWithMedia(author.id, { per_page: perPage, page });
+      
+      res.json({ author, posts });
+    } catch (error) {
+      console.error("Error fetching author:", error);
+      res.status(500).json({ error: "Failed to fetch author" });
+    }
+  });
+
+  app.get("/api/categories/:slug/posts", async (req: Request, res: Response) => {
+    try {
+      const slug = req.params.slug as string;
+      const category = await fetchCategoryBySlug(slug);
+      if (!category) {
+        res.status(404).json({ error: "Category not found" });
+        return;
+      }
+      
+      const perPage = parseInt(req.query.per_page as string) || 12;
+      const page = parseInt(req.query.page as string) || 1;
+      const posts = await fetchPostsByCategoryWithMedia(category.id, { per_page: perPage, page });
+      
+      res.json({ category, posts });
+    } catch (error) {
+      console.error("Error fetching category posts:", error);
+      res.status(500).json({ error: "Failed to fetch category posts" });
     }
   });
 
@@ -336,6 +382,40 @@ export async function registerRoutes(
     if (!isBot(ua)) return next();
     res.setHeader("Content-Type", "text/html");
     res.send(renderComplicationsOfChildbirth());
+  });
+
+  app.get("/author/:slug", async (req: Request, res: Response, next: Function) => {
+    try {
+      const ua = req.headers['user-agent'] || '';
+      if (!isBot(ua)) return next();
+      
+      const slug = req.params.slug as string;
+      const html = await renderAuthorPage(slug);
+      if (!html) return next();
+      
+      res.setHeader("Content-Type", "text/html");
+      res.send(html);
+    } catch (error) {
+      console.error("Error rendering author page:", error);
+      next();
+    }
+  });
+
+  app.get("/category/:slug", async (req: Request, res: Response, next: Function) => {
+    try {
+      const ua = req.headers['user-agent'] || '';
+      if (!isBot(ua)) return next();
+      
+      const slug = req.params.slug as string;
+      const html = await renderCategoryPage(slug);
+      if (!html) return next();
+      
+      res.setHeader("Content-Type", "text/html");
+      res.send(html);
+    } catch (error) {
+      console.error("Error rendering category page:", error);
+      next();
+    }
   });
 
   // Dynamic blog post route - SSR for blog posts (bots get full SSR, users get React)
