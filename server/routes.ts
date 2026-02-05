@@ -372,72 +372,92 @@ export async function registerRoutes(
   });
 
   // SSR Routes - serve to bots only, regular users get React app
+  // Add ?ssr=true to force SSR for testing
   app.get("/", (req: Request, res: Response, next: Function) => {
     const ua = req.headers['user-agent'] || '';
-    if (!isBot(ua)) return next();
+    const forceSSR = req.query.ssr === 'true';
+    if (!forceSSR && !isBot(ua)) return next();
     res.setHeader("Content-Type", "text/html");
     res.send(renderHomepage());
   });
 
+  // Add ?ssr=true to force SSR for testing
   app.get("/about", (req: Request, res: Response, next: Function) => {
     const ua = req.headers['user-agent'] || '';
-    if (!isBot(ua)) return next();
+    const forceSSR = req.query.ssr === 'true';
+    if (!forceSSR && !isBot(ua)) return next();
     res.setHeader("Content-Type", "text/html");
     res.send(renderAbout());
   });
 
+  // Add ?ssr=true to force SSR for testing
   app.get("/contact", (req: Request, res: Response, next: Function) => {
     const ua = req.headers['user-agent'] || '';
-    if (!isBot(ua)) return next();
+    const forceSSR = req.query.ssr === 'true';
+    if (!forceSSR && !isBot(ua)) return next();
     res.setHeader("Content-Type", "text/html");
     res.send(renderContact());
   });
 
+  // Add ?ssr=true to force SSR for testing
   app.get("/faq", (req: Request, res: Response, next: Function) => {
     const ua = req.headers['user-agent'] || '';
-    if (!isBot(ua)) return next();
+    const forceSSR = req.query.ssr === 'true';
+    if (!forceSSR && !isBot(ua)) return next();
     res.setHeader("Content-Type", "text/html");
     res.send(renderFAQ());
   });
 
+  // Add ?ssr=true to force SSR for testing
   app.get("/testimonials", (req: Request, res: Response, next: Function) => {
     const ua = req.headers['user-agent'] || '';
-    if (!isBot(ua)) return next();
+    const forceSSR = req.query.ssr === 'true';
+    if (!forceSSR && !isBot(ua)) return next();
     res.setHeader("Content-Type", "text/html");
     res.send(renderTestimonials());
   });
 
+  // Add ?ssr=true to force SSR for testing
   app.get("/blog", async (req: Request, res: Response, next: Function) => {
     const ua = req.headers['user-agent'] || '';
-    if (!isBot(ua)) return next();
+    const forceSSR = req.query.ssr === 'true';
+    if (!forceSSR && !isBot(ua)) return next();
     res.setHeader("Content-Type", "text/html");
     res.send(await renderBlogIndex());
   });
 
+  // Add ?ssr=true to force SSR for testing
   app.get("/cases-we-handle", (req: Request, res: Response, next: Function) => {
     const ua = req.headers['user-agent'] || '';
-    if (!isBot(ua)) return next();
+    const forceSSR = req.query.ssr === 'true';
+    if (!forceSSR && !isBot(ua)) return next();
     res.setHeader("Content-Type", "text/html");
     res.send(renderCases());
   });
 
+  // Add ?ssr=true to force SSR for testing
   app.get("/cases-we-handle/medical-malpractice", (req: Request, res: Response, next: Function) => {
     const ua = req.headers['user-agent'] || '';
-    if (!isBot(ua)) return next();
+    const forceSSR = req.query.ssr === 'true';
+    if (!forceSSR && !isBot(ua)) return next();
     res.setHeader("Content-Type", "text/html");
     res.send(renderMedicalMalpractice());
   });
 
+  // Add ?ssr=true to force SSR for testing
   app.get("/cases-we-handle/birth-injuries", (req: Request, res: Response, next: Function) => {
     const ua = req.headers['user-agent'] || '';
-    if (!isBot(ua)) return next();
+    const forceSSR = req.query.ssr === 'true';
+    if (!forceSSR && !isBot(ua)) return next();
     res.setHeader("Content-Type", "text/html");
     res.send(renderBirthInjuries());
   });
 
+  // Add ?ssr=true to force SSR for testing
   app.get("/cases-we-handle/complications-of-childbirth", (req: Request, res: Response, next: Function) => {
     const ua = req.headers['user-agent'] || '';
-    if (!isBot(ua)) return next();
+    const forceSSR = req.query.ssr === 'true';
+    if (!forceSSR && !isBot(ua)) return next();
     res.setHeader("Content-Type", "text/html");
     res.send(renderComplicationsOfChildbirth());
   });
