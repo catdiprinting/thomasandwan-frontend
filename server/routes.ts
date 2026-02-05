@@ -442,10 +442,12 @@ export async function registerRoutes(
     res.send(renderComplicationsOfChildbirth());
   });
 
+  // Add ?ssr=true to force SSR for testing
   app.get("/author/:slug", async (req: Request, res: Response, next: Function) => {
     try {
       const ua = req.headers['user-agent'] || '';
-      if (!isBot(ua)) return next();
+      const forceSSR = req.query.ssr === 'true';
+      if (!forceSSR && !isBot(ua)) return next();
       
       const slug = req.params.slug as string;
       const html = await renderAuthorPage(slug);
@@ -459,10 +461,12 @@ export async function registerRoutes(
     }
   });
 
+  // Add ?ssr=true to force SSR for testing
   app.get("/category/:slug", async (req: Request, res: Response, next: Function) => {
     try {
       const ua = req.headers['user-agent'] || '';
-      if (!isBot(ua)) return next();
+      const forceSSR = req.query.ssr === 'true';
+      if (!forceSSR && !isBot(ua)) return next();
       
       const slug = req.params.slug as string;
       const html = await renderCategoryPage(slug);
@@ -477,10 +481,12 @@ export async function registerRoutes(
   });
 
   // Blog post SSR route - /blog/:slug path
+  // Add ?ssr=true to force SSR for testing
   app.get("/blog/:slug", async (req: Request, res: Response, next: Function) => {
     try {
       const ua = req.headers['user-agent'] || '';
-      if (!isBot(ua)) return next();
+      const forceSSR = req.query.ssr === 'true';
+      if (!forceSSR && !isBot(ua)) return next();
       
       const slug = req.params.slug as string;
       const html = await renderBlogPost(slug);
