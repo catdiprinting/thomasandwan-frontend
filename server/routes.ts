@@ -476,7 +476,25 @@ export async function registerRoutes(
     }
   });
 
-  // Dynamic blog post route - SSR for blog posts (bots get full SSR, users get React)
+  // Blog post SSR route - /blog/:slug path
+  app.get("/blog/:slug", async (req: Request, res: Response, next: Function) => {
+    try {
+      const ua = req.headers['user-agent'] || '';
+      if (!isBot(ua)) return next();
+      
+      const slug = req.params.slug as string;
+      const html = await renderBlogPost(slug);
+      if (!html) return next();
+      
+      res.setHeader("Content-Type", "text/html");
+      res.send(html);
+    } catch (error) {
+      console.error("Error rendering blog post:", error);
+      next();
+    }
+  });
+
+  // Dynamic blog post route - SSR for blog posts at root level (bots get full SSR, users get React)
   app.get("/:slug", async (req: Request, res: Response, next: Function) => {
     try {
       const ua = req.headers['user-agent'] || '';
