@@ -60,11 +60,11 @@ export default function Hero() {
           initial={{ opacity: 0, scale: 0.95 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 1, delay: 0.2 }}
-          className="hidden md:block order-1 md:order-2 relative"
+          className="order-1 md:order-2 relative"
         >
           <div className="relative z-10">
             <div className="absolute -top-6 -right-6 w-full h-full border-2 border-secondary/30 z-0 hidden md:block" />
-            <div className="aspect-[4/5] overflow-hidden shadow-2xl relative bg-white p-2 border border-gray-100">
+            <div className="aspect-[3/2] md:aspect-[4/5] overflow-hidden shadow-2xl relative bg-white p-2 border border-gray-100">
                <img 
                  src="/images/partners-hero.jpg" 
                  alt="Linda Thomas and Michelle Wan" 
