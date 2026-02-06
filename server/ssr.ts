@@ -21,6 +21,24 @@ function formatDate(dateStr: string): string {
   });
 }
 
+function processContent(html: string): string {
+  let processed = html;
+  
+  processed = processed.replace(/href="https?:\/\/wp\.thomasandwan\.com\//g, 'href="/blog/');
+  processed = processed.replace(/href="https?:\/\/thomasandwan\.com\/test\//g, 'href="/blog/');
+  
+  processed = processed.replace(/<li>\s*<\/li>/g, '');
+  
+  processed = processed.replace(
+    /(<h2[^>]*>[\s\S]*?<\/h2>)\s*(<p>[\s\S]*?<\/p>)/g,
+    (match, heading, firstPara) => {
+      return `${heading}\n<div class="key-point"><p>${stripHtml(firstPara)}</p></div>`;
+    }
+  );
+  
+  return processed;
+}
+
 const BASE_STYLES = `
   * { margin: 0; padding: 0; box-sizing: border-box; }
   body { font-family: 'Lato', system-ui, sans-serif; line-height: 1.7; color: #334155; background: #fff; }
@@ -48,12 +66,31 @@ const BASE_STYLES = `
   .content { font-size: 1.125rem; }
   .content p { margin-bottom: 1.5em; }
   .content h2, .content h3 { margin-top: 2em; margin-bottom: 1em; }
-  .content h2 { font-size: 1.75rem; }
-  .content h3 { font-size: 1.5rem; }
+  .content h2 { font-size: 1.75rem; border-bottom: 2px solid #F59E0B; padding-bottom: 12px; }
+  .content h3 { font-size: 1.5rem; padding-left: 16px; border-left: 4px solid #F59E0B; }
   .content ul, .content ol { margin-bottom: 1.5em; padding-left: 1.5em; }
   .content li { margin-bottom: 0.5em; }
-  .content a { color: #F59E0B; text-decoration: underline; }
+  .content a { color: #B45309; text-decoration: underline; }
+  .content a:hover { color: #F59E0B; }
   .content img { max-width: 100%; height: auto; margin: 1.5em 0; border-radius: 8px; }
+  .content figure { margin: 2em 0; }
+  .content figure img { margin: 0; }
+  .content figcaption { font-size: 0.875rem; color: #64748b; text-align: center; margin-top: 8px; font-style: italic; }
+  .content blockquote { border-left: 4px solid #F59E0B; padding: 16px 24px; margin: 2em 0; background: #FFFBEB; font-style: italic; color: #92400E; border-radius: 0 8px 8px 0; }
+  .content .wp-block-heading strong { color: #1F2937; }
+  .content .wp-block-list { background: #f8fafc; padding: 20px 20px 20px 40px; border-radius: 8px; border: 1px solid #e2e8f0; }
+  .content .wp-block-list li { padding: 4px 0; }
+  .content .wp-block-image { text-align: center; }
+  .info-box { background: linear-gradient(135deg, #1F2937 0%, #374151 100%); color: #fff; padding: 32px; margin: 2em 0; border-radius: 8px; }
+  .info-box h4 { font-family: 'Playfair Display', Georgia, serif; font-size: 1.25rem; color: #F59E0B; margin-bottom: 16px; }
+  .info-box p { color: rgba(255,255,255,0.85); margin-bottom: 0; }
+  .key-point { background: #FFFBEB; border: 1px solid #FDE68A; padding: 20px 24px; margin: 2em 0; border-radius: 8px; display: flex; gap: 16px; align-items: flex-start; }
+  .key-point::before { content: "⚖️"; font-size: 1.5rem; flex-shrink: 0; }
+  .key-point p { margin: 0; color: #92400E; font-weight: 500; }
+  .stat-highlight { display: flex; gap: 24px; flex-wrap: wrap; margin: 2em 0; }
+  .stat-box { flex: 1; min-width: 150px; background: #f8fafc; border: 1px solid #e2e8f0; padding: 24px; text-align: center; border-radius: 8px; }
+  .stat-box .number { font-size: 2rem; font-family: 'Playfair Display', Georgia, serif; color: #F59E0B; font-weight: 700; }
+  .stat-box .label { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.1em; color: #64748b; margin-top: 4px; }
   .cta { background: #1F2937; color: #fff; padding: 40px; margin-top: 48px; text-align: center; border-radius: 8px; }
   .cta h3 { font-size: 1.5rem; margin-bottom: 16px; color: #fff; }
   .cta p { color: rgba(255,255,255,0.8); margin-bottom: 24px; }
@@ -184,7 +221,7 @@ export async function renderBlogPost(slug: string): Promise<string | null> {
       <h1 class="post-title">${post.title.rendered}</h1>
       ${featuredImageHtml}
       <div class="content">
-        ${post.content.rendered}
+        ${processContent(post.content.rendered)}
       </div>
       <div class="cta">
         <h3>Talk to an Attorney</h3>
