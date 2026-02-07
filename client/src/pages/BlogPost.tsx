@@ -65,6 +65,21 @@ function extractTOC(html: string): TOCItem[] {
   return toc;
 }
 
+function processContent(html: string): string {
+  let processed = html;
+  processed = processed.replace(/href="https?:\/\/wp\.thomasandwan\.com\//g, 'href="/blog/');
+  processed = processed.replace(/href="https?:\/\/thomasandwan\.com\/test\//g, 'href="/blog/');
+  processed = processed.replace(/<li>\s*<\/li>/g, '');
+  processed = processed.replace(
+    /(<h2[^>]*>[\s\S]*?<\/h2>)\s*(<p>[\s\S]*?<\/p>)/g,
+    (match, heading, firstPara) => {
+      const text = firstPara.replace(/<[^>]*>/g, "").trim();
+      return `${heading}\n<div class="key-point"><p>${text}</p></div>`;
+    }
+  );
+  return processed;
+}
+
 function addIdsToHeadings(html: string): string {
   const parser = new DOMParser();
   const doc = parser.parseFromString(html, "text/html");
@@ -93,7 +108,7 @@ export default function BlogPost() {
   });
 
   const toc = post ? extractTOC(post.content.rendered) : [];
-  const contentWithIds = post ? addIdsToHeadings(post.content.rendered) : "";
+  const contentWithIds = post ? addIdsToHeadings(processContent(post.content.rendered)) : "";
 
   useEffect(() => {
     if (toc.length === 0) return;
