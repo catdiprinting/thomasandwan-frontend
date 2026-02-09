@@ -261,9 +261,11 @@ export default function Navigation() {
                  <Mail className="w-5 h-5 text-secondary" /> info@thomasandwan.com
                </a>
             </div>
-            <Button className="w-full bg-secondary hover:bg-secondary/90 text-white font-bold rounded-none mt-2">
-              Free Consultation
-            </Button>
+            <Link href="/contact-us" onClick={() => setOpen(false)}>
+              <Button className="w-full bg-secondary hover:bg-secondary/90 text-white font-bold rounded-none mt-2">
+                Free Consultation
+              </Button>
+            </Link>
           </div>
         )}
       </nav>
