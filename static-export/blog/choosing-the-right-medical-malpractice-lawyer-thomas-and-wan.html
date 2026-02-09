@@ -75,13 +75,24 @@
     .featured-image { width: 100%; height: auto; margin-bottom: 32px; }
     .article-body { font-size: 1.125rem; }
     .article-body p { margin-bottom: 1.5em; }
-    .article-body h2 { font-family: 'Playfair Display', Georgia, serif; font-size: 1.75rem; color: #1F2937; margin-top: 2em; margin-bottom: 1em; }
-    .article-body h3 { font-family: 'Playfair Display', Georgia, serif; font-size: 1.5rem; color: #1F2937; margin-top: 1.5em; margin-bottom: 0.75em; }
+    .article-body h2 { font-family: 'Playfair Display', Georgia, serif; font-size: 1.75rem; color: #1F2937; margin-top: 2em; margin-bottom: 1em; border-bottom: 2px solid #F59E0B; padding-bottom: 12px; }
+    .article-body h3 { font-family: 'Playfair Display', Georgia, serif; font-size: 1.5rem; color: #1F2937; margin-top: 1.5em; margin-bottom: 0.75em; padding-left: 16px; border-left: 4px solid #F59E0B; }
     .article-body ul, .article-body ol { margin-bottom: 1.5em; padding-left: 1.5em; }
     .article-body li { margin-bottom: 0.5em; }
-    .article-body a { color: #F59E0B; text-decoration: underline; }
+    .article-body a { color: #B45309; text-decoration: underline; }
+    .article-body a:hover { color: #F59E0B; }
     .article-body img { max-width: 100%; height: auto; margin: 1.5em 0; }
-    .article-body blockquote { border-left: 4px solid #F59E0B; padding-left: 20px; margin: 1.5em 0; font-style: italic; color: #64748b; }
+    .article-body figure { margin: 2em 0; }
+    .article-body figure img { margin: 0; }
+    .article-body figcaption { font-size: 0.875rem; color: #64748b; text-align: center; margin-top: 8px; font-style: italic; }
+    .article-body blockquote { border-left: 4px solid #F59E0B; padding: 16px 24px; margin: 2em 0; background: #FFFBEB; font-style: italic; color: #92400E; border-radius: 0 8px 8px 0; }
+    .article-body .wp-block-heading strong { color: #1F2937; }
+    .article-body .wp-block-list { background: #f8fafc; padding: 20px 20px 20px 40px; border-radius: 8px; border: 1px solid #e2e8f0; }
+    .article-body .wp-block-list li { padding: 4px 0; }
+    .article-body .wp-block-image { text-align: center; }
+    .key-point { background: #FFFBEB; border: 1px solid #FDE68A; padding: 20px 24px; margin: 2em 0; border-radius: 8px; display: flex; gap: 16px; align-items: flex-start; }
+    .key-point::before { content: "⚖️"; font-size: 1.5rem; flex-shrink: 0; }
+    .key-point p { margin: 0; color: #92400E; font-weight: 500; }
     .cta { background: #1F2937; color: #fff; padding: 48px; margin-top: 48px; text-align: center; }
     .cta h3 { font-family: 'Playfair Display', Georgia, serif; font-size: 1.75rem; margin-bottom: 16px; }
     .cta p { color: rgba(255,255,255,0.8); margin-bottom: 24px; max-width: 500px; margin-left: auto; margin-right: auto; }
@@ -100,10 +111,10 @@
     <div class="nav-inner">
       <a href="/">Thomas & Wan</a>
       <div class="nav-links">
-        <a href="/about">About</a>
+        <a href="/about-thomas-wan-llp">About</a>
         <a href="/cases-we-handle">Cases</a>
         <a href="/blog">Blog</a>
-        <a href="/contact">Contact</a>
+        <a href="/contact-us">Contact</a>
       </div>
     </div>
   </nav>
@@ -128,7 +139,7 @@
       <img src="https://wp.thomasandwan.com/wp-content/uploads/2022/06/medical-malpractice.jpg" alt="Choosing the Right Medical Malpractice Lawyer: Thomas and Wan" class="featured-image">
       <article class="article-body">
         
-<p>Every year in the United States, <a href="https://justpoint.com/knowledge-base/us-medical-malpractice-case-statistics" target="_blank" rel="noopener">85,000 medical malpractice</a> lawsuits are filed. Filing a lawsuit can help you get valuable compensation if you have experienced negligent medical care. It can also help to make health care services aware of dangerous practitioners.</p>
+<p>Every year in the United States, <a href="https://justpoint.com/knowledge-base/us-medical-malpractice-case-statistics">85,000 medical malpractice</a> lawsuits are filed. Filing a lawsuit can help you get valuable compensation if you have experienced negligent medical care. It can also help to make health care services aware of dangerous practitioners.</p>
 
 
 
@@ -136,7 +147,7 @@
 
 
 
-<p>If your case is going to be successful then you need support from an experienced medical malpractice attorney. With <a href="https://www.ibisworld.com/industry-statistics/number-of-businesses/personal-injury-lawyers-attorneys-united-states/" target="_blank" rel="noopener">more than 48,000</a> personal injury law firms working across the US, choosing the right one for you can feel overwhelming. Knowing what to look for in an attorney will help you find the right one for your claim.</p>
+<p>If your case is going to be successful then you need support from an experienced medical malpractice attorney. With <a href="https://www.ibisworld.com/industry-statistics/number-of-businesses/personal-injury-lawyers-attorneys-united-states/">more than 48,000</a> personal injury law firms working across the US, choosing the right one for you can feel overwhelming. Knowing what to look for in an attorney will help you find the right one for your claim.</p>
 
 
 
@@ -145,10 +156,7 @@
 
 
 <h2 class="wp-block-heading">What Do Medical Malpractice Cases Cover?</h2>
-
-
-
-<p>All healthcare professionals are expected to deliver a certain standard of care in their work. Failing to meet this standard is known as medical negligence. This can cause existing conditions to become worse or may result in direct injuries.</p>
+<div class="key-point"><p>All healthcare professionals are expected to deliver a certain standard of care in their work. Failing to meet this standard is known as medical negligence. This can cause existing conditions to become worse or may result in direct injuries.</p></div>
 
 
 
@@ -156,7 +164,7 @@
 
 
 
-<ul class="wp-block-list"><li>Misdiagnoses as a result of incorrect testing, missed tests, or unexplored symptoms</li><li>Surgical errors, including improper monitoring of anesthesia</li><li>Birth injuries, such as <a href="https://www.cdc.gov/ncbddd/cp/facts.html#:~:text=Cerebral%20palsy%20(CP)%20is%20a,problems%20with%20using%20the%20muscles." target="_blank" rel="noopener">cerebral palsy</a> and oxygen deprivation</li><li>Increased or undiagnosed pregnancy risk factors</li><li>Use of incorrect treatments</li><li>Use of incorrect medication or incorrect dosages (resulting in overdoses <em>or</em> ineffective treatment)</li></ul>
+<ul class="wp-block-list"><li>Misdiagnoses as a result of incorrect testing, missed tests, or unexplored symptoms</li><li>Surgical errors, including improper monitoring of anesthesia</li><li>Birth injuries, such as <a href="https://www.cdc.gov/ncbddd/cp/facts.html#:~:text=Cerebral%20palsy%20(CP)%20is%20a,problems%20with%20using%20the%20muscles.">cerebral palsy</a> and oxygen deprivation</li><li>Increased or undiagnosed pregnancy risk factors</li><li>Use of incorrect treatments</li><li>Use of incorrect medication or incorrect dosages (resulting in overdoses <em>or</em> ineffective treatment)</li></ul>
 
 
 
@@ -169,10 +177,7 @@
 
 
 <h2 class="wp-block-heading">Who Can You Make a Case Against?</h2>
-
-
-
-<p>Doctors are not the only people who you can file medical malpractice claims against.</p>
+<div class="key-point"><p>Doctors are not the only people who you can file medical malpractice claims against.</p></div>
 
 
 
@@ -189,10 +194,7 @@
 
 
 <h2 class="wp-block-heading">How Can an Attorney Help?</h2>
-
-
-
-<p>Medical negligence does not automatically result in compensation. In fact, most medical professionals will have a team of lawyers on their side to fight claims.</p>
+<div class="key-point"><p>Medical negligence does not automatically result in compensation. In fact, most medical professionals will have a team of lawyers on their side to fight claims.</p></div>
 
 
 
@@ -213,10 +215,7 @@
 
 
 <h2 class="wp-block-heading">Ask For Recommendations</h2>
-
-
-
-<p>If you know anyone who has made a medical malpractice claim in the past then it is a good idea to ask them about which lawyer they used.</p>
+<div class="key-point"><p>If you know anyone who has made a medical malpractice claim in the past then it is a good idea to ask them about which lawyer they used.</p></div>
 
 
 
@@ -229,10 +228,7 @@
 
 
 <h2 class="wp-block-heading">Look For Lawyers With Specialist Experience</h2>
-
-
-
-<p>You want help from a lawyer who has experience in putting together medical malpractice cases.</p>
+<div class="key-point"><p>You want help from a lawyer who has experience in putting together medical malpractice cases.</p></div>
 
 
 
@@ -253,10 +249,7 @@
 
 
 <h2 class="wp-block-heading">Make Sure That They Fight for Patients</h2>
-
-
-
-<p>There are two types of medical malpractice attorneys that you should know about:</p>
+<div class="key-point"><p>There are two types of medical malpractice attorneys that you should know about:</p></div>
 
 
 
@@ -264,7 +257,7 @@
 
 
 
-<p>When you first start looking for a lawyer make sure you avoid anyone who works defending healthcare workers. While they are probably still great at their jobs, most defending lawyers <a href="https://wp.thomasandwan.com/when-a-lawyer-will-not-take-your-case-do-not-give-up/">won&#8217;t take on claimants&#8217; cases</a>.</p>
+<p>When you first start looking for a lawyer make sure you avoid anyone who works defending healthcare workers. While they are probably still great at their jobs, most defending lawyers <a href="/blog/when-a-lawyer-will-not-take-your-case-do-not-give-up/">won&#8217;t take on claimants&#8217; cases</a>.</p>
 
 
 
@@ -277,10 +270,7 @@
 
 
 <h2 class="wp-block-heading">Check Them Out Online</h2>
-
-
-
-<p>If you are just starting your search for a lawyer then it&#8217;s a good idea to go online. That way you can find lawyers near you quickly and compare them easily. You may even be able to book a consultation via their website!</p>
+<div class="key-point"><p>If you are just starting your search for a lawyer then it&#8217;s a good idea to go online. That way you can find lawyers near you quickly and compare them easily. You may even be able to book a consultation via their website!</p></div>
 
 
 
@@ -297,10 +287,7 @@
 
 
 <h2 class="wp-block-heading">Read Testimonials From Previous Clients</h2>
-
-
-
-<p>Testimonials are an invaluable resource when it comes to finding a great lawyer. So make sure that you check these out.</p>
+<div class="key-point"><p>Testimonials are an invaluable resource when it comes to finding a great lawyer. So make sure that you check these out.</p></div>
 
 
 
@@ -312,15 +299,12 @@
 
 
 
-<p>It is a good idea to <a href="https://wp.thomasandwan.com/testimonials/">look out for testimonials</a> from the last two years or so. Recent testimonials will tell you about their practice now, as this can change over the years.</p>
+<p>It is a good idea to <a href="/blog/testimonials/">look out for testimonials</a> from the last two years or so. Recent testimonials will tell you about their practice now, as this can change over the years.</p>
 
 
 
 <h2 class="wp-block-heading">Look at Their Success Rate for Settlements <em>and</em> Trials</h2>
-
-
-
-<p>Of course, if you hire a lawyer to help with your malpractice case then you want to be confident that they are going to win the case for you. So it is important to look at their success rates.</p>
+<div class="key-point"><p>Of course, if you hire a lawyer to help with your malpractice case then you want to be confident that they are going to win the case for you. So it is important to look at their success rates.</p></div>
 
 
 
@@ -336,7 +320,7 @@
 
 
 
-<p>In an ideal world, your case will be settled outside of court. However, <a href="https://www.physicianleaders.org/news/the-verdict-surviving-medical-malpractice-trial" target="_blank" rel="noopener">7% of medical malpractice lawsuits</a> do end up in front of a judge. In the majority of these cases, the judge will rule in favor of the defendant.</p>
+<p>In an ideal world, your case will be settled outside of court. However, <a href="https://www.physicianleaders.org/news/the-verdict-surviving-medical-malpractice-trial">7% of medical malpractice lawsuits</a> do end up in front of a judge. In the majority of these cases, the judge will rule in favor of the defendant.</p>
 
 
 
@@ -345,10 +329,7 @@
 
 
 <h2 class="wp-block-heading">Find a Lawyer Who Communicates Well</h2>
-
-
-
-<p>Great communication is a vital trait to look for in a lawyer. After all, you want to work with someone who is going to update you on your case regularly. You also need to be able to reach them easily with any questions or useful information.</p>
+<div class="key-point"><p>Great communication is a vital trait to look for in a lawyer. After all, you want to work with someone who is going to update you on your case regularly. You also need to be able to reach them easily with any questions or useful information.</p></div>
 
 
 
@@ -369,10 +350,7 @@
 
 
 <h2 class="wp-block-heading">Ask Lots of Questions</h2>
-
-
-
-<p>Good attorneys understand that potential clients will need a lot of information before hiring them. After all, this helps you to make an informed decision.</p>
+<div class="key-point"><p>Good attorneys understand that potential clients will need a lot of information before hiring them. After all, this helps you to make an informed decision.</p></div>
 
 
 
@@ -384,7 +362,7 @@
 
 
 
-<ul class="wp-block-list"><li>What factors work for or against you</li><li>What the deadline is for filing your claim (according to the <a href="https://www.investopedia.com/terms/s/statute-of-limitations.asp" target="_blank" rel="noopener">Statute of Limitations</a>)</li><li>Whether they have experience dealing with cases like yours</li><li>The kind of resources they have at their disposal</li><li>How many cases they usually take on at a time</li><li>What their fees are and whether they work on a no-win-no-fee basis</li><li>Who your point of contact would be during your case</li></ul>
+<ul class="wp-block-list"><li>What factors work for or against you</li><li>What the deadline is for filing your claim (according to the <a href="https://www.investopedia.com/terms/s/statute-of-limitations.asp">Statute of Limitations</a>)</li><li>Whether they have experience dealing with cases like yours</li><li>The kind of resources they have at their disposal</li><li>How many cases they usually take on at a time</li><li>What their fees are and whether they work on a no-win-no-fee basis</li><li>Who your point of contact would be during your case</li></ul>
 
 
 
@@ -393,10 +371,7 @@
 
 
 <h2 class="wp-block-heading">How Can Thomas and Wan Help With Your Claims for Medical Negligence and Birth Injuries</h2>
-
-
-
-<p>At Thomas and Wan, we have <a href="https://wp.thomasandwan.com/about-thomas-wan-llp/">over 35 years</a> of experience advocating for victims of medical negligence. Because of this, we can offer our clients specialist expertise in making successful claims.</p>
+<div class="key-point"><p>At Thomas and Wan, we have over 35 years of experience advocating for victims of medical negligence. Because of this, we can offer our clients specialist expertise in making successful claims.</p></div>
 
 
 
@@ -408,7 +383,7 @@
 
 
 
-<p>In particular, we have experience working on cases involving <a href="https://wp.thomasandwan.com/cases-we-handle/birth-injuries/">birth injuries</a> and complications. So if you are looking for a birth injury attorney, look no further!</p>
+<p>In particular, we have experience working on cases involving <a href="/blog/cases-we-handle/birth-injuries/">birth injuries</a> and complications. So if you are looking for a birth injury attorney, look no further!</p>
 
 
 
@@ -417,21 +392,18 @@
 
 
 <h2 class="wp-block-heading">Get Support Today</h2>
+<div class="key-point"><p>If you have been the victim of medical negligence or are living with birth injuries, Thomas and Wan are here to help.</p></div>
 
 
 
-<p>If you have been the victim of medical negligence or are living with birth injuries, Thomas and Wan are here to help.</p>
-
-
-
-<p>We have extensive specialist experience with making medical malpractice claims and would be happy to review your case in a free consultation. <a href="https://wp.thomasandwan.com/contact-us/">Get in touch here</a> to organize your consultation now.</p>
+<p>We have extensive specialist experience with making medical malpractice claims and would be happy to review your case in a free consultation. <a href="/blog/contact-us/">Get in touch here</a> to organize your consultation now.</p>
 
       </article>
 
       <div class="cta">
         <h3>Talk to an Attorney</h3>
         <p>If you believe medical negligence played a role in your situation, reach out for a free consultation.</p>
-        <a href="/contact" class="btn">Contact Thomas & Wan</a>
+        <a href="/contact-us" class="btn">Contact Thomas & Wan</a>
       </div>
     </div>
   </main>

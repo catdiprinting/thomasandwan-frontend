@@ -75,13 +75,24 @@
     .featured-image { width: 100%; height: auto; margin-bottom: 32px; }
     .article-body { font-size: 1.125rem; }
     .article-body p { margin-bottom: 1.5em; }
-    .article-body h2 { font-family: 'Playfair Display', Georgia, serif; font-size: 1.75rem; color: #1F2937; margin-top: 2em; margin-bottom: 1em; }
-    .article-body h3 { font-family: 'Playfair Display', Georgia, serif; font-size: 1.5rem; color: #1F2937; margin-top: 1.5em; margin-bottom: 0.75em; }
+    .article-body h2 { font-family: 'Playfair Display', Georgia, serif; font-size: 1.75rem; color: #1F2937; margin-top: 2em; margin-bottom: 1em; border-bottom: 2px solid #F59E0B; padding-bottom: 12px; }
+    .article-body h3 { font-family: 'Playfair Display', Georgia, serif; font-size: 1.5rem; color: #1F2937; margin-top: 1.5em; margin-bottom: 0.75em; padding-left: 16px; border-left: 4px solid #F59E0B; }
     .article-body ul, .article-body ol { margin-bottom: 1.5em; padding-left: 1.5em; }
     .article-body li { margin-bottom: 0.5em; }
-    .article-body a { color: #F59E0B; text-decoration: underline; }
+    .article-body a { color: #B45309; text-decoration: underline; }
+    .article-body a:hover { color: #F59E0B; }
     .article-body img { max-width: 100%; height: auto; margin: 1.5em 0; }
-    .article-body blockquote { border-left: 4px solid #F59E0B; padding-left: 20px; margin: 1.5em 0; font-style: italic; color: #64748b; }
+    .article-body figure { margin: 2em 0; }
+    .article-body figure img { margin: 0; }
+    .article-body figcaption { font-size: 0.875rem; color: #64748b; text-align: center; margin-top: 8px; font-style: italic; }
+    .article-body blockquote { border-left: 4px solid #F59E0B; padding: 16px 24px; margin: 2em 0; background: #FFFBEB; font-style: italic; color: #92400E; border-radius: 0 8px 8px 0; }
+    .article-body .wp-block-heading strong { color: #1F2937; }
+    .article-body .wp-block-list { background: #f8fafc; padding: 20px 20px 20px 40px; border-radius: 8px; border: 1px solid #e2e8f0; }
+    .article-body .wp-block-list li { padding: 4px 0; }
+    .article-body .wp-block-image { text-align: center; }
+    .key-point { background: #FFFBEB; border: 1px solid #FDE68A; padding: 20px 24px; margin: 2em 0; border-radius: 8px; display: flex; gap: 16px; align-items: flex-start; }
+    .key-point::before { content: "⚖️"; font-size: 1.5rem; flex-shrink: 0; }
+    .key-point p { margin: 0; color: #92400E; font-weight: 500; }
     .cta { background: #1F2937; color: #fff; padding: 48px; margin-top: 48px; text-align: center; }
     .cta h3 { font-family: 'Playfair Display', Georgia, serif; font-size: 1.75rem; margin-bottom: 16px; }
     .cta p { color: rgba(255,255,255,0.8); margin-bottom: 24px; max-width: 500px; margin-left: auto; margin-right: auto; }
@@ -100,10 +111,10 @@
     <div class="nav-inner">
       <a href="/">Thomas & Wan</a>
       <div class="nav-links">
-        <a href="/about">About</a>
+        <a href="/about-thomas-wan-llp">About</a>
         <a href="/cases-we-handle">Cases</a>
         <a href="/blog">Blog</a>
-        <a href="/contact">Contact</a>
+        <a href="/contact-us">Contact</a>
       </div>
     </div>
   </nav>
@@ -132,23 +143,17 @@
 
 
 
-<p>This blog will explore the <strong>risk factors, causes, and potential consequences</strong> of <a href="https://wp.thomasandwan.com/how-is-fetal-acidosis-treated/" target="_blank" rel="noreferrer noopener">fetal acidosis</a>, as well as <strong>preventive measures</strong> that can help improve outcomes for both mother and baby.</p>
+<p>This blog will explore the <strong>risk factors, causes, and potential consequences</strong> of <a href="/blog/how-is-fetal-acidosis-treated/" target="_blank" rel="noreferrer noopener">fetal acidosis</a>, as well as <strong>preventive measures</strong> that can help improve outcomes for both mother and baby.</p>
 
 
 
 <h2 class="wp-block-heading"><strong>What Is Fetal Acidosis?</strong></h2>
-
-
-
-<p>Fetal acidosis occurs when the baby&#8217;s <strong>blood pH drops below 7.2</strong>, indicating excessive acidity due to <strong>oxygen deprivation (hypoxia)</strong>. Normally, a baby receives oxygen through the placenta, but if the oxygen supply is disrupted, the baby’s body switches to <strong>anaerobic metabolism</strong>, leading to <strong>lactic acid buildup</strong>. This <strong>acid-base imbalance</strong> can cause severe complications if not addressed promptly.</p>
+<div class="key-point"><p>Fetal acidosis occurs when the baby&#8217;s blood pH drops below 7.2, indicating excessive acidity due to oxygen deprivation (hypoxia). Normally, a baby receives oxygen through the placenta, but if the oxygen supply is disrupted, the baby’s body switches to anaerobic metabolism, leading to lactic acid buildup. This acid-base imbalance can cause severe complications if not addressed promptly.</p></div>
 
 
 
 <h2 class="wp-block-heading"><strong>Major Risk Factors for Fetal Acidosis</strong></h2>
-
-
-
-<p>Several <strong>maternal, fetal, and delivery-related factors</strong> can contribute to fetal acidosis. Understanding these <a href="https://pubmed.ncbi.nlm.nih.gov/21934444/" target="_blank" rel="noreferrer noopener">risk factors</a> allows healthcare providers to <strong>monitor high-risk pregnancies</strong> and take <strong>preventive action</strong> when necessary.<strong>Maternal Health Conditions</strong></p>
+<div class="key-point"><p>Several maternal, fetal, and delivery-related factors can contribute to fetal acidosis. Understanding these risk factors allows healthcare providers to monitor high-risk pregnancies and take preventive action when necessary.Maternal Health Conditions</p></div>
 
 
 
@@ -178,7 +183,7 @@
 
 
 
-<figure class="wp-block-image size-full"><a href="https://wp.thomasandwan.com/wp-content/uploads/2025/01/Major-Risk-Factors-for-Fetal-Acidosis.jpg"><img loading="lazy" decoding="async" width="1000" height="667" src="https://wp.thomasandwan.com/wp-content/uploads/2025/01/Major-Risk-Factors-for-Fetal-Acidosis.jpg" alt="Pregnant woman having ultrasound scan" class="wp-image-1966" srcset="https://wp.thomasandwan.com/wp-content/uploads/2025/01/Major-Risk-Factors-for-Fetal-Acidosis.jpg 1000w, https://wp.thomasandwan.com/wp-content/uploads/2025/01/Major-Risk-Factors-for-Fetal-Acidosis-300x200.jpg 300w, https://wp.thomasandwan.com/wp-content/uploads/2025/01/Major-Risk-Factors-for-Fetal-Acidosis-768x512.jpg 768w" sizes="auto, (max-width: 1000px) 100vw, 1000px" /></a></figure>
+<figure class="wp-block-image size-full"><a href="/blog/wp-content/uploads/2025/01/Major-Risk-Factors-for-Fetal-Acidosis.jpg"><img loading="lazy" decoding="async" width="1000" height="667" src="https://wp.thomasandwan.com/wp-content/uploads/2025/01/Major-Risk-Factors-for-Fetal-Acidosis.jpg" alt="Pregnant woman having ultrasound scan" class="wp-image-1966" srcset="https://wp.thomasandwan.com/wp-content/uploads/2025/01/Major-Risk-Factors-for-Fetal-Acidosis.jpg 1000w, https://wp.thomasandwan.com/wp-content/uploads/2025/01/Major-Risk-Factors-for-Fetal-Acidosis-300x200.jpg 300w, https://wp.thomasandwan.com/wp-content/uploads/2025/01/Major-Risk-Factors-for-Fetal-Acidosis-768x512.jpg 768w" sizes="auto, (max-width: 1000px) 100vw, 1000px" /></a></figure>
 
 
 
@@ -260,7 +265,7 @@
 
 
 
-<figure class="wp-block-image size-full"><a href="https://wp.thomasandwan.com/wp-content/uploads/2025/01/Placental-and-Umbilical-Cord-Issues.jpg"><img loading="lazy" decoding="async" width="1000" height="667" src="https://wp.thomasandwan.com/wp-content/uploads/2025/01/Placental-and-Umbilical-Cord-Issues.jpg" alt="Pregnant mothers meet the nurse at the clinic as scheduled" class="wp-image-1967" srcset="https://wp.thomasandwan.com/wp-content/uploads/2025/01/Placental-and-Umbilical-Cord-Issues.jpg 1000w, https://wp.thomasandwan.com/wp-content/uploads/2025/01/Placental-and-Umbilical-Cord-Issues-300x200.jpg 300w, https://wp.thomasandwan.com/wp-content/uploads/2025/01/Placental-and-Umbilical-Cord-Issues-768x512.jpg 768w" sizes="auto, (max-width: 1000px) 100vw, 1000px" /></a></figure>
+<figure class="wp-block-image size-full"><a href="/blog/wp-content/uploads/2025/01/Placental-and-Umbilical-Cord-Issues.jpg"><img loading="lazy" decoding="async" width="1000" height="667" src="https://wp.thomasandwan.com/wp-content/uploads/2025/01/Placental-and-Umbilical-Cord-Issues.jpg" alt="Pregnant mothers meet the nurse at the clinic as scheduled" class="wp-image-1967" srcset="https://wp.thomasandwan.com/wp-content/uploads/2025/01/Placental-and-Umbilical-Cord-Issues.jpg 1000w, https://wp.thomasandwan.com/wp-content/uploads/2025/01/Placental-and-Umbilical-Cord-Issues-300x200.jpg 300w, https://wp.thomasandwan.com/wp-content/uploads/2025/01/Placental-and-Umbilical-Cord-Issues-768x512.jpg 768w" sizes="auto, (max-width: 1000px) 100vw, 1000px" /></a></figure>
 
 
 
@@ -268,12 +273,12 @@
 
 
 
-<p>In some cases, <strong><a href="https://wp.thomasandwan.com/medical-errors-the-third-leading-cause-of-death-in-the-us/" target="_blank" rel="noreferrer noopener">medical errors and negligence</a></strong> can contribute to fetal acidosis. These include:</p>
+<p>In some cases, <strong><a href="/blog/medical-errors-the-third-leading-cause-of-death-in-the-us/" target="_blank" rel="noreferrer noopener">medical errors and negligence</a></strong> can contribute to fetal acidosis. These include:</p>
 
 
 
 <ul class="wp-block-list">
-<li><a href="https://wp.thomasandwan.com/why-is-a-fetal-monitor-so-important/" target="_blank" rel="noreferrer noopener"><strong>Failure to Monitor Fetal Distress</strong></a> – If fetal heart rate abnormalities are ignored, <strong>acidosis can progress without intervention</strong>.</li>
+<li><a href="/blog/why-is-a-fetal-monitor-so-important/" target="_blank" rel="noreferrer noopener"><strong>Failure to Monitor Fetal Distress</strong></a> – If fetal heart rate abnormalities are ignored, <strong>acidosis can progress without intervention</strong>.</li>
 
 
 
@@ -295,10 +300,7 @@
 
 
 <h2 class="wp-block-heading"><strong>How Is Fetal Acidosis Diagnosed?</strong></h2>
-
-
-
-<p>Doctors use several <strong>monitoring tools</strong> to detect <a href="https://wp.thomasandwan.com/signs-of-fetal-acidosis/" target="_blank" rel="noreferrer noopener">signs of fetal acidosis</a> early:</p>
+<div class="key-point"><p>Doctors use several monitoring tools to detect signs of fetal acidosis early:</p></div>
 
 
 
@@ -324,15 +326,12 @@
 
 
 
-<figure class="wp-block-image size-full"><a href="https://wp.thomasandwan.com/wp-content/uploads/2025/01/How-Is-Fetal-Acidosis-Diagnosed-1.jpg"><img loading="lazy" decoding="async" width="1000" height="667" src="https://wp.thomasandwan.com/wp-content/uploads/2025/01/How-Is-Fetal-Acidosis-Diagnosed-1.jpg" alt="gynecologist scanning the stomach of the client" class="wp-image-1970" srcset="https://wp.thomasandwan.com/wp-content/uploads/2025/01/How-Is-Fetal-Acidosis-Diagnosed-1.jpg 1000w, https://wp.thomasandwan.com/wp-content/uploads/2025/01/How-Is-Fetal-Acidosis-Diagnosed-1-300x200.jpg 300w, https://wp.thomasandwan.com/wp-content/uploads/2025/01/How-Is-Fetal-Acidosis-Diagnosed-1-768x512.jpg 768w" sizes="auto, (max-width: 1000px) 100vw, 1000px" /></a></figure>
+<figure class="wp-block-image size-full"><a href="/blog/wp-content/uploads/2025/01/How-Is-Fetal-Acidosis-Diagnosed-1.jpg"><img loading="lazy" decoding="async" width="1000" height="667" src="https://wp.thomasandwan.com/wp-content/uploads/2025/01/How-Is-Fetal-Acidosis-Diagnosed-1.jpg" alt="gynecologist scanning the stomach of the client" class="wp-image-1970" srcset="https://wp.thomasandwan.com/wp-content/uploads/2025/01/How-Is-Fetal-Acidosis-Diagnosed-1.jpg 1000w, https://wp.thomasandwan.com/wp-content/uploads/2025/01/How-Is-Fetal-Acidosis-Diagnosed-1-300x200.jpg 300w, https://wp.thomasandwan.com/wp-content/uploads/2025/01/How-Is-Fetal-Acidosis-Diagnosed-1-768x512.jpg 768w" sizes="auto, (max-width: 1000px) 100vw, 1000px" /></a></figure>
 
 
 
 <h2 class="wp-block-heading"><strong>Preventing Fetal Acidosis</strong></h2>
-
-
-
-<p>While some cases of fetal acidosis are unavoidable, <strong>proactive steps</strong> can help reduce the risk:</p>
+<div class="key-point"><p>While some cases of fetal acidosis are unavoidable, proactive steps can help reduce the risk:</p></div>
 
 
 
@@ -351,7 +350,7 @@
 
 <li><strong>Proper Labor Management</strong>
 <ul class="wp-block-list">
-<li><a href="https://wp.thomasandwan.com/why-is-fetal-monitoring-so-important-during-labour-delivery/" target="_blank" rel="noreferrer noopener">Monitoring fetal heart rate throughout labor</a><strong> and delivery</strong>.</li>
+<li><a href="/blog/why-is-fetal-monitoring-so-important-during-labour-delivery/" target="_blank" rel="noreferrer noopener">Monitoring fetal heart rate throughout labor</a><strong> and delivery</strong>.</li>
 
 
 
@@ -383,10 +382,7 @@
 
 
 <h2 class="wp-block-heading"><strong>Legal Options for Families Affected by Fetal Acidosis</strong></h2>
-
-
-
-<p>If <strong>medical negligence</strong> contributed to fetal acidosis and resulted in complications such as <strong>hypoxic-ischemic encephalopathy (HIE), cerebral palsy, or developmental delays</strong>, parents may have <strong>legal grounds</strong> to file a medical malpractice claim. Compensation may cover:</p>
+<div class="key-point"><p>If medical negligence contributed to fetal acidosis and resulted in complications such as hypoxic-ischemic encephalopathy (HIE), cerebral palsy, or developmental delays, parents may have legal grounds to file a medical malpractice claim. Compensation may cover:</p></div>
 
 
 
@@ -404,19 +400,16 @@
 
 
 
-<p>If you believe <a href="https://wp.thomasandwan.com/how-does-fetal-acidosis-affect-the-baby/" target="_blank" rel="noreferrer noopener">medical negligence played a role in your baby’s fetal acidosis</a> diagnosis, consulting with an experienced <strong>birth injury attorney</strong> can help you understand your legal rights.</p>
+<p>If you believe <a href="/blog/how-does-fetal-acidosis-affect-the-baby/" target="_blank" rel="noreferrer noopener">medical negligence played a role in your baby’s fetal acidosis</a> diagnosis, consulting with an experienced <strong>birth injury attorney</strong> can help you understand your legal rights.</p>
 
 
 
-<figure class="wp-block-image size-full"><a href="https://wp.thomasandwan.com/wp-content/uploads/2025/01/Legal-Options-for-Families-Affected-by-Fetal-Acidosis.jpg"><img loading="lazy" decoding="async" width="1000" height="649" src="https://wp.thomasandwan.com/wp-content/uploads/2025/01/Legal-Options-for-Families-Affected-by-Fetal-Acidosis.jpg" alt="medical malpractice Lawyer discussing at meeting" class="wp-image-1971" srcset="https://wp.thomasandwan.com/wp-content/uploads/2025/01/Legal-Options-for-Families-Affected-by-Fetal-Acidosis.jpg 1000w, https://wp.thomasandwan.com/wp-content/uploads/2025/01/Legal-Options-for-Families-Affected-by-Fetal-Acidosis-300x195.jpg 300w, https://wp.thomasandwan.com/wp-content/uploads/2025/01/Legal-Options-for-Families-Affected-by-Fetal-Acidosis-768x498.jpg 768w" sizes="auto, (max-width: 1000px) 100vw, 1000px" /></a></figure>
+<figure class="wp-block-image size-full"><a href="/blog/wp-content/uploads/2025/01/Legal-Options-for-Families-Affected-by-Fetal-Acidosis.jpg"><img loading="lazy" decoding="async" width="1000" height="649" src="https://wp.thomasandwan.com/wp-content/uploads/2025/01/Legal-Options-for-Families-Affected-by-Fetal-Acidosis.jpg" alt="medical malpractice Lawyer discussing at meeting" class="wp-image-1971" srcset="https://wp.thomasandwan.com/wp-content/uploads/2025/01/Legal-Options-for-Families-Affected-by-Fetal-Acidosis.jpg 1000w, https://wp.thomasandwan.com/wp-content/uploads/2025/01/Legal-Options-for-Families-Affected-by-Fetal-Acidosis-300x195.jpg 300w, https://wp.thomasandwan.com/wp-content/uploads/2025/01/Legal-Options-for-Families-Affected-by-Fetal-Acidosis-768x498.jpg 768w" sizes="auto, (max-width: 1000px) 100vw, 1000px" /></a></figure>
 
 
 
 <h2 class="wp-block-heading"><strong>How Thomas &amp; Wan LLP Can Help</strong></h2>
-
-
-
-<p>At <strong><a href="https://wp.thomasandwan.com/about-thomas-wan-llp/" target="_blank" rel="noreferrer noopener">Thomas &amp; Wan LLP</a></strong>, we specialize in <strong>birth injury cases</strong>, helping families seek justice for <strong>medical malpractice</strong> that leads to conditions like <strong>fetal acidosis, HIE, and cerebral palsy</strong>. Our legal team will:</p>
+<div class="key-point"><p>At Thomas &amp; Wan LLP, we specialize in birth injury cases, helping families seek justice for medical malpractice that leads to conditions like fetal acidosis, HIE, and cerebral palsy. Our legal team will:</p></div>
 
 
 
@@ -442,14 +435,14 @@
 
 
 
-<p>If <strong> medical negligence </strong> contributed to your baby’s condition, seeking legal guidance can help secure the <a href="https://wp.thomasandwan.com/top-7-questions-parents-ask-about-what-causes-birth-asphyxia/">financial support and justice</a> your family deserves.</p>
+<p>If <strong> medical negligence </strong> contributed to your baby’s condition, seeking legal guidance can help secure the <a href="/blog/top-7-questions-parents-ask-about-what-causes-birth-asphyxia/">financial support and justice</a> your family deserves.</p>
 
       </article>
 
       <div class="cta">
         <h3>Talk to an Attorney</h3>
         <p>If you believe medical negligence played a role in your situation, reach out for a free consultation.</p>
-        <a href="/contact" class="btn">Contact Thomas & Wan</a>
+        <a href="/contact-us" class="btn">Contact Thomas & Wan</a>
       </div>
     </div>
   </main>
