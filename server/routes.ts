@@ -371,6 +371,148 @@ export async function registerRoutes(
     }
   });
 
+  // Sitemap cache
+  let sitemapCache: { content: string; timestamp: number } | null = null;
+  const SITEMAP_CACHE_DURATION = 60 * 60 * 1000; // 1 hour
+
+  function escapeXml(str: string): string {
+    return str
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;')
+      .replace(/'/g, '&apos;');
+  }
+
+  app.get("/sitemap.xml", async (_req: Request, res: Response) => {
+    try {
+      const now = Date.now();
+      if (sitemapCache && (now - sitemapCache.timestamp) < SITEMAP_CACHE_DURATION) {
+        res.setHeader("Content-Type", "application/xml");
+        res.send(sitemapCache.content);
+        return;
+      }
+
+      const [posts, categories] = await Promise.all([
+        fetchPosts({ per_page: 100 }),
+        fetchCategories(),
+      ]);
+
+      const staticPages = [
+        { loc: '/about', priority: '0.8', changefreq: 'weekly' },
+        { loc: '/cases-we-handle', priority: '0.8', changefreq: 'weekly' },
+        { loc: '/contact', priority: '0.8', changefreq: 'weekly' },
+        { loc: '/faq', priority: '0.8', changefreq: 'weekly' },
+        { loc: '/testimonials', priority: '0.8', changefreq: 'weekly' },
+        { loc: '/blog', priority: '0.8', changefreq: 'weekly' },
+      ];
+
+      let xml = `<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>https://thomasandwan.com/</loc>
+    <changefreq>daily</changefreq>
+    <priority>1.0</priority>
+  </url>`;
+
+      for (const page of staticPages) {
+        xml += `
+  <url>
+    <loc>https://thomasandwan.com${page.loc}</loc>
+    <changefreq>${page.changefreq}</changefreq>
+    <priority>${page.priority}</priority>
+  </url>`;
+      }
+
+      for (const post of posts) {
+        const lastmod = new Date(post.date).toISOString().split('T')[0];
+        xml += `
+  <url>
+    <loc>https://thomasandwan.com/blog/${escapeXml(post.slug)}</loc>
+    <lastmod>${lastmod}</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>`;
+      }
+
+      for (const category of categories) {
+        xml += `
+  <url>
+    <loc>https://thomasandwan.com/category/${escapeXml(category.slug)}</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>`;
+      }
+
+      xml += `
+  <url>
+    <loc>https://thomasandwan.com/author/admin</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+</urlset>`;
+
+      sitemapCache = { content: xml, timestamp: now };
+      res.setHeader("Content-Type", "application/xml");
+      res.send(xml);
+    } catch (error) {
+      console.error("Error generating sitemap:", error);
+      res.status(500).send("Failed to generate sitemap");
+    }
+  });
+
+  app.get("/robots.txt", (_req: Request, res: Response) => {
+    const content = `User-agent: *
+Allow: /
+Disallow: /api/
+
+Sitemap: https://thomasandwan.com/sitemap.xml`;
+    res.setHeader("Content-Type", "text/plain");
+    res.send(content);
+  });
+
+  app.get("/feed", async (_req: Request, res: Response) => {
+    try {
+      const posts = await fetchPostsWithMedia({ per_page: 20 });
+      const now = new Date().toUTCString();
+
+      let rss = `<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0">
+  <channel>
+    <title>Thomas &amp; Wan LLP - Medical Malpractice Blog</title>
+    <link>https://thomasandwan.com/blog</link>
+    <description>Expert legal insights on medical malpractice, birth injuries, and patient rights from Thomas &amp; Wan LLP, Houston&apos;s trusted medical malpractice attorneys.</description>
+    <language>en-us</language>
+    <lastBuildDate>${now}</lastBuildDate>`;
+
+      for (const post of posts) {
+        const title = escapeXml(post.title.rendered);
+        const link = `https://thomasandwan.com/blog/${escapeXml(post.slug)}`;
+        const pubDate = new Date(post.date).toUTCString();
+        const excerpt = post.excerpt?.rendered || '';
+
+        rss += `
+    <item>
+      <title>${title}</title>
+      <link>${link}</link>
+      <description><![CDATA[${excerpt}]]></description>
+      <pubDate>${pubDate}</pubDate>
+      <guid>${link}</guid>
+    </item>`;
+      }
+
+      rss += `
+  </channel>
+</rss>`;
+
+      res.setHeader("Content-Type", "application/rss+xml");
+      res.send(rss);
+    } catch (error) {
+      console.error("Error generating RSS feed:", error);
+      res.status(500).send("Failed to generate RSS feed");
+    }
+  });
+
   // SSR Routes - serve to bots only, regular users get React app
   // Add ?ssr=true to force SSR for testing
   app.get("/", (req: Request, res: Response, next: Function) => {
