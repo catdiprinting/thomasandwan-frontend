@@ -9,6 +9,7 @@ import {
   fetchPageBySlug,
   fetchCategories,
   fetchPostsWithMedia,
+  fetchPostsWithPagination,
   fetchMedia,
   fetchAuthor,
   fetchAuthorBySlug,
@@ -58,11 +59,24 @@ export async function registerRoutes(
       const page = parseInt(req.query.page as string) || 1;
       const withMedia = req.query.with_media === "true";
 
+      const { posts, totalPages, total } = await fetchPostsWithPagination({ per_page: perPage, page });
+
+      res.set("X-WP-TotalPages", String(totalPages));
+      res.set("X-WP-Total", String(total));
+      res.set("Access-Control-Expose-Headers", "X-WP-TotalPages, X-WP-Total");
+
       if (withMedia) {
-        const posts = await fetchPostsWithMedia({ per_page: perPage, page });
-        res.json(posts);
+        const postsWithMedia = await Promise.all(
+          posts.map(async (post: any) => {
+            if (post.featured_media) {
+              const media = await fetchMedia(post.featured_media);
+              return { ...post, featured_image: media || undefined };
+            }
+            return post;
+          })
+        );
+        res.json(postsWithMedia);
       } else {
-        const posts = await fetchPosts({ per_page: perPage, page });
         res.json(posts);
       }
     } catch (error) {

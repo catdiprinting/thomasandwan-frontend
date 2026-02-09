@@ -88,6 +88,25 @@ export async function fetchPosts(params?: {
   return response.json();
 }
 
+export async function fetchPostsWithPagination(params?: {
+  per_page?: number;
+  page?: number;
+}): Promise<{ posts: WPPost[]; totalPages: number; total: number }> {
+  const searchParams = new URLSearchParams();
+  if (params?.per_page) searchParams.set("per_page", String(params.per_page));
+  if (params?.page) searchParams.set("page", String(params.page));
+
+  const url = `${WP_API_BASE}/posts?${searchParams.toString()}`;
+  const response = await fetch(url);
+  if (!response.ok) {
+    throw new Error(`Failed to fetch posts: ${response.status}`);
+  }
+  const posts = await response.json();
+  const totalPages = parseInt(response.headers.get("X-WP-TotalPages") || "1", 10);
+  const total = parseInt(response.headers.get("X-WP-Total") || "0", 10);
+  return { posts, totalPages, total };
+}
+
 export async function fetchPostBySlug(slug: string): Promise<WPPost | null> {
   const url = `${WP_API_BASE}/posts?slug=${encodeURIComponent(slug)}`;
   const response = await fetch(url);
