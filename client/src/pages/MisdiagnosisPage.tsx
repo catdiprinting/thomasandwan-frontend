@@ -46,7 +46,7 @@ export default function MisdiagnosisPage() {
                   Claims against negligent doctors, specialists, and hospitals whose diagnostic failures caused preventable patient harm.
                 </p>
                 <Link
-                  href="/contact"
+                  href="/contact-us"
                   className="mt-8 inline-flex items-center gap-2 bg-secondary hover:bg-secondary/90 text-white font-bold px-8 py-4 rounded-none uppercase tracking-widest text-sm"
                   data-testid="link-contact-from-misdiagnosis"
                 >
@@ -92,7 +92,7 @@ export default function MisdiagnosisPage() {
               Call us today for a free consultation—we will discuss what your legal options are for your misdiagnosis case. If you have medical records, you can send them to us for a free review with no obligation.
             </p>
             <Link
-              href="/contact"
+              href="/contact-us"
               className="inline-flex items-center gap-2 bg-secondary hover:bg-secondary/90 text-white font-bold px-10 py-4 rounded-none uppercase tracking-widest text-sm"
               data-testid="link-misdiagnosis-cta"
             >

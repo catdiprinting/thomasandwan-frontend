@@ -169,7 +169,7 @@ export default function CategoryPage() {
               If you believe medical negligence played a role in your situation, reach out for a free consultation.
             </p>
             <Link
-              href="/contact"
+              href="/contact-us"
               className="inline-flex items-center justify-center bg-secondary hover:bg-secondary/90 text-white font-bold px-10 py-4 rounded-none uppercase tracking-widest text-sm"
               data-testid="link-category-cta"
             >

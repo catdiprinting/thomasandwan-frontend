@@ -492,9 +492,9 @@ export async function registerRoutes(
       ]);
 
       const staticPages = [
-        { loc: '/about', priority: '0.8', changefreq: 'weekly' },
+        { loc: '/about-thomas-wan-llp', priority: '0.8', changefreq: 'weekly' },
         { loc: '/cases-we-handle', priority: '0.8', changefreq: 'weekly' },
-        { loc: '/contact', priority: '0.8', changefreq: 'weekly' },
+        { loc: '/contact-us', priority: '0.8', changefreq: 'weekly' },
         { loc: '/faq', priority: '0.8', changefreq: 'weekly' },
         { loc: '/testimonials', priority: '0.8', changefreq: 'weekly' },
         { loc: '/blog', priority: '0.8', changefreq: 'weekly' },
@@ -617,7 +617,7 @@ Sitemap: https://thomasandwan.com/sitemap.xml`;
   });
 
   // Add ?ssr=true to force SSR for testing
-  app.get("/about", (req: Request, res: Response, next: Function) => {
+  app.get("/about-thomas-wan-llp", (req: Request, res: Response, next: Function) => {
     const ua = req.headers['user-agent'] || '';
     const forceSSR = req.query.ssr === 'true';
     if (!forceSSR && !isBot(ua)) return next();
@@ -626,7 +626,7 @@ Sitemap: https://thomasandwan.com/sitemap.xml`;
   });
 
   // Add ?ssr=true to force SSR for testing
-  app.get("/contact", (req: Request, res: Response, next: Function) => {
+  app.get("/contact-us", (req: Request, res: Response, next: Function) => {
     const ua = req.headers['user-agent'] || '';
     const forceSSR = req.query.ssr === 'true';
     if (!forceSSR && !isBot(ua)) return next();

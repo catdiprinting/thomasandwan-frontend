@@ -191,10 +191,10 @@ function generatePostHtml(
     <div class="nav-inner">
       <a href="/">Thomas & Wan</a>
       <div class="nav-links">
-        <a href="/about">About</a>
+        <a href="/about-thomas-wan-llp">About</a>
         <a href="/cases-we-handle">Cases</a>
         <a href="/blog">Blog</a>
-        <a href="/contact">Contact</a>
+        <a href="/contact-us">Contact</a>
       </div>
     </div>
   </nav>
@@ -224,7 +224,7 @@ function generatePostHtml(
       <div class="cta">
         <h3>Talk to an Attorney</h3>
         <p>If you believe medical negligence played a role in your situation, reach out for a free consultation.</p>
-        <a href="/contact" class="btn">Contact Thomas & Wan</a>
+        <a href="/contact-us" class="btn">Contact Thomas & Wan</a>
       </div>
     </div>
   </main>
@@ -327,10 +327,10 @@ function generateListingPage(title: string, description: string, canonicalUrl: s
     <div class="nav-inner">
       <a href="/">Thomas & Wan</a>
       <div class="nav-links">
-        <a href="/about">About</a>
+        <a href="/about-thomas-wan-llp">About</a>
         <a href="/cases-we-handle">Cases</a>
         <a href="/blog">Blog</a>
-        <a href="/contact">Contact</a>
+        <a href="/contact-us">Contact</a>
       </div>
     </div>
   </nav>

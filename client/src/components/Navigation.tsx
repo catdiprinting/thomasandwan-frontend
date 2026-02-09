@@ -28,11 +28,11 @@ export default function Navigation() {
 
   const navLinks = [
     { name: "Home", href: "/" },
-    { name: "About", href: "/about" },
+    { name: "About", href: "/about-thomas-wan-llp" },
     { name: "Testimonials", href: "/testimonials" },
     { name: "FAQ", href: "/faq" },
     { name: "Blog", href: "/blog" },
-    { name: "Contact", href: "/contact" },
+    { name: "Contact", href: "/contact-us" },
   ];
 
   const isCasesActive = location.startsWith("/cases-we-handle");
@@ -54,7 +54,7 @@ export default function Navigation() {
       <div className="bg-primary text-white py-2 text-sm border-b border-white/10 hidden md:block">
         <div className="container mx-auto px-4 md:px-6 flex justify-between items-center">
           <div className="flex items-center">
-            <Link href="/contact">
+            <Link href="/contact-us">
               <span className="bg-secondary hover:bg-secondary/90 text-white font-bold px-4 py-1.5 uppercase tracking-wider text-xs cursor-pointer transition-colors">
                 Free Consultation
               </span>
@@ -203,7 +203,7 @@ export default function Navigation() {
                 Home
               </span>
             </Link>
-            <Link href="/about">
+            <Link href="/about-thomas-wan-llp">
               <span
                 className="text-primary font-medium text-lg py-2 border-b border-gray-100 block cursor-pointer"
                 onClick={() => setIsOpen(false)}

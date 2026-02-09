@@ -121,7 +121,7 @@ export default function Testimonials() {
             <p className="text-xl text-white/80 mb-10 leading-relaxed">
               If you or a loved one has suffered due to medical negligence, we are here to listen. Contact us today for a free, confidential consultation.
             </p>
-            <Link href="/contact">
+            <Link href="/contact-us">
               <Button size="lg" className="bg-secondary hover:bg-secondary/90 text-white font-bold py-8 px-10 text-xl rounded-none">
                 Share Your Story With Us
               </Button>

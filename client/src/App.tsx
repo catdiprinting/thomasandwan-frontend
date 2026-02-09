@@ -26,7 +26,7 @@ function Router() {
   return (
     <Switch>
       <Route path="/" component={Home} />
-      <Route path="/about" component={About} />
+      <Route path="/about-thomas-wan-llp" component={About} />
       <Route path="/cases-we-handle" component={Cases} />
       <Route path="/cases-we-handle/medical-malpractice" component={MedicalMalpractice} />
       <Route path="/cases-we-handle/birth-injuries" component={BirthInjuries} />
@@ -37,7 +37,7 @@ function Router() {
       <Route path="/cases-we-handle/misdiagnosis" component={MisdiagnosisPage} />
       <Route path="/testimonials" component={Testimonials} />
       <Route path="/faq" component={FAQ} />
-      <Route path="/contact" component={Contact} />
+      <Route path="/contact-us" component={Contact} />
       <Route path="/blog" component={BlogIndex} />
       <Route path="/blog/:slug" component={BlogPost} />
       <Route path="/author/:slug" component={AuthorPage} />

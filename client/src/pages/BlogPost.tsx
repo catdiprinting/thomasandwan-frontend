@@ -242,7 +242,7 @@ export default function BlogPost() {
                   If you believe medical negligence played a role in your situation, reach out for a free consultation.
                 </p>
                 <Link
-                  href="/contact"
+                  href="/contact-us"
                   className="inline-flex items-center justify-center bg-secondary hover:bg-secondary/90 text-white font-bold px-10 py-4 rounded-none uppercase tracking-widest text-sm w-full"
                   data-testid="link-blogpost-cta"
                 >
@@ -291,7 +291,7 @@ export default function BlogPost() {
                     <Phone className="w-5 h-5" /> (713) 529-1177
                   </a>
                   <Link
-                    href="/contact"
+                    href="/contact-us"
                     className="block text-center bg-secondary hover:bg-secondary/90 text-white font-bold py-3 px-4 text-sm uppercase tracking-wide"
                   >
                     Contact Us
@@ -304,7 +304,7 @@ export default function BlogPost() {
                     <Link href="/cases-we-handle" className="block text-sm text-slate-600 hover:text-secondary transition-colors">
                       Cases We Handle
                     </Link>
-                    <Link href="/about" className="block text-sm text-slate-600 hover:text-secondary transition-colors">
+                    <Link href="/about-thomas-wan-llp" className="block text-sm text-slate-600 hover:text-secondary transition-colors">
                       About Our Firm
                     </Link>
                     <Link href="/testimonials" className="block text-sm text-slate-600 hover:text-secondary transition-colors">

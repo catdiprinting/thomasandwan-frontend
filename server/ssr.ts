@@ -170,10 +170,10 @@ function wrapInLayout(content: string, title: string, description: string, optio
     <div class="nav-inner">
       <a href="/">Thomas & Wan</a>
       <div class="nav-links">
-        <a href="/about">About</a>
+        <a href="/about-thomas-wan-llp">About</a>
         <a href="/cases-we-handle">Cases</a>
         <a href="/blog">Blog</a>
-        <a href="/contact">Contact</a>
+        <a href="/contact-us">Contact</a>
       </div>
     </div>
   </nav>
@@ -226,7 +226,7 @@ export async function renderBlogPost(slug: string): Promise<string | null> {
       <div class="cta">
         <h3>Talk to an Attorney</h3>
         <p>If you believe medical negligence played a role in your situation, reach out for a free consultation.</p>
-        <a href="/contact">Contact Thomas & Wan</a>
+        <a href="/contact-us">Contact Thomas & Wan</a>
       </div>
     </article>
   `;
@@ -278,7 +278,7 @@ export async function renderBlogIndex(): Promise<string> {
         <div class="cta" style="margin-top: 60px;">
           <h3>Need help with a case?</h3>
           <p>If you believe medical negligence played a role in your situation, reach out for a free consultation.</p>
-          <a href="/contact">Contact Us</a>
+          <a href="/contact-us">Contact Us</a>
         </div>
       </div>
     </section>
@@ -308,7 +308,7 @@ export function renderHomepage(): string {
             Linda Thomas and Michelle Wan fight for the answers and compensation you deserve.
           </p>
           <div style="display: flex; gap: 16px; margin-top: 32px;">
-            <a href="/contact" class="btn">Schedule Free Consultation</a>
+            <a href="/contact-us" class="btn">Schedule Free Consultation</a>
           </div>
           <div style="display: flex; gap: 24px; margin-top: 32px; color: #1F2937;">
             <span>● Available 24/7</span>
@@ -349,7 +349,7 @@ export function renderHomepage(): string {
           <div class="card" style="background: #1F2937; color: #fff;">
             <h3 style="font-size: 1.5rem; margin-bottom: 12px; color: #fff;">Do You Have a Case?</h3>
             <p style="color: rgba(255,255,255,0.8); margin-bottom: 16px;">Get a free review of your medical records by our expert team.</p>
-            <a href="/contact" class="btn">Contact Us Today</a>
+            <a href="/contact-us" class="btn">Contact Us Today</a>
           </div>
         </div>
       </div>
@@ -430,7 +430,7 @@ export function renderHomepage(): string {
             <div class="cta" style="margin-top: 32px; text-align: left;">
               <h3>Still have questions?</h3>
               <p>We are available 24/7 to answer your questions and help you understand your rights.</p>
-              <a href="/contact">Contact Us Now</a>
+              <a href="/contact-us">Contact Us Now</a>
             </div>
           </div>
           <div>
@@ -608,7 +608,7 @@ export function renderAbout(): string {
     content,
     "About Our Firm - Medical Malpractice Attorneys",
     "Linda Thomas and Michelle Wan are compassionate Texas medical malpractice lawyers with over 55 years of combined experience fighting for families.",
-    { canonicalPath: "/about" }
+    { canonicalPath: "/about-thomas-wan-llp" }
   );
 }
 
@@ -632,7 +632,7 @@ export function renderCases(): string {
             <p style="color: #64748b; line-height: 1.8;">
               We've successfully handled numerous multi-million dollar cases related to serious medical malpractice and wrongful death issues across the nation. We're not afraid to take on challenging cases, and our commitment to justice is unwavering.
             </p>
-            <a href="/contact" class="btn" style="margin-top: 32px;">Request a Free Consultation</a>
+            <a href="/contact-us" class="btn" style="margin-top: 32px;">Request a Free Consultation</a>
           </div>
           <div>
             <div class="grid-2" style="gap: 16px;">
@@ -672,7 +672,7 @@ export function renderCases(): string {
         <p style="color: rgba(255,255,255,0.8); margin: 16px 0 32px; font-size: 1.125rem;">
           Call us today for a free consultation—we will discuss what your legal options are for your medical malpractice case. If you have the medical records, you can send them to us for a free review with no obligation.
         </p>
-        <a href="/contact" class="btn">Contact Us</a>
+        <a href="/contact-us" class="btn">Contact Us</a>
       </div>
     </section>
   `;
@@ -771,7 +771,7 @@ export function renderContact(): string {
     content,
     "Contact Us - Free Consultation",
     "Contact Thomas & Wan for a free medical malpractice consultation. Call (713) 529-1177 or email info@thomasandwan.com. No fee unless we win.",
-    { canonicalPath: "/contact" }
+    { canonicalPath: "/contact-us" }
   );
 }
 
@@ -812,7 +812,7 @@ export function renderFAQ(): string {
               <p style="color: #64748b; line-height: 1.8;">
                 This page is designed to be easier to scan and more helpful than the typical FAQ. If you don't see your question here, call us.
               </p>
-              <a href="/contact" class="btn" style="margin-top: 24px;">Contact Us</a>
+              <a href="/contact-us" class="btn" style="margin-top: 24px;">Contact Us</a>
             </div>
             <div class="cta" style="margin-top: 24px;">
               <div style="font-size: 2.5rem; color: #F59E0B;">24/7</div>
@@ -825,7 +825,7 @@ export function renderFAQ(): string {
             <div class="cta" style="margin-top: 48px; text-align: left;">
               <h3>Call Us Now For a Free Consultation</h3>
               <p>Call us today for a free consultation—we will discuss what your legal options are for your medical malpractice case. If you have the medical records, you can send them to us for a free review with no obligation.</p>
-              <a href="/contact">Contact Us</a>
+              <a href="/contact-us">Contact Us</a>
             </div>
           </div>
         </div>
@@ -885,7 +885,7 @@ export function renderTestimonials(): string {
         <p style="color: rgba(255,255,255,0.8); margin: 16px 0 32px; font-size: 1.125rem;">
           If you or a loved one has suffered due to medical negligence, we are here to listen. Contact us today for a free, confidential consultation.
         </p>
-        <a href="/contact" class="btn" style="font-size: 1.25rem; padding: 20px 40px;">Share Your Story With Us</a>
+        <a href="/contact-us" class="btn" style="font-size: 1.25rem; padding: 20px 40px;">Share Your Story With Us</a>
       </div>
     </section>
   `;
@@ -935,7 +935,7 @@ export function renderMedicalMalpractice(): string {
               <p style="color: #64748b; line-height: 1.8;">
                 Claims against negligent hospitals, nurses, doctors, pharmacists, medical technicians, and other providers.
               </p>
-              <a href="/contact" class="btn" style="margin-top: 24px;">Request Free Consultation</a>
+              <a href="/contact-us" class="btn" style="margin-top: 24px;">Request Free Consultation</a>
             </div>
           </div>
           <div class="grid-2" style="gap: 20px;">
@@ -946,7 +946,7 @@ export function renderMedicalMalpractice(): string {
         <div class="cta" style="margin-top: 64px; text-align: left;">
           <h3>Call Us Now For a Free Consultation</h3>
           <p>Call us today for a free consultation—we will discuss what your legal options are for your medical malpractice case. If you have medical records, you can send them to us for a free review with no obligation.</p>
-          <a href="/contact">Contact Us</a>
+          <a href="/contact-us">Contact Us</a>
         </div>
       </div>
     </section>
@@ -1201,7 +1201,7 @@ export async function renderAuthorPage(slug: string): Promise<string | null> {
     <div class="cta container" style="margin-bottom: 48px;">
       <h3>Need Legal Help?</h3>
       <p>If you believe medical negligence played a role in your situation, reach out for a free consultation.</p>
-      <a href="/contact">Contact Us Today</a>
+      <a href="/contact-us">Contact Us Today</a>
     </div>
   `;
 
@@ -1248,7 +1248,7 @@ export async function renderCategoryPage(slug: string): Promise<string | null> {
     <div class="cta container" style="margin-bottom: 48px;">
       <h3>Need Legal Help?</h3>
       <p>If you believe medical negligence played a role in your situation, reach out for a free consultation.</p>
-      <a href="/contact">Contact Us Today</a>
+      <a href="/contact-us">Contact Us Today</a>
     </div>
   `;
 

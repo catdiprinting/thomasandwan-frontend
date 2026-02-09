@@ -65,7 +65,7 @@ export default function Cases() {
               </div>
               <div className="mt-10">
                 <Link
-                  href="/contact"
+                  href="/contact-us"
                   className="inline-flex items-center gap-2 bg-secondary hover:bg-secondary/90 text-white font-bold px-8 py-4 rounded-none uppercase tracking-widest text-sm"
                   data-testid="link-contact-from-cases"
                 >
@@ -121,7 +121,7 @@ export default function Cases() {
               Call us today for a free consultation—we will discuss what your legal options are for your medical malpractice case. If you have the medical records, you can send them to us for a free review with no obligation.
             </p>
             <Link
-              href="/contact"
+              href="/contact-us"
               className="inline-flex items-center gap-2 bg-secondary hover:bg-secondary/90 text-white font-bold px-10 py-4 rounded-none uppercase tracking-widest text-sm"
               data-testid="link-cases-cta"
             >
