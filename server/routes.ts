@@ -1,5 +1,6 @@
 import type { Express, Request, Response } from "express";
 import { createServer, type Server } from "http";
+import OpenAI from "openai";
 import { storage } from "./storage";
 import {
   fetchPosts,
@@ -368,6 +369,98 @@ export async function registerRoutes(
     } catch (error) {
       console.error("Error checking export status:", error);
       res.status(500).json({ error: "Failed to check export status" });
+    }
+  });
+
+  // OpenAI Assistant API
+  const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
+  const assistantId = process.env.OPENAI_ASSISTANT_ID || "";
+
+  app.post("/api/assistant/thread", async (req: Request, res: Response) => {
+    try {
+      const thread = await openai.beta.threads.create();
+      res.json({ threadId: thread.id });
+    } catch (error: any) {
+      console.error("Error creating thread:", error);
+      res.status(500).json({ error: error.message || "Failed to create thread" });
+    }
+  });
+
+  app.post("/api/assistant/message", async (req: Request, res: Response) => {
+    try {
+      const { threadId, message } = req.body;
+      if (!threadId || !message) {
+        res.status(400).json({ error: "threadId and message are required" });
+        return;
+      }
+
+      await openai.beta.threads.messages.create(threadId, {
+        role: "user",
+        content: message,
+      });
+
+      const run = await openai.beta.threads.runs.create(threadId, {
+        assistant_id: assistantId,
+      });
+
+      let runStatus = await openai.beta.threads.runs.retrieve(run.id, { thread_id: threadId as string });
+      let attempts = 0;
+      while (runStatus.status !== "completed" && runStatus.status !== "failed" && attempts < 60) {
+        await new Promise((resolve) => setTimeout(resolve, 1000));
+        runStatus = await openai.beta.threads.runs.retrieve(run.id, { thread_id: threadId as string });
+        attempts++;
+      }
+
+      if (runStatus.status === "failed") {
+        res.status(500).json({ error: "Assistant run failed", details: runStatus.last_error });
+        return;
+      }
+
+      if (runStatus.status !== "completed") {
+        res.status(504).json({ error: "Assistant timed out" });
+        return;
+      }
+
+      const messages = await openai.beta.threads.messages.list(threadId);
+      const assistantMessage = messages.data.find((m) => m.role === "assistant");
+
+      if (!assistantMessage) {
+        res.status(500).json({ error: "No response from assistant" });
+        return;
+      }
+
+      const content = assistantMessage.content
+        .filter((c) => c.type === "text")
+        .map((c) => (c as any).text.value)
+        .join("\n");
+
+      res.json({ response: content, threadId });
+    } catch (error: any) {
+      console.error("Error sending message:", error);
+      res.status(500).json({ error: error.message || "Failed to send message" });
+    }
+  });
+
+  app.get("/api/assistant/history/:threadId", async (req: Request, res: Response) => {
+    try {
+      const threadId = req.params.threadId as string;
+      const messages = await openai.beta.threads.messages.list(threadId);
+      
+      const history = messages.data
+        .map((m) => ({
+          role: m.role,
+          content: m.content
+            .filter((c) => c.type === "text")
+            .map((c) => (c as any).text.value)
+            .join("\n"),
+          createdAt: m.created_at,
+        }))
+        .reverse();
+
+      res.json({ messages: history });
+    } catch (error: any) {
+      console.error("Error fetching history:", error);
+      res.status(500).json({ error: error.message || "Failed to fetch history" });
     }
   });
 
