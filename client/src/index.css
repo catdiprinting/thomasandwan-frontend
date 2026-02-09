@@ -255,7 +255,7 @@
 }
 
 .wp-content .key-point::before {
-  content: "\u2696\uFE0F";
+  content: "⚖️";
   font-size: 1.5rem;
   flex-shrink: 0;
 }
