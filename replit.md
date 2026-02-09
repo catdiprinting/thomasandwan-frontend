@@ -69,13 +69,24 @@ shared/           # Shared code between client/server
 - `GET /api/export/page/:slug` - Export a page as standalone HTML file
 - `GET /api/export/all-posts` - Export all posts as JSON with HTML content
 
+### OpenAI Assistant Endpoints
+- `POST /api/assistant/thread` - Create a new conversation thread
+- `POST /api/assistant/message` - Send a message to the assistant (body: `{ threadId, message }`)
+- `GET /api/assistant/history/:threadId` - Fetch conversation history for a thread
+
+### SEO & Feed Endpoints
+- `GET /sitemap.xml` - Dynamic XML sitemap with all posts, categories, pages (1-hour cache)
+- `GET /robots.txt` - Robots file pointing to sitemap, allows all crawling except /api/
+- `GET /feed` - RSS 2.0 feed with latest 20 blog posts
+
 ### SSR Endpoints (SEO-Friendly)
 - `GET /:slug` - Server-rendered blog post at root level with full content, Open Graph tags, and featured images
 
 ## External Dependencies
 
 ### Third-Party Services
-- **WordPress REST API**: External CMS at `thomasandwan.com/test/wp-json/wp/v2` provides blog posts, pages, and media
+- **WordPress REST API**: External CMS at `wp.thomasandwan.com/wp-json/wp/v2` provides blog posts, pages, and media
+- **OpenAI Assistants API**: Connected via user's own API key and Assistant ID for content creation (secrets: `OPENAI_API_KEY`, `OPENAI_ASSISTANT_ID`)
 - **Google Fonts**: Typography loaded from fonts.googleapis.com
 
 ### Database
