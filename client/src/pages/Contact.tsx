@@ -1,5 +1,5 @@
 import { useMemo, useState } from "react";
-import { MapPin, Phone, Mail, Clock, ArrowRight, CheckCircle2, ShieldCheck, Scale, Loader2, AlertCircle } from "lucide-react";
+import { MapPin, Phone, Mail, Clock, CheckCircle2, ShieldCheck, Scale, Loader2, AlertCircle } from "lucide-react";
 import PageShell from "@/components/PageShell";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -179,13 +179,18 @@ export default function Contact() {
                   </div>
                 </div>
 
-                <a
-                  href="https://www.thomasandwan.com/"
-                  className="inline-flex items-center gap-2 text-primary font-bold uppercase tracking-wider hover:text-secondary transition-colors"
-                  data-testid="link-back-to-main"
-                >
-                  Visit Main Website <ArrowRight className="w-4 h-4" />
-                </a>
+                <div className="rounded-2xl overflow-hidden border border-slate-200/70 shadow-sm" data-testid="map-embed">
+                  <iframe
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3464.8771854130096!2d-95.4019524!3d29.723316600000004!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8640c07d09b07ce9%3A0x48003f69a9f01ca5!2sThomas%20%26%20Wan%20%E2%80%93%20Medical%20Malpractice%20Attorneys!5e0!3m2!1sen!2sus!4v1731813785586!5m2!1sen!2sus"
+                    width="100%"
+                    height="280"
+                    style={{ border: 0 }}
+                    allowFullScreen
+                    loading="lazy"
+                    referrerPolicy="no-referrer-when-downgrade"
+                    title="Thomas & Wan Office Location"
+                  />
+                </div>
               </div>
             </div>
 
