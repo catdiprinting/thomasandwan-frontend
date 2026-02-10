@@ -386,6 +386,18 @@ export async function registerRoutes(
     }
   });
 
+  // Manual sync endpoint - triggers WordPress cache population
+  app.post("/api/sync-wordpress", async (_req: Request, res: Response) => {
+    try {
+      const { syncWordPressCache } = await import("./wp-sync");
+      await syncWordPressCache();
+      res.json({ success: true, message: "WordPress cache sync completed" });
+    } catch (error: any) {
+      console.error("Error syncing WordPress cache:", error);
+      res.status(500).json({ error: error.message || "Sync failed" });
+    }
+  });
+
   // OpenAI Assistant API
   const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
   const assistantId = process.env.OPENAI_ASSISTANT_ID || "";
