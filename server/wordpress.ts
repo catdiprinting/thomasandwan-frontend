@@ -1,4 +1,15 @@
+process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
+
 const WP_API_BASE = process.env.WP_API_BASE || "https://wp.thomasandwan.com/wp-json/wp/v2";
+
+async function wpFetch(url: string): Promise<Response> {
+  return fetch(url, {
+    headers: {
+      "Accept": "application/json",
+      "User-Agent": "ThomasWanWebsite/1.0",
+    },
+  });
+}
 
 export interface WPPost {
   id: number;
@@ -81,7 +92,7 @@ export async function fetchPosts(params?: {
   if (params?.search) searchParams.set("search", params.search);
 
   const url = `${WP_API_BASE}/posts?${searchParams.toString()}`;
-  const response = await fetch(url);
+  const response = await wpFetch(url);
   if (!response.ok) {
     throw new Error(`Failed to fetch posts: ${response.status}`);
   }
@@ -97,7 +108,7 @@ export async function fetchPostsWithPagination(params?: {
   if (params?.page) searchParams.set("page", String(params.page));
 
   const url = `${WP_API_BASE}/posts?${searchParams.toString()}`;
-  const response = await fetch(url);
+  const response = await wpFetch(url);
   if (!response.ok) {
     throw new Error(`Failed to fetch posts: ${response.status}`);
   }
@@ -109,7 +120,7 @@ export async function fetchPostsWithPagination(params?: {
 
 export async function fetchPostBySlug(slug: string): Promise<WPPost | null> {
   const url = `${WP_API_BASE}/posts?slug=${encodeURIComponent(slug)}`;
-  const response = await fetch(url);
+  const response = await wpFetch(url);
   if (!response.ok) {
     throw new Error(`Failed to fetch post: ${response.status}`);
   }
@@ -119,7 +130,7 @@ export async function fetchPostBySlug(slug: string): Promise<WPPost | null> {
 
 export async function fetchPostById(id: number): Promise<WPPost | null> {
   const url = `${WP_API_BASE}/posts/${id}`;
-  const response = await fetch(url);
+  const response = await wpFetch(url);
   if (!response.ok) {
     if (response.status === 404) return null;
     throw new Error(`Failed to fetch post: ${response.status}`);
@@ -138,7 +149,7 @@ export async function fetchPages(params?: {
   if (params?.parent !== undefined) searchParams.set("parent", String(params.parent));
 
   const url = `${WP_API_BASE}/pages?${searchParams.toString()}`;
-  const response = await fetch(url);
+  const response = await wpFetch(url);
   if (!response.ok) {
     throw new Error(`Failed to fetch pages: ${response.status}`);
   }
@@ -147,7 +158,7 @@ export async function fetchPages(params?: {
 
 export async function fetchPageBySlug(slug: string): Promise<WPPage | null> {
   const url = `${WP_API_BASE}/pages?slug=${encodeURIComponent(slug)}&_embed`;
-  const response = await fetch(url);
+  const response = await wpFetch(url);
   if (!response.ok) {
     throw new Error(`Failed to fetch page: ${response.status}`);
   }
@@ -168,7 +179,7 @@ export async function fetchPageWithMedia(slug: string): Promise<(WPPage & { feat
 
 export async function fetchMedia(id: number): Promise<WPMedia | null> {
   const url = `${WP_API_BASE}/media/${id}`;
-  const response = await fetch(url);
+  const response = await wpFetch(url);
   if (!response.ok) {
     if (response.status === 404) return null;
     throw new Error(`Failed to fetch media: ${response.status}`);
@@ -178,7 +189,7 @@ export async function fetchMedia(id: number): Promise<WPMedia | null> {
 
 export async function fetchCategories(): Promise<WPCategory[]> {
   const url = `${WP_API_BASE}/categories?per_page=100`;
-  const response = await fetch(url);
+  const response = await wpFetch(url);
   if (!response.ok) {
     throw new Error(`Failed to fetch categories: ${response.status}`);
   }
@@ -187,7 +198,7 @@ export async function fetchCategories(): Promise<WPCategory[]> {
 
 export async function fetchAuthor(id: number): Promise<WPAuthor | null> {
   const url = `${WP_API_BASE}/users/${id}`;
-  const response = await fetch(url);
+  const response = await wpFetch(url);
   if (!response.ok) {
     if (response.status === 404) return null;
     throw new Error(`Failed to fetch author: ${response.status}`);
@@ -198,7 +209,7 @@ export async function fetchAuthor(id: number): Promise<WPAuthor | null> {
 export async function fetchCategoriesByIds(ids: number[]): Promise<WPCategory[]> {
   if (ids.length === 0) return [];
   const url = `${WP_API_BASE}/categories?include=${ids.join(",")}`;
-  const response = await fetch(url);
+  const response = await wpFetch(url);
   if (!response.ok) {
     throw new Error(`Failed to fetch categories: ${response.status}`);
   }
@@ -226,7 +237,7 @@ export async function fetchPostsWithMedia(params?: {
 
 export async function fetchAuthorBySlug(slug: string): Promise<WPAuthor | null> {
   const url = `${WP_API_BASE}/users?slug=${encodeURIComponent(slug)}`;
-  const response = await fetch(url);
+  const response = await wpFetch(url);
   if (!response.ok) {
     throw new Error(`Failed to fetch author: ${response.status}`);
   }
@@ -236,7 +247,7 @@ export async function fetchAuthorBySlug(slug: string): Promise<WPAuthor | null> 
 
 export async function fetchCategoryBySlug(slug: string): Promise<WPCategory | null> {
   const url = `${WP_API_BASE}/categories?slug=${encodeURIComponent(slug)}`;
-  const response = await fetch(url);
+  const response = await wpFetch(url);
   if (!response.ok) {
     throw new Error(`Failed to fetch category: ${response.status}`);
   }
@@ -254,7 +265,7 @@ export async function fetchPostsByAuthor(authorId: number, params?: {
   if (params?.page) searchParams.set("page", String(params.page));
 
   const url = `${WP_API_BASE}/posts?${searchParams.toString()}`;
-  const response = await fetch(url);
+  const response = await wpFetch(url);
   if (!response.ok) {
     throw new Error(`Failed to fetch posts by author: ${response.status}`);
   }
@@ -271,7 +282,7 @@ export async function fetchPostsByCategory(categoryId: number, params?: {
   if (params?.page) searchParams.set("page", String(params.page));
 
   const url = `${WP_API_BASE}/posts?${searchParams.toString()}`;
-  const response = await fetch(url);
+  const response = await wpFetch(url);
   if (!response.ok) {
     throw new Error(`Failed to fetch posts by category: ${response.status}`);
   }
