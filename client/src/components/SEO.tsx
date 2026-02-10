@@ -85,8 +85,10 @@ export const lawFirmSchema = {
   "email": "info@thomasandwan.com",
   "address": {
     "@type": "PostalAddress",
+    "streetAddress": "1710 Sunset Blvd",
     "addressLocality": "Houston",
     "addressRegion": "TX",
+    "postalCode": "77005",
     "addressCountry": "US"
   },
   "areaServed": {
