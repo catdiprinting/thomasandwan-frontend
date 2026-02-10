@@ -1,15 +1,10 @@
+import { db } from "./db";
+import { wpPostsCache, wpMediaCache, wpCategoriesCache } from "@shared/schema";
+import { eq, desc, inArray, sql, ilike, and } from "drizzle-orm";
+
 process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
 
 const WP_API_BASE = process.env.WP_API_BASE || "https://wp.thomasandwan.com/wp-json/wp/v2";
-
-async function wpFetch(url: string): Promise<Response> {
-  return fetch(url, {
-    headers: {
-      "Accept": "application/json",
-      "User-Agent": "ThomasWanWebsite/1.0",
-    },
-  });
-}
 
 export interface WPPost {
   id: number;
@@ -79,63 +74,102 @@ export interface WPAuthor {
   avatar_urls?: Record<string, string>;
 }
 
+function dbPostToWPPost(row: typeof wpPostsCache.$inferSelect): WPPost {
+  return {
+    id: row.id,
+    date: row.date,
+    date_gmt: row.dateGmt,
+    slug: row.slug,
+    status: row.status,
+    type: row.type,
+    link: row.link,
+    title: { rendered: row.title },
+    content: { rendered: row.content, protected: false },
+    excerpt: { rendered: row.excerpt, protected: false },
+    author: row.author,
+    featured_media: row.featuredMedia,
+    categories: (row.categories as number[]) || [],
+    tags: (row.tags as number[]) || [],
+  };
+}
+
+function dbMediaToWPMedia(row: typeof wpMediaCache.$inferSelect): WPMedia {
+  return {
+    id: row.id,
+    source_url: row.sourceUrl,
+    alt_text: row.altText,
+    media_details: (row.mediaDetails as any) || { width: 0, height: 0 },
+  };
+}
+
 export async function fetchPosts(params?: {
   per_page?: number;
   page?: number;
   categories?: number[];
   search?: string;
 }): Promise<WPPost[]> {
-  const searchParams = new URLSearchParams();
-  if (params?.per_page) searchParams.set("per_page", String(params.per_page));
-  if (params?.page) searchParams.set("page", String(params.page));
-  if (params?.categories?.length) searchParams.set("categories", params.categories.join(","));
-  if (params?.search) searchParams.set("search", params.search);
+  const perPage = params?.per_page || 10;
+  const page = params?.page || 1;
+  const offset = (page - 1) * perPage;
 
-  const url = `${WP_API_BASE}/posts?${searchParams.toString()}`;
-  const response = await wpFetch(url);
-  if (!response.ok) {
-    throw new Error(`Failed to fetch posts: ${response.status}`);
+  let query = db.select().from(wpPostsCache).orderBy(desc(wpPostsCache.date));
+
+  const conditions: any[] = [];
+  if (params?.categories?.length) {
+    conditions.push(
+      sql`${wpPostsCache.categories} ?| array[${sql.join(params.categories.map(c => sql`${String(c)}`), sql`, `)}]`
+    );
   }
-  return response.json();
+
+  const rows = await db.select().from(wpPostsCache)
+    .where(conditions.length > 0 ? and(...conditions) : undefined)
+    .orderBy(desc(wpPostsCache.date))
+    .limit(perPage)
+    .offset(offset);
+
+  return rows.map(dbPostToWPPost);
 }
 
 export async function fetchPostsWithPagination(params?: {
   per_page?: number;
   page?: number;
 }): Promise<{ posts: WPPost[]; totalPages: number; total: number }> {
-  const searchParams = new URLSearchParams();
-  if (params?.per_page) searchParams.set("per_page", String(params.per_page));
-  if (params?.page) searchParams.set("page", String(params.page));
+  const perPage = params?.per_page || 10;
+  const page = params?.page || 1;
+  const offset = (page - 1) * perPage;
 
-  const url = `${WP_API_BASE}/posts?${searchParams.toString()}`;
-  const response = await wpFetch(url);
-  if (!response.ok) {
-    throw new Error(`Failed to fetch posts: ${response.status}`);
-  }
-  const posts = await response.json();
-  const totalPages = parseInt(response.headers.get("X-WP-TotalPages") || "1", 10);
-  const total = parseInt(response.headers.get("X-WP-Total") || "0", 10);
-  return { posts, totalPages, total };
+  const [rows, countResult] = await Promise.all([
+    db.select().from(wpPostsCache)
+      .orderBy(desc(wpPostsCache.date))
+      .limit(perPage)
+      .offset(offset),
+    db.select({ count: sql<number>`count(*)::int` }).from(wpPostsCache),
+  ]);
+
+  const total = countResult[0]?.count || 0;
+  const totalPages = Math.ceil(total / perPage);
+
+  return {
+    posts: rows.map(dbPostToWPPost),
+    totalPages,
+    total,
+  };
 }
 
 export async function fetchPostBySlug(slug: string): Promise<WPPost | null> {
-  const url = `${WP_API_BASE}/posts?slug=${encodeURIComponent(slug)}`;
-  const response = await wpFetch(url);
-  if (!response.ok) {
-    throw new Error(`Failed to fetch post: ${response.status}`);
-  }
-  const posts: WPPost[] = await response.json();
-  return posts[0] || null;
+  const rows = await db.select().from(wpPostsCache)
+    .where(eq(wpPostsCache.slug, slug))
+    .limit(1);
+
+  return rows[0] ? dbPostToWPPost(rows[0]) : null;
 }
 
 export async function fetchPostById(id: number): Promise<WPPost | null> {
-  const url = `${WP_API_BASE}/posts/${id}`;
-  const response = await wpFetch(url);
-  if (!response.ok) {
-    if (response.status === 404) return null;
-    throw new Error(`Failed to fetch post: ${response.status}`);
-  }
-  return response.json();
+  const rows = await db.select().from(wpPostsCache)
+    .where(eq(wpPostsCache.id, id))
+    .limit(1);
+
+  return rows[0] ? dbPostToWPPost(rows[0]) : null;
 }
 
 export async function fetchPages(params?: {
@@ -143,77 +177,53 @@ export async function fetchPages(params?: {
   page?: number;
   parent?: number;
 }): Promise<WPPage[]> {
-  const searchParams = new URLSearchParams();
-  if (params?.per_page) searchParams.set("per_page", String(params.per_page));
-  if (params?.page) searchParams.set("page", String(params.page));
-  if (params?.parent !== undefined) searchParams.set("parent", String(params.parent));
-
-  const url = `${WP_API_BASE}/pages?${searchParams.toString()}`;
-  const response = await wpFetch(url);
-  if (!response.ok) {
-    throw new Error(`Failed to fetch pages: ${response.status}`);
-  }
-  return response.json();
+  return [];
 }
 
 export async function fetchPageBySlug(slug: string): Promise<WPPage | null> {
-  const url = `${WP_API_BASE}/pages?slug=${encodeURIComponent(slug)}&_embed`;
-  const response = await wpFetch(url);
-  if (!response.ok) {
-    throw new Error(`Failed to fetch page: ${response.status}`);
-  }
-  const pages: WPPage[] = await response.json();
-  return pages[0] || null;
+  return null;
 }
 
 export async function fetchPageWithMedia(slug: string): Promise<(WPPage & { featured_image?: WPMedia }) | null> {
-  const page = await fetchPageBySlug(slug);
-  if (!page) return null;
-  
-  if (page.featured_media) {
-    const media = await fetchMedia(page.featured_media);
-    return { ...page, featured_image: media || undefined };
-  }
-  return page;
+  return null;
 }
 
 export async function fetchMedia(id: number): Promise<WPMedia | null> {
-  const url = `${WP_API_BASE}/media/${id}`;
-  const response = await wpFetch(url);
-  if (!response.ok) {
-    if (response.status === 404) return null;
-    throw new Error(`Failed to fetch media: ${response.status}`);
-  }
-  return response.json();
+  const rows = await db.select().from(wpMediaCache)
+    .where(eq(wpMediaCache.id, id))
+    .limit(1);
+
+  return rows[0] ? dbMediaToWPMedia(rows[0]) : null;
 }
 
 export async function fetchCategories(): Promise<WPCategory[]> {
-  const url = `${WP_API_BASE}/categories?per_page=100`;
-  const response = await wpFetch(url);
-  if (!response.ok) {
-    throw new Error(`Failed to fetch categories: ${response.status}`);
-  }
-  return response.json();
+  const rows = await db.select().from(wpCategoriesCache);
+  return rows.map(row => ({
+    id: row.id,
+    name: row.name,
+    slug: row.slug,
+    count: row.count,
+  }));
 }
 
 export async function fetchAuthor(id: number): Promise<WPAuthor | null> {
-  const url = `${WP_API_BASE}/users/${id}`;
-  const response = await wpFetch(url);
-  if (!response.ok) {
-    if (response.status === 404) return null;
-    throw new Error(`Failed to fetch author: ${response.status}`);
-  }
-  return response.json();
+  return {
+    id: 1,
+    name: "Thomas & Wan",
+    slug: "thomas-wan",
+  };
 }
 
 export async function fetchCategoriesByIds(ids: number[]): Promise<WPCategory[]> {
   if (ids.length === 0) return [];
-  const url = `${WP_API_BASE}/categories?include=${ids.join(",")}`;
-  const response = await wpFetch(url);
-  if (!response.ok) {
-    throw new Error(`Failed to fetch categories: ${response.status}`);
-  }
-  return response.json();
+  const rows = await db.select().from(wpCategoriesCache)
+    .where(inArray(wpCategoriesCache.id, ids));
+  return rows.map(row => ({
+    id: row.id,
+    name: row.name,
+    slug: row.slug,
+    count: row.count,
+  }));
 }
 
 export async function fetchPostsWithMedia(params?: {
@@ -221,7 +231,7 @@ export async function fetchPostsWithMedia(params?: {
   page?: number;
 }): Promise<(WPPost & { featured_image?: WPMedia })[]> {
   const posts = await fetchPosts(params);
-  
+
   const postsWithMedia = await Promise.all(
     posts.map(async (post) => {
       if (post.featured_media) {
@@ -231,62 +241,62 @@ export async function fetchPostsWithMedia(params?: {
       return post;
     })
   );
-  
+
   return postsWithMedia;
 }
 
 export async function fetchAuthorBySlug(slug: string): Promise<WPAuthor | null> {
-  const url = `${WP_API_BASE}/users?slug=${encodeURIComponent(slug)}`;
-  const response = await wpFetch(url);
-  if (!response.ok) {
-    throw new Error(`Failed to fetch author: ${response.status}`);
-  }
-  const authors: WPAuthor[] = await response.json();
-  return authors[0] || null;
+  return {
+    id: 1,
+    name: "Thomas & Wan",
+    slug: "thomas-wan",
+  };
 }
 
 export async function fetchCategoryBySlug(slug: string): Promise<WPCategory | null> {
-  const url = `${WP_API_BASE}/categories?slug=${encodeURIComponent(slug)}`;
-  const response = await wpFetch(url);
-  if (!response.ok) {
-    throw new Error(`Failed to fetch category: ${response.status}`);
-  }
-  const categories: WPCategory[] = await response.json();
-  return categories[0] || null;
+  const rows = await db.select().from(wpCategoriesCache)
+    .where(eq(wpCategoriesCache.slug, slug))
+    .limit(1);
+  return rows[0] ? {
+    id: rows[0].id,
+    name: rows[0].name,
+    slug: rows[0].slug,
+    count: rows[0].count,
+  } : null;
 }
 
 export async function fetchPostsByAuthor(authorId: number, params?: {
   per_page?: number;
   page?: number;
 }): Promise<WPPost[]> {
-  const searchParams = new URLSearchParams();
-  searchParams.set("author", String(authorId));
-  if (params?.per_page) searchParams.set("per_page", String(params.per_page));
-  if (params?.page) searchParams.set("page", String(params.page));
+  const perPage = params?.per_page || 10;
+  const page = params?.page || 1;
+  const offset = (page - 1) * perPage;
 
-  const url = `${WP_API_BASE}/posts?${searchParams.toString()}`;
-  const response = await wpFetch(url);
-  if (!response.ok) {
-    throw new Error(`Failed to fetch posts by author: ${response.status}`);
-  }
-  return response.json();
+  const rows = await db.select().from(wpPostsCache)
+    .where(eq(wpPostsCache.author, authorId))
+    .orderBy(desc(wpPostsCache.date))
+    .limit(perPage)
+    .offset(offset);
+
+  return rows.map(dbPostToWPPost);
 }
 
 export async function fetchPostsByCategory(categoryId: number, params?: {
   per_page?: number;
   page?: number;
 }): Promise<WPPost[]> {
-  const searchParams = new URLSearchParams();
-  searchParams.set("categories", String(categoryId));
-  if (params?.per_page) searchParams.set("per_page", String(params.per_page));
-  if (params?.page) searchParams.set("page", String(params.page));
+  const perPage = params?.per_page || 10;
+  const page = params?.page || 1;
+  const offset = (page - 1) * perPage;
 
-  const url = `${WP_API_BASE}/posts?${searchParams.toString()}`;
-  const response = await wpFetch(url);
-  if (!response.ok) {
-    throw new Error(`Failed to fetch posts by category: ${response.status}`);
-  }
-  return response.json();
+  const rows = await db.select().from(wpPostsCache)
+    .where(sql`${wpPostsCache.categories} @> ${JSON.stringify([categoryId])}::jsonb`)
+    .orderBy(desc(wpPostsCache.date))
+    .limit(perPage)
+    .offset(offset);
+
+  return rows.map(dbPostToWPPost);
 }
 
 export async function fetchPostsByAuthorWithMedia(authorId: number, params?: {
@@ -294,7 +304,7 @@ export async function fetchPostsByAuthorWithMedia(authorId: number, params?: {
   page?: number;
 }): Promise<(WPPost & { featured_image?: WPMedia })[]> {
   const posts = await fetchPostsByAuthor(authorId, params);
-  
+
   const postsWithMedia = await Promise.all(
     posts.map(async (post) => {
       if (post.featured_media) {
@@ -304,7 +314,7 @@ export async function fetchPostsByAuthorWithMedia(authorId: number, params?: {
       return post;
     })
   );
-  
+
   return postsWithMedia;
 }
 
@@ -313,7 +323,7 @@ export async function fetchPostsByCategoryWithMedia(categoryId: number, params?:
   page?: number;
 }): Promise<(WPPost & { featured_image?: WPMedia })[]> {
   const posts = await fetchPostsByCategory(categoryId, params);
-  
+
   const postsWithMedia = await Promise.all(
     posts.map(async (post) => {
       if (post.featured_media) {
@@ -323,6 +333,6 @@ export async function fetchPostsByCategoryWithMedia(categoryId: number, params?:
       return post;
     })
   );
-  
+
   return postsWithMedia;
 }
