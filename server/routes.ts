@@ -398,6 +398,18 @@ export async function registerRoutes(
     }
   });
 
+  // Refresh cache - pulls updated content from WordPress
+  app.post("/api/refresh-wordpress", async (_req: Request, res: Response) => {
+    try {
+      const { refreshWordPressCache } = await import("./wp-sync");
+      const result = await refreshWordPressCache();
+      res.json({ success: true, message: "WordPress cache refreshed", ...result });
+    } catch (error: any) {
+      console.error("Error refreshing WordPress cache:", error);
+      res.status(500).json({ error: error.message || "Refresh failed" });
+    }
+  });
+
   // Push content to WordPress
   app.post("/api/push-to-wordpress", async (_req: Request, res: Response) => {
     try {

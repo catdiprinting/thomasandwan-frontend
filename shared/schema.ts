@@ -22,6 +22,8 @@ export const wpPostsCache = pgTable("wp_posts_cache", {
   slug: text("slug").notNull().unique(),
   date: text("date").notNull(),
   dateGmt: text("date_gmt").notNull(),
+  modified: text("modified").notNull().default(""),
+  modifiedGmt: text("modified_gmt").notNull().default(""),
   status: text("status").notNull().default("publish"),
   type: text("type").notNull().default("post"),
   link: text("link").notNull(),
