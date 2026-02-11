@@ -398,6 +398,18 @@ export async function registerRoutes(
     }
   });
 
+  // Push content to WordPress
+  app.post("/api/push-to-wordpress", async (_req: Request, res: Response) => {
+    try {
+      const { pushAllPagesToWordPress } = await import("./wp-push");
+      const result = await pushAllPagesToWordPress();
+      res.json({ success: true, ...result });
+    } catch (error: any) {
+      console.error("Error pushing to WordPress:", error);
+      res.status(500).json({ error: error.message || "Push to WordPress failed" });
+    }
+  });
+
   // OpenAI Assistant API
   const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
   const assistantId = process.env.OPENAI_ASSISTANT_ID || "";
