@@ -199,7 +199,7 @@ export default function Navigation() {
           <div className="lg:hidden absolute top-full left-0 w-full bg-white border-b border-border p-4 shadow-lg flex flex-col gap-2 animate-in slide-in-from-top-5 max-h-[80vh] overflow-y-auto">
             <Link href="/">
               <span
-                className="text-primary font-medium text-lg py-2 border-b border-gray-100 block cursor-pointer"
+                className="text-primary font-medium text-lg py-3 border-b border-gray-100 block cursor-pointer"
                 onClick={() => setIsOpen(false)}
               >
                 Home
@@ -207,7 +207,7 @@ export default function Navigation() {
             </Link>
             <Link href="/about-thomas-wan-llp">
               <span
-                className="text-primary font-medium text-lg py-2 border-b border-gray-100 block cursor-pointer"
+                className="text-primary font-medium text-lg py-3 border-b border-gray-100 block cursor-pointer"
                 onClick={() => setIsOpen(false)}
               >
                 About
@@ -217,7 +217,7 @@ export default function Navigation() {
             {/* Mobile Cases Dropdown */}
             <div className="border-b border-gray-100">
               <button
-                className="text-primary font-medium text-lg py-2 w-full text-left flex items-center justify-between"
+                className="text-primary font-medium text-lg py-3 w-full text-left flex items-center justify-between"
                 onClick={() => setMobileSubOpen(!mobileSubOpen)}
               >
                 Cases We Handle
@@ -229,7 +229,7 @@ export default function Navigation() {
                     <Link key={item.name} href={item.href}>
                       <span
                         className={cn(
-                          "block py-2 text-base cursor-pointer",
+                          "block py-3 text-base cursor-pointer",
                           location === item.href ? "text-secondary font-medium" : "text-slate-600"
                         )}
                         onClick={() => {
@@ -248,7 +248,7 @@ export default function Navigation() {
             {navLinks.slice(2).map((link) => (
               <Link key={link.name} href={link.href}>
                 <span
-                  className="text-primary font-medium text-lg py-2 border-b border-gray-100 block cursor-pointer"
+                  className="text-primary font-medium text-lg py-3 border-b border-gray-100 block cursor-pointer"
                   onClick={() => setIsOpen(false)}
                 >
                   {link.name}

@@ -42,10 +42,10 @@ export default function BlogSection() {
             </h2>
           </div>
           <Link href="/blog">
-            <a className="inline-flex items-center text-primary font-bold uppercase tracking-wide hover:text-secondary transition-colors group">
+            <span className="inline-flex items-center text-primary font-bold uppercase tracking-wide hover:text-secondary transition-colors group cursor-pointer">
               View All Articles 
               <ArrowRight className="ml-2 w-4 h-4 transition-transform group-hover:translate-x-1" />
-            </a>
+            </span>
           </Link>
         </div>
 
