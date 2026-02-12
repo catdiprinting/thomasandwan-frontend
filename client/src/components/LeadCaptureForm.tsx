@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Phone } from "lucide-react";
+import { Phone, Shield, Award, Scale } from "lucide-react";
 
 interface LeadCaptureFormProps {
   variant?: "inline" | "card" | "sidebar";
@@ -145,6 +145,21 @@ export default function LeadCaptureForm({
           <a href="tel:713-529-1177" className="text-secondary font-bold hover:underline">
             (713) 529-1177
           </a>
+        </div>
+
+        <div className="mt-6 pt-6 border-t border-white/10 grid grid-cols-3 gap-4" data-testid="trust-badges">
+          <div className="flex flex-col items-center text-center gap-1">
+            <Shield className="w-5 h-5 text-secondary" />
+            <span className="text-white/70 text-xs leading-tight">No Fee Unless We Win</span>
+          </div>
+          <div className="flex flex-col items-center text-center gap-1">
+            <Award className="w-5 h-5 text-secondary" />
+            <span className="text-white/70 text-xs leading-tight">55+ Years Experience</span>
+          </div>
+          <div className="flex flex-col items-center text-center gap-1">
+            <Scale className="w-5 h-5 text-secondary" />
+            <span className="text-white/70 text-xs leading-tight">$50M+ Recovered</span>
+          </div>
         </div>
       </div>
     );
