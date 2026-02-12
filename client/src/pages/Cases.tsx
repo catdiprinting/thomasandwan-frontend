@@ -1,6 +1,7 @@
 import { ArrowRight } from "lucide-react";
 import { Link } from "wouter";
 import PageShell from "@/components/PageShell";
+import LeadCaptureForm from "@/components/LeadCaptureForm";
 
 const cards = [
   {
@@ -109,6 +110,14 @@ export default function Cases() {
                 </div>
               </div>
             </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="py-16 md:py-20 bg-slate-50">
+        <div className="container mx-auto px-4 md:px-6">
+          <div className="max-w-2xl mx-auto">
+            <LeadCaptureForm variant="card" />
           </div>
         </div>
       </section>

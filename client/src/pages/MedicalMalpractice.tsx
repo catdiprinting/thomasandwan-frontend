@@ -1,5 +1,6 @@
 import { ArrowRight, ShieldAlert, Stethoscope, Pill, Activity, Scissors, Scale } from "lucide-react";
 import PageShell from "@/components/PageShell";
+import LeadCaptureForm from "@/components/LeadCaptureForm";
 import SEO, { createPracticeAreaSchema } from "@/components/SEO";
 
 const examples = [
@@ -64,6 +65,12 @@ export default function MedicalMalpractice() {
                   </div>
                 ))}
               </div>
+            </div>
+          </div>
+
+          <div className="mt-16">
+            <div className="max-w-2xl mx-auto">
+              <LeadCaptureForm variant="card" />
             </div>
           </div>
 

@@ -8,6 +8,7 @@ import TeamSection from "@/components/TeamSection";
 import FAQSection from "@/components/FAQSection";
 import BlogSection from "@/components/BlogSection";
 import Footer from "@/components/Footer";
+import LeadCaptureForm from "@/components/LeadCaptureForm";
 import SEO, { lawFirmSchema } from "@/components/SEO";
 
 export default function Home() {
@@ -54,6 +55,14 @@ export default function Home() {
 
         {/* New FAQ Section */}
         <FAQSection />
+
+        <section className="py-16 md:py-20 bg-slate-50">
+          <div className="container mx-auto px-4 md:px-6">
+            <div className="max-w-2xl mx-auto">
+              <LeadCaptureForm variant="card" />
+            </div>
+          </div>
+        </section>
 
         <BlogSection />
 

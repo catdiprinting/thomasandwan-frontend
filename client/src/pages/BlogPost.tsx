@@ -3,6 +3,7 @@ import { useRoute } from "wouter";
 import { ArrowLeft, Calendar, Loader2, Phone, List, User, Tag } from "lucide-react";
 import { Link } from "wouter";
 import PageShell from "@/components/PageShell";
+import LeadCaptureForm from "@/components/LeadCaptureForm";
 import { useEffect, useState } from "react";
 
 interface WPCategory {
@@ -253,6 +254,8 @@ export default function BlogPost() {
 
             <aside className="hidden lg:block mt-[120px]">
               <div className="sticky top-32 space-y-6">
+                <LeadCaptureForm variant="sidebar" />
+
                 {toc.length > 0 && (
                   <div className="bg-gray-50 border border-gray-100 p-6">
                     <div className="flex items-center gap-2 mb-4">
