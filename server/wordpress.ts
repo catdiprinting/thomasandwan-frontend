@@ -74,6 +74,24 @@ export interface WPAuthor {
   avatar_urls?: Record<string, string>;
 }
 
+const LIVE_DOMAIN = "https://thomasandwan.catdi.com";
+const WP_DOMAINS = [
+  "https://wp.thomasandwan.com",
+  "http://wp.thomasandwan.com",
+  "https://www.thomasandwan.com",
+  "http://www.thomasandwan.com",
+  "https://thomasandwan.com",
+  "http://thomasandwan.com",
+];
+
+function rewriteUrls(html: string): string {
+  let result = html;
+  for (const domain of WP_DOMAINS) {
+    result = result.replaceAll(domain, LIVE_DOMAIN);
+  }
+  return result;
+}
+
 function dbPostToWPPost(row: typeof wpPostsCache.$inferSelect): WPPost {
   return {
     id: row.id,
@@ -82,10 +100,10 @@ function dbPostToWPPost(row: typeof wpPostsCache.$inferSelect): WPPost {
     slug: row.slug,
     status: row.status,
     type: row.type,
-    link: row.link,
+    link: rewriteUrls(row.link),
     title: { rendered: row.title },
-    content: { rendered: row.content, protected: false },
-    excerpt: { rendered: row.excerpt, protected: false },
+    content: { rendered: rewriteUrls(row.content), protected: false },
+    excerpt: { rendered: rewriteUrls(row.excerpt), protected: false },
     author: row.author,
     featured_media: row.featuredMedia,
     categories: (row.categories as number[]) || [],
