@@ -59,7 +59,7 @@ export default function Navigation() {
           <div className="flex items-center">
             <Link href="/contact-us">
               <span className="bg-secondary hover:bg-secondary/90 text-white font-bold px-4 py-1.5 uppercase tracking-wider text-xs cursor-pointer transition-colors">
-                Free Consultation
+                Free Case Review
               </span>
             </Link>
           </div>
