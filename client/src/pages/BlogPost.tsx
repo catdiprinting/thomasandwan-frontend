@@ -4,6 +4,36 @@ import { ArrowLeft, Calendar, Loader2, Phone, List, User, Tag } from "lucide-rea
 import { Link } from "wouter";
 import PageShell from "@/components/PageShell";
 import SEO from "@/components/SEO";
+
+function decodeHtmlEntities(str: string): string {
+  return str.replace(/&amp;/g, '&').replace(/&#8217;/g, "'").replace(/&#8211;/g, '\u2013').replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&#8220;/g, '\u201c').replace(/&#8221;/g, '\u201d');
+}
+
+function createArticleSchema(post: WPPost) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": decodeHtmlEntities(post.title.rendered),
+    "description": post.excerpt.rendered.replace(/<[^>]*>/g, '').trim().slice(0, 160),
+    "datePublished": post.date,
+    "dateModified": post.date,
+    ...(post.featured_image ? { "image": post.featured_image.source_url } : {}),
+    "author": {
+      "@type": "Organization",
+      "name": post.author_info?.name || "Thomas & Wan Law Firm",
+      "url": "https://thomasandwan.com"
+    },
+    "publisher": {
+      "@type": "LegalService",
+      "name": "Thomas & Wan Law Firm",
+      "url": "https://thomasandwan.com"
+    },
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": `https://thomasandwan.com/blog/${post.slug}`
+    }
+  };
+}
 import LeadCaptureForm from "@/components/LeadCaptureForm";
 import { useEffect, useState } from "react";
 
@@ -172,11 +202,12 @@ export default function BlogPost() {
   return (
     <PageShell title={post.title.rendered} subtitle="Article">
       <SEO 
-        title={post.title.rendered.replace(/&amp;/g, '&').replace(/&#8217;/g, "'").replace(/&#8211;/g, '–').replace(/&lt;/g, '<').replace(/&gt;/g, '>')}
+        title={decodeHtmlEntities(post.title.rendered)}
         description={post.excerpt.rendered.replace(/<[^>]*>/g, '').trim().slice(0, 160)}
         canonical={`https://thomasandwan.com/blog/${post.slug}`}
         type="article"
         image={post.featured_image?.source_url}
+        schema={createArticleSchema(post)}
       />
       <section className="py-16 md:py-20 bg-white">
         <div className="container mx-auto px-4 md:px-6">
