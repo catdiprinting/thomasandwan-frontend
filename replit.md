@@ -52,6 +52,14 @@ shared/           # Shared code between client/server
   schema.ts       # Drizzle database schema
 ```
 
+### Lead Generation Features
+- **StickyMobileCTA**: Fixed call bar at bottom on mobile with tap-to-call (713) 529-1177 and "Free Review" link
+- **SmartCTA**: Reusable component that shows tel: link on mobile, /contact-us link on desktop
+- **LeadCaptureForm**: Compact lead form (name, phone, message) in 3 variants (inline, card, sidebar) - submits to Contact Form 7 via /api/contact
+- **FloatingWidget**: Bottom-right floating button with Quick Contact form tab and AI Assistant chat tab (uses OpenAI assistant API)
+- **Trust Badges**: Shield/Award/Scale icons with "No Fee Unless We Win", "55+ Years Experience", "$50M+ Recovered" displayed on lead capture cards
+- **Click-to-Call CTAs**: All "Call Us Now" sections across practice area pages use direct tel: links
+
 ### Key Design Decisions
 1. **Headless WordPress CMS**: Blog content is fetched from an existing WordPress installation via REST API, allowing the law firm to continue using their familiar CMS while the frontend is built with React
 2. **Server-side API Proxy**: WordPress requests go through the Express server to handle CORS and add caching capabilities
