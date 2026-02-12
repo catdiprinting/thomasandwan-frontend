@@ -91,13 +91,13 @@ export default function SurgicalErrorsPage() {
             <p className="text-white/80 leading-relaxed mb-8">
               Call us today for a free consultation—we will discuss what your legal options are for your surgical error case. If you have medical records, you can send them to us for a free review with no obligation.
             </p>
-            <Link
-              href="/contact-us"
+            <a
+              href="tel:713-529-1177"
               className="inline-flex items-center gap-2 bg-secondary hover:bg-secondary/90 text-white font-bold px-10 py-4 rounded-none uppercase tracking-widest text-sm"
               data-testid="link-surgical-errors-cta"
             >
-              Contact Us <ArrowRight className="w-4 h-4" />
-            </Link>
+              Call (713) 529-1177 <ArrowRight className="w-4 h-4" />
+            </a>
           </div>
         </div>
       </section>

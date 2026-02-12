@@ -178,9 +178,11 @@ export default function Navigation() {
                 </span>
               </Link>
             ))}
-            <Button className="bg-secondary hover:bg-secondary/90 text-white font-bold rounded-none px-6">
-              Free Case Review
-            </Button>
+            <Link href="/contact-us">
+              <Button className="bg-secondary hover:bg-secondary/90 text-white font-bold rounded-none px-6">
+                Free Case Review
+              </Button>
+            </Link>
           </div>
 
           {/* Mobile Menu Toggle */}
@@ -261,7 +263,7 @@ export default function Navigation() {
                  <Mail className="w-5 h-5 text-secondary" /> info@thomasandwan.com
                </a>
             </div>
-            <Link href="/contact-us" onClick={() => setOpen(false)}>
+            <Link href="/contact-us" onClick={() => setIsOpen(false)}>
               <Button className="w-full bg-secondary hover:bg-secondary/90 text-white font-bold rounded-none mt-2">
                 Free Consultation
               </Button>

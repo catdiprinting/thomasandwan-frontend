@@ -58,11 +58,11 @@ export default function FAQ() {
                   This page is designed to be easier to scan and more helpful than the typical FAQ. If you don’t see your question here, call us.
                 </p>
                 <a
-                  href="https://www.thomasandwan.com/contact-us/"
+                  href="tel:713-529-1177"
                   className="mt-8 inline-flex w-full items-center justify-center bg-secondary hover:bg-secondary/90 text-white font-bold px-6 py-4 rounded-none uppercase tracking-widest text-sm"
                   data-testid="link-faq-contact"
                 >
-                  Contact Us
+                  Call (713) 529-1177
                 </a>
               </div>
 
@@ -95,11 +95,11 @@ export default function FAQ() {
                   Call us today for a free consultation—we will discuss what your legal options are for your medical malpractice case. If you have the medical records, you can send them to us for a free review with no obligation.
                 </p>
                 <a
-                  href="https://www.thomasandwan.com/contact-us/"
+                  href="tel:713-529-1177"
                   className="inline-flex items-center justify-center bg-secondary hover:bg-secondary/90 text-white font-bold px-10 py-4 rounded-none uppercase tracking-widest text-sm"
                   data-testid="link-faq-cta"
                 >
-                  Contact Us
+                  Call (713) 529-1177
                 </a>
               </div>
             </div>
