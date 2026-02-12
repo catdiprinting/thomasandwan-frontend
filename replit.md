@@ -109,6 +109,14 @@ shared/           # Shared code between client/server
 - **wouter**: Client-side routing
 - **zod**: Schema validation (integrated with Drizzle via drizzle-zod)
 
+### SEO & Schema Markup
+- **SEO Component** (`client/src/components/SEO.tsx`): Centralized meta tags (title, description, canonical, OG, Twitter Card, geo tags)
+- **Schema Helpers**: `lawFirmSchema` (LegalService + GeoCoordinates), `createPracticeAreaSchema`, `createFAQSchema`, `attorneySchemas`, `createReviewSchema`
+- **Every page has SEO**: Home, About, Testimonials, FAQ, Cases, BlogIndex, Contact, BlogPost, all practice area pages
+- **Rich Results**: FAQ page (FAQPage schema), Testimonials (Review/AggregateRating schema), About (Person schemas for attorneys), Blog posts (Article schema)
+- **Geo/Local SEO**: US-TX region, Houston placename, GeoCoordinates (29.723317, -95.401952) on all pages
+- **SSR for bots**: Search engine crawlers get server-rendered HTML with full content and meta tags
+
 ### Replit-Specific Integrations
 - **@replit/vite-plugin-runtime-error-modal**: Development error overlay
 - **@replit/vite-plugin-cartographer**: Development tooling (dev only)
