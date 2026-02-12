@@ -22,14 +22,13 @@ export default function Hero() {
           </div>
           
           <h1 className="text-4xl md:text-6xl lg:text-7xl font-serif text-primary leading-[1.1]">
-            Dedicated to <br/>
-            <span className="italic text-secondary">Justice</span> for <br/>
-            Your Family.
+            Hurt by a Doctor<br/>
+            or Hospital? <span className="italic text-secondary">We Help<br/>
+            Families</span> Get Answers.
           </h1>
           
           <p className="text-lg md:text-xl text-muted-foreground font-light max-w-lg leading-relaxed">
-            With over 60+ years of combined experience in medical malpractice, 
-            Linda Thomas and Michelle Wan fight for the answers and compensation you deserve.
+            If you or someone you love was seriously harmed by a doctor or hospital, you have rights. Hospitals have lawyers on day one. You deserve someone fighting for you too.
           </p>
           
           <div className="flex flex-col sm:flex-row gap-4 pt-4">

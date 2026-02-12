@@ -59,19 +59,16 @@ export default function WomenOwnedSection() {
               Why Choose Us
             </span>
             <h2 className="text-4xl md:text-5xl font-serif text-primary mb-8">
-              A Women-Owned Firm <br/>
-              <span className="text-muted-foreground italic font-alt">Fighting for Families</span>
+              When You Hire Us, <br/>
+              <span className="text-muted-foreground italic font-alt">You Work with Us.</span>
             </h2>
             
             <div className="space-y-6 text-lg text-slate-600 leading-relaxed font-light">
               <p>
-                At Thomas & Wan, we bring a unique perspective to medical malpractice law. 
-                As a women-owned firm, we understand the deep emotional toll that medical negligence takes on families.
-                We don't just see a case; we see a mother, a child, a family that has been wronged.
+                At Thomas & Wan, you will work directly with Linda Thomas and Michelle Wan. We do not pass your case to junior associates. We do not refer cases out to other attorneys. We prepare every case as if it will go to trial.
               </p>
               <p>
-                With over 60 years of combined experience, we have successfully resolved cases for millions of dollars 
-                against major hospitals throughout Texas. But what truly sets us apart is our personal commitment.
+                With over 60 years of combined experience, we have held major Texas hospitals accountable over and over again.
               </p>
             </div>
 
