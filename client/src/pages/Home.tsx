@@ -12,7 +12,7 @@ import SEO, { lawFirmSchema } from "@/components/SEO";
 
 export default function Home() {
   return (
-    <div className="min-h-screen bg-background font-sans text-foreground overflow-x-hidden selection:bg-secondary selection:text-primary">
+    <div className="min-h-screen bg-background font-sans text-foreground overflow-x-hidden selection:bg-secondary selection:text-primary pb-20 md:pb-0">
       <SEO 
         title="Houston Medical Malpractice Lawyers"
         description="Thomas & Wan is a Houston-based medical malpractice law firm representing victims of birth injuries, medical negligence, and hospital malpractice. Free consultation."

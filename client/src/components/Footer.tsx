@@ -5,7 +5,7 @@ import { Textarea } from "@/components/ui/textarea";
 
 export default function Footer() {
   return (
-    <footer className="bg-primary text-white pt-12 pb-8">
+    <footer className="bg-primary text-white pt-12 pb-28 md:pb-8">
       <div className="container mx-auto px-4 md:px-6">
         <div className="grid lg:grid-cols-2 gap-16 mb-12">
           

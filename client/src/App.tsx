@@ -21,6 +21,7 @@ import SurgicalErrorsPage from "@/pages/SurgicalErrors";
 import MedicationErrorsPage from "@/pages/MedicationErrors";
 import MisdiagnosisPage from "@/pages/MisdiagnosisPage";
 import NotFound from "@/pages/not-found";
+import StickyMobileCTA from "@/components/StickyMobileCTA";
 
 function Router() {
   return (
@@ -53,6 +54,7 @@ function App() {
     <QueryClientProvider client={queryClient}>
       <Toaster />
       <Router />
+      <StickyMobileCTA />
     </QueryClientProvider>
   );
 }

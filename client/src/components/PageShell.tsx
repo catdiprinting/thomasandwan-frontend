@@ -11,7 +11,7 @@ export default function PageShell({
   children: React.ReactNode;
 }) {
   return (
-    <div className="min-h-screen bg-background font-sans text-foreground overflow-x-hidden selection:bg-secondary selection:text-primary">
+    <div className="min-h-screen bg-background font-sans text-foreground overflow-x-hidden selection:bg-secondary selection:text-primary pb-20 md:pb-0">
       <Navigation />
       <main className="pt-20">
         <header className="bg-primary text-white py-18 md:py-24 relative overflow-hidden">
