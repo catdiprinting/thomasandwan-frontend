@@ -5,8 +5,6 @@ import { storage } from "./storage";
 import {
   fetchPosts,
   fetchPostBySlug,
-  fetchPages,
-  fetchPageBySlug,
   fetchCategories,
   fetchPostsWithMedia,
   fetchPostsWithPagination,
@@ -36,6 +34,9 @@ import {
   renderCategoryPage
 } from "./ssr";
 import { exportStaticSite } from "./static-export";
+import { db } from "./db";
+import { wpPagesCache } from "@shared/schema";
+import { eq } from "drizzle-orm";
 
 // Detect search engine crawlers for SSR
 function isBot(userAgent: string): boolean {
@@ -109,10 +110,20 @@ export async function registerRoutes(
 
   app.get("/api/pages", async (req: Request, res: Response) => {
     try {
-      const perPage = parseInt(req.query.per_page as string) || 10;
-      const page = parseInt(req.query.page as string) || 1;
-      const pages = await fetchPages({ per_page: perPage, page });
-      res.json(pages);
+      const allPages = await db.select().from(wpPagesCache).where(eq(wpPagesCache.status, "publish"));
+      res.json(allPages.map(p => ({
+        id: p.id,
+        slug: p.slug,
+        date: p.date,
+        modified: p.modified,
+        title: { rendered: p.title },
+        content: { rendered: p.content },
+        excerpt: { rendered: p.excerpt },
+        author: p.author,
+        featured_media: p.featuredMedia,
+        parent: p.parent,
+        menu_order: p.menuOrder,
+      })));
     } catch (error) {
       console.error("Error fetching pages:", error);
       res.status(500).json({ error: "Failed to fetch pages" });
@@ -122,12 +133,24 @@ export async function registerRoutes(
   app.get("/api/pages/:slug", async (req: Request, res: Response) => {
     try {
       const slug = req.params.slug as string;
-      const wpPage = await fetchPageBySlug(slug);
-      if (!wpPage) {
+      const [page] = await db.select().from(wpPagesCache).where(eq(wpPagesCache.slug, slug));
+      if (!page) {
         res.status(404).json({ error: "Page not found" });
         return;
       }
-      res.json(wpPage);
+      res.json({
+        id: page.id,
+        slug: page.slug,
+        date: page.date,
+        modified: page.modified,
+        title: { rendered: page.title },
+        content: { rendered: page.content },
+        excerpt: { rendered: page.excerpt },
+        author: page.author,
+        featured_media: page.featuredMedia,
+        parent: page.parent,
+        menu_order: page.menuOrder,
+      });
     } catch (error) {
       console.error("Error fetching page:", error);
       res.status(500).json({ error: "Failed to fetch page" });

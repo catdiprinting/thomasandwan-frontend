@@ -53,6 +53,25 @@ export const wpCategoriesCache = pgTable("wp_categories_cache", {
   cachedAt: timestamp("cached_at").defaultNow(),
 });
 
+export const wpPagesCache = pgTable("wp_pages_cache", {
+  id: integer("id").primaryKey(),
+  slug: text("slug").notNull().unique(),
+  date: text("date").notNull(),
+  dateGmt: text("date_gmt").notNull(),
+  modified: text("modified").notNull().default(""),
+  modifiedGmt: text("modified_gmt").notNull().default(""),
+  status: text("status").notNull().default("publish"),
+  title: text("title").notNull(),
+  content: text("content").notNull(),
+  excerpt: text("excerpt").notNull().default(""),
+  author: integer("author").notNull().default(1),
+  featuredMedia: integer("featured_media").notNull().default(0),
+  parent: integer("parent").notNull().default(0),
+  menuOrder: integer("menu_order").notNull().default(0),
+  cachedAt: timestamp("cached_at").defaultNow(),
+});
+
 export type WpPostCache = typeof wpPostsCache.$inferSelect;
 export type WpMediaCache = typeof wpMediaCache.$inferSelect;
 export type WpCategoryCache = typeof wpCategoriesCache.$inferSelect;
+export type WpPageCache = typeof wpPagesCache.$inferSelect;

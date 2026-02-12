@@ -1,5 +1,5 @@
 import { db } from "./db";
-import { wpPostsCache, wpMediaCache, wpCategoriesCache } from "@shared/schema";
+import { wpPostsCache, wpMediaCache, wpCategoriesCache, wpPagesCache } from "@shared/schema";
 import { sql, eq } from "drizzle-orm";
 
 process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
@@ -49,6 +49,26 @@ function postToRow(post: any) {
     featuredMedia: post.featured_media || 0,
     categories: post.categories || [],
     tags: post.tags || [],
+    cachedAt: new Date(),
+  };
+}
+
+function pageToRow(page: any) {
+  return {
+    id: page.id,
+    slug: page.slug,
+    date: page.date,
+    dateGmt: page.date_gmt,
+    modified: page.modified || "",
+    modifiedGmt: page.modified_gmt || "",
+    status: page.status,
+    title: page.title.rendered,
+    content: page.content.rendered,
+    excerpt: page.excerpt?.rendered || "",
+    author: page.author,
+    featuredMedia: page.featured_media || 0,
+    parent: page.parent || 0,
+    menuOrder: page.menu_order || 0,
     cachedAt: new Date(),
   };
 }
@@ -108,12 +128,22 @@ async function fullSync(): Promise<void> {
     console.log(`  Synced ${media.length} media items`);
   }
 
+  console.log("Fetching pages...");
+  const pages = await fetchAllPaginated("pages");
+  if (pages.length > 0) {
+    for (const page of pages) {
+      await db.insert(wpPagesCache).values(pageToRow(page)).onConflictDoNothing();
+    }
+    console.log(`  Synced ${pages.length} pages`);
+  }
+
   const [finalCount] = await db.select({ count: sql<number>`count(*)::int` }).from(wpPostsCache);
-  console.log(`WordPress cache sync complete! ${finalCount.count} posts in database.`);
+  const [pageCount] = await db.select({ count: sql<number>`count(*)::int` }).from(wpPagesCache);
+  console.log(`WordPress cache sync complete! ${finalCount.count} posts, ${pageCount.count} pages in database.`);
 }
 
-export async function refreshWordPressCache(): Promise<{ postsUpdated: number; postsCreated: number; mediaUpdated: number; categoriesUpdated: number }> {
-  const result = { postsUpdated: 0, postsCreated: 0, mediaUpdated: 0, categoriesUpdated: 0 };
+export async function refreshWordPressCache(): Promise<{ postsUpdated: number; postsCreated: number; mediaUpdated: number; categoriesUpdated: number; pagesUpdated: number; pagesCreated: number }> {
+  const result = { postsUpdated: 0, postsCreated: 0, mediaUpdated: 0, categoriesUpdated: 0, pagesUpdated: 0, pagesCreated: 0 };
 
   try {
     console.log("Refreshing WordPress cache — checking for updates...");
@@ -184,6 +214,26 @@ export async function refreshWordPressCache(): Promise<{ postsUpdated: number; p
       result.mediaUpdated++;
     }
     console.log(`  Refreshed ${result.mediaUpdated} media items`);
+
+    console.log("Refreshing pages...");
+    const pages = await fetchAllPaginated("pages");
+    for (const page of pages) {
+      const existing = await db.select({ id: wpPagesCache.id, modified: wpPagesCache.modified }).from(wpPagesCache).where(eq(wpPagesCache.id, page.id));
+
+      if (existing.length > 0) {
+        const wpModified = page.modified || "";
+        if (wpModified !== existing[0].modified) {
+          await db.update(wpPagesCache).set(pageToRow(page)).where(eq(wpPagesCache.id, page.id));
+          result.pagesUpdated++;
+          console.log(`  Updated page: "${page.title.rendered}" (modified ${wpModified})`);
+        }
+      } else {
+        await db.insert(wpPagesCache).values(pageToRow(page));
+        result.pagesCreated++;
+        console.log(`  New page: "${page.title.rendered}"`);
+      }
+    }
+    console.log(`  Pages: ${result.pagesUpdated} updated, ${result.pagesCreated} new`);
 
     console.log("WordPress cache refresh complete!");
     return result;
