@@ -4,7 +4,7 @@ import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { Link } from "wouter";
-import SEO from "@/components/SEO";
+import SEO, { createReviewSchema } from "@/components/SEO";
 
 const testimonials = [
   {
@@ -47,6 +47,7 @@ export default function Testimonials() {
         title="Client Testimonials"
         description="Read what our clients say about Thomas & Wan. Real reviews from families we've represented in medical malpractice, birth injury, and negligence cases in Houston, TX."
         canonical="https://thomasandwan.com/testimonials"
+        schema={createReviewSchema(testimonials)}
       />
       <Navigation />
       

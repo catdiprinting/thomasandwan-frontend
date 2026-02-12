@@ -6,7 +6,7 @@ interface SEOProps {
   canonical?: string;
   type?: "website" | "article";
   image?: string;
-  schema?: object;
+  schema?: object | object[];
   noindex?: boolean;
 }
 
@@ -74,22 +74,18 @@ export default function SEO({
     updateMeta("geo.position", "29.723317;-95.401952");
     updateMeta("ICBM", "29.723317, -95.401952");
 
-    if (schema) {
-      let script = document.getElementById("schema-jsonld") as HTMLScriptElement;
-      if (!script) {
-        script = document.createElement("script");
-        script.id = "schema-jsonld";
-        script.type = "application/ld+json";
-        document.head.appendChild(script);
-      }
-      script.textContent = JSON.stringify(schema);
-    }
+    const schemas = Array.isArray(schema) ? schema : schema ? [schema] : [];
+    document.querySelectorAll('script[data-seo-schema]').forEach(el => el.remove());
+    schemas.forEach((s, i) => {
+      const script = document.createElement("script");
+      script.type = "application/ld+json";
+      script.setAttribute("data-seo-schema", `${i}`);
+      script.textContent = JSON.stringify(s);
+      document.head.appendChild(script);
+    });
 
     return () => {
-      const schemaScript = document.getElementById("schema-jsonld");
-      if (schemaScript) {
-        schemaScript.remove();
-      }
+      document.querySelectorAll('script[data-seo-schema]').forEach(el => el.remove());
     };
   }, [fullTitle, description, canonical, type, absoluteImage, schema, siteUrl, noindex]);
 
@@ -111,6 +107,11 @@ export const lawFirmSchema = {
     "addressRegion": "TX",
     "postalCode": "77005",
     "addressCountry": "US"
+  },
+  "geo": {
+    "@type": "GeoCoordinates",
+    "latitude": 29.723317,
+    "longitude": -95.401952
   },
   "areaServed": {
     "@type": "State",
@@ -147,6 +148,82 @@ export const lawFirmSchema = {
     ]
   }
 };
+
+export const createFAQSchema = (faqs: { q: string; a: string }[]) => ({
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": faqs.map(faq => ({
+    "@type": "Question",
+    "name": faq.q,
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": faq.a
+    }
+  }))
+});
+
+export const attorneySchemas = [
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Linda Laurent Thomas",
+    "jobTitle": "Partner",
+    "worksFor": {
+      "@type": "LegalService",
+      "name": "Thomas & Wan Law Firm"
+    },
+    "url": "https://thomasandwan.com/about-thomas-wan-llp",
+    "alumniOf": [
+      { "@type": "CollegeOrUniversity", "name": "South Texas College of Law" },
+      { "@type": "CollegeOrUniversity", "name": "University of Texas at Austin" }
+    ],
+    "award": ["Multi-Million Dollar Advocates Forum", "Elite Lawyers of America", "H Texas Magazine Top Lawyer"],
+    "knowsAbout": ["Medical Malpractice", "Birth Injuries", "Personal Injury Law"]
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Michelle W. Wan",
+    "jobTitle": "Partner",
+    "worksFor": {
+      "@type": "LegalService",
+      "name": "Thomas & Wan Law Firm"
+    },
+    "url": "https://thomasandwan.com/about-thomas-wan-llp",
+    "alumniOf": [
+      { "@type": "CollegeOrUniversity", "name": "University of Texas School of Law" },
+      { "@type": "CollegeOrUniversity", "name": "Rice University" }
+    ],
+    "award": ["Multi-Million Dollar Advocates Forum", "Texas Monthly SuperLawyer", "Houstonia Magazine Top Lawyer"],
+    "knowsAbout": ["Medical Malpractice", "Personal Injury", "Toxic Exposure"]
+  }
+];
+
+export const createReviewSchema = (reviews: { quote: string; author: string; date?: string }[]) => ({
+  "@context": "https://schema.org",
+  "@type": "LegalService",
+  "name": "Thomas & Wan Law Firm",
+  "aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": "5",
+    "bestRating": "5",
+    "ratingCount": String(reviews.length)
+  },
+  "review": reviews.map(r => ({
+    "@type": "Review",
+    "reviewRating": {
+      "@type": "Rating",
+      "ratingValue": "5",
+      "bestRating": "5"
+    },
+    "author": {
+      "@type": "Person",
+      "name": r.author
+    },
+    ...(r.date ? { "datePublished": r.date } : {}),
+    "reviewBody": r.quote
+  }))
+});
 
 export const createPracticeAreaSchema = (name: string, description: string, url: string) => ({
   "@context": "https://schema.org",

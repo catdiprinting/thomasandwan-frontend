@@ -3,7 +3,7 @@ import { CheckCircle2, Award, Heart, Scale, GraduationCap } from "lucide-react";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
-import SEO from "@/components/SEO";
+import SEO, { lawFirmSchema, attorneySchemas } from "@/components/SEO";
 
 export default function About() {
   return (
@@ -12,6 +12,7 @@ export default function About() {
         title="About Our Attorneys"
         description="Meet Linda Thomas and Michelle Wan — Houston medical malpractice attorneys with over 55 years of combined experience. Women-owned firm dedicated to justice for families."
         canonical="https://thomasandwan.com/about-thomas-wan-llp"
+        schema={[lawFirmSchema, ...attorneySchemas]}
       />
       <Navigation />
       
