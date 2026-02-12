@@ -130,7 +130,7 @@ export default function Testimonials() {
             </p>
             <Link href="/contact-us">
               <Button size="lg" className="bg-secondary hover:bg-secondary/90 text-white font-bold py-8 px-10 text-xl rounded-none">
-                Share Your Story With Us
+                Free Case Review
               </Button>
             </Link>
           </div>

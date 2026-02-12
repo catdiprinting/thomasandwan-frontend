@@ -50,7 +50,7 @@ export default function BrainInjuriesPage() {
                   className="mt-8 inline-flex items-center gap-2 bg-secondary hover:bg-secondary/90 text-white font-bold px-8 py-4 rounded-none uppercase tracking-widest text-sm"
                   data-testid="link-contact-from-brain-injuries"
                 >
-                  Request Free Consultation <ArrowRight className="w-4 h-4" />
+                  Free Case Review <ArrowRight className="w-4 h-4" />
                 </Link>
               </div>
             </div>
@@ -92,11 +92,11 @@ export default function BrainInjuriesPage() {
               Call us today for a free consultation—we will discuss what your legal options are for your brain injury case. If you have medical records, you can send them to us for a free review with no obligation.
             </p>
             <a
-              href="tel:713-529-1177"
+              href="/contact-us"
               className="inline-flex items-center gap-2 bg-secondary hover:bg-secondary/90 text-white font-bold px-10 py-4 rounded-none uppercase tracking-widest text-sm"
               data-testid="link-brain-injuries-cta"
             >
-              Call (713) 529-1177 <ArrowRight className="w-4 h-4" />
+              Free Case Review <ArrowRight className="w-4 h-4" />
             </a>
           </div>
         </div>

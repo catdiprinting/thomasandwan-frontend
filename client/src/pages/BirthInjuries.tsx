@@ -3,6 +3,7 @@ import { AlertTriangle, Baby, Heart, Phone } from "lucide-react";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
+import { Link } from "wouter";
 import SEO, { createPracticeAreaSchema } from "@/components/SEO";
 
 const birthInjuryTypes = [
@@ -225,11 +226,11 @@ export default function BirthInjuries() {
             <p className="text-xl text-white/80 mb-10 leading-relaxed">
               At Thomas & Wan, we have the training, experience and knowledge to sue grossly negligent hospitals, doctors, nurses and midwives for birth injuries. Please call us today for free—we are here to listen to you.
             </p>
-            <a href="tel:713-529-1177">
+            <Link href="/contact-us">
               <Button size="lg" className="bg-secondary hover:bg-secondary/90 text-white font-bold py-8 px-10 text-xl rounded-none">
-                <Phone className="w-6 h-6 mr-2" /> Call (713) 529-1177
+                Free Case Review
               </Button>
-            </a>
+            </Link>
           </div>
         </section>
 

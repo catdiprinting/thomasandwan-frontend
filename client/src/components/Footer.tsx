@@ -80,7 +80,7 @@ export default function Footer() {
                  <Textarea className="bg-white/10 border-white/20 text-white placeholder:text-white/30 focus-visible:ring-secondary min-h-[120px]" />
               </div>
               <Button className="w-full bg-secondary hover:bg-secondary/90 text-white font-bold py-6 text-lg">
-                Submit Request
+                Free Case Review
               </Button>
             </form>
           </div>

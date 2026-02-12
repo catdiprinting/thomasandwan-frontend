@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import { ArrowRight, Phone } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { Link } from "wouter";
 
 export default function Hero() {
@@ -33,14 +33,14 @@ export default function Hero() {
           </p>
           
           <div className="flex flex-col sm:flex-row gap-4 pt-4">
-            <a href="tel:713-529-1177" className="md:hidden w-full sm:w-auto">
+            <Link href="/contact-us" className="md:hidden w-full sm:w-auto">
               <Button size="lg" className="w-full bg-secondary hover:bg-secondary/90 text-white rounded-none h-14 px-8 text-base tracking-wide border-0">
-                <Phone className="w-4 h-4 mr-2" /> Call Now — Free Review
+                Free Case Review
               </Button>
-            </a>
+            </Link>
             <Link href="/contact-us" className="hidden md:inline-flex w-auto">
               <Button size="lg" className="w-full bg-secondary hover:bg-secondary/90 text-white rounded-none h-14 px-8 text-base tracking-wide border-0">
-                Schedule Free Consultation
+                Free Case Review
               </Button>
             </Link>
             <Link href="/cases-we-handle" className="w-full sm:w-auto">

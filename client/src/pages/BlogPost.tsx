@@ -286,7 +286,7 @@ export default function BlogPost() {
                   className="inline-flex items-center justify-center bg-secondary hover:bg-secondary/90 text-white font-bold px-10 py-4 rounded-none uppercase tracking-widest text-sm w-full"
                   data-testid="link-blogpost-cta"
                 >
-                  Contact Thomas & Wan
+                  Free Case Review
                 </Link>
               </div>
             </div>
@@ -336,7 +336,7 @@ export default function BlogPost() {
                     href="/contact-us"
                     className="block text-center bg-secondary hover:bg-secondary/90 text-white font-bold py-3 px-4 text-sm uppercase tracking-wide"
                   >
-                    Contact Us
+                    Free Case Review
                   </Link>
                 </div>
 

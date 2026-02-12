@@ -137,7 +137,7 @@ export default function AuthorPage() {
               className="inline-flex items-center justify-center bg-secondary hover:bg-secondary/90 text-white font-bold px-10 py-4 rounded-none uppercase tracking-widest text-sm"
               data-testid="link-author-cta"
             >
-              Contact Us
+              Free Case Review
             </Link>
           </div>
         </div>

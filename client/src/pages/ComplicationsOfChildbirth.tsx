@@ -3,6 +3,7 @@ import { AlertCircle, Heart, Phone } from "lucide-react";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
+import { Link } from "wouter";
 import SEO, { createPracticeAreaSchema } from "@/components/SEO";
 
 const complications = [
@@ -137,11 +138,11 @@ export default function ComplicationsOfChildbirth() {
             <p className="text-xl text-white/80 mb-10 leading-relaxed">
               Call us today for a free consultation—we will discuss what your legal options are for your medical malpractice case. If you have the medical records, you can send them to us for a free review with no obligation to you. Remember, in Texas there are strict deadlines for filing a medical malpractice lawsuit.
             </p>
-            <a href="tel:713-529-1177">
+            <Link href="/contact-us">
               <Button size="lg" className="bg-secondary hover:bg-secondary/90 text-white font-bold py-8 px-10 text-xl rounded-none">
-                <Phone className="w-6 h-6 mr-2" /> Call Today - Don't Delay
+                Free Case Review
               </Button>
-            </a>
+            </Link>
           </div>
         </section>
 

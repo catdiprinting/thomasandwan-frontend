@@ -5,6 +5,7 @@ import { Phone } from "lucide-react";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
+import { Link } from "wouter";
 import SEO, { createPracticeAreaSchema } from "@/components/SEO";
 
 interface WPPage {
@@ -152,11 +153,11 @@ export default function WordPressPage({ slugOverride, category = "Cases We Handl
             <p className="text-xl text-white/80 mb-10 leading-relaxed">
               If you or a loved one has been affected, contact us today for a free, confidential consultation. We're here to help.
             </p>
-            <a href="tel:713-529-1177">
+            <Link href="/contact-us">
               <Button size="lg" className="bg-secondary hover:bg-secondary/90 text-white font-bold py-8 px-10 text-xl rounded-none">
-                <Phone className="w-6 h-6 mr-2" /> Call (713) 529-1177
+                Free Case Review
               </Button>
-            </a>
+            </Link>
           </div>
         </section>
       </main>

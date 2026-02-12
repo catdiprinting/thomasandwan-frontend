@@ -3,6 +3,7 @@ import { CheckCircle2, Award, Heart, Scale, GraduationCap } from "lucide-react";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
+import { Link } from "wouter";
 import SEO, { lawFirmSchema, attorneySchemas } from "@/components/SEO";
 
 export default function About() {
@@ -223,9 +224,11 @@ export default function About() {
             <p className="text-xl text-white/80 mb-10 leading-relaxed">
               Call us today for a free consultation. If you have the medical records, you can send them to us for a free review with no obligation. Remember, strict deadlines apply.
             </p>
-            <Button size="lg" className="bg-secondary hover:bg-secondary/90 text-white font-bold py-8 px-10 text-xl rounded-none">
-              Call (713) 529-1177
-            </Button>
+            <Link href="/contact-us">
+              <Button size="lg" className="bg-secondary hover:bg-secondary/90 text-white font-bold py-8 px-10 text-xl rounded-none">
+                Free Case Review
+              </Button>
+            </Link>
           </div>
         </section>
 
