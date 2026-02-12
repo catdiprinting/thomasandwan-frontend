@@ -1,6 +1,7 @@
 import { ArrowRight } from "lucide-react";
 import { Link } from "wouter";
 import PageShell from "@/components/PageShell";
+import SEO from "@/components/SEO";
 import LeadCaptureForm from "@/components/LeadCaptureForm";
 
 const cards = [
@@ -49,6 +50,11 @@ const caseLinks = [
 export default function Cases() {
   return (
     <PageShell title="Cases We Handle" subtitle="Medical Malpractice Focus">
+      <SEO 
+        title="Cases We Handle"
+        description="Thomas & Wan handles medical malpractice, birth injuries, brain injuries, surgical errors, medication errors, misdiagnosis, and more. Free case review in Houston, TX."
+        canonical="https://thomasandwan.com/cases-we-handle"
+      />
       <section className="py-16 md:py-20 bg-white">
         <div className="container mx-auto px-4 md:px-6">
           <div className="grid lg:grid-cols-12 gap-12 items-start">

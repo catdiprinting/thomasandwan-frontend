@@ -1,4 +1,5 @@
 import PageShell from "@/components/PageShell";
+import SEO from "@/components/SEO";
 import {
   Accordion,
   AccordionContent,
@@ -48,6 +49,11 @@ const faqs = [
 export default function FAQ() {
   return (
     <PageShell title="Frequently Asked Questions" subtitle="What to Expect">
+      <SEO 
+        title="Frequently Asked Questions"
+        description="Get answers to common questions about medical malpractice claims, attorney fees, the lawsuit process, depositions, mediation, and trial — from Thomas & Wan in Houston, TX."
+        canonical="https://thomasandwan.com/faq"
+      />
       <section className="py-16 md:py-20 bg-white">
         <div className="container mx-auto px-4 md:px-6">
           <div className="grid lg:grid-cols-12 gap-12 items-start">

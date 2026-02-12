@@ -3,6 +3,7 @@ import { useRoute } from "wouter";
 import { ArrowLeft, Calendar, Loader2, Phone, List, User, Tag } from "lucide-react";
 import { Link } from "wouter";
 import PageShell from "@/components/PageShell";
+import SEO from "@/components/SEO";
 import LeadCaptureForm from "@/components/LeadCaptureForm";
 import { useEffect, useState } from "react";
 
@@ -170,6 +171,13 @@ export default function BlogPost() {
 
   return (
     <PageShell title={post.title.rendered} subtitle="Article">
+      <SEO 
+        title={post.title.rendered.replace(/&amp;/g, '&').replace(/&#8217;/g, "'").replace(/&#8211;/g, '–').replace(/&lt;/g, '<').replace(/&gt;/g, '>')}
+        description={post.excerpt.rendered.replace(/<[^>]*>/g, '').trim().slice(0, 160)}
+        canonical={`https://thomasandwan.com/blog/${post.slug}`}
+        type="article"
+        image={post.featured_image?.source_url}
+      />
       <section className="py-16 md:py-20 bg-white">
         <div className="container mx-auto px-4 md:px-6">
           <div className="mb-8 max-w-4xl">

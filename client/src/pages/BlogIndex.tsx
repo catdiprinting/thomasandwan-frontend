@@ -3,6 +3,7 @@ import { useQuery } from "@tanstack/react-query";
 import { ArrowRight, ArrowLeft, Calendar, Loader2, BookOpen, Search, Scale } from "lucide-react";
 import { Link } from "wouter";
 import PageShell from "@/components/PageShell";
+import SEO from "@/components/SEO";
 
 interface WPPost {
   id: number;
@@ -58,6 +59,11 @@ export default function BlogIndex() {
 
   return (
     <PageShell title="Resource Center" subtitle="Knowledge & Insights">
+      <SEO 
+        title="Medical Malpractice Blog"
+        description="Expert articles on medical malpractice law, birth injuries, surgical errors, and patient rights from Houston attorneys Linda Thomas and Michelle Wan."
+        canonical="https://thomasandwan.com/blog"
+      />
       <section className="py-16 md:py-20 bg-white">
         <div className="container mx-auto px-4 md:px-6">
           <div className="max-w-4xl mb-14">

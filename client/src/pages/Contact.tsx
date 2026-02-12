@@ -1,6 +1,7 @@
 import { useMemo, useState } from "react";
 import { MapPin, Phone, Mail, Clock, CheckCircle2, ShieldCheck, Scale, Loader2, AlertCircle } from "lucide-react";
 import PageShell from "@/components/PageShell";
+import SEO from "@/components/SEO";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -89,6 +90,11 @@ export default function Contact() {
 
   return (
     <PageShell title="Contact" subtitle="Free consultation · No fee unless we win">
+      <SEO 
+        title="Contact Us"
+        description="Contact Thomas & Wan for a free medical malpractice consultation. Call (713) 529-1177 or visit our Houston office at 1710 Sunset Blvd, Houston, TX 77005."
+        canonical="https://thomasandwan.com/contact-us"
+      />
       <section className="relative py-14 md:py-20 bg-white overflow-hidden">
         <div className="pointer-events-none absolute inset-0">
           <div className="absolute -top-24 -right-24 h-80 w-80 rounded-full bg-secondary/10 blur-3xl" />

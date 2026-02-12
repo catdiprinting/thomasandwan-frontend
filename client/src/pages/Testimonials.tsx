@@ -4,6 +4,7 @@ import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { Link } from "wouter";
+import SEO from "@/components/SEO";
 
 const testimonials = [
   {
@@ -42,6 +43,11 @@ const testimonials = [
 export default function Testimonials() {
   return (
     <div className="min-h-screen bg-background font-sans text-foreground overflow-x-hidden selection:bg-secondary selection:text-primary">
+      <SEO 
+        title="Client Testimonials"
+        description="Read what our clients say about Thomas & Wan. Real reviews from families we've represented in medical malpractice, birth injury, and negligence cases in Houston, TX."
+        canonical="https://thomasandwan.com/testimonials"
+      />
       <Navigation />
       
       <main className="pt-20">

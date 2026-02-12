@@ -7,6 +7,7 @@ interface SEOProps {
   type?: "website" | "article";
   image?: string;
   schema?: object;
+  noindex?: boolean;
 }
 
 export default function SEO({ 
@@ -15,10 +16,12 @@ export default function SEO({
   canonical,
   type = "website",
   image = "/images/logo.webp",
-  schema
+  schema,
+  noindex = false,
 }: SEOProps) {
   const fullTitle = `${title} | Thomas & Wan Law Firm`;
   const siteUrl = typeof window !== "undefined" ? window.location.origin : "";
+  const absoluteImage = image?.startsWith("/") ? `${siteUrl}${image}` : image;
 
   useEffect(() => {
     document.title = fullTitle;
@@ -38,12 +41,16 @@ export default function SEO({
     updateMeta("og:title", fullTitle, true);
     updateMeta("og:description", description, true);
     updateMeta("og:type", type, true);
-    updateMeta("og:image", `${siteUrl}${image}`, true);
+    updateMeta("og:image", absoluteImage || `${siteUrl}/images/logo.webp`, true);
+    updateMeta("og:site_name", "Thomas & Wan Law Firm", true);
+    updateMeta("og:locale", "en_US", true);
     updateMeta("twitter:card", "summary_large_image");
     updateMeta("twitter:title", fullTitle);
     updateMeta("twitter:description", description);
+    updateMeta("twitter:image", absoluteImage || `${siteUrl}/images/logo.webp`);
 
     if (canonical) {
+      updateMeta("og:url", canonical, true);
       let link = document.querySelector('link[rel="canonical"]') as HTMLLinkElement;
       if (!link) {
         link = document.createElement("link");
@@ -52,6 +59,20 @@ export default function SEO({
       }
       link.href = canonical;
     }
+
+    if (noindex) {
+      updateMeta("robots", "noindex, nofollow");
+    } else {
+      const robotsMeta = document.querySelector('meta[name="robots"]');
+      if (robotsMeta && robotsMeta.getAttribute("content") === "noindex, nofollow") {
+        robotsMeta.remove();
+      }
+    }
+
+    updateMeta("geo.region", "US-TX");
+    updateMeta("geo.placename", "Houston");
+    updateMeta("geo.position", "29.723317;-95.401952");
+    updateMeta("ICBM", "29.723317, -95.401952");
 
     if (schema) {
       let script = document.getElementById("schema-jsonld") as HTMLScriptElement;
@@ -70,7 +91,7 @@ export default function SEO({
         schemaScript.remove();
       }
     };
-  }, [fullTitle, description, canonical, type, image, schema, siteUrl]);
+  }, [fullTitle, description, canonical, type, absoluteImage, schema, siteUrl, noindex]);
 
   return null;
 }

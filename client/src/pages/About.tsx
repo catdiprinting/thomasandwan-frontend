@@ -3,10 +3,16 @@ import { CheckCircle2, Award, Heart, Scale, GraduationCap } from "lucide-react";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
+import SEO from "@/components/SEO";
 
 export default function About() {
   return (
     <div className="min-h-screen bg-background font-sans text-foreground overflow-x-hidden selection:bg-secondary selection:text-primary">
+      <SEO 
+        title="About Our Attorneys"
+        description="Meet Linda Thomas and Michelle Wan — Houston medical malpractice attorneys with over 55 years of combined experience. Women-owned firm dedicated to justice for families."
+        canonical="https://thomasandwan.com/about-thomas-wan-llp"
+      />
       <Navigation />
       
       <main className="pt-20">
