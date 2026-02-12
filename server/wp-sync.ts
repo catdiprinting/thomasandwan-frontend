@@ -76,9 +76,22 @@ function pageToRow(page: any) {
 export async function syncWordPressCache(): Promise<void> {
   try {
     const [postCount] = await db.select({ count: sql<number>`count(*)::int` }).from(wpPostsCache);
+    const [pageCount] = await db.select({ count: sql<number>`count(*)::int` }).from(wpPagesCache);
 
-    if (postCount.count > 0) {
-      console.log(`WordPress cache already populated (${postCount.count} posts). Skipping full sync.`);
+    if (postCount.count > 0 && pageCount.count > 0) {
+      console.log(`WordPress cache already populated (${postCount.count} posts, ${pageCount.count} pages). Skipping full sync.`);
+      return;
+    }
+
+    if (postCount.count > 0 && pageCount.count === 0) {
+      console.log(`Posts cached but pages missing. Syncing pages...`);
+      const pages = await fetchAllPaginated("pages");
+      if (pages.length > 0) {
+        for (const page of pages) {
+          await db.insert(wpPagesCache).values(pageToRow(page)).onConflictDoNothing();
+        }
+        console.log(`  Synced ${pages.length} pages`);
+      }
       return;
     }
 
