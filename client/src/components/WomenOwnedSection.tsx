@@ -70,7 +70,7 @@ export default function WomenOwnedSection() {
                 We don't just see a case; we see a mother, a child, a family that has been wronged.
               </p>
               <p>
-                With over 55 years of combined experience, we have successfully resolved cases for millions of dollars 
+                With over 60 years of combined experience, we have successfully resolved cases for millions of dollars 
                 against major hospitals throughout Texas. But what truly sets us apart is our personal commitment.
               </p>
             </div>

@@ -64,7 +64,7 @@ export default function Cases() {
               </h2>
               <div className="space-y-6 text-lg text-slate-600 leading-relaxed font-light">
                 <p>
-                  If you're in need of legal guidance and support, you've come to the right place. Meet the dedicated team at Thomas & Wan, who bring 55 years of experience to the table.
+                  If you're in need of legal guidance and support, you've come to the right place. Meet the dedicated team at Thomas & Wan, who bring 60 years of experience to the table.
                 </p>
                 <p>
                   We've successfully handled numerous multi-million dollar cases related to serious medical malpractice and wrongful death issues across the nation. We're not afraid to take on challenging cases, and our commitment to justice is unwavering.

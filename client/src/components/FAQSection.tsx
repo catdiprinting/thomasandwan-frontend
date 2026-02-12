@@ -20,7 +20,7 @@ const faqs = [
   },
   {
     question: "Why should we hire you?",
-    answer: "There are very few attorneys in Texas who specialize in medical malpractice, and those are the only kind of cases we do. Linda Thomas and Michelle Wan have over 55 years of combined experience. If we take your case, we work on your case ourselves; we don’t “flip” it to another firm."
+    answer: "There are very few attorneys in Texas who specialize in medical malpractice, and those are the only kind of cases we do. Linda Thomas and Michelle Wan have over 60 years of combined experience. If we take your case, we work on your case ourselves; we don’t “flip” it to another firm."
   }
 ];
 

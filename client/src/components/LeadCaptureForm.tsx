@@ -154,7 +154,7 @@ export default function LeadCaptureForm({
           </div>
           <div className="flex flex-col items-center text-center gap-1">
             <Award className="w-5 h-5 text-secondary" />
-            <span className="text-white/70 text-xs leading-tight">55+ Years Experience</span>
+            <span className="text-white/70 text-xs leading-tight">60+ Years Experience</span>
           </div>
           <div className="flex flex-col items-center text-center gap-1">
             <Scale className="w-5 h-5 text-secondary" />

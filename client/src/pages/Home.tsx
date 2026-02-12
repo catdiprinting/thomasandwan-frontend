@@ -39,7 +39,7 @@ export default function Home() {
         <section className="bg-primary py-16 text-white border-y border-secondary/30">
           <div className="container mx-auto px-4 grid md:grid-cols-3 gap-8 text-center divide-y md:divide-y-0 md:divide-x divide-white/10">
             <div className="p-4">
-              <div className="text-5xl md:text-6xl font-serif text-secondary mb-2">55+</div>
+              <div className="text-5xl md:text-6xl font-serif text-secondary mb-2">60+</div>
               <div className="text-sm uppercase tracking-widest opacity-80">Years Combined Experience</div>
             </div>
             <div className="p-4">

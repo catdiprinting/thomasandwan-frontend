@@ -11,7 +11,7 @@ export default function About() {
     <div className="min-h-screen bg-background font-sans text-foreground overflow-x-hidden selection:bg-secondary selection:text-primary">
       <SEO 
         title="About Our Attorneys"
-        description="Meet Linda Thomas and Michelle Wan — Houston medical malpractice attorneys with over 55 years of combined experience. Women-owned firm dedicated to justice for families."
+        description="Meet Linda Thomas and Michelle Wan — Houston medical malpractice attorneys with over 60 years of combined experience. Women-owned firm dedicated to justice for families."
         canonical="https://thomasandwan.com/about-thomas-wan-llp"
         schema={[lawFirmSchema, ...attorneySchemas]}
       />
