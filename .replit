@@ -45,3 +45,9 @@ waitForPort = 5000
 
 [agent]
 mockupState = "FULLSTACK"
+
+[userenv]
+
+[userenv.shared]
+WP_BASE_URL = "https://wp.thomasandwan.com"
+CACHE_TTL_SECONDS = "300"
