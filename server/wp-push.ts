@@ -78,187 +78,351 @@ async function createPage(data: { title: string; slug: string; content: string; 
 }
 
 function buildHomepageContent(): string {
-  return `<!-- wp:heading {"level":1} -->
-<h1>Dedicated to Justice for Your Family</h1>
-<!-- /wp:heading -->
+  const starSvg = `<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="hsl(35 92% 50%)" stroke="hsl(35 92% 50%)" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>`;
+  const stars5 = `${starSvg}${starSvg}${starSvg}${starSvg}${starSvg}`;
+  const checkSvg = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="hsl(35 92% 50%)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="m9 11 3 3L22 4"/></svg>`;
 
-<!-- wp:paragraph {"className":"subtitle"} -->
-<p><strong>Medical Malpractice Attorneys</strong></p>
-<!-- /wp:paragraph -->
+  const babySvg = `<svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12h.01"/><path d="M15 12h.01"/><path d="M10 16c.5.3 1.2.5 2 .5s1.5-.2 2-.5"/><path d="M19 6.3a9 9 0 0 1 1.8 3.9 2 2 0 0 1 0 3.6 9 9 0 0 1-17.6 0 2 2 0 0 1 0-3.6A9 9 0 0 1 12 3c2 0 3.5 1.1 3.5 2.5s-.9 2.5-2 2.5c-.8 0-1.5-.4-1.5-1"/></svg>`;
+  const stethSvg = `<svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4.8 2.3A.3.3 0 1 0 5 2H4a2 2 0 0 0-2 2v5a6 6 0 0 0 6 6v0a6 6 0 0 0 6-6V4a2 2 0 0 0-2-2h-1a.2.2 0 1 0 .3.3"/><path d="M8 15v1a6 6 0 0 0 6 6v0a6 6 0 0 0 6-6v-4"/><circle cx="20" cy="10" r="2"/></svg>`;
+  const brainSvg = `<svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5a3 3 0 1 0-5.997.125 4 4 0 0 0-2.526 5.77 4 4 0 0 0 .556 6.588A4 4 0 1 0 12 18Z"/><path d="M12 5a3 3 0 1 1 5.997.125 4 4 0 0 1 2.526 5.77 4 4 0 0 1-.556 6.588A4 4 0 1 1 12 18Z"/><path d="M15 13a4.5 4.5 0 0 1-3-4 4.5 4.5 0 0 1-3 4"/><path d="M17.599 6.5a3 3 0 0 0 .399-1.375"/><path d="M6.003 5.125A3 3 0 0 0 6.401 6.5"/><path d="M3.477 10.896a4 4 0 0 1 .585-.396"/><path d="M19.938 10.5a4 4 0 0 1 .585.396"/><path d="M6 18a4 4 0 0 1-1.967-.516"/><path d="M19.967 17.484A4 4 0 0 1 18 18"/></svg>`;
+  const activitySvg = `<svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-2.48a2 2 0 0 0-1.93 1.46l-2.35 8.36a.25.25 0 0 1-.48 0L9.24 2.18a.25.25 0 0 0-.48 0l-2.35 8.36A2 2 0 0 1 4.49 12H2"/></svg>`;
+  const heartSvg = `<svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/><path d="M3.22 12H9.5l.5-1 2 4.5 2-7 1.5 3.5h5.27"/></svg>`;
 
-<!-- wp:paragraph -->
-<p>With over 60+ years of combined experience in medical malpractice, Linda Thomas and Michelle Wan fight for the answers and compensation you deserve.</p>
-<!-- /wp:paragraph -->
-
-<!-- wp:heading {"level":2} -->
-<h2>Focused Exclusively on Medical Malpractice</h2>
-<!-- /wp:heading -->
-
-<!-- wp:paragraph -->
-<p>We don't handle car accidents or divorces. Our sole focus is mastering the complex realm of medical malpractice to win for you.</p>
-<!-- /wp:paragraph -->
-
-<!-- wp:heading {"level":3} -->
-<h3>Our Practice Areas</h3>
-<!-- /wp:heading -->
-
-<!-- wp:list -->
-<ul>
-<li><strong>Birth Injuries</strong> — Cerebral palsy, hypoxia, shoulder dystocia, and preventable birth trauma.</li>
-<li><strong>Surgical Errors</strong> — Mistakes during surgery, anesthesia errors, and post-operative negligence.</li>
-<li><strong>Brain Injuries</strong> — Traumatic brain injuries resulting from medical negligence or malpractice.</li>
-<li><strong>Misdiagnosis</strong> — Failure to diagnose cancer, heart attacks, strokes, and critical conditions.</li>
-<li><strong>Wrongful Death</strong> — Seeking justice for the loss of a loved one due to medical carelessness.</li>
-</ul>
-<!-- /wp:list -->
-
-<!-- wp:separator -->
-<hr class="wp-block-separator"/>
-<!-- /wp:separator -->
-
-<!-- wp:heading {"level":2} -->
-<h2>A Women-Owned Firm Fighting for Families</h2>
-<!-- /wp:heading -->
-
-<!-- wp:paragraph -->
-<p>At Thomas &amp; Wan, we bring a unique perspective to medical malpractice law. As a women-owned firm, we understand the deep emotional toll that medical negligence takes on families. We don't just see a case; we see a mother, a child, a family that has been wronged.</p>
-<!-- /wp:paragraph -->
-
-<!-- wp:paragraph -->
-<p>With over 55 years of combined experience, we have successfully resolved cases for millions of dollars against major hospitals throughout Texas. But what truly sets us apart is our personal commitment.</p>
-<!-- /wp:paragraph -->
-
-<!-- wp:quote -->
-<blockquote class="wp-block-quote"><p>"We don't refer cases out. When you hire Thomas &amp; Wan, you get Thomas &amp; Wan."</p></blockquote>
-<!-- /wp:quote -->
-
-<!-- wp:columns -->
-<div class="wp-block-columns">
-<!-- wp:column -->
-<div class="wp-block-column">
-<ul>
-<li><strong>Direct Representation</strong> — You work directly with the partners, not junior associates.</li>
-<li><strong>Medical Expertise</strong> — We hire top experts from Harvard, Yale, and premier institutions.</li>
-</ul>
+  return `<!-- wp:html -->
+<div class="hp-hero">
+  <div>
+    <div class="hp-hero-label">Medical Malpractice Attorneys</div>
+    <h1>Hurt by a Doctor or Hospital? <em>We Help Families</em> Get Answers.</h1>
+    <p class="hp-hero-text">If you or someone you love was seriously harmed by a doctor or hospital, you have rights. Hospitals have lawyers on day one. You deserve someone fighting for you too.</p>
+    <div class="hp-hero-buttons">
+      <a href="/contact-us">Free Case Review</a>
+      <a href="/cases-we-handle">Learn More &rarr;</a>
+    </div>
+    <div class="hp-hero-badges">
+      <span><span class="dot"></span> Available 24/7</span>
+      <span><span class="dot"></span> No Win, No Fee</span>
+    </div>
+  </div>
+  <div class="hp-hero-image">
+    <div class="hp-img-border"></div>
+    <div class="hp-img-wrap">
+      <img src="/images/partners-hero.jpg" alt="Linda Thomas and Michelle Wan" />
+    </div>
+  </div>
 </div>
-<!-- /wp:column -->
-<!-- wp:column -->
-<div class="wp-block-column">
-<ul>
-<li><strong>Compassionate Advocacy</strong> — We fight aggressively in court while treating you with care.</li>
-<li><strong>Proven Results</strong> — Millions recovered for birth injuries and wrongful death.</li>
-</ul>
+<!-- /wp:html -->
+
+<!-- wp:html -->
+<div class="hp-trust">
+  <div class="hp-trust-badges">
+    <img src="/images/trust-badges.png" alt="Award Badges: Million Dollar Advocates, Super Lawyers, Top 25 Trial Lawyers" />
+  </div>
+  <div class="hp-trust-signals">
+    <div class="hp-trust-rating">
+      <div class="rating-top">
+        <strong>5.0</strong>
+        ${stars5}
+      </div>
+      <div class="rating-label">Google Reviews</div>
+    </div>
+    <div class="hp-trust-av">
+      <div class="av-title">AV Preeminent&reg;</div>
+      <div class="av-sub">Peer Rated for Highest Level of Excellence</div>
+    </div>
+  </div>
 </div>
-<!-- /wp:column -->
+<!-- /wp:html -->
+
+<!-- wp:html -->
+<div class="hp-section" style="background:#F9F7F5;">
+  <div class="hp-section-header">
+    <span class="hp-section-label">Our Expertise</span>
+    <h2>Focused Exclusively on Medical Malpractice</h2>
+    <p>We don&rsquo;t handle car accidents or divorces. Our sole focus is mastering the complex realm of medical malpractice to win for you.</p>
+  </div>
+  <div class="hp-practice-grid">
+    <div class="hp-practice-card">
+      <div class="hp-practice-icon">${babySvg}</div>
+      <h3>Birth Injuries</h3>
+      <p>Cerebral palsy, hypoxia, shoulder dystocia, and preventable birth trauma.</p>
+    </div>
+    <div class="hp-practice-card">
+      <div class="hp-practice-icon">${stethSvg}</div>
+      <h3>Surgical Errors</h3>
+      <p>Mistakes during surgery, anesthesia errors, and post-operative negligence.</p>
+    </div>
+    <div class="hp-practice-card">
+      <div class="hp-practice-icon">${brainSvg}</div>
+      <h3>Brain Injuries</h3>
+      <p>Traumatic brain injuries resulting from medical negligence or malpractice.</p>
+    </div>
+    <div class="hp-practice-card">
+      <div class="hp-practice-icon">${activitySvg}</div>
+      <h3>Misdiagnosis</h3>
+      <p>Failure to diagnose cancer, heart attacks, strokes, and critical conditions.</p>
+    </div>
+    <div class="hp-practice-card">
+      <div class="hp-practice-icon">${heartSvg}</div>
+      <h3>Wrongful Death</h3>
+      <p>Seeking justice for the loss of a loved one due to medical carelessness.</p>
+    </div>
+    <div class="hp-practice-cta">
+      <h3>Do You Have a Case?</h3>
+      <p>Get a free review of your medical records by our expert team.</p>
+      <a href="/contact-us">Contact Us Today</a>
+    </div>
+  </div>
 </div>
-<!-- /wp:columns -->
+<!-- /wp:html -->
 
-<!-- wp:separator -->
-<hr class="wp-block-separator"/>
-<!-- /wp:separator -->
-
-<!-- wp:heading {"level":2} -->
-<h2>Meet Our Team</h2>
-<!-- /wp:heading -->
-
-<!-- wp:heading {"level":3} -->
-<h3>Linda Laurent Thomas — Partner</h3>
-<!-- /wp:heading -->
-
-<!-- wp:paragraph -->
-<p>Since 1987, Linda Laurent Thomas has pursued aggressive legal representation on behalf of injury victims. She specializes in cases involving personal injuries, wrongful death, and medical malpractice.</p>
-<!-- /wp:paragraph -->
-
-<!-- wp:heading {"level":3} -->
-<h3>Michelle W. Wan — Partner</h3>
-<!-- /wp:heading -->
-
-<!-- wp:paragraph -->
-<p>Michelle W. Wan has worked exclusively representing clients in personal injury matters. Like Thomas, Wan has dedicated her career to fighting on behalf of persons injured by the negligence of others.</p>
-<!-- /wp:paragraph -->
-
-<!-- wp:separator -->
-<hr class="wp-block-separator"/>
-<!-- /wp:separator -->
-
-<!-- wp:columns {"className":"stats-section"} -->
-<div class="wp-block-columns stats-section">
-<!-- wp:column -->
-<div class="wp-block-column" style="text-align:center">
-<h3>55+</h3>
-<p>Years Combined Experience</p>
+<!-- wp:html -->
+<div class="hp-about">
+  <div style="position:relative;">
+    <div class="hp-about-photos">
+      <div class="photo-card">
+        <img src="/images/partner-thomas.jpg" alt="Linda Thomas" />
+        <div class="photo-name">Linda Thomas</div>
+      </div>
+      <div class="photo-card">
+        <img src="/images/partner-wan.jpg" alt="Michelle Wan" />
+        <div class="photo-name">Michelle Wan</div>
+      </div>
+    </div>
+    <div class="hp-about-quote">
+      <div class="quote-mark">&ldquo;</div>
+      <p>We don&rsquo;t refer cases out. When you hire Thomas &amp; Wan, you get Thomas &amp; Wan.</p>
+      <div class="quote-bar"></div>
+    </div>
+  </div>
+  <div class="hp-about-content">
+    <span class="hp-section-label">Why Choose Us</span>
+    <h2 style="font-family:var(--font-serif);font-size:2.5rem;color:hsl(215 28% 17%);margin:0 0 1.5rem;border:none;padding:0;">When You Hire Us, You Work with Us.</h2>
+    <p class="hp-about-text">At Thomas &amp; Wan, you will work directly with Linda Thomas and Michelle Wan. We do not pass your case to junior associates. We do not refer cases out to other attorneys. We prepare every case as if it will go to trial.</p>
+    <p class="hp-about-text">With over 60 years of combined experience, we have held major Texas hospitals accountable over and over again.</p>
+    <div class="hp-about-features">
+      <div class="feature">
+        ${checkSvg}
+        <div>
+          <h4>Direct Representation</h4>
+          <p>You work directly with the partners, not junior associates.</p>
+        </div>
+      </div>
+      <div class="feature">
+        ${checkSvg}
+        <div>
+          <h4>Medical Expertise</h4>
+          <p>We hire top experts from Harvard, Yale, and premier institutions.</p>
+        </div>
+      </div>
+      <div class="feature">
+        ${checkSvg}
+        <div>
+          <h4>Compassionate Advocacy</h4>
+          <p>We fight aggressively in court while treating you with care.</p>
+        </div>
+      </div>
+      <div class="feature">
+        ${checkSvg}
+        <div>
+          <h4>Proven Results</h4>
+          <p>Millions recovered for birth injuries and wrongful death.</p>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
-<!-- /wp:column -->
-<!-- wp:column -->
-<div class="wp-block-column" style="text-align:center">
-<h3>$50M+</h3>
-<p>Recovered for Clients</p>
+<!-- /wp:html -->
+
+<!-- wp:html -->
+<div class="hp-team" style="background:#F9F7F5;padding:4rem 0;">
+  <div class="hp-section-header">
+    <span class="hp-section-label">Team Behind This Work</span>
+    <h2>Dedicated to Your Family&rsquo;s Future</h2>
+  </div>
+  <div class="hp-team-grid">
+    <div class="hp-team-card">
+      <div class="team-photo">
+        <img src="/images/partner-thomas.jpg" alt="Linda Laurent Thomas" />
+        <div class="hp-team-name">
+          <h3>Linda Laurent Thomas</h3>
+          <span>Partner</span>
+        </div>
+      </div>
+      <p class="team-bio">Since 1987, Linda Laurent Thomas has pursued aggressive legal representation on behalf of injury victims. She specializes in cases involving personal injuries, wrongful death, and medical malpractice.</p>
+    </div>
+    <div class="hp-team-card">
+      <div class="team-photo">
+        <img src="/images/partner-wan.jpg" alt="Michelle W. Wan" />
+        <div class="hp-team-name">
+          <h3>Michelle W. Wan</h3>
+          <span>Partner</span>
+        </div>
+      </div>
+      <p class="team-bio">Michelle W. Wan has worked exclusively representing clients in personal injury matters. Like Thomas, Wan has dedicated her career to fighting on behalf of persons injured by the negligence of others.</p>
+    </div>
+  </div>
 </div>
-<!-- /wp:column -->
-<!-- wp:column -->
-<div class="wp-block-column" style="text-align:center">
-<h3>100%</h3>
-<p>Medical Malpractice Focus</p>
+<!-- /wp:html -->
+
+<!-- wp:html -->
+<div class="hp-results">
+  <div class="hp-section-header">
+    <span class="hp-section-label">Proven Track Record</span>
+    <h2>Recent Case Results</h2>
+  </div>
+  <div class="hp-result-grid">
+    <div class="hp-result-card">
+      <div class="hp-result-amount">$6.5 Million</div>
+      <div class="result-type">Birth Injury Settlement</div>
+      <p class="result-desc">Settlement for a child who suffered brain damage due to delayed delivery.</p>
+    </div>
+    <div class="hp-result-card">
+      <div class="hp-result-amount">$2.1 Million</div>
+      <div class="result-type">Surgical Error</div>
+      <p class="result-desc">Verdict for a patient who suffered permanent nerve damage during routine surgery.</p>
+    </div>
+    <div class="hp-result-card">
+      <div class="hp-result-amount">$4.8 Million</div>
+      <div class="result-type">Wrongful Death</div>
+      <p class="result-desc">Settlement for a family who lost a mother due to misdiagnosis of heart condition.</p>
+    </div>
+  </div>
 </div>
-<!-- /wp:column -->
+<!-- /wp:html -->
+
+<!-- wp:html -->
+<div class="hp-testimonials">
+  <div class="hp-section-header">
+    <h2>Client Stories</h2>
+  </div>
+  <div class="hp-testimonial-grid">
+    <div class="hp-testimonial-card">
+      <div class="hp-testimonial-stars">${stars5}</div>
+      <p class="testimonial-text">&ldquo;I had a hard time coming to terms with what happened to my baby at birth&hellip; and as I was looking for a Medical Malpractice attorney, her face was so welcoming. I instantly relaxed and what helped me thru my childbirth complications was she said it wasn&rsquo;t my fault.&rdquo;</p>
+      <div class="testimonial-name">Alyssa</div>
+      <div class="testimonial-label">Verified Client</div>
+    </div>
+    <div class="hp-testimonial-card">
+      <div class="hp-testimonial-stars">${stars5}</div>
+      <p class="testimonial-text">&ldquo;Thomas &amp; Wan did a great job representing me and my family. The lawyers went to work right away and through research found out critical information. They were aggressive and fought hard for us. I highly recommend them.&rdquo;</p>
+      <div class="testimonial-name">Lisa A.</div>
+      <div class="testimonial-label">Verified Client</div>
+    </div>
+    <div class="hp-testimonial-card">
+      <div class="hp-testimonial-stars">${stars5}</div>
+      <p class="testimonial-text">&ldquo;Linda Thomas and Michelle Wan are the dedicated attorneys you need. They explained everything clearly and were always available to answer my questions. Their expertise in birth injury cases is unmatched.&rdquo;</p>
+      <div class="testimonial-name">Sarah M.</div>
+      <div class="testimonial-label">Verified Client</div>
+    </div>
+  </div>
 </div>
-<!-- /wp:columns -->
+<!-- /wp:html -->
 
-<!-- wp:separator -->
-<hr class="wp-block-separator"/>
-<!-- /wp:separator -->
+<!-- wp:html -->
+<div class="hp-stats">
+  <div class="hp-stats-grid">
+    <div class="hp-stat">
+      <div class="hp-stat-number">60+</div>
+      <div class="stat-label">Years Combined Experience</div>
+    </div>
+    <div class="hp-stat">
+      <div class="hp-stat-number">$50M+</div>
+      <div class="stat-label">Recovered for Clients</div>
+    </div>
+    <div class="hp-stat">
+      <div class="hp-stat-number">100%</div>
+      <div class="stat-label">Medical Malpractice Focus</div>
+    </div>
+  </div>
+</div>
+<!-- /wp:html -->
 
-<!-- wp:heading {"level":2} -->
-<h2>Frequently Asked Questions</h2>
-<!-- /wp:heading -->
+<!-- wp:html -->
+<div class="hp-faq">
+  <div class="hp-faq-sidebar">
+    <span class="hp-section-label">Common Questions</span>
+    <h2 style="font-family:var(--font-serif);font-size:2.5rem;color:hsl(215 28% 17%);margin:0 0 1rem;border:none;padding:0;">Frequently Asked Questions</h2>
+    <p style="font-size:1.125rem;color:hsl(215 16% 47%);font-weight:300;line-height:1.75;margin-bottom:2rem;">Navigating medical malpractice claims can be confusing. Here are answers to some of the most common questions our clients ask.</p>
+    <div class="sidebar-box">
+      <h3>Still have questions?</h3>
+      <p>We are available 24/7 to answer your questions and help you understand your rights.</p>
+      <a href="/contact-us">Contact Us Now</a>
+    </div>
+  </div>
+  <div class="hp-faq-list">
+    <div class="hp-faq-item">
+      <div class="hp-faq-q">Do I have a case?</div>
+      <div class="hp-faq-a">The first step is for us to help you get a copy of all your medical records. Then we work with our team of expert doctors and nurses to review the records to let us know if you have a case.</div>
+    </div>
+    <div class="hp-faq-item">
+      <div class="hp-faq-q">What kind of help can my family receive?</div>
+      <div class="hp-faq-a">If we feel you have a case, we will have our team of experts determine how much money it will take to pay for the past medical bills and future quality medical care for you or your loved one for the rest of his or her life.</div>
+    </div>
+    <div class="hp-faq-item">
+      <div class="hp-faq-q">How much do you charge?</div>
+      <div class="hp-faq-a">We work on a contingency basis. This means that you only pay a percentage for our services if we win a verdict or settlement for your family. If no recovery is made, you pay nothing.</div>
+    </div>
+    <div class="hp-faq-item">
+      <div class="hp-faq-q">Why should we hire you?</div>
+      <div class="hp-faq-a">There are very few attorneys in Texas who specialize in medical malpractice, and those are the only kind of cases we do. Linda Thomas and Michelle Wan have over 60 years of combined experience. If we take your case, we work on your case ourselves; we don&rsquo;t &ldquo;flip&rdquo; it to another firm.</div>
+    </div>
+  </div>
+</div>
+<!-- /wp:html -->
 
-<!-- wp:heading {"level":3} -->
-<h3>Do I have a case?</h3>
-<!-- /wp:heading -->
+<!-- wp:html -->
+<div class="hp-lead">
+  <div class="hp-lead-box">
+    <h3>Injured by Medical Negligence?</h3>
+    <p>Tell us what happened. We&rsquo;ll review your case for free &mdash; no obligation, no cost.</p>
+    <a href="/contact-us">Contact Us for a Free Review</a>
+  </div>
+</div>
+<!-- /wp:html -->
 
-<!-- wp:paragraph -->
-<p>The first step is for us to help you get a copy of all your medical records. Then we work with our team of expert doctors and nurses to review the records to let us know if you have a case.</p>
-<!-- /wp:paragraph -->
-
-<!-- wp:heading {"level":3} -->
-<h3>What kind of help can my family receive?</h3>
-<!-- /wp:heading -->
-
-<!-- wp:paragraph -->
-<p>If we feel you have a case, we will have our team of experts determine how much money it will take to pay for the past medical bills and future quality medical care for you or your loved one for the rest of his or her life.</p>
-<!-- /wp:paragraph -->
-
-<!-- wp:heading {"level":3} -->
-<h3>How much do you charge?</h3>
-<!-- /wp:heading -->
-
-<!-- wp:paragraph -->
-<p>We work on a contingency basis. This means that you only pay a percentage for our services if we win a verdict or settlement for your family. If no recovery is made, you pay nothing.</p>
-<!-- /wp:paragraph -->
-
-<!-- wp:heading {"level":3} -->
-<h3>Why should we hire you?</h3>
-<!-- /wp:heading -->
-
-<!-- wp:paragraph -->
-<p>There are very few attorneys in Texas who specialize in medical malpractice, and those are the only kind of cases we do. Linda Thomas and Michelle Wan have over 55 years of combined experience. If we take your case, we work on your case ourselves; we don't "flip" it to another firm.</p>
-<!-- /wp:paragraph -->
-
-<!-- wp:separator -->
-<hr class="wp-block-separator"/>
-<!-- /wp:separator -->
-
-<!-- wp:heading {"level":2} -->
-<h2>Contact Us Today</h2>
-<!-- /wp:heading -->
-
-<!-- wp:paragraph -->
-<p>Call us today for a free consultation. We are available 24/7 to answer your questions and help you understand your rights.</p>
-<!-- /wp:paragraph -->
-
-<!-- wp:paragraph {"className":"cta"} -->
-<p class="cta"><strong><a href="tel:713-529-1177">Call (713) 529-1177</a></strong></p>
-<!-- /wp:paragraph -->`;
+<!-- wp:html -->
+<div class="hp-blog">
+  <div class="hp-blog-header">
+    <div>
+      <span class="hp-section-label">Latest Insights</span>
+      <h2 style="font-family:var(--font-serif);font-size:2.5rem;color:hsl(215 28% 17%);margin:0;border:none;padding:0;">Legal Resources &amp; News</h2>
+    </div>
+    <a href="/blog" class="view-all">View All Articles &rarr;</a>
+  </div>
+  <div class="hp-blog-grid">
+    <div class="hp-blog-card">
+      <div class="blog-body">
+        <div class="blog-meta">
+          <span class="blog-cat">Birth Injury</span>
+          <span>Jan 15, 2026</span>
+        </div>
+        <h3>Understanding Birth Injury Claims in Texas</h3>
+        <p>Birth injuries can be devastating for families. Learn about your rights and the legal process for seeking justice in Texas.</p>
+      </div>
+    </div>
+    <div class="hp-blog-card">
+      <div class="blog-body">
+        <div class="blog-meta">
+          <span class="blog-cat">Surgical Errors</span>
+          <span>Dec 28, 2025</span>
+        </div>
+        <h3>The Impact of Surgical Errors on Patient Safety</h3>
+        <p>Surgical errors are more common than you might think. We discuss the most frequent types of surgical mistakes and how to prevent them.</p>
+      </div>
+    </div>
+    <div class="hp-blog-card">
+      <div class="blog-body">
+        <div class="blog-meta">
+          <span class="blog-cat">Medical Malpractice</span>
+          <span>Nov 12, 2025</span>
+        </div>
+        <h3>Misdiagnosis: When Doctors Miss the Signs</h3>
+        <p>Failure to diagnose a serious condition can have life-altering consequences. Here&rsquo;s what you need to know about medical misdiagnosis cases.</p>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- /wp:html -->`;
 }
 
 function buildAboutContent(): string {
