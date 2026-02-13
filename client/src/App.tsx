@@ -16,7 +16,7 @@ import BlogPost from "@/pages/BlogPost";
 import AuthorPage from "@/pages/AuthorPage";
 import CategoryPage from "@/pages/CategoryPage";
 import ContentAssistant from "@/pages/ContentAssistant";
-import WordPressPage from "@/pages/WordPressPage";
+import BrainInjuriesPage from "@/pages/BrainInjuries";
 import SurgicalErrorsPage from "@/pages/SurgicalErrors";
 import MedicationErrorsPage from "@/pages/MedicationErrors";
 import MisdiagnosisPage from "@/pages/MisdiagnosisPage";
@@ -33,7 +33,7 @@ function Router() {
       <Route path="/cases-we-handle/medical-malpractice" component={MedicalMalpractice} />
       <Route path="/cases-we-handle/birth-injuries" component={BirthInjuries} />
       <Route path="/cases-we-handle/complications-of-childbirth" component={ComplicationsOfChildbirth} />
-      <Route path="/cases-we-handle/brain-injuries">{() => <WordPressPage slugOverride="brain-injuries" />}</Route>
+      <Route path="/cases-we-handle/brain-injuries" component={BrainInjuriesPage} />
       <Route path="/cases-we-handle/surgical-errors" component={SurgicalErrorsPage} />
       <Route path="/cases-we-handle/medication-errors" component={MedicationErrorsPage} />
       <Route path="/cases-we-handle/misdiagnosis" component={MisdiagnosisPage} />
