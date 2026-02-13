@@ -1,6 +1,7 @@
 import { db } from "./db";
 import { wpPostsCache, wpMediaCache, wpCategoriesCache, wpPagesCache } from "@shared/schema";
 import { sql, eq } from "drizzle-orm";
+import { purgeAllCache } from "./wp-content";
 
 process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
 
@@ -248,7 +249,8 @@ export async function refreshWordPressCache(): Promise<{ postsUpdated: number; p
     }
     console.log(`  Pages: ${result.pagesUpdated} updated, ${result.pagesCreated} new`);
 
-    console.log("WordPress cache refresh complete!");
+    purgeAllCache();
+    console.log("WordPress cache refresh complete! (in-memory cache cleared)");
     return result;
   } catch (error) {
     console.error("Error refreshing WordPress cache:", error);

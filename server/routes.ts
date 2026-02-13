@@ -37,7 +37,7 @@ import { exportStaticSite } from "./static-export";
 import { db } from "./db";
 import { wpPagesCache } from "@shared/schema";
 import { eq } from "drizzle-orm";
-import { getPostBySlug, getPageBySlug, purgeAndWarm, getCacheStats } from "./wp-content";
+import { getPostBySlug, getPageBySlug, purgeAndWarm, getCacheStats, purgeAllCache } from "./wp-content";
 
 // Detect search engine crawlers for SSR
 function isBot(userAgent: string): boolean {
@@ -425,6 +425,7 @@ export async function registerRoutes(
   // Refresh cache - pulls updated content from WordPress
   app.post("/api/refresh-wordpress", async (_req: Request, res: Response) => {
     try {
+      purgeAllCache();
       const { refreshWordPressCache } = await import("./wp-sync");
       const result = await refreshWordPressCache();
       res.json({ success: true, message: "WordPress cache refreshed", ...result });
@@ -435,6 +436,14 @@ export async function registerRoutes(
   });
 
   app.post("/webhooks/wp", async (req: Request, res: Response) => {
+    console.log(`[webhook] === INCOMING REQUEST ===`);
+    console.log(`[webhook] Headers: ${JSON.stringify({
+      'content-type': req.headers['content-type'],
+      'x-webhook-secret': req.headers['x-webhook-secret'] ? '***provided***' : 'MISSING',
+      'user-agent': req.headers['user-agent'],
+    })}`);
+    console.log(`[webhook] Body: ${JSON.stringify(req.body)}`);
+
     const secret = req.headers["x-webhook-secret"] as string;
     const expectedSecret = process.env.WP_WEBHOOK_SECRET;
 
@@ -445,7 +454,7 @@ export async function registerRoutes(
     }
 
     if (!secret || secret !== expectedSecret) {
-      console.warn(`[webhook] Unauthorized webhook attempt (provided: "${secret ? '***' : 'none'}")`);
+      console.warn(`[webhook] Unauthorized — secret mismatch (provided: "${secret || 'none'}", expected length: ${expectedSecret.length})`);
       res.status(401).json({ error: "Unauthorized: invalid x-webhook-secret" });
       return;
     }
@@ -464,11 +473,11 @@ export async function registerRoutes(
       return;
     }
 
-    console.log(`[webhook] Received: type="${type}", slug="${slug}"`);
+    console.log(`[webhook] Valid request: type="${type}", slug="${slug}"`);
 
     try {
       const result = await purgeAndWarm(type, slug);
-      console.log(`[webhook] Processed: type="${type}", slug="${slug}" — purged=${result.purged}, warmed=${result.warmed}`);
+      console.log(`[webhook] SUCCESS: type="${type}", slug="${slug}" — purged=${result.purged}, warmed=${result.warmed}`);
       res.json({
         success: true,
         type,
