@@ -7,7 +7,7 @@ process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
 
 const WP_BASE_URL = process.env.WP_BASE_URL || "https://wp.thomasandwan.com";
 const WP_API = `${WP_BASE_URL}/wp-json/wp/v2`;
-const CACHE_TTL = parseInt(process.env.CACHE_TTL_SECONDS || "300", 10) * 1000;
+const CACHE_TTL = parseInt(process.env.CACHE_TTL_SECONDS || "60", 10) * 1000;
 
 interface CacheEntry<T> {
   data: T;
