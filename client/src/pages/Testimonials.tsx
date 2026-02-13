@@ -5,7 +5,6 @@ import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { Link } from "wouter";
 import SEO, { createReviewSchema } from "@/components/SEO";
-import { useWordPressPage } from "@/hooks/useWordPressPage";
 
 const testimonials = [
   {
@@ -42,8 +41,6 @@ const testimonials = [
 ];
 
 export default function Testimonials() {
-  const { data: wpPage } = useWordPressPage("testimonials");
-
   return (
     <div className="min-h-screen bg-background font-sans text-foreground overflow-x-hidden selection:bg-secondary selection:text-primary">
       <SEO 
@@ -55,6 +52,7 @@ export default function Testimonials() {
       <Navigation />
       
       <main className="pt-20">
+        {/* Hero Section */}
         <section className="bg-primary text-white py-24 relative overflow-hidden">
           <div className="absolute top-0 right-0 w-1/2 h-full bg-secondary/5 -skew-x-12 transform origin-top translate-x-1/4" />
           <div className="container mx-auto px-4 md:px-6 relative z-10">
@@ -70,11 +68,8 @@ export default function Testimonials() {
                 </span>
               </div>
               <h1 className="text-5xl md:text-6xl font-serif mb-8 leading-tight">
-                {wpPage ? (
-                  <span dangerouslySetInnerHTML={{ __html: wpPage.title.rendered }} />
-                ) : (
-                  <>Voices of <br/><span className="text-secondary italic">Justice & Hope</span></>
-                )}
+                Voices of <br/>
+                <span className="text-secondary italic">Justice & Hope</span>
               </h1>
               <p className="text-xl text-white/80 leading-relaxed font-light">
                 Don't just take our word for it. Read what our clients have to say about their experience working with Thomas & Wan.
@@ -83,56 +78,50 @@ export default function Testimonials() {
           </div>
         </section>
 
-        {wpPage ? (
-          <section className="py-20 bg-white">
-            <div className="container mx-auto px-4 md:px-6">
-              <div className="max-w-4xl mx-auto wp-content" dangerouslySetInnerHTML={{ __html: wpPage.content.rendered }} />
+        {/* Testimonials Grid */}
+        <section className="py-24 bg-white">
+          <div className="container mx-auto px-4 md:px-6">
+            <div className="grid md:grid-cols-2 gap-8">
+              {testimonials.map((testimonial, index) => (
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6, delay: index * 0.1 }}
+                  className="bg-[#F9F7F5] p-8 relative"
+                >
+                  <div className="absolute top-6 right-6">
+                    <Quote className="w-10 h-10 text-secondary/20" />
+                  </div>
+                  
+                  <div className="flex gap-1 mb-6">
+                    {[...Array(5)].map((_, i) => (
+                      <Star key={i} className="w-5 h-5 fill-secondary text-secondary" />
+                    ))}
+                  </div>
+                  
+                  <p className="text-slate-600 leading-relaxed mb-6 text-lg italic">
+                    "{testimonial.quote}"
+                  </p>
+                  
+                  <div className="flex items-center gap-4 border-t border-gray-200 pt-6">
+                    <div className="w-12 h-12 bg-primary text-white rounded-full flex items-center justify-center font-serif text-xl">
+                      {testimonial.initial}
+                    </div>
+                    <div>
+                      <p className="font-bold text-primary">{testimonial.author}</p>
+                      {testimonial.date && (
+                        <p className="text-sm text-muted-foreground">{testimonial.date}</p>
+                      )}
+                    </div>
+                  </div>
+                </motion.div>
+              ))}
             </div>
-          </section>
-        ) : (
-          <section className="py-24 bg-white">
-            <div className="container mx-auto px-4 md:px-6">
-              <div className="grid md:grid-cols-2 gap-8">
-                {testimonials.map((testimonial, index) => (
-                  <motion.div
-                    key={index}
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.6, delay: index * 0.1 }}
-                    className="bg-[#F9F7F5] p-8 relative"
-                  >
-                    <div className="absolute top-6 right-6">
-                      <Quote className="w-10 h-10 text-secondary/20" />
-                    </div>
-                    
-                    <div className="flex gap-1 mb-6">
-                      {[...Array(5)].map((_, i) => (
-                        <Star key={i} className="w-5 h-5 fill-secondary text-secondary" />
-                      ))}
-                    </div>
-                    
-                    <p className="text-slate-600 leading-relaxed mb-6 text-lg italic">
-                      "{testimonial.quote}"
-                    </p>
-                    
-                    <div className="flex items-center gap-4 border-t border-gray-200 pt-6">
-                      <div className="w-12 h-12 bg-primary text-white rounded-full flex items-center justify-center font-serif text-xl">
-                        {testimonial.initial}
-                      </div>
-                      <div>
-                        <p className="font-bold text-primary">{testimonial.author}</p>
-                        {testimonial.date && (
-                          <p className="text-sm text-muted-foreground">{testimonial.date}</p>
-                        )}
-                      </div>
-                    </div>
-                  </motion.div>
-                ))}
-              </div>
-            </div>
-          </section>
-        )}
+          </div>
+        </section>
 
+        {/* Call to Action */}
         <section className="bg-primary text-white py-20">
           <div className="container mx-auto px-4 max-w-4xl text-center">
             <h2 className="text-4xl md:text-5xl font-serif mb-6">Let Us Fight for Your Family Too</h2>
