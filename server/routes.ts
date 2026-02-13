@@ -435,6 +435,16 @@ export async function registerRoutes(
     }
   });
 
+  app.get("/webhooks/wp/test", async (_req: Request, res: Response) => {
+    console.log(`[webhook] Test endpoint hit`);
+    res.json({ 
+      status: "ok", 
+      message: "Webhook endpoint is reachable",
+      timestamp: new Date().toISOString(),
+      secretConfigured: !!process.env.WP_WEBHOOK_SECRET,
+    });
+  });
+
   app.post("/webhooks/wp", async (req: Request, res: Response) => {
     console.log(`[webhook] === INCOMING REQUEST ===`);
     console.log(`[webhook] Headers: ${JSON.stringify({
