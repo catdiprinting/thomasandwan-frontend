@@ -37,6 +37,7 @@ import { exportStaticSite } from "./static-export";
 import { db } from "./db";
 import { wpPagesCache } from "@shared/schema";
 import { eq } from "drizzle-orm";
+import { getPostBySlug, getPageBySlug, purgeAndWarm, getCacheStats } from "./wp-content";
 
 // Detect search engine crawlers for SSR
 function isBot(userAgent: string): boolean {
@@ -133,7 +134,7 @@ export async function registerRoutes(
   app.get("/api/pages/:slug", async (req: Request, res: Response) => {
     try {
       const slug = req.params.slug as string;
-      const [page] = await db.select().from(wpPagesCache).where(eq(wpPagesCache.slug, slug));
+      const page = await getPageBySlug(slug);
       if (!page) {
         res.status(404).json({ error: "Page not found" });
         return;
@@ -431,6 +432,59 @@ export async function registerRoutes(
       console.error("Error refreshing WordPress cache:", error);
       res.status(500).json({ error: error.message || "Refresh failed" });
     }
+  });
+
+  app.post("/webhooks/wp", async (req: Request, res: Response) => {
+    const secret = req.headers["x-webhook-secret"] as string;
+    const expectedSecret = process.env.WP_WEBHOOK_SECRET;
+
+    if (!expectedSecret) {
+      console.error("[webhook] WP_WEBHOOK_SECRET not configured on server");
+      res.status(500).json({ error: "Webhook secret not configured" });
+      return;
+    }
+
+    if (!secret || secret !== expectedSecret) {
+      console.warn(`[webhook] Unauthorized webhook attempt (provided: "${secret ? '***' : 'none'}")`);
+      res.status(401).json({ error: "Unauthorized: invalid x-webhook-secret" });
+      return;
+    }
+
+    const { type, slug } = req.body || {};
+
+    if (!type || !slug) {
+      console.warn(`[webhook] Bad request — missing type or slug. Body: ${JSON.stringify(req.body)}`);
+      res.status(400).json({ error: "Missing required fields: type and slug" });
+      return;
+    }
+
+    if (type !== "post" && type !== "page") {
+      console.warn(`[webhook] Unknown type "${type}"`);
+      res.status(400).json({ error: 'type must be "post" or "page"' });
+      return;
+    }
+
+    console.log(`[webhook] Received: type="${type}", slug="${slug}"`);
+
+    try {
+      const result = await purgeAndWarm(type, slug);
+      console.log(`[webhook] Processed: type="${type}", slug="${slug}" — purged=${result.purged}, warmed=${result.warmed}`);
+      res.json({
+        success: true,
+        type,
+        slug,
+        purged: result.purged,
+        warmed: result.warmed,
+      });
+    } catch (err: any) {
+      console.error(`[webhook] Error processing ${type} "${slug}":`, err);
+      res.status(500).json({ error: "Failed to process webhook", details: err.message });
+    }
+  });
+
+  app.get("/api/cache-stats", async (_req: Request, res: Response) => {
+    const stats = getCacheStats();
+    res.json(stats);
   });
 
   // Push content to WordPress

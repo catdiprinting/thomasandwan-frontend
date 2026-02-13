@@ -1,5 +1,5 @@
 import { db } from "./db";
-import { wpPostsCache, wpMediaCache, wpCategoriesCache } from "@shared/schema";
+import { wpPostsCache, wpMediaCache, wpCategoriesCache, wpPagesCache } from "@shared/schema";
 import { eq, desc, inArray, sql, ilike, and } from "drizzle-orm";
 
 process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
@@ -111,6 +111,25 @@ function dbPostToWPPost(row: typeof wpPostsCache.$inferSelect): WPPost {
   };
 }
 
+function dbPageToWPPage(row: typeof wpPagesCache.$inferSelect): WPPage {
+  return {
+    id: row.id,
+    date: row.date,
+    date_gmt: row.dateGmt,
+    slug: row.slug,
+    status: row.status,
+    type: "page",
+    link: rewriteUrls(`https://wp.thomasandwan.com/${row.slug}/`),
+    title: { rendered: row.title },
+    content: { rendered: rewriteUrls(row.content), protected: false },
+    excerpt: { rendered: rewriteUrls(row.excerpt), protected: false },
+    author: row.author,
+    featured_media: row.featuredMedia,
+    parent: row.parent,
+    menu_order: row.menuOrder,
+  };
+}
+
 function dbMediaToWPMedia(row: typeof wpMediaCache.$inferSelect): WPMedia {
   return {
     id: row.id,
@@ -195,15 +214,25 @@ export async function fetchPages(params?: {
   page?: number;
   parent?: number;
 }): Promise<WPPage[]> {
-  return [];
+  const rows = await db.select().from(wpPagesCache);
+  return rows.map(dbPageToWPPage);
 }
 
 export async function fetchPageBySlug(slug: string): Promise<WPPage | null> {
-  return null;
+  const rows = await db.select().from(wpPagesCache)
+    .where(eq(wpPagesCache.slug, slug))
+    .limit(1);
+  return rows[0] ? dbPageToWPPage(rows[0]) : null;
 }
 
 export async function fetchPageWithMedia(slug: string): Promise<(WPPage & { featured_image?: WPMedia }) | null> {
-  return null;
+  const page = await fetchPageBySlug(slug);
+  if (!page) return null;
+  if (page.featured_media) {
+    const media = await fetchMedia(page.featured_media);
+    return { ...page, featured_image: media || undefined };
+  }
+  return page;
 }
 
 export async function fetchMedia(id: number): Promise<WPMedia | null> {
