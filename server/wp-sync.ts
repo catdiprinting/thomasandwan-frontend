@@ -189,14 +189,20 @@ export async function refreshWordPressCache(): Promise<{ postsUpdated: number; p
     console.log("Refreshing posts...");
     const posts = await fetchAllPaginated("posts");
     for (const post of posts) {
-      const existing = await db.select({ id: wpPostsCache.id, modified: wpPostsCache.modified }).from(wpPostsCache).where(eq(wpPostsCache.id, post.id));
+      const existing = await db.select({ id: wpPostsCache.id, modified: wpPostsCache.modified, title: wpPostsCache.title, content: wpPostsCache.content }).from(wpPostsCache).where(eq(wpPostsCache.id, post.id));
 
       if (existing.length > 0) {
         const wpModified = post.modified || "";
-        if (wpModified !== existing[0].modified) {
+        const contentChanged = post.content.rendered !== existing[0].content;
+        const titleChanged = post.title.rendered !== existing[0].title;
+        if (wpModified !== existing[0].modified || contentChanged || titleChanged) {
           await db.update(wpPostsCache).set(postToRow(post)).where(eq(wpPostsCache.id, post.id));
           result.postsUpdated++;
-          console.log(`  Updated post: "${post.title.rendered}" (modified ${wpModified})`);
+          const reasons = [];
+          if (wpModified !== existing[0].modified) reasons.push("modified date");
+          if (contentChanged) reasons.push("content");
+          if (titleChanged) reasons.push("title");
+          console.log(`  Updated post: "${post.title.rendered}" (changed: ${reasons.join(", ")})`);
         }
       } else {
         await db.insert(wpPostsCache).values(postToRow(post));
@@ -232,14 +238,20 @@ export async function refreshWordPressCache(): Promise<{ postsUpdated: number; p
     console.log("Refreshing pages...");
     const pages = await fetchAllPaginated("pages");
     for (const page of pages) {
-      const existing = await db.select({ id: wpPagesCache.id, modified: wpPagesCache.modified }).from(wpPagesCache).where(eq(wpPagesCache.id, page.id));
+      const existing = await db.select({ id: wpPagesCache.id, modified: wpPagesCache.modified, title: wpPagesCache.title, content: wpPagesCache.content }).from(wpPagesCache).where(eq(wpPagesCache.id, page.id));
 
       if (existing.length > 0) {
         const wpModified = page.modified || "";
-        if (wpModified !== existing[0].modified) {
+        const contentChanged = page.content.rendered !== existing[0].content;
+        const titleChanged = page.title.rendered !== existing[0].title;
+        if (wpModified !== existing[0].modified || contentChanged || titleChanged) {
           await db.update(wpPagesCache).set(pageToRow(page)).where(eq(wpPagesCache.id, page.id));
           result.pagesUpdated++;
-          console.log(`  Updated page: "${page.title.rendered}" (modified ${wpModified})`);
+          const reasons = [];
+          if (wpModified !== existing[0].modified) reasons.push("modified date");
+          if (contentChanged) reasons.push("content");
+          if (titleChanged) reasons.push("title");
+          console.log(`  Updated page: "${page.title.rendered}" (changed: ${reasons.join(", ")})`);
         }
       } else {
         await db.insert(wpPagesCache).values(pageToRow(page));
