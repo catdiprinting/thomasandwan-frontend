@@ -2,8 +2,7 @@ import express, { type Request, Response, NextFunction } from "express";
 import { registerRoutes } from "./routes";
 import { serveStatic } from "./static";
 import { createServer } from "http";
-// WordPress sync disabled — site is headless-ready but not pulling content yet
-// import { syncWordPressCache, refreshWordPressCache } from "./wp-sync";
+import { syncWordPressCache, refreshWordPressCache } from "./wp-sync";
 
 const app = express();
 const httpServer = createServer(app);
@@ -62,8 +61,7 @@ app.use((req, res, next) => {
 });
 
 (async () => {
-  // WordPress sync disabled — re-enable when ready to pull content
-  // await syncWordPressCache();
+  await syncWordPressCache();
   await registerRoutes(httpServer, app);
 
   app.use((err: any, _req: Request, res: Response, next: NextFunction) => {
@@ -105,16 +103,15 @@ app.use((req, res, next) => {
     },
   );
 
-  // WordPress auto-sync disabled — re-enable when ready to pull content
-  // const SYNC_INTERVAL_MS = 5 * 60 * 1000;
-  // setInterval(async () => {
-  //   try {
-  //     log("Auto-refreshing WordPress cache...", "wp-sync");
-  //     const result = await refreshWordPressCache();
-  //     log(`WordPress sync complete: ${result.postsUpdated} updated, ${result.postsCreated} new posts, ${result.mediaUpdated} media`, "wp-sync");
-  //   } catch (error) {
-  //     console.error("Auto WordPress sync failed:", error);
-  //   }
-  // }, SYNC_INTERVAL_MS);
-  // log(`WordPress auto-sync scheduled every ${SYNC_INTERVAL_MS / 60000} minutes`, "wp-sync");
+  const SYNC_INTERVAL_MS = 5 * 60 * 1000;
+  setInterval(async () => {
+    try {
+      log("Auto-refreshing WordPress cache...", "wp-sync");
+      const result = await refreshWordPressCache();
+      log(`WordPress sync complete: ${result.postsUpdated} updated, ${result.postsCreated} new posts, ${result.mediaUpdated} media`, "wp-sync");
+    } catch (error) {
+      console.error("Auto WordPress sync failed:", error);
+    }
+  }, SYNC_INTERVAL_MS);
+  log(`WordPress auto-sync scheduled every ${SYNC_INTERVAL_MS / 60000} minutes`, "wp-sync");
 })();
