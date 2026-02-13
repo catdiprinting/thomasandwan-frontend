@@ -140,42 +140,55 @@ export async function getPageBySlug(slug: string): Promise<any | null> {
   }
   log(`[wp-content] Memory cache MISS for page "${slug}"`, "wp-content");
 
-  const wpData = await fetchFromWP(`pages?slug=${encodeURIComponent(slug)}&_embed`);
-  if (wpData && Array.isArray(wpData) && wpData.length > 0) {
-    const page = wpData[0];
-    const row = {
-      id: page.id,
-      slug: page.slug,
-      date: page.date,
-      dateGmt: page.date_gmt,
-      modified: page.modified || "",
-      modifiedGmt: page.modified_gmt || "",
-      status: page.status,
-      title: page.title.rendered,
-      content: page.content.rendered,
-      excerpt: page.excerpt?.rendered || "",
-      author: page.author,
-      featuredMedia: page.featured_media || 0,
-      parent: page.parent || 0,
-      menuOrder: page.menu_order || 0,
-      cachedAt: new Date(),
-    };
-    await db.insert(wpPagesCache).values(row).onConflictDoUpdate({
-      target: wpPagesCache.id,
-      set: row,
-    });
-    setCache(key, row);
-    log(`[wp-content] Fetched page "${slug}" from WP API (fresh) and cached in DB + memory`, "wp-content");
-    return row;
+  const dbRows = await db.select().from(wpPagesCache).where(eq(wpPagesCache.slug, slug)).limit(1);
+  const dbPage = dbRows.length > 0 ? dbRows[0] : null;
+
+  const wpCheck = await fetchFromWP(`pages?slug=${encodeURIComponent(slug)}&_fields=id,modified`);
+  if (wpCheck && Array.isArray(wpCheck) && wpCheck.length > 0) {
+    const wpModified = wpCheck[0].modified || "";
+    const dbModified = dbPage?.modified || "";
+
+    if (dbPage && wpModified === dbModified) {
+      setCache(key, dbPage);
+      log(`[wp-content] Page "${slug}" unchanged (modified: ${wpModified}), served from DB cache`, "wp-content");
+      return dbPage;
+    }
+
+    log(`[wp-content] Page "${slug}" changed (WP: ${wpModified}, DB: ${dbModified}), fetching full content...`, "wp-content");
+    const wpData = await fetchFromWP(`pages?slug=${encodeURIComponent(slug)}&_embed`);
+    if (wpData && Array.isArray(wpData) && wpData.length > 0) {
+      const page = wpData[0];
+      const row = {
+        id: page.id,
+        slug: page.slug,
+        date: page.date,
+        dateGmt: page.date_gmt,
+        modified: page.modified || "",
+        modifiedGmt: page.modified_gmt || "",
+        status: page.status,
+        title: page.title.rendered,
+        content: page.content.rendered,
+        excerpt: page.excerpt?.rendered || "",
+        author: page.author,
+        featuredMedia: page.featured_media || 0,
+        parent: page.parent || 0,
+        menuOrder: page.menu_order || 0,
+        cachedAt: new Date(),
+      };
+      await db.insert(wpPagesCache).values(row).onConflictDoUpdate({
+        target: wpPagesCache.id,
+        set: row,
+      });
+      setCache(key, row);
+      log(`[wp-content] Updated page "${slug}" from WP API (new content cached)`, "wp-content");
+      return row;
+    }
   }
 
-  log(`[wp-content] WP API unreachable for page "${slug}", falling back to DB cache`, "wp-content");
-  const dbRows = await db.select().from(wpPagesCache).where(eq(wpPagesCache.slug, slug)).limit(1);
-  if (dbRows.length > 0) {
-    const page = dbRows[0];
-    setCache(key, page);
-    log(`[wp-content] Served page "${slug}" from DB cache (fallback)`, "wp-content");
-    return page;
+  if (dbPage) {
+    setCache(key, dbPage);
+    log(`[wp-content] WP API unreachable for page "${slug}", served from DB cache (fallback)`, "wp-content");
+    return dbPage;
   }
 
   log(`[wp-content] Page "${slug}" not found anywhere`, "wp-content");
