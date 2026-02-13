@@ -23,13 +23,13 @@ Preferred communication style: Simple, everyday language.
 - **Runtime**: Node.js with Express
 - **Build Tool**: Vite for development, esbuild for production server bundling
 - **API Pattern**: RESTful endpoints prefixed with `/api`
-- **WordPress Integration**: Server acts as a proxy to fetch blog posts from an external WordPress REST API (`thomasandwan.com/test/wp-json/wp/v2`)
+- **WordPress Integration**: Hybrid headless CMS — WordPress at `wp.thomasandwan.com` is source of truth, content cached in PostgreSQL with in-memory TTL layer, instant webhook-based cache refresh
 
 ### Data Storage
 - **ORM**: Drizzle ORM configured for PostgreSQL
 - **Schema Location**: `shared/schema.ts` contains database table definitions
-- **Current Schema**: Basic users table with id, username, and password fields
-- **In-Memory Fallback**: `MemStorage` class provides runtime storage when database isn't needed
+- **Current Schema**: users, wp_posts_cache, wp_pages_cache, wp_media_cache, wp_categories_cache, contact_submissions
+- **In-Memory TTL Cache**: `server/wp-content.ts` provides fast in-memory caching with configurable TTL (CACHE_TTL_SECONDS env var, default 300s)
 
 ### Build and Development
 - **Development**: `npm run dev` starts the Express server with Vite middleware for HMR
@@ -46,7 +46,9 @@ client/           # React frontend application
     lib/          # Utilities and query client
 server/           # Express backend
   routes.ts       # API endpoint definitions
-  wordpress.ts    # WordPress API integration
+  wordpress.ts    # WordPress DB cache queries (read layer)
+  wp-content.ts   # In-memory TTL cache + WP REST API fetch layer + purge/warm
+  wp-sync.ts      # Full WordPress sync (initial + periodic 5-min refresh)
   storage.ts      # Data access layer
 shared/           # Shared code between client/server
   schema.ts       # Drizzle database schema
@@ -70,12 +72,17 @@ shared/           # Shared code between client/server
 ### WordPress API Endpoints
 - `GET /api/posts` - Fetch blog posts (supports `per_page`, `page`, `with_media=true` query params)
 - `GET /api/posts/:slug` - Fetch a single post by slug (includes featured image)
-- `GET /api/pages` - Fetch WordPress pages
-- `GET /api/pages/:slug` - Fetch a single page by slug
+- `GET /api/pages` - Fetch WordPress pages (from DB cache)
+- `GET /api/pages/:slug` - Fetch a single page by slug (via TTL memory cache → DB cache → WP REST API)
 - `GET /api/categories` - Fetch all categories
+- `GET /api/cache-stats` - View in-memory cache stats (size, keys)
+- `POST /api/refresh-wordpress` - Trigger full WordPress cache refresh
 - `GET /api/export/post/:slug` - Export a post as standalone HTML file
 - `GET /api/export/page/:slug` - Export a page as standalone HTML file
 - `GET /api/export/all-posts` - Export all posts as JSON with HTML content
+
+### Webhook Endpoints
+- `POST /webhooks/wp` - WordPress webhook receiver; requires `x-webhook-secret` header matching `WP_WEBHOOK_SECRET` env var; body: `{ type: "post"|"page", slug: "..." }`; purges cached content and immediately refetches from WordPress
 
 ### OpenAI Assistant Endpoints
 - `POST /api/assistant/thread` - Create a new conversation thread
@@ -93,7 +100,8 @@ shared/           # Shared code between client/server
 ## External Dependencies
 
 ### Third-Party Services
-- **WordPress REST API**: External CMS at `wp.thomasandwan.com/wp-json/wp/v2` provides blog posts, pages, and media
+- **WordPress REST API**: External CMS at `wp.thomasandwan.com/wp-json/wp/v2` provides blog posts, pages, and media (env: `WP_BASE_URL`)
+- **WordPress Webhook**: Incoming `POST /webhooks/wp` for instant content updates (env: `WP_WEBHOOK_SECRET`)
 - **OpenAI Assistants API**: Connected via user's own API key and Assistant ID for content creation (secrets: `OPENAI_API_KEY`, `OPENAI_ASSISTANT_ID`)
 - **Google Fonts**: Typography loaded from fonts.googleapis.com
 
