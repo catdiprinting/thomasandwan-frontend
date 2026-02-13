@@ -5,6 +5,7 @@ import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { Link } from "wouter";
 import SEO, { createPracticeAreaSchema } from "@/components/SEO";
+import { useWordPressPage } from "@/hooks/useWordPressPage";
 
 const birthInjuryTypes = [
   "Hypoxic ischemic encephalopathy",
@@ -49,6 +50,8 @@ export default function BirthInjuries() {
     "https://thomasandwan.com/cases-we-handle/birth-injuries"
   );
 
+  const { data: wpPage } = useWordPressPage("birth-injuries");
+
   return (
     <div className="min-h-screen bg-background font-sans text-foreground overflow-x-hidden selection:bg-secondary selection:text-primary">
       <SEO 
@@ -60,7 +63,6 @@ export default function BirthInjuries() {
       <Navigation />
       
       <main className="pt-20">
-        {/* Hero Section */}
         <section className="bg-primary text-white py-24 relative overflow-hidden">
           <div className="absolute top-0 right-0 w-1/2 h-full bg-secondary/5 -skew-x-12 transform origin-top translate-x-1/4" />
           <div className="container mx-auto px-4 md:px-6 relative z-10">
@@ -76,7 +78,11 @@ export default function BirthInjuries() {
                 </span>
               </div>
               <h1 className="text-5xl md:text-6xl font-serif mb-8 leading-tight">
-                Birth <span className="text-secondary italic">Injuries</span>
+                {wpPage ? (
+                  <span dangerouslySetInnerHTML={{ __html: wpPage.title.rendered }} />
+                ) : (
+                  <>Birth <span className="text-secondary italic">Injuries</span></>
+                )}
               </h1>
               <p className="text-xl text-white/80 leading-relaxed font-light">
                 Sometimes babies are born with medical problems that don't match their parents' expectations. Sometimes it is because the baby is a victim of a birth injury that occurs during labor and delivery.
@@ -85,140 +91,145 @@ export default function BirthInjuries() {
           </div>
         </section>
 
-        {/* Introduction */}
-        <section className="py-20 bg-white">
-          <div className="container mx-auto px-4 md:px-6">
-            <div className="grid lg:grid-cols-2 gap-12 items-center max-w-6xl mx-auto">
-              <div>
-                <p className="text-lg text-slate-600 leading-relaxed mb-6">
-                  Giving birth is one of the most exciting events in a mother's life. Parents prepare for the big day when their new baby is born, and they hope and pray for a healthy baby. At Thomas & Wan, our lawyers have represented many Texas families who have suffered injuries to their baby as a result of gross negligence and malpractice.
-                </p>
-                <p className="text-lg text-slate-600 leading-relaxed mb-6">
-                  We are very familiar with the medicine, the law and the policies of hospitals all across Texas concerning the need for monitoring and possible emergency delivery of laboring moms to prevent injuries to babies. Many times these injuries are preventable if hospitals only ensured that safety policies were followed by their labor nurses, midwives and doctors.
-                </p>
-              </div>
-              <div className="relative">
-                <img 
-                  src="/images/birth-injuries.jpg" 
-                  alt="Newborn baby receiving care" 
-                  className="w-full rounded-lg shadow-xl"
-                />
-                <div className="absolute -bottom-4 -right-4 w-full h-full border-4 border-secondary/20 rounded-lg -z-10" />
-              </div>
+        {wpPage ? (
+          <section className="py-20 bg-white">
+            <div className="container mx-auto px-4 md:px-6">
+              <div className="max-w-4xl mx-auto wp-content" dangerouslySetInnerHTML={{ __html: wpPage.content.rendered }} />
             </div>
-          </div>
-        </section>
-
-        {/* Types of Birth Injuries */}
-        <section className="py-20 bg-[#F9F7F5]">
-          <div className="container mx-auto px-4 md:px-6">
-            <h2 className="text-4xl font-serif text-primary mb-10 text-center">
-              Types of Birth Injuries We Handle
-            </h2>
-            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4 max-w-6xl mx-auto">
-              {birthInjuryTypes.map((type, index) => (
-                <motion.div
-                  key={index}
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.4, delay: index * 0.05 }}
-                  className="bg-white p-4 border-l-4 border-secondary shadow-sm"
-                >
-                  <p className="text-primary font-medium">{type}</p>
-                </motion.div>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* Birth Defects vs Birth Negligence */}
-        <section className="py-20 bg-white">
-          <div className="container mx-auto px-4 md:px-6">
-            <div className="max-w-4xl mx-auto">
-              <h2 className="text-4xl font-serif text-primary mb-8">
-                Birth Defects Versus Birth Negligence
-              </h2>
-              
-              <div className="grid md:grid-cols-2 gap-8 mb-12">
-                <div className="bg-slate-50 p-8 border-t-4 border-slate-400">
-                  <h3 className="font-bold text-xl text-primary mb-4">Birth Defects</h3>
-                  <p className="text-slate-600 leading-relaxed">
-                    A birth defect is a health problem that affects your baby based on your child's genetic material or DNA. Examples include Down's Syndrome, a cleft palate, or heart murmurs. <strong>A birth defect is generally NOT medical malpractice.</strong>
-                  </p>
-                </div>
-                
-                <div className="bg-secondary/10 p-8 border-t-4 border-secondary">
-                  <h3 className="font-bold text-xl text-primary mb-4">Birth Injuries</h3>
-                  <p className="text-slate-600 leading-relaxed">
-                    A birth injury is a medical issue that an infant is born with that is, in most cases, <strong>completely preventable</strong>. These are often caused by negligence during labor and delivery.
-                  </p>
+          </section>
+        ) : (
+          <>
+            <section className="py-20 bg-white">
+              <div className="container mx-auto px-4 md:px-6">
+                <div className="grid lg:grid-cols-2 gap-12 items-center max-w-6xl mx-auto">
+                  <div>
+                    <p className="text-lg text-slate-600 leading-relaxed mb-6">
+                      Giving birth is one of the most exciting events in a mother's life. Parents prepare for the big day when their new baby is born, and they hope and pray for a healthy baby. At Thomas & Wan, our lawyers have represented many Texas families who have suffered injuries to their baby as a result of gross negligence and malpractice.
+                    </p>
+                    <p className="text-lg text-slate-600 leading-relaxed mb-6">
+                      We are very familiar with the medicine, the law and the policies of hospitals all across Texas concerning the need for monitoring and possible emergency delivery of laboring moms to prevent injuries to babies. Many times these injuries are preventable if hospitals only ensured that safety policies were followed by their labor nurses, midwives and doctors.
+                    </p>
+                  </div>
+                  <div className="relative">
+                    <img 
+                      src="/images/birth-injuries.jpg" 
+                      alt="Newborn baby receiving care" 
+                      className="w-full rounded-lg shadow-xl"
+                    />
+                    <div className="absolute -bottom-4 -right-4 w-full h-full border-4 border-secondary/20 rounded-lg -z-10" />
+                  </div>
                 </div>
               </div>
+            </section>
 
-              <h3 className="font-bold text-2xl text-primary mb-6">
-                Common Causes of Preventable Birth Injuries:
-              </h3>
-              <div className="space-y-4">
-                {preventableCauses.map((cause, index) => (
-                  <div key={index} className="flex gap-4 items-start">
-                    <AlertTriangle className="w-5 h-5 text-secondary shrink-0 mt-1" />
-                    <p className="text-slate-600">{cause}</p>
-                  </div>
-                ))}
+            <section className="py-20 bg-[#F9F7F5]">
+              <div className="container mx-auto px-4 md:px-6">
+                <h2 className="text-4xl font-serif text-primary mb-10 text-center">
+                  Types of Birth Injuries We Handle
+                </h2>
+                <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4 max-w-6xl mx-auto">
+                  {birthInjuryTypes.map((type, index) => (
+                    <motion.div
+                      key={index}
+                      initial={{ opacity: 0, y: 10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.4, delay: index * 0.05 }}
+                      className="bg-white p-4 border-l-4 border-secondary shadow-sm"
+                    >
+                      <p className="text-primary font-medium">{type}</p>
+                    </motion.div>
+                  ))}
+                </div>
               </div>
-            </div>
-          </div>
-        </section>
+            </section>
 
-        {/* Case Example: HIE */}
-        <section className="py-20 bg-[#F9F7F5]">
-          <div className="container mx-auto px-4 md:px-6">
-            <div className="max-w-5xl mx-auto">
-              <div className="grid lg:grid-cols-2 gap-12 items-start">
-                <div>
-                  <div className="inline-block border-b-2 border-secondary pb-1 mb-6">
-                    <span className="text-secondary font-bold tracking-widest uppercase text-sm">
-                      Case Example
-                    </span>
-                  </div>
-                  <h2 className="text-3xl font-serif text-primary mb-6">
-                    Lack Of Oxygen To The Brain During Labor
+            <section className="py-20 bg-white">
+              <div className="container mx-auto px-4 md:px-6">
+                <div className="max-w-4xl mx-auto">
+                  <h2 className="text-4xl font-serif text-primary mb-8">
+                    Birth Defects Versus Birth Negligence
                   </h2>
                   
-                  <p className="text-lg text-slate-600 leading-relaxed mb-6">
-                    Hypoxic Ischemic Encephalopathy (HIE) is a type of brain damage that occurs when an infant's brain doesn't receive enough oxygen. It is a dangerous condition that requires immediate medical intervention. HIE is the leading cause of infant fatalities in the United States, as well as the primary source of severe impairments.
-                  </p>
+                  <div className="grid md:grid-cols-2 gap-8 mb-12">
+                    <div className="bg-slate-50 p-8 border-t-4 border-slate-400">
+                      <h3 className="font-bold text-xl text-primary mb-4">Birth Defects</h3>
+                      <p className="text-slate-600 leading-relaxed">
+                        A birth defect is a health problem that affects your baby based on your child's genetic material or DNA. Examples include Down's Syndrome, a cleft palate, or heart murmurs. <strong>A birth defect is generally NOT medical malpractice.</strong>
+                      </p>
+                    </div>
+                    
+                    <div className="bg-secondary/10 p-8 border-t-4 border-secondary">
+                      <h3 className="font-bold text-xl text-primary mb-4">Birth Injuries</h3>
+                      <p className="text-slate-600 leading-relaxed">
+                        A birth injury is a medical issue that an infant is born with that is, in most cases, <strong>completely preventable</strong>. These are often caused by negligence during labor and delivery.
+                      </p>
+                    </div>
+                  </div>
 
-                  <h3 className="font-bold text-xl text-primary mb-4">
-                    Symptoms Associated with HIE:
+                  <h3 className="font-bold text-2xl text-primary mb-6">
+                    Common Causes of Preventable Birth Injuries:
                   </h3>
-                  <div className="grid gap-3 mb-8">
-                    {hieSymptoms.map((symptom, index) => (
-                      <div key={index} className="flex gap-3 items-center bg-white p-3 shadow-sm">
-                        <Baby className="w-5 h-5 text-secondary" />
-                        <span className="text-slate-600">{symptom}</span>
+                  <div className="space-y-4">
+                    {preventableCauses.map((cause, index) => (
+                      <div key={index} className="flex gap-4 items-start">
+                        <AlertTriangle className="w-5 h-5 text-secondary shrink-0 mt-1" />
+                        <p className="text-slate-600">{cause}</p>
                       </div>
                     ))}
                   </div>
                 </div>
-                <div className="relative">
-                  <img 
-                    src="/images/newborn-care.jpg" 
-                    alt="Mother holding newborn baby" 
-                    className="w-full rounded-lg shadow-xl"
-                  />
-                  <div className="absolute -bottom-4 -left-4 w-full h-full border-4 border-secondary/20 rounded-lg -z-10" />
+              </div>
+            </section>
+
+            <section className="py-20 bg-[#F9F7F5]">
+              <div className="container mx-auto px-4 md:px-6">
+                <div className="max-w-5xl mx-auto">
+                  <div className="grid lg:grid-cols-2 gap-12 items-start">
+                    <div>
+                      <div className="inline-block border-b-2 border-secondary pb-1 mb-6">
+                        <span className="text-secondary font-bold tracking-widest uppercase text-sm">
+                          Case Example
+                        </span>
+                      </div>
+                      <h2 className="text-3xl font-serif text-primary mb-6">
+                        Lack Of Oxygen To The Brain During Labor
+                      </h2>
+                      
+                      <p className="text-lg text-slate-600 leading-relaxed mb-6">
+                        Hypoxic Ischemic Encephalopathy (HIE) is a type of brain damage that occurs when an infant's brain doesn't receive enough oxygen. It is a dangerous condition that requires immediate medical intervention. HIE is the leading cause of infant fatalities in the United States, as well as the primary source of severe impairments.
+                      </p>
+
+                      <h3 className="font-bold text-xl text-primary mb-4">
+                        Symptoms Associated with HIE:
+                      </h3>
+                      <div className="grid gap-3 mb-8">
+                        {hieSymptoms.map((symptom, index) => (
+                          <div key={index} className="flex gap-3 items-center bg-white p-3 shadow-sm">
+                            <Baby className="w-5 h-5 text-secondary" />
+                            <span className="text-slate-600">{symptom}</span>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                    <div className="relative">
+                      <img 
+                        src="/images/newborn-care.jpg" 
+                        alt="Mother holding newborn baby" 
+                        className="w-full rounded-lg shadow-xl"
+                      />
+                      <div className="absolute -bottom-4 -left-4 w-full h-full border-4 border-secondary/20 rounded-lg -z-10" />
+                    </div>
+                  </div>
+
+                  <p className="text-slate-600 leading-relaxed mt-8 max-w-4xl">
+                    Effects of HIE may include developmental delays, epilepsy, cognitive issues, motor skill development delays, and neurodevelopment delays. The true severity of HIE generally cannot be determined until the baby reaches three to four years of age.
+                  </p>
                 </div>
               </div>
+            </section>
+          </>
+        )}
 
-              <p className="text-slate-600 leading-relaxed mt-8 max-w-4xl">
-                Effects of HIE may include developmental delays, epilepsy, cognitive issues, motor skill development delays, and neurodevelopment delays. The true severity of HIE generally cannot be determined until the baby reaches three to four years of age.
-              </p>
-            </div>
-          </div>
-        </section>
-
-        {/* Call to Action */}
         <section className="bg-primary text-white py-20">
           <div className="container mx-auto px-4 max-w-4xl text-center">
             <Heart className="w-16 h-16 text-secondary mx-auto mb-6" />

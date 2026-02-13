@@ -1,8 +1,10 @@
 import { ArrowRight } from "lucide-react";
 import { Link } from "wouter";
-import PageShell from "@/components/PageShell";
+import Navigation from "@/components/Navigation";
+import Footer from "@/components/Footer";
 import SEO from "@/components/SEO";
 import LeadCaptureForm from "@/components/LeadCaptureForm";
+import { useWordPressPage } from "@/hooks/useWordPressPage";
 
 const cards = [
   {
@@ -48,103 +50,138 @@ const caseLinks = [
 ];
 
 export default function Cases() {
+  const { data: wpPage } = useWordPressPage("cases-we-handle");
+
   return (
-    <PageShell title="Cases We Handle" subtitle="Medical Malpractice Focus">
-      <SEO 
-        title="Cases We Handle"
-        description="Thomas & Wan handles medical malpractice, birth injuries, brain injuries, surgical errors, medication errors, misdiagnosis, and more. Free case review in Houston, TX."
-        canonical="https://thomasandwan.com/cases-we-handle"
-      />
-      <section className="py-16 md:py-20 bg-white">
-        <div className="container mx-auto px-4 md:px-6">
-          <div className="grid lg:grid-cols-12 gap-12 items-start">
-            <div className="lg:col-span-5">
-              <h2 className="text-3xl md:text-4xl font-serif text-primary mb-6">
-                Advocating for You and Your Family
-              </h2>
-              <div className="space-y-6 text-lg text-slate-600 leading-relaxed font-light">
-                <p>
-                  If you're in need of legal guidance and support, you've come to the right place. Meet the dedicated team at Thomas & Wan, who bring 60 years of experience to the table.
-                </p>
-                <p>
-                  We've successfully handled numerous multi-million dollar cases related to serious medical malpractice and wrongful death issues across the nation. We're not afraid to take on challenging cases, and our commitment to justice is unwavering.
-                </p>
+    <div className="min-h-screen bg-background font-sans text-foreground overflow-x-hidden selection:bg-secondary selection:text-primary pb-20 md:pb-0">
+      <Navigation />
+      <main className="pt-20">
+        <header className="bg-primary text-white py-18 md:py-24 relative overflow-hidden">
+          <div className="absolute top-0 right-0 w-1/2 h-full bg-secondary/5 -skew-x-12 transform origin-top translate-x-1/4" />
+          <div className="container mx-auto px-4 md:px-6 relative z-10">
+            <div className="max-w-4xl">
+              <div className="inline-block border-b-2 border-secondary pb-1 mb-6">
+                <span className="text-secondary font-bold tracking-widest uppercase text-xs md:text-sm">
+                  Medical Malpractice Focus
+                </span>
               </div>
-              <div className="mt-10">
-                <Link
-                  href="/contact-us"
-                  className="inline-flex items-center gap-2 bg-secondary hover:bg-secondary/90 text-white font-bold px-8 py-4 rounded-none uppercase tracking-widest text-sm"
-                  data-testid="link-contact-from-cases"
-                >
-                  Free Case Review <ArrowRight className="w-4 h-4" />
-                </Link>
-              </div>
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-serif mb-4 leading-tight">
+                {wpPage ? (
+                  <span dangerouslySetInnerHTML={{ __html: wpPage.title.rendered }} />
+                ) : (
+                  "Cases We Handle"
+                )}
+              </h1>
             </div>
+          </div>
+        </header>
 
-            <div className="lg:col-span-7">
-              <div className="grid sm:grid-cols-2 gap-6">
-                {cards.map((c, i) => (
-                  <Link
-                    key={i}
-                    href={c.href}
-                    className="block bg-[#F9F7F5] border border-gray-100 p-7 hover:shadow-lg hover:border-secondary/30 transition-all group"
-                    data-testid={`card-case-${i}`}
-                  >
-                    <h3 className="font-serif text-2xl text-primary mb-3 group-hover:text-secondary transition-colors">{c.title}</h3>
-                    <p className="text-slate-600 leading-relaxed">{c.desc}</p>
-                    <span className="inline-flex items-center gap-1 mt-4 text-secondary font-bold text-sm uppercase tracking-wide">
-                      Learn More <ArrowRight className="w-3 h-3" />
-                    </span>
-                  </Link>
-                ))}
-              </div>
+        <SEO 
+          title="Cases We Handle"
+          description="Thomas & Wan handles medical malpractice, birth injuries, brain injuries, surgical errors, medication errors, misdiagnosis, and more. Free case review in Houston, TX."
+          canonical="https://thomasandwan.com/cases-we-handle"
+        />
 
-              <div className="mt-10 bg-primary text-white p-8 border-t-4 border-secondary">
-                <h3 className="font-serif text-2xl mb-3">We handle the following types of cases:</h3>
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 mt-6">
-                  {caseLinks.map((link, i) => (
+        {wpPage ? (
+          <section className="py-20 bg-white">
+            <div className="container mx-auto px-4 md:px-6">
+              <div className="max-w-4xl mx-auto wp-content" dangerouslySetInnerHTML={{ __html: wpPage.content.rendered }} />
+            </div>
+          </section>
+        ) : (
+          <section className="py-16 md:py-20 bg-white">
+            <div className="container mx-auto px-4 md:px-6">
+              <div className="grid lg:grid-cols-12 gap-12 items-start">
+                <div className="lg:col-span-5">
+                  <h2 className="text-3xl md:text-4xl font-serif text-primary mb-6">
+                    Advocating for You and Your Family
+                  </h2>
+                  <div className="space-y-6 text-lg text-slate-600 leading-relaxed font-light">
+                    <p>
+                      If you're in need of legal guidance and support, you've come to the right place. Meet the dedicated team at Thomas & Wan, who bring 60 years of experience to the table.
+                    </p>
+                    <p>
+                      We've successfully handled numerous multi-million dollar cases related to serious medical malpractice and wrongful death issues across the nation. We're not afraid to take on challenging cases, and our commitment to justice is unwavering.
+                    </p>
+                  </div>
+                  <div className="mt-10">
                     <Link
-                      key={i}
-                      href={link.href}
-                      className="inline-flex items-center justify-between gap-3 bg-white/5 hover:bg-white/10 border border-white/10 px-5 py-3 transition-colors"
-                      data-testid={`link-cases-${link.title.toLowerCase().replace(/\s+/g, '-')}`}
+                      href="/contact-us"
+                      className="inline-flex items-center gap-2 bg-secondary hover:bg-secondary/90 text-white font-bold px-8 py-4 rounded-none uppercase tracking-widest text-sm"
+                      data-testid="link-contact-from-cases"
                     >
-                      <span className="font-bold text-sm">{link.title}</span>
-                      <ArrowRight className="w-4 h-4 text-secondary flex-shrink-0" />
+                      Free Case Review <ArrowRight className="w-4 h-4" />
                     </Link>
-                  ))}
+                  </div>
+                </div>
+
+                <div className="lg:col-span-7">
+                  <div className="grid sm:grid-cols-2 gap-6">
+                    {cards.map((c, i) => (
+                      <Link
+                        key={i}
+                        href={c.href}
+                        className="block bg-[#F9F7F5] border border-gray-100 p-7 hover:shadow-lg hover:border-secondary/30 transition-all group"
+                        data-testid={`card-case-${i}`}
+                      >
+                        <h3 className="font-serif text-2xl text-primary mb-3 group-hover:text-secondary transition-colors">{c.title}</h3>
+                        <p className="text-slate-600 leading-relaxed">{c.desc}</p>
+                        <span className="inline-flex items-center gap-1 mt-4 text-secondary font-bold text-sm uppercase tracking-wide">
+                          Learn More <ArrowRight className="w-3 h-3" />
+                        </span>
+                      </Link>
+                    ))}
+                  </div>
+
+                  <div className="mt-10 bg-primary text-white p-8 border-t-4 border-secondary">
+                    <h3 className="font-serif text-2xl mb-3">We handle the following types of cases:</h3>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 mt-6">
+                      {caseLinks.map((link, i) => (
+                        <Link
+                          key={i}
+                          href={link.href}
+                          className="inline-flex items-center justify-between gap-3 bg-white/5 hover:bg-white/10 border border-white/10 px-5 py-3 transition-colors"
+                          data-testid={`link-cases-${link.title.toLowerCase().replace(/\s+/g, '-')}`}
+                        >
+                          <span className="font-bold text-sm">{link.title}</span>
+                          <ArrowRight className="w-4 h-4 text-secondary flex-shrink-0" />
+                        </Link>
+                      ))}
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-        </div>
-      </section>
+          </section>
+        )}
 
-      <section className="py-16 md:py-20 bg-slate-50">
-        <div className="container mx-auto px-4 md:px-6">
-          <div className="max-w-2xl mx-auto">
-            <LeadCaptureForm variant="card" />
+        <section className="py-16 md:py-20 bg-slate-50">
+          <div className="container mx-auto px-4 md:px-6">
+            <div className="max-w-2xl mx-auto">
+              <LeadCaptureForm variant="card" />
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
 
-      <section className="bg-white py-16 border-t border-gray-100">
-        <div className="container mx-auto px-4 md:px-6">
-          <div className="bg-primary text-white p-10 text-center">
-            <h2 className="text-3xl md:text-4xl font-serif mb-4">Call Us Now For a Free Consultation</h2>
-            <p className="text-white/80 max-w-3xl mx-auto leading-relaxed mb-8">
-              Call us today for a free consultation—we will discuss what your legal options are for your medical malpractice case. If you have the medical records, you can send them to us for a free review with no obligation.
-            </p>
-            <a
-              href="/contact-us"
-              className="inline-flex items-center gap-2 bg-secondary hover:bg-secondary/90 text-white font-bold px-10 py-4 rounded-none uppercase tracking-widest text-sm"
-              data-testid="link-cases-cta"
-            >
-              Free Case Review <ArrowRight className="w-4 h-4" />
-            </a>
+        <section className="bg-white py-16 border-t border-gray-100">
+          <div className="container mx-auto px-4 md:px-6">
+            <div className="bg-primary text-white p-10 text-center">
+              <h2 className="text-3xl md:text-4xl font-serif mb-4">Call Us Now For a Free Consultation</h2>
+              <p className="text-white/80 max-w-3xl mx-auto leading-relaxed mb-8">
+                Call us today for a free consultation—we will discuss what your legal options are for your medical malpractice case. If you have the medical records, you can send them to us for a free review with no obligation.
+              </p>
+              <a
+                href="/contact-us"
+                className="inline-flex items-center gap-2 bg-secondary hover:bg-secondary/90 text-white font-bold px-10 py-4 rounded-none uppercase tracking-widest text-sm"
+                data-testid="link-cases-cta"
+              >
+                Free Case Review <ArrowRight className="w-4 h-4" />
+              </a>
+            </div>
           </div>
-        </div>
-      </section>
-    </PageShell>
+        </section>
+      </main>
+      <Footer />
+    </div>
   );
 }
