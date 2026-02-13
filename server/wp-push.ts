@@ -1044,94 +1044,71 @@ function buildComplicationsContent(): string {
 }
 
 function buildBrainInjuriesContent(): string {
-  return `<!-- wp:heading {"level":1} -->
-<h1>Brain Injuries</h1>
-<!-- /wp:heading -->
+  const syringeSvg = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m18 2 4 4"/><path d="m17 7 3-3"/><path d="M19 9 8.7 19.3c-1 1-2.5 1-3.4 0l-.6-.6c-1-1-1-2.5 0-3.4L15 5"/><path d="m9 11 4 4"/><path d="m5 19-3 3"/><path d="m14 4 6 6"/></svg>`;
+  const brainSvg = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5a3 3 0 1 0-5.997.125 4 4 0 0 0-2.526 5.77 4 4 0 0 0 .556 6.588A4 4 0 1 0 12 18Z"/><path d="M12 5a3 3 0 1 1 5.997.125 4 4 0 0 1 2.526 5.77 4 4 0 0 1-.556 6.588A4 4 0 1 1 12 18Z"/><path d="M15 13a4.5 4.5 0 0 1-3-4 4.5 4.5 0 0 1-3 4"/><path d="M17.599 6.5a3 3 0 0 0 .399-1.375"/><path d="M6.003 5.125A3 3 0 0 0 6.401 6.5"/><path d="M3.477 10.896a4 4 0 0 1 .585-.396"/><path d="M19.938 10.5a4 4 0 0 1 .585.396"/><path d="M6 18a4 4 0 0 1-1.967-.516"/><path d="M19.967 17.484A4 4 0 0 1 18 18"/></svg>`;
+  const scissorsSvg = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="6" r="3"/><path d="M8.12 8.12 12 12"/><path d="M20 4 8.12 15.88"/><circle cx="6" cy="18" r="3"/><path d="M14.8 14.8 20 20"/></svg>`;
+  const alertSvg = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3"/><path d="M12 9v4"/><path d="M12 17h.01"/></svg>`;
+  const searchSvg = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>`;
+  const arrowSvg = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>`;
+  const warningSvg = `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3"/><path d="M12 9v4"/><path d="M12 17h.01"/></svg>`;
 
-<!-- wp:paragraph -->
-<p>At Thomas &amp; Wan, we are deeply committed to representing individuals and families affected by brain injuries as a result of medical negligence. We understand that brain injuries can be life-altering, affecting every aspect of life. Compassionate, diligent, and thorough — we work to unravel the complex circumstances surrounding the incidents to seek justice for our clients.</p>
-<!-- /wp:paragraph -->
+  return `<!-- wp:html -->
+<div class="pa-grid">
+  <div>
+    <p class="pa-intro">At Thomas &amp; Wan, we are deeply committed to representing individuals and families affected by brain injuries as a result of medical negligence. We understand that brain injuries can be life-altering, affecting every aspect of life. Compassionate, diligent, and thorough — we work to unravel the complex circumstances surrounding the incidents to seek justice for our clients.</p>
+    <div class="pa-sidebar-box">
+      <h3>Brain injury cases we handle:</h3>
+      <p>Claims against negligent hospitals, nurses, doctors, and other providers whose actions caused preventable brain injuries.</p>
+      <a href="/contact-us" class="pa-btn">Free Case Review ${arrowSvg}</a>
+    </div>
+  </div>
+  <div>
+    <div class="pa-cards">
+      <div class="pa-card">
+        <div class="pa-card-icon">${syringeSvg}</div>
+        <h3>Anesthesia Errors</h3>
+        <p>Improper management during anesthesia can lead to brain damage. Oxygen deprivation and improper medication are some of the causes.</p>
+      </div>
+      <div class="pa-card">
+        <div class="pa-card-icon">${brainSvg}</div>
+        <h3>Birth-Related Brain Injury</h3>
+        <p>Proper care is critical during childbirth. Negligence can result in serious brain injury with lifelong consequences for the child.</p>
+      </div>
+      <div class="pa-card">
+        <div class="pa-card-icon">${scissorsSvg}</div>
+        <h3>Surgical Errors</h3>
+        <p>Wrong site surgery, poor surgical technique, among others can result in traumatic brain injuries.</p>
+      </div>
+      <div class="pa-card">
+        <div class="pa-card-icon">${alertSvg}</div>
+        <h3>Emergency Room Negligence</h3>
+        <p>Delays in assessments or treatments in emergency rooms can lead to preventable brain injuries.</p>
+      </div>
+      <div class="pa-card">
+        <div class="pa-card-icon">${searchSvg}</div>
+        <h3>Misdiagnosis of Stroke or Tumor</h3>
+        <p>Incorrect or delayed diagnosis of a condition like stroke or brain tumor can lead to severe brain injuries.</p>
+      </div>
+    </div>
+  </div>
+</div>
 
-<!-- wp:paragraph -->
-<p>Claims against negligent hospitals, nurses, doctors, and other providers whose actions caused preventable brain injuries.</p>
-<!-- /wp:paragraph -->
+<div class="pa-warning">
+  <h2>Warning Signs of Brain Injury</h2>
+  <div class="pa-warning-grid">
+    <div class="pa-warning-item">${warningSvg}<p>Sudden changes in cognitive function or behavior</p></div>
+    <div class="pa-warning-item">${warningSvg}<p>Long-term or worsening headache</p></div>
+    <div class="pa-warning-item">${warningSvg}<p>Frequent dizziness or loss of balance</p></div>
+    <div class="pa-warning-item">${warningSvg}<p>Prolonged periods of unconsciousness</p></div>
+  </div>
+</div>
 
-<!-- wp:heading {"level":2} -->
-<h2>Brain Injury Cases We Handle</h2>
-<!-- /wp:heading -->
-
-<!-- wp:heading {"level":3} -->
-<h3>Anesthesia Errors</h3>
-<!-- /wp:heading -->
-
-<!-- wp:paragraph -->
-<p>Improper management during anesthesia can lead to brain damage. Oxygen deprivation and improper medication are some of the causes.</p>
-<!-- /wp:paragraph -->
-
-<!-- wp:heading {"level":3} -->
-<h3>Birth-Related Brain Injury</h3>
-<!-- /wp:heading -->
-
-<!-- wp:paragraph -->
-<p>Proper care is critical during childbirth. Negligence can result in serious brain injury with lifelong consequences for the child.</p>
-<!-- /wp:paragraph -->
-
-<!-- wp:heading {"level":3} -->
-<h3>Surgical Errors</h3>
-<!-- /wp:heading -->
-
-<!-- wp:paragraph -->
-<p>Wrong site surgery, poor surgical technique, among others can result in traumatic brain injuries.</p>
-<!-- /wp:paragraph -->
-
-<!-- wp:heading {"level":3} -->
-<h3>Emergency Room Negligence</h3>
-<!-- /wp:heading -->
-
-<!-- wp:paragraph -->
-<p>Delays in assessments or treatments in emergency rooms can lead to preventable brain injuries.</p>
-<!-- /wp:paragraph -->
-
-<!-- wp:heading {"level":3} -->
-<h3>Misdiagnosis of Stroke or Tumor</h3>
-<!-- /wp:heading -->
-
-<!-- wp:paragraph -->
-<p>Incorrect or delayed diagnosis of a condition like stroke or brain tumor can lead to severe brain injuries.</p>
-<!-- /wp:paragraph -->
-
-<!-- wp:separator -->
-<hr class="wp-block-separator"/>
-<!-- /wp:separator -->
-
-<!-- wp:heading {"level":2} -->
-<h2>Warning Signs of Brain Injury</h2>
-<!-- /wp:heading -->
-
-<!-- wp:list -->
-<ul>
-<li>Sudden changes in cognitive function or behavior</li>
-<li>Long-term or worsening headache</li>
-<li>Frequent dizziness or loss of balance</li>
-<li>Prolonged periods of unconsciousness</li>
-</ul>
-<!-- /wp:list -->
-
-<!-- wp:separator -->
-<hr class="wp-block-separator"/>
-<!-- /wp:separator -->
-
-<!-- wp:heading {"level":2} -->
-<h2>Call Us Now For a Free Consultation</h2>
-<!-- /wp:heading -->
-
-<!-- wp:paragraph -->
-<p>Call us today for a free consultation—we will discuss what your legal options are for your brain injury case. If you have medical records, you can send them to us for a free review with no obligation.</p>
-<!-- /wp:paragraph -->
-
-<!-- wp:paragraph {"className":"cta"} -->
-<p class="cta"><strong><a href="/contact-us">Contact Us</a></strong></p>
-<!-- /wp:paragraph -->`;
+<div class="pa-cta">
+  <h2>Call Us Now For a Free Consultation</h2>
+  <p>Call us today for a free consultation—we will discuss what your legal options are for your brain injury case. If you have medical records, you can send them to us for a free review with no obligation.</p>
+  <a href="/contact-us" class="pa-btn">Free Case Review ${arrowSvg}</a>
+</div>
+<!-- /wp:html -->`;
 }
 
 function buildSurgicalErrorsContent(): string {
