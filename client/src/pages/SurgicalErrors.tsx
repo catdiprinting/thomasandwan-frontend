@@ -1,24 +1,16 @@
-import { ArrowRight, Syringe, Users, MapPin, Wrench, ShieldAlert, AlertTriangle } from "lucide-react";
+import { motion } from "framer-motion";
+import { Phone } from "lucide-react";
+import Navigation from "@/components/Navigation";
+import Footer from "@/components/Footer";
+import { Button } from "@/components/ui/button";
 import { Link } from "wouter";
-import PageShell from "@/components/PageShell";
 import SEO, { createPracticeAreaSchema } from "@/components/SEO";
-
-const caseTypes = [
-  { icon: Syringe, title: "Anesthesia Complications", desc: "These can range from incorrect dosages to failure in monitoring vital signs, leading to serious patient harm." },
-  { icon: Users, title: "Wrong Patient Surgery", desc: "A horrifying but real mistake where surgery is performed on the wrong patient." },
-  { icon: MapPin, title: "Wrong Site Surgery", desc: "Operating on the wrong part of the patient's body, a preventable error with devastating consequences." },
-  { icon: Wrench, title: "Retained Surgical Instruments", desc: "Postoperative complications arise when surgical tools are unintentionally left inside the patient's body." },
-  { icon: ShieldAlert, title: "Post-Surgical Infections", desc: "Poor hygiene standards and negligent post-operative care can lead to dangerous infections." },
-];
-
-const warningSigns = [
-  "Unexpected and severe pain post-surgery",
-  "Alarming changes at the site of surgery",
-  "Symptoms or illness unconnected to known surgical risks",
-  "Lack of improvement or worsening condition post-surgery",
-];
+import { useWordPressPage } from "@/hooks/useWordPressPage";
+import LeadCaptureForm from "@/components/LeadCaptureForm";
 
 export default function SurgicalErrorsPage() {
+  const { page, loading } = useWordPressPage("surgical-errors");
+
   const schema = createPracticeAreaSchema(
     "Surgical Error Lawyers",
     "Houston surgical error attorneys at Thomas & Wan handle wrong-site surgery, retained instruments, anesthesia complications, and post-surgical infection cases.",
@@ -26,81 +18,84 @@ export default function SurgicalErrorsPage() {
   );
 
   return (
-    <PageShell title="Surgical Errors" subtitle="Cases We Handle">
+    <div className="min-h-screen bg-background font-sans text-foreground overflow-x-hidden selection:bg-secondary selection:text-primary pb-20 md:pb-0">
       <SEO
-        title="Surgical Error Lawyers in Houston"
+        title={page?.title || "Surgical Error Lawyers in Houston"}
         description="Houston surgical error attorneys at Thomas & Wan handle wrong-site surgery, retained instruments, anesthesia complications, and post-surgical infection cases. Free consultation."
         canonical="https://thomasandwan.com/cases-we-handle/surgical-errors"
         schema={schema}
       />
-      <section className="py-16 md:py-20 bg-white">
-        <div className="container mx-auto px-4 md:px-6">
-          <div className="grid lg:grid-cols-12 gap-12">
-            <div className="lg:col-span-5">
-              <p className="text-lg text-slate-600 leading-relaxed font-light">
-                Surgical procedures carry inherent risks. However, preventable errors due to the negligence of healthcare providers can lead to grave consequences for patients. At Thomas & Wan, we strive to hold these professionals accountable for their actions.
-              </p>
-              <div className="mt-8 bg-[#F9F7F5] border border-gray-100 p-8">
-                <h3 className="font-serif text-2xl text-primary mb-4">Surgical error cases we handle:</h3>
-                <p className="text-slate-600 leading-relaxed">
-                  Claims against negligent surgeons, anesthesiologists, nurses, and hospitals whose errors caused preventable surgical harm.
-                </p>
-                <Link
-                  href="/contact-us"
-                  className="mt-8 inline-flex items-center gap-2 bg-secondary hover:bg-secondary/90 text-white font-bold px-8 py-4 rounded-none uppercase tracking-widest text-sm"
-                  data-testid="link-contact-from-surgical-errors"
-                >
-                  Free Case Review <ArrowRight className="w-4 h-4" />
-                </Link>
-              </div>
-            </div>
-
-            <div className="lg:col-span-7">
-              <div className="grid sm:grid-cols-2 gap-6">
-                {caseTypes.map((e, idx) => (
-                  <div
-                    key={idx}
-                    className="border border-gray-100 p-7 hover:shadow-lg transition-shadow"
-                    data-testid={`card-case-type-${idx}`}
-                  >
-                    <div className="w-12 h-12 bg-secondary/10 flex items-center justify-center mb-5">
-                      <e.icon className="w-6 h-6 text-secondary" />
-                    </div>
-                    <h3 className="font-serif text-2xl text-primary mb-3">{e.title}</h3>
-                    <p className="text-slate-600 leading-relaxed">{e.desc}</p>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-
-          <div className="mt-16 bg-amber-50 border border-amber-200 p-10 border-l-4 border-l-amber-500">
-            <h2 className="text-3xl md:text-4xl font-serif text-primary mb-6">Warning Signs After Surgery</h2>
-            <div className="grid sm:grid-cols-2 gap-4">
-              {warningSigns.map((sign, idx) => (
-                <div key={idx} className="flex gap-3 items-start">
-                  <AlertTriangle className="w-5 h-5 text-amber-500 shrink-0 mt-1" />
-                  <p className="text-slate-600">{sign}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          <div className="mt-16 bg-primary text-white p-10 border-t-4 border-secondary">
-            <h2 className="text-3xl md:text-4xl font-serif mb-4">Call Us Now For a Free Consultation</h2>
-            <p className="text-white/80 leading-relaxed mb-8">
-              Call us today for a free consultation—we will discuss what your legal options are for your surgical error case. If you have medical records, you can send them to us for a free review with no obligation.
-            </p>
-            <a
-              href="/contact-us"
-              className="inline-flex items-center gap-2 bg-secondary hover:bg-secondary/90 text-white font-bold px-10 py-4 rounded-none uppercase tracking-widest text-sm"
-              data-testid="link-surgical-errors-cta"
+      <Navigation />
+      
+      <main className="pt-20">
+        <section className="bg-primary text-white py-24 relative overflow-hidden">
+          <div className="absolute top-0 right-0 w-1/2 h-full bg-secondary/5 -skew-x-12 transform origin-top translate-x-1/4" />
+          <div className="container mx-auto px-4 md:px-6 relative z-10">
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8 }}
+              className="max-w-3xl"
             >
-              Free Case Review <ArrowRight className="w-4 h-4" />
-            </a>
+              <div className="inline-block border-b-2 border-secondary pb-1 mb-6">
+                <span className="text-secondary font-bold tracking-widest uppercase text-sm">Cases We Handle</span>
+              </div>
+              <h1 className="text-5xl md:text-6xl font-serif mb-8 leading-tight">
+                {page?.title || "Surgical Errors"}
+              </h1>
+            </motion.div>
           </div>
-        </div>
-      </section>
-    </PageShell>
+        </section>
+
+        <section className="py-20 bg-white">
+          <div className="container mx-auto px-4 md:px-6">
+            {loading ? (
+              <div className="max-w-4xl mx-auto animate-pulse space-y-4">
+                <div className="h-6 bg-gray-200 rounded w-3/4" />
+                <div className="h-4 bg-gray-200 rounded w-full" />
+                <div className="h-4 bg-gray-200 rounded w-5/6" />
+                <div className="h-4 bg-gray-200 rounded w-full" />
+              </div>
+            ) : page?.content ? (
+              <div className="max-w-4xl mx-auto wp-content" dangerouslySetInnerHTML={{ __html: page.content }} />
+            ) : (
+              <div className="max-w-4xl mx-auto wp-content">
+                <p>Content is being updated. Please check back shortly.</p>
+              </div>
+            )}
+          </div>
+        </section>
+
+        <section className="py-16 md:py-20 bg-slate-50">
+          <div className="container mx-auto px-4 md:px-6">
+            <div className="max-w-2xl mx-auto">
+              <LeadCaptureForm variant="card" />
+            </div>
+          </div>
+        </section>
+
+        <section className="bg-primary text-white py-20">
+          <div className="container mx-auto px-4 max-w-4xl text-center">
+            <h2 className="text-4xl md:text-5xl font-serif mb-6">Free Consultation</h2>
+            <p className="text-xl text-white/80 mb-10 leading-relaxed">
+              If you or a loved one has been affected, contact us today for a free, confidential consultation.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <a href="tel:713-529-1177">
+                <Button size="lg" className="bg-secondary hover:bg-secondary/90 text-white font-bold py-8 px-10 text-xl rounded-none">
+                  <Phone className="mr-2 h-5 w-5" /> Call (713) 529-1177
+                </Button>
+              </a>
+              <Link href="/contact-us">
+                <Button size="lg" variant="outline" className="border-white text-white hover:bg-white/10 font-bold py-8 px-10 text-xl rounded-none">
+                  Free Case Review
+                </Button>
+              </Link>
+            </div>
+          </div>
+        </section>
+      </main>
+      <Footer />
+    </div>
   );
 }
