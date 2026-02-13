@@ -1,15 +1,17 @@
 import Navigation from "@/components/Navigation";
 import Hero from "@/components/Hero";
 import TrustBar from "@/components/TrustBar";
+import WomenOwnedSection from "@/components/WomenOwnedSection";
+import PracticeAreas from "@/components/PracticeAreas";
+import TestimonialsAndResults from "@/components/Testimonials";
+import TeamSection from "@/components/TeamSection";
+import FAQSection from "@/components/FAQSection";
 import BlogSection from "@/components/BlogSection";
 import Footer from "@/components/Footer";
 import LeadCaptureForm from "@/components/LeadCaptureForm";
 import SEO, { lawFirmSchema } from "@/components/SEO";
-import { useWordPressPage } from "@/hooks/useWordPressPage";
 
 export default function Home() {
-  const { page, loading } = useWordPressPage("home");
-
   return (
     <div className="min-h-screen bg-background font-sans text-foreground overflow-x-hidden selection:bg-secondary selection:text-primary pb-20 md:pb-0">
       <SEO 
@@ -22,27 +24,37 @@ export default function Home() {
       <main>
         <Hero />
         <TrustBar />
-
-        <section className="py-20 bg-white">
-          <div className="container mx-auto px-4 md:px-6">
-            {loading ? (
-              <div className="max-w-4xl mx-auto animate-pulse space-y-4">
-                <div className="h-6 bg-gray-200 rounded w-3/4" />
-                <div className="h-4 bg-gray-200 rounded w-full" />
-                <div className="h-4 bg-gray-200 rounded w-5/6" />
-                <div className="h-6 bg-gray-200 rounded w-2/3 mt-8" />
-                <div className="h-4 bg-gray-200 rounded w-full" />
-                <div className="h-4 bg-gray-200 rounded w-4/5" />
-              </div>
-            ) : page?.content ? (
-              <div className="max-w-4xl mx-auto wp-content" dangerouslySetInnerHTML={{ __html: page.content }} />
-            ) : (
-              <div className="max-w-4xl mx-auto wp-content">
-                <p>Content is being updated. Please check back shortly.</p>
-              </div>
-            )}
+        
+        {/* Reordered: Practice Areas first */}
+        <PracticeAreas />
+        
+        <WomenOwnedSection />
+        
+        {/* New Team Section */}
+        <TeamSection />
+        
+        <TestimonialsAndResults />
+        
+        {/* Simple Stats Banner */}
+        <section className="bg-primary py-16 text-white border-y border-secondary/30">
+          <div className="container mx-auto px-4 grid md:grid-cols-3 gap-8 text-center divide-y md:divide-y-0 md:divide-x divide-white/10">
+            <div className="p-4">
+              <div className="text-5xl md:text-6xl font-serif text-secondary mb-2">60+</div>
+              <div className="text-sm uppercase tracking-widest opacity-80">Years Combined Experience</div>
+            </div>
+            <div className="p-4">
+              <div className="text-5xl md:text-6xl font-serif text-secondary mb-2">$50M+</div>
+              <div className="text-sm uppercase tracking-widest opacity-80">Recovered for Clients</div>
+            </div>
+            <div className="p-4">
+              <div className="text-5xl md:text-6xl font-serif text-secondary mb-2">100%</div>
+              <div className="text-sm uppercase tracking-widest opacity-80">Medical Malpractice Focus</div>
+            </div>
           </div>
         </section>
+
+        {/* New FAQ Section */}
+        <FAQSection />
 
         <section className="py-16 md:py-20 bg-slate-50">
           <div className="container mx-auto px-4 md:px-6">
@@ -53,6 +65,7 @@ export default function Home() {
         </section>
 
         <BlogSection />
+
       </main>
       <Footer />
     </div>

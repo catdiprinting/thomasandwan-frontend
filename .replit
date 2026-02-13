@@ -50,4 +50,4 @@ mockupState = "FULLSTACK"
 
 [userenv.shared]
 WP_BASE_URL = "https://wp.thomasandwan.com"
-CACHE_TTL_SECONDS = "30"
+CACHE_TTL_SECONDS = "300"
