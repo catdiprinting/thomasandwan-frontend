@@ -7,7 +7,7 @@ process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
 
 const WP_BASE_URL = process.env.WP_BASE_URL || "https://wp.thomasandwan.com";
 const WP_API = `${WP_BASE_URL}/wp-json/wp/v2`;
-const CACHE_TTL = parseInt(process.env.CACHE_TTL_SECONDS || "60", 10) * 1000;
+const CACHE_TTL = parseInt(process.env.CACHE_TTL_SECONDS || "30", 10) * 1000;
 
 interface CacheEntry<T> {
   data: T;
@@ -140,14 +140,6 @@ export async function getPageBySlug(slug: string): Promise<any | null> {
   }
   log(`[wp-content] Memory cache MISS for page "${slug}"`, "wp-content");
 
-  const dbRows = await db.select().from(wpPagesCache).where(eq(wpPagesCache.slug, slug)).limit(1);
-  if (dbRows.length > 0) {
-    const page = dbRows[0];
-    setCache(key, page);
-    log(`[wp-content] Served page "${slug}" from DB cache`, "wp-content");
-    return page;
-  }
-
   const wpData = await fetchFromWP(`pages?slug=${encodeURIComponent(slug)}&_embed`);
   if (wpData && Array.isArray(wpData) && wpData.length > 0) {
     const page = wpData[0];
@@ -173,8 +165,17 @@ export async function getPageBySlug(slug: string): Promise<any | null> {
       set: row,
     });
     setCache(key, row);
-    log(`[wp-content] Fetched page "${slug}" from WP API and cached in DB + memory`, "wp-content");
+    log(`[wp-content] Fetched page "${slug}" from WP API (fresh) and cached in DB + memory`, "wp-content");
     return row;
+  }
+
+  log(`[wp-content] WP API unreachable for page "${slug}", falling back to DB cache`, "wp-content");
+  const dbRows = await db.select().from(wpPagesCache).where(eq(wpPagesCache.slug, slug)).limit(1);
+  if (dbRows.length > 0) {
+    const page = dbRows[0];
+    setCache(key, page);
+    log(`[wp-content] Served page "${slug}" from DB cache (fallback)`, "wp-content");
+    return page;
   }
 
   log(`[wp-content] Page "${slug}" not found anywhere`, "wp-content");
