@@ -29,31 +29,46 @@ const testimonials = [
   },
 ];
 
-const results = [
+interface ResultItem {
+  amount: string;
+  type: string;
+  desc: string;
+}
+
+interface TestimonialsProps {
+  resultsLabel?: string;
+  resultsHeading?: string;
+  results?: ResultItem[];
+}
+
+const defaultResults: ResultItem[] = [
   { amount: "$6.5 Million", type: "Birth Injury Settlement", desc: "Settlement for a child who suffered brain damage due to delayed delivery." },
   { amount: "$2.1 Million", type: "Surgical Error", desc: "Verdict for a patient who suffered permanent nerve damage during routine surgery." },
   { amount: "$4.8 Million", type: "Wrongful Death", desc: "Settlement for a family who lost a mother due to misdiagnosis of heart condition." },
 ];
 
-export default function TestimonialsAndResults() {
+export default function TestimonialsAndResults({
+  resultsLabel = "Proven Track Record",
+  resultsHeading = "Recent Case Results",
+  results = defaultResults,
+}: TestimonialsProps) {
   return (
     <section className="py-24 bg-white overflow-hidden">
       <div className="container mx-auto px-4 md:px-6">
         
-        {/* Results Section */}
         <div className="mb-24">
            <div className="text-center mb-12">
-            <span className="text-secondary font-bold tracking-widest uppercase text-sm mb-4 block">
-              Proven Track Record
+            <span className="text-secondary font-bold tracking-widest uppercase text-sm mb-4 block" data-testid="text-results-label">
+              {resultsLabel}
             </span>
-            <h2 className="text-4xl md:text-5xl font-serif text-primary">
-              Recent Case Results
+            <h2 className="text-4xl md:text-5xl font-serif text-primary" data-testid="text-results-heading">
+              {resultsHeading}
             </h2>
           </div>
           
           <div className="grid md:grid-cols-3 gap-8">
             {results.map((result, idx) => (
-              <div key={idx} className="border-t-4 border-secondary pt-6 group hover:bg-[#F9F7F5] transition-colors p-6">
+              <div key={idx} className="border-t-4 border-secondary pt-6 group hover:bg-[#F9F7F5] transition-colors p-6" data-testid={`card-result-${idx}`}>
                 <div className="text-4xl font-serif text-primary mb-2 group-hover:scale-105 transition-transform origin-left">
                   {result.amount}
                 </div>
@@ -68,7 +83,6 @@ export default function TestimonialsAndResults() {
           </div>
         </div>
 
-        {/* Testimonials Carousel */}
         <div className="relative">
           <div className="bg-primary/5 absolute inset-0 -skew-y-3 scale-110 transform origin-center -z-10 rounded-3xl" />
           

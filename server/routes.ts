@@ -38,6 +38,7 @@ import { db } from "./db";
 import { wpPagesCache } from "@shared/schema";
 import { eq } from "drizzle-orm";
 import { getPostBySlug, getPageBySlug, purgeAndWarm, getCacheStats, purgeAllCache } from "./wp-content";
+import { getHomepageFields, getAboutFields, getPracticeAreaFields, purgeCmsCache } from "./wp-graphql";
 
 // Detect search engine crawlers for SSR
 function isBot(userAgent: string): boolean {
@@ -504,6 +505,54 @@ export async function registerRoutes(
   app.get("/api/cache-stats", async (_req: Request, res: Response) => {
     const stats = getCacheStats();
     res.json(stats);
+  });
+
+  app.get("/api/cms/homepage", async (_req: Request, res: Response) => {
+    try {
+      const fields = await getHomepageFields();
+      if (!fields) {
+        res.json({ source: "default", fields: null });
+        return;
+      }
+      res.json({ source: "wordpress", fields });
+    } catch (error: any) {
+      console.error("Error fetching homepage CMS fields:", error);
+      res.json({ source: "default", fields: null });
+    }
+  });
+
+  app.get("/api/cms/about", async (_req: Request, res: Response) => {
+    try {
+      const fields = await getAboutFields();
+      if (!fields) {
+        res.json({ source: "default", fields: null });
+        return;
+      }
+      res.json({ source: "wordpress", fields });
+    } catch (error: any) {
+      console.error("Error fetching about CMS fields:", error);
+      res.json({ source: "default", fields: null });
+    }
+  });
+
+  app.get("/api/cms/practice-area/:slug", async (req: Request, res: Response) => {
+    try {
+      const slug = req.params.slug;
+      const fields = await getPracticeAreaFields(slug);
+      if (!fields) {
+        res.json({ source: "default", fields: null });
+        return;
+      }
+      res.json({ source: "wordpress", fields });
+    } catch (error: any) {
+      console.error("Error fetching practice area CMS fields:", error);
+      res.json({ source: "default", fields: null });
+    }
+  });
+
+  app.post("/api/cms/purge", async (_req: Request, res: Response) => {
+    purgeCmsCache();
+    res.json({ success: true, message: "CMS cache purged" });
   });
 
   // Push content to WordPress

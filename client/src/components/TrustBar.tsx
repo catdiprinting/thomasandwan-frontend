@@ -1,12 +1,23 @@
 import { Star } from "lucide-react";
 
-export default function TrustBar() {
+interface TrustBarProps {
+  rating?: string;
+  ratingLabel?: string;
+  avTitle?: string;
+  avSubtitle?: string;
+}
+
+export default function TrustBar({
+  rating = "5.0",
+  ratingLabel = "Google Reviews",
+  avTitle = "AV Preeminent®",
+  avSubtitle = "Peer Rated for Highest Level of Excellence",
+}: TrustBarProps) {
   return (
     <section className="border-b border-gray-100 bg-white">
       <div className="container mx-auto px-4 md:px-6">
         <div className="flex flex-col md:flex-row items-center justify-between py-4 md:py-8 gap-6 md:gap-8">
           
-          {/* Trust Badges Image */}
           <div className="flex-1 w-full flex justify-center md:justify-start">
              <img 
                src="/images/trust-badges.png" 
@@ -15,28 +26,25 @@ export default function TrustBar() {
              />
           </div>
 
-          {/* Additional Trust Signals */}
           <div className="flex items-center gap-8 shrink-0 border-t md:border-t-0 md:border-l border-gray-100 pt-6 md:pt-0 md:pl-8 mt-4 md:mt-0 w-full md:w-auto justify-center md:justify-end">
-             {/* Google Rating */}
              <div className="flex flex-col items-center md:items-end">
                <div className="flex items-center gap-1 mb-1">
-                 <span className="font-bold text-primary text-lg">5.0</span>
+                 <span className="font-bold text-primary text-lg" data-testid="text-trust-rating">{rating}</span>
                  <div className="flex text-secondary">
                    {[...Array(5)].map((_, i) => (
                      <Star key={i} className="w-4 h-4 fill-current" />
                    ))}
                  </div>
                </div>
-               <span className="text-xs text-muted-foreground uppercase tracking-widest font-semibold">
-                 Google Reviews
+               <span className="text-xs text-muted-foreground uppercase tracking-widest font-semibold" data-testid="text-trust-rating-label">
+                 {ratingLabel}
                </span>
              </div>
 
-             {/* AV Preeminent (Simulated text badge since we don't have the image) */}
              <div className="hidden sm:flex flex-col items-center md:items-end text-right">
-                <span className="font-serif font-bold text-primary text-lg leading-none">AV Preeminent®</span>
-                <span className="text-xs text-muted-foreground uppercase tracking-widest font-semibold mt-1">
-                  Peer Rated for Highest Level of Excellence
+                <span className="font-serif font-bold text-primary text-lg leading-none" data-testid="text-trust-av-title">{avTitle}</span>
+                <span className="text-xs text-muted-foreground uppercase tracking-widest font-semibold mt-1" data-testid="text-trust-av-subtitle">
+                  {avSubtitle}
                 </span>
              </div>
           </div>

@@ -5,8 +5,11 @@ import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { Link } from "wouter";
 import SEO, { lawFirmSchema, attorneySchemas } from "@/components/SEO";
+import { useAboutData, cms } from "@/hooks/useCmsData";
 
 export default function About() {
+  const { data: d } = useAboutData();
+
   return (
     <div className="min-h-screen bg-background font-sans text-foreground overflow-x-hidden selection:bg-secondary selection:text-primary">
       <SEO 
@@ -18,7 +21,6 @@ export default function About() {
       <Navigation />
       
       <main className="pt-20">
-        {/* Hero Section */}
         <section className="bg-primary text-white py-24 relative overflow-hidden">
           <div className="absolute top-0 right-0 w-1/2 h-full bg-secondary/5 -skew-x-12 transform origin-top translate-x-1/4" />
           <div className="container mx-auto px-4 md:px-6 relative z-10">
@@ -29,43 +31,43 @@ export default function About() {
               className="max-w-3xl"
             >
               <div className="inline-block border-b-2 border-secondary pb-1 mb-6">
-                <span className="text-secondary font-bold tracking-widest uppercase text-sm">
-                  About Our Firm
+                <span className="text-secondary font-bold tracking-widest uppercase text-sm" data-testid="text-about-hero-label">
+                  {cms(d, "aboutHeroLabel", "About Our Firm")}
                 </span>
               </div>
-              <h1 className="text-5xl md:text-6xl font-serif mb-8 leading-tight">
+              <h1 className="text-5xl md:text-6xl font-serif mb-8 leading-tight" data-testid="text-about-hero-heading">
                 Compassionate Texas <br/>
                 <span className="text-secondary italic">Medical Malpractice</span> Lawyers
               </h1>
-              <p className="text-xl text-white/80 leading-relaxed font-light">
-                We Care, and Our Dedication Shines Through. Representing our clients in the pursuit of justice is both an honor and a privilege.
+              <p className="text-xl text-white/80 leading-relaxed font-light" data-testid="text-about-hero-text">
+                {cms(d, "aboutHeroText", "We Care, and Our Dedication Shines Through. Representing our clients in the pursuit of justice is both an honor and a privilege.")}
               </p>
             </motion.div>
           </div>
         </section>
 
-        {/* Mission / Why Choose Us */}
         <section className="py-24 bg-white">
           <div className="container mx-auto px-4 md:px-6">
             <div className="grid lg:grid-cols-2 gap-16 items-start">
               <div>
-                <h2 className="text-4xl font-serif text-primary mb-6">
-                  Empowering Citizens through the Legal System
+                <h2 className="text-4xl font-serif text-primary mb-6" data-testid="text-about-mission-heading">
+                  {cms(d, "aboutMissionHeading", "Empowering Citizens through the Legal System")}
                 </h2>
                 <div className="space-y-6 text-lg text-slate-600 leading-relaxed font-light">
-                  <p>
-                    We firmly believe that juries play a pivotal role in safeguarding the rights of citizens. 
-                    In the courtroom, an injured individual stands on equal ground with even the largest hospital corporations.
+                  <p data-testid="text-about-mission-text1">
+                    {cms(d, "aboutMissionText1", "We firmly believe that juries play a pivotal role in safeguarding the rights of citizens. In the courtroom, an injured individual stands on equal ground with even the largest hospital corporations.")}
                   </p>
-                  <p>
-                    Whether your case can be resolved amicably without the need for a lawsuit or requires a tenacious battle that extends all the way to trial, we’re here to stand by your side. Every client, without exception, deserves the highest standard of legal representation and an equitable opportunity to present their case in court.
+                  <p data-testid="text-about-mission-text2">
+                    {cms(d, "aboutMissionText2", "Whether your case can be resolved amicably without the need for a lawsuit or requires a tenacious battle that extends all the way to trial, we're here to stand by your side. Every client, without exception, deserves the highest standard of legal representation and an equitable opportunity to present their case in court.")}
                   </p>
                 </div>
               </div>
 
               <div className="bg-[#F9F7F5] p-10 relative">
                 <div className="absolute top-0 left-0 w-2 h-full bg-secondary" />
-                <h3 className="font-serif text-2xl text-primary mb-8">Why Choose Thomas & Wan</h3>
+                <h3 className="font-serif text-2xl text-primary mb-8" data-testid="text-about-why-heading">
+                  {cms(d, "aboutWhyHeading", "Why Choose Thomas & Wan")}
+                </h3>
                 <div className="space-y-6">
                   <div className="flex gap-4">
                     <Heart className="w-6 h-6 text-secondary shrink-0 mt-1" />
@@ -101,11 +103,9 @@ export default function About() {
           </div>
         </section>
 
-        {/* Partner Bios */}
         <section className="py-24 bg-[#F9F7F5]">
           <div className="container mx-auto px-4 md:px-6 space-y-24">
             
-            {/* Linda Thomas */}
             <div className="grid lg:grid-cols-12 gap-12 items-start">
               <div className="lg:col-span-4 relative">
                 <div className="aspect-[3/4] relative z-10">
@@ -122,9 +122,8 @@ export default function About() {
                 <p className="text-secondary font-bold uppercase tracking-widest text-sm mb-6">Partner | Since 1987</p>
                 
                 <div className="space-y-6 text-slate-600 leading-relaxed mb-8">
-                  <p>
-                    Since 1987, Linda Laurent Thomas has pursued aggressive legal representation on behalf of injury victims. 
-                    Whether the wrongdoer is a Fortune 500 corporate giant or a reckless driver, Thomas has dedicated her career to fighting for individuals to obtain the maximum amount of damages available under the law.
+                  <p data-testid="text-about-thomas-bio">
+                    {cms(d, "aboutThomasBio", "Since 1987, Linda Laurent Thomas has pursued aggressive legal representation on behalf of injury victims. Whether the wrongdoer is a Fortune 500 corporate giant or a reckless driver, Thomas has dedicated her career to fighting for individuals to obtain the maximum amount of damages available under the law.")}
                   </p>
                   <p>
                     Every case that the firm takes on is handled with the highest level of care and attention. This representation involves all phases of a complex personal injury action: early and thorough factual investigation, retention of expert witnesses, thorough case value assessment, aggressive pre-trial discovery, and proactive negotiations.
@@ -159,7 +158,6 @@ export default function About() {
               </div>
             </div>
 
-            {/* Michelle Wan */}
             <div className="grid lg:grid-cols-12 gap-12 items-start">
               <div className="lg:col-span-4 lg:order-2 relative">
                 <div className="aspect-[3/4] relative z-10">
@@ -176,12 +174,11 @@ export default function About() {
                 <p className="text-secondary font-bold uppercase tracking-widest text-sm mb-6">Partner</p>
                 
                 <div className="space-y-6 text-slate-600 leading-relaxed mb-8">
-                  <p>
-                    Michelle W. Wan has worked exclusively representing clients in personal injury matters, handling numerous matters involving toxic exposures, medical negligence, and product defects. 
-                    Like Thomas, Wan has dedicated her career to fighting on behalf of persons injured by the negligence of others.
+                  <p data-testid="text-about-wan-bio">
+                    {cms(d, "aboutWanBio", "Michelle W. Wan has worked exclusively representing clients in personal injury matters, handling numerous matters involving toxic exposures, medical negligence, and product defects. Like Thomas, Wan has dedicated her career to fighting on behalf of persons injured by the negligence of others.")}
                   </p>
                   <p>
-                    Wan and Thomas work as a team in trial. Wan enjoys the ability to stand in front of juries and bring her clients’ side of the story to the light of a courtroom. 
+                    Wan and Thomas work as a team in trial. Wan enjoys the ability to stand in front of juries and bring her clients' side of the story to the light of a courtroom. 
                     As a former law journal editor, she enjoys in-depth legal research and strives for concise and clear writing.
                   </p>
                 </div>
@@ -217,15 +214,16 @@ export default function About() {
           </div>
         </section>
 
-        {/* Call to Action */}
         <section className="bg-primary text-white py-20 text-center">
           <div className="container mx-auto px-4 max-w-4xl">
-            <h2 className="text-4xl md:text-5xl font-serif mb-6">Do You Have a Medical Malpractice Case?</h2>
-            <p className="text-xl text-white/80 mb-10 leading-relaxed">
-              Call us today for a free consultation. If you have the medical records, you can send them to us for a free review with no obligation. Remember, strict deadlines apply.
+            <h2 className="text-4xl md:text-5xl font-serif mb-6" data-testid="text-about-cta-heading">
+              {cms(d, "aboutCtaHeading", "Do You Have a Medical Malpractice Case?")}
+            </h2>
+            <p className="text-xl text-white/80 mb-10 leading-relaxed" data-testid="text-about-cta-text">
+              {cms(d, "aboutCtaText", "Call us today for a free consultation. If you have the medical records, you can send them to us for a free review with no obligation. Remember, strict deadlines apply.")}
             </p>
             <Link href="/contact-us">
-              <Button size="lg" className="bg-secondary hover:bg-secondary/90 text-white font-bold py-8 px-10 text-xl rounded-none">
+              <Button size="lg" className="bg-secondary hover:bg-secondary/90 text-white font-bold py-8 px-10 text-xl rounded-none" data-testid="button-about-cta">
                 Free Case Review
               </Button>
             </Link>

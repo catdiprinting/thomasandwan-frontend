@@ -3,12 +3,33 @@ import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
 import { Link } from "wouter";
 
-export default function Hero() {
+interface HeroProps {
+  label?: string;
+  heading?: string;
+  text?: string;
+  ctaText?: string;
+  ctaLink?: string;
+  secondaryText?: string;
+  secondaryLink?: string;
+  badge1?: string;
+  badge2?: string;
+}
+
+export default function Hero({
+  label = "Medical Malpractice Attorneys",
+  heading = "Hurt by a Doctor or Hospital? We Help Families Get Answers.",
+  text = "If you or someone you love was seriously harmed by a doctor or hospital, you have rights. Hospitals have lawyers on day one. You deserve someone fighting for you too.",
+  ctaText = "Free Case Review",
+  ctaLink = "/contact-us",
+  secondaryText = "Learn More",
+  secondaryLink = "/cases-we-handle",
+  badge1 = "Available 24/7",
+  badge2 = "No Win, No Fee",
+}: HeroProps) {
   return (
     <section className="relative min-h-[90vh] flex items-start pt-20 md:pt-8 overflow-hidden bg-white">
       <div className="container mx-auto px-4 md:px-6 grid md:grid-cols-2 gap-12 items-center">
         
-        {/* Text Content */}
         <motion.div
           initial={{ opacity: 0, x: -50 }}
           animate={{ opacity: 1, x: 0 }}
@@ -16,35 +37,35 @@ export default function Hero() {
           className="order-2 md:order-1 space-y-6 relative z-10"
         >
           <div className="inline-block border-b-2 border-secondary pb-1 mb-4 md:mb-6">
-            <span className="text-secondary font-bold tracking-widest uppercase text-xs md:text-sm">
-              Medical Malpractice Attorneys
+            <span className="text-secondary font-bold tracking-widest uppercase text-xs md:text-sm" data-testid="text-hero-label">
+              {label}
             </span>
           </div>
           
-          <h1 className="text-4xl md:text-6xl lg:text-7xl font-serif text-primary leading-[1.1]">
+          <h1 className="text-4xl md:text-6xl lg:text-7xl font-serif text-primary leading-[1.1]" data-testid="text-hero-heading">
             Hurt by a Doctor<br/>
             or Hospital? <span className="italic text-secondary">We Help<br/>
             Families</span> Get Answers.
           </h1>
           
-          <p className="text-lg md:text-xl text-muted-foreground font-light max-w-lg leading-relaxed">
-            If you or someone you love was seriously harmed by a doctor or hospital, you have rights. Hospitals have lawyers on day one. You deserve someone fighting for you too.
+          <p className="text-lg md:text-xl text-muted-foreground font-light max-w-lg leading-relaxed" data-testid="text-hero-text">
+            {text}
           </p>
           
           <div className="flex flex-col sm:flex-row gap-4 pt-4">
-            <Link href="/contact-us" className="md:hidden w-full sm:w-auto">
-              <Button size="lg" className="w-full bg-secondary hover:bg-secondary/90 text-white rounded-none h-14 px-8 text-base tracking-wide border-0">
-                Free Case Review
+            <Link href={ctaLink} className="md:hidden w-full sm:w-auto">
+              <Button size="lg" className="w-full bg-secondary hover:bg-secondary/90 text-white rounded-none h-14 px-8 text-base tracking-wide border-0" data-testid="button-hero-cta">
+                {ctaText}
               </Button>
             </Link>
-            <Link href="/contact-us" className="hidden md:inline-flex w-auto">
-              <Button size="lg" className="w-full bg-secondary hover:bg-secondary/90 text-white rounded-none h-14 px-8 text-base tracking-wide border-0">
-                Free Case Review
+            <Link href={ctaLink} className="hidden md:inline-flex w-auto">
+              <Button size="lg" className="w-full bg-secondary hover:bg-secondary/90 text-white rounded-none h-14 px-8 text-base tracking-wide border-0" data-testid="button-hero-cta-desktop">
+                {ctaText}
               </Button>
             </Link>
-            <Link href="/cases-we-handle" className="w-full sm:w-auto">
-              <Button variant="outline" size="lg" className="w-full border-2 border-primary text-primary hover:bg-primary hover:text-white rounded-none h-14 px-8 text-base tracking-wide group">
-                Learn More <ArrowRight className="ml-2 w-4 h-4 transition-transform group-hover:translate-x-1" />
+            <Link href={secondaryLink} className="w-full sm:w-auto">
+              <Button variant="outline" size="lg" className="w-full border-2 border-primary text-primary hover:bg-primary hover:text-white rounded-none h-14 px-8 text-base tracking-wide group" data-testid="button-hero-secondary">
+                {secondaryText} <ArrowRight className="ml-2 w-4 h-4 transition-transform group-hover:translate-x-1" />
               </Button>
             </Link>
           </div>
@@ -52,16 +73,15 @@ export default function Hero() {
           <div className="pt-4 md:pt-8 flex items-center gap-6 text-muted-foreground">
              <div className="flex items-center gap-2">
                <span className="w-3 h-3 rounded-full bg-secondary"></span>
-               <span className="text-lg font-medium text-primary">Available 24/7</span>
+               <span className="text-lg font-medium text-primary" data-testid="text-hero-badge1">{badge1}</span>
              </div>
              <div className="flex items-center gap-2">
                <span className="w-3 h-3 rounded-full bg-secondary"></span>
-               <span className="text-lg font-medium text-primary">No Win, No Fee</span>
+               <span className="text-lg font-medium text-primary" data-testid="text-hero-badge2">{badge2}</span>
              </div>
           </div>
         </motion.div>
 
-        {/* Image Content */}
         <motion.div
           initial={{ opacity: 0, scale: 0.95 }}
           animate={{ opacity: 1, scale: 1 }}
@@ -79,7 +99,6 @@ export default function Hero() {
             </div>
           </div>
           
-          {/* Decorative Elements */}
           <div className="absolute -bottom-10 -left-10 w-40 h-40 bg-secondary/10 rounded-full blur-3xl -z-10" />
           <div className="absolute top-10 right-10 w-60 h-60 bg-primary/5 rounded-full blur-3xl -z-10" />
         </motion.div>

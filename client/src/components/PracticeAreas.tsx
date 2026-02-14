@@ -36,21 +36,36 @@ const practices = [
   },
 ];
 
-export default function PracticeAreas() {
+interface PracticeAreasProps {
+  label?: string;
+  heading?: string;
+  subtext?: string;
+  ctaHeading?: string;
+  ctaText?: string;
+  ctaButton?: string;
+}
+
+export default function PracticeAreas({
+  label = "Our Expertise",
+  heading = "Focused Exclusively on Medical Malpractice",
+  subtext = "We don't handle car accidents or divorces. Our sole focus is mastering the complex realm of medical malpractice to win for you.",
+  ctaHeading = "Do You Have a Case?",
+  ctaText = "Get a free review of your medical records by our expert team.",
+  ctaButton = "Contact Us Today",
+}: PracticeAreasProps) {
   return (
     <section className="py-24 bg-[#F9F7F5]">
       <div className="container mx-auto px-4 md:px-6">
         <div className="text-center max-w-3xl mx-auto mb-16">
-          <span className="text-secondary font-bold tracking-widest uppercase text-sm mb-4 block">
-            Our Expertise
+          <span className="text-secondary font-bold tracking-widest uppercase text-sm mb-4 block" data-testid="text-practice-label">
+            {label}
           </span>
-          <h2 className="text-4xl md:text-5xl font-serif text-primary mb-6">
+          <h2 className="text-4xl md:text-5xl font-serif text-primary mb-6" data-testid="text-practice-heading">
             Focused Exclusively on <br/>
             <span className="italic font-alt text-secondary">Medical Malpractice</span>
           </h2>
-          <p className="text-lg text-muted-foreground font-light">
-            We don't handle car accidents or divorces. Our sole focus is mastering the 
-            complex realm of medical malpractice to win for you.
+          <p className="text-lg text-muted-foreground font-light" data-testid="text-practice-subtext">
+            {subtext}
           </p>
         </div>
 
@@ -59,6 +74,7 @@ export default function PracticeAreas() {
             <Card 
               key={idx} 
               className="group relative overflow-hidden border-none shadow-sm hover:shadow-xl transition-all duration-300 bg-white"
+              data-testid={`card-practice-${idx}`}
             >
               <div className="absolute top-0 left-0 w-1 h-full bg-secondary scale-y-0 group-hover:scale-y-100 transition-transform duration-300 origin-top" />
               
@@ -81,15 +97,14 @@ export default function PracticeAreas() {
             </Card>
           ))}
           
-          {/* CTA Card */}
           <div className="bg-primary p-8 flex flex-col justify-center items-center text-center text-white relative overflow-hidden group">
             <div className="absolute inset-0 bg-secondary/10 translate-y-full group-hover:translate-y-0 transition-transform duration-500" />
-            <h3 className="font-serif text-3xl mb-4 relative z-10">Do You Have a Case?</h3>
-            <p className="mb-8 text-white/80 relative z-10">
-              Get a free review of your medical records by our expert team.
+            <h3 className="font-serif text-3xl mb-4 relative z-10" data-testid="text-practice-cta-heading">{ctaHeading}</h3>
+            <p className="mb-8 text-white/80 relative z-10" data-testid="text-practice-cta-text">
+              {ctaText}
             </p>
-            <button className="bg-secondary text-primary px-8 py-3 font-bold uppercase tracking-widest hover:bg-white transition-colors relative z-10">
-              Contact Us Today
+            <button className="bg-secondary text-primary px-8 py-3 font-bold uppercase tracking-widest hover:bg-white transition-colors relative z-10" data-testid="button-practice-cta">
+              {ctaButton}
             </button>
           </div>
         </div>
