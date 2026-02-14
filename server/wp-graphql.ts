@@ -231,7 +231,7 @@ interface PracticeAreaData {
 }
 
 const cmsCache = new Map<string, { data: any; expiresAt: number }>();
-const CMS_TTL = parseInt(process.env.CMS_CACHE_TTL || "60", 10) * 1000;
+const CMS_TTL = parseInt(process.env.CMS_CACHE_TTL || "10", 10) * 1000;
 
 function getCmsCache<T>(key: string): T | null {
   const entry = cmsCache.get(key);
