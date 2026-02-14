@@ -682,6 +682,49 @@ export async function getGenericPageFields(slug: string): Promise<GenericPageFie
   return fields;
 }
 
+function parsePracticeAreaContent(html: string): Partial<PracticeAreaFields> {
+  if (!html) return {};
+  const fields: Partial<PracticeAreaFields> = {};
+
+  const introByClass = html.match(/<p[^>]*class="[^"]*pa-intro[^"]*"[^>]*>([\s\S]*?)<\/p>/);
+  if (introByClass) {
+    fields.paIntro = stripHtml(introByClass[1]);
+  } else {
+    const firstP = html.match(/<p>([\s\S]*?)<\/p>/);
+    if (firstP) fields.paIntro = stripHtml(firstP[1]);
+  }
+
+  const sidebarBox = html.match(/<div[^>]*class="[^"]*pa-sidebar-box[^"]*"[^>]*>([\s\S]*?)<\/div>/);
+  if (sidebarBox) {
+    const h3 = sidebarBox[1].match(/<h3[^>]*>([\s\S]*?)<\/h3>/);
+    if (h3) fields.paSidebarHeading = stripHtml(h3[1]);
+    const p = sidebarBox[1].match(/<p[^>]*>([\s\S]*?)<\/p>/);
+    if (p) fields.paSidebarText = stripHtml(p[1]);
+  } else {
+    const h3 = html.match(/<h3[^>]*>([\s\S]*?)<\/h3>/);
+    if (h3) fields.paSidebarHeading = stripHtml(h3[1]);
+    const allP = html.match(/<p>([\s\S]*?)<\/p>/g) || [];
+    if (allP.length > 1) fields.paSidebarText = stripHtml(allP[1]);
+  }
+
+  const ctaSection = html.match(/<div[^>]*class="[^"]*pa-cta[^"]*"[^>]*>([\s\S]*?)<\/div>/);
+  if (ctaSection) {
+    const h2 = ctaSection[1].match(/<h2[^>]*>([\s\S]*?)<\/h2>/);
+    if (h2) fields.paCtaHeading = stripHtml(h2[1]);
+    const p = ctaSection[1].match(/<p[^>]*>([\s\S]*?)<\/p>/);
+    if (p) fields.paCtaText = stripHtml(p[1]);
+  } else {
+    const h2s = html.match(/<h2[^>]*>([\s\S]*?)<\/h2>/g) || [];
+    const lastH2 = h2s[h2s.length - 1];
+    if (lastH2) fields.paCtaHeading = stripHtml(lastH2);
+    const allP = html.match(/<p>([\s\S]*?)<\/p>/g) || [];
+    const lastP = allP[allP.length - 1];
+    if (lastP && allP.length > 2) fields.paCtaText = stripHtml(lastP);
+  }
+
+  return fields;
+}
+
 export async function getPracticeAreaFields(slug: string): Promise<PracticeAreaFields | null> {
   const cacheKey = `practice:${slug}`;
   const cached = getCmsCache<PracticeAreaFields>(cacheKey);
@@ -691,12 +734,16 @@ export async function getPracticeAreaFields(slug: string): Promise<PracticeAreaF
   }
 
   const data = await graphqlQuery<PracticeAreaData>(PRACTICE_AREA_QUERY, { slug });
-  const fields = data?.pageBy?.practiceAreaFields ?? null;
+  if (!data?.pageBy) return null;
 
-  if (fields) {
-    setCmsCache(cacheKey, fields);
-    log(`[wp-graphql] Practice area "${slug}" fetched and cached`, "wp-graphql");
+  const acfFields = data.pageBy.practiceAreaFields ?? null;
+  const parsedFields = parsePracticeAreaContent(data.pageBy.content || "");
+  const merged = mergeFields<PracticeAreaFields>(parsedFields, acfFields);
+
+  if (merged) {
+    setCmsCache(cacheKey, merged);
+    log(`[wp-graphql] Practice area "${slug}" fetched (content+ACF merged) and cached`, "wp-graphql");
   }
 
-  return fields;
+  return merged;
 }
