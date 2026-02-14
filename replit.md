@@ -26,8 +26,9 @@ Preferred communication style: Simple, everyday language.
 - **WordPress Integration**: Dual-layer headless CMS architecture:
   - **Blog posts**: Fetched via REST API (`/wp-json/wp/v2`), cached in PostgreSQL, rendered with DOMPurify (rich HTML content)
   - **Page content (CMS text)**: Fetched via WPGraphQL (`/graphql`) as structured ACF field values, fed into React components as plain text props — React controls all layout/design, WordPress only supplies editable text
+  - **Generic page CMS**: Any WordPress page's editor content is auto-parsed into structured fields (headings, paragraphs, quotes) via `/api/cms/page/:slug` — no ACF setup needed
   - **Caching**: PostgreSQL DB cache + in-memory TTL cache (300s default), auto-sync every 5 minutes, instant webhook purge/refresh
-  - **Safe updates**: Changing text in WordPress ACF fields cannot break site design since React components always control rendering
+  - **Safe updates**: Changing text in WordPress fields cannot break site design since React components always control rendering
 
 ### Data Storage
 - **ORM**: Drizzle ORM configured for PostgreSQL
@@ -90,7 +91,23 @@ shared/           # Shared code between client/server
 - `GET /api/cms/homepage` - Structured text fields for the homepage (hero, trust bar, team, practice areas, FAQ, testimonials, etc.)
 - `GET /api/cms/about` - Structured text fields for the about page (firm story, attorney bios, values)
 - `GET /api/cms/practice-area/:slug` - Structured text fields for a specific practice area page
+- `GET /api/cms/page/:slug` - Generic page content parser — returns pageHeading, pageSubheading, pageIntro, sectionNHeading, paragraphN, quoteN, quoteNAuthor for any WordPress page
 - `GET /api/cms/purge` - Purge the in-memory CMS content cache
+
+### CMS-Connected Pages (all text editable from WordPress)
+- **Homepage** → `useHomepageData()` — hero, trust bar, practice areas, team, results, FAQ, lead capture
+- **About** → `useAboutData()` — hero, mission, attorney bios, CTA
+- **Practice Areas (7)** → `usePracticeAreaData(slug)` — intro, sidebar, CTA (brain-injuries, birth-injuries, surgical-errors, misdiagnosis, medical-malpractice, medication-errors, complications-of-childbirth)
+- **Cases** → `usePageCms("cases-we-handle")` — heading, intro paragraphs
+- **FAQ** → `usePageCms("faq")` — sidebar text, all Q&A pairs
+- **Testimonials** → `usePageCms("testimonials")` — hero subtitle, all quotes & authors
+- **Contact** → `usePageCms("contact-us")` — heading, subheading
+
+### Adding CMS to a New Page
+1. Create the WordPress page in wp-admin (content auto-parsed into structured fields)
+2. In React: `const { data: d } = usePageCms("your-slug");`
+3. Replace text: `{cms(d, "pageHeading", "Fallback Text")}`
+4. Available auto-parsed fields: pageHeading, pageSubheading, pageIntro, sectionNHeading, paragraphN, quoteN, quoteNAuthor
 
 ### Webhook Endpoints
 - `POST /webhooks/wp` - WordPress webhook receiver; requires `x-webhook-secret` header matching `WP_WEBHOOK_SECRET` env var; body: `{ type: "post"|"page", slug: "..." }`; purges cached content and immediately refetches from WordPress
