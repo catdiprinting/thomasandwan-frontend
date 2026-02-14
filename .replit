@@ -51,3 +51,4 @@ mockupState = "FULLSTACK"
 [userenv.shared]
 WP_BASE_URL = "https://wp.thomasandwan.com"
 CACHE_TTL_SECONDS = "300"
+PRODUCTION_URL = "https://thomasandwan.catdi.com"

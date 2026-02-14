@@ -457,6 +457,24 @@ export async function registerRoutes(
     return { success: true, message: "All caches nuked and content refreshed from WordPress" };
   }
 
+  async function notifyProductionRefresh(): Promise<void> {
+    const prodUrl = process.env.PRODUCTION_URL;
+    const secret = process.env.WP_WEBHOOK_SECRET;
+    if (!prodUrl || !secret) {
+      console.log(`[webhook] No PRODUCTION_URL configured, skipping production notification`);
+      return;
+    }
+    const revalidateUrl = `${prodUrl}/api/revalidate-all?secret=${encodeURIComponent(secret)}`;
+    try {
+      console.log(`[webhook] Notifying production site to refresh: ${prodUrl}`);
+      const resp = await fetch(revalidateUrl, { signal: AbortSignal.timeout(15000) });
+      const body = await resp.text();
+      console.log(`[webhook] Production refresh response (${resp.status}): ${body}`);
+    } catch (err: any) {
+      console.error(`[webhook] Failed to notify production: ${err.message}`);
+    }
+  }
+
   app.post("/webhooks/wp", async (req: Request, res: Response) => {
     console.log(`[webhook] === INCOMING REQUEST ===`);
     console.log(`[webhook] Body: ${JSON.stringify(req.body)}`);
@@ -478,6 +496,7 @@ export async function registerRoutes(
 
     try {
       const result = await nukeAndRefreshAll();
+      notifyProductionRefresh().catch(() => {});
       res.json(result);
     } catch (err: any) {
       console.error(`[webhook] Error:`, err);
