@@ -28,7 +28,7 @@ export default function MedicationErrorsPage() {
   );
 
   return (
-    <PageShell title="Medication Errors" subtitle="Cases We Handle">
+    <PageShell title={cms(d, "paTitle", "Medication Errors")} subtitle="Cases We Handle">
       <SEO
         title="Medication Error Lawyers in Houston"
         description="Houston medication error attorneys at Thomas & Wan represent patients harmed by wrong medications, overdoses, drug interactions, and pharmacy errors. Free consultation."

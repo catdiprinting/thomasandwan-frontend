@@ -58,7 +58,7 @@ export default function ComplicationsOfChildbirth() {
                 </span>
               </div>
               <h1 className="text-5xl md:text-6xl font-serif mb-8 leading-tight">
-                Complications of <span className="text-secondary italic">Childbirth</span>
+                {cms(d, "paTitle", "Complications of Childbirth")}
               </h1>
               <p className="text-xl text-white/80 leading-relaxed font-light">
                 {cms(d, "paIntro", "At Thomas & Wan, we have helped families dealing with the devastating loss of a mother or serious permanent brain damage due to gross negligence during pregnancy and childbirth.")}

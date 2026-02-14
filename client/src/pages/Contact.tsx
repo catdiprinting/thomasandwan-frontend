@@ -91,7 +91,7 @@ export default function Contact() {
   };
 
   return (
-    <PageShell title="Contact" subtitle="Free consultation · No fee unless we win">
+    <PageShell title={cms(d, "pageHeading", "Contact")} subtitle="Free consultation · No fee unless we win">
       <SEO 
         title="Contact Us"
         description="Contact Thomas & Wan for a free medical malpractice consultation. Call (713) 529-1177 or visit our Houston office at 1710 Sunset Blvd, Houston, TX 77005."

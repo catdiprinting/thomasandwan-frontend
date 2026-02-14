@@ -51,7 +51,7 @@ const caseLinks = [
 export default function Cases() {
   const { data: d } = usePageCms("cases-we-handle");
   return (
-    <PageShell title="Cases We Handle" subtitle="Medical Malpractice Focus">
+    <PageShell title={cms(d, "pageHeading", "Cases We Handle")} subtitle="Medical Malpractice Focus">
       <SEO 
         title="Cases We Handle"
         description="Thomas & Wan handles medical malpractice, birth injuries, brain injuries, surgical errors, medication errors, misdiagnosis, and more. Free case review in Houston, TX."

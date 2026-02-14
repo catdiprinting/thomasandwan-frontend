@@ -28,7 +28,7 @@ export default function SurgicalErrorsPage() {
   );
 
   return (
-    <PageShell title="Surgical Errors" subtitle="Cases We Handle">
+    <PageShell title={cms(d, "paTitle", "Surgical Errors")} subtitle="Cases We Handle">
       <SEO
         title="Surgical Error Lawyers in Houston"
         description="Houston surgical error attorneys at Thomas & Wan handle wrong-site surgery, retained instruments, anesthesia complications, and post-surgical infection cases. Free consultation."

@@ -22,7 +22,7 @@ export default function MedicalMalpractice() {
   );
 
   return (
-    <PageShell title="Medical Malpractice" subtitle="Cases We Handle">
+    <PageShell title={cms(d, "paTitle", "Medical Malpractice")} subtitle="Cases We Handle">
       <SEO 
         title="Medical Malpractice Lawyers in Houston"
         description="Thomas & Wan medical malpractice attorneys handle surgical errors, misdiagnosis, medication errors, anesthesia negligence, and hospital malpractice cases. Free consultation."

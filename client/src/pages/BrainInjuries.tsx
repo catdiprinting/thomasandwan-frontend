@@ -28,7 +28,7 @@ export default function BrainInjuriesPage() {
   );
 
   return (
-    <PageShell title="Brain Injuries" subtitle="Cases We Handle">
+    <PageShell title={cms(d, "paTitle", "Brain Injuries")} subtitle="Cases We Handle">
       <SEO
         title="Brain Injury Lawyers in Houston"
         description="Houston brain injury attorneys at Thomas & Wan represent victims of medical negligence including anesthesia errors, surgical mistakes, and failure to diagnose stroke. Free consultation."

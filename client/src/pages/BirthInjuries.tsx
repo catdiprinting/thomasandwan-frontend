@@ -78,7 +78,7 @@ export default function BirthInjuries() {
                 </span>
               </div>
               <h1 className="text-5xl md:text-6xl font-serif mb-8 leading-tight">
-                Birth <span className="text-secondary italic">Injuries</span>
+                {cms(d, "paTitle", "Birth Injuries")}
               </h1>
               <p className="text-xl text-white/80 leading-relaxed font-light">
                 {cms(d, "paIntro", "Sometimes babies are born with medical problems that don't match their parents' expectations. Sometimes it is because the baby is a victim of a birth injury that occurs during labor and delivery.")}

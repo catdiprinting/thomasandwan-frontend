@@ -28,7 +28,7 @@ export default function MisdiagnosisPage() {
   );
 
   return (
-    <PageShell title="Misdiagnosis" subtitle="Cases We Handle">
+    <PageShell title={cms(d, "paTitle", "Misdiagnosis")} subtitle="Cases We Handle">
       <SEO
         title="Misdiagnosis Lawyers in Houston"
         description="Houston misdiagnosis attorneys at Thomas & Wan represent patients harmed by failure to diagnose cancer, heart attack, stroke, and delayed diagnosis. Free consultation."

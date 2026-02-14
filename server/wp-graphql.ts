@@ -109,6 +109,7 @@ export interface AboutFields {
 }
 
 export interface PracticeAreaFields {
+  paTitle: string;
   paIntro: string;
   paSidebarHeading: string;
   paSidebarText: string;
@@ -686,6 +687,9 @@ function parsePracticeAreaContent(html: string): Partial<PracticeAreaFields> {
   if (!html) return {};
   const fields: Partial<PracticeAreaFields> = {};
 
+  const h1 = html.match(/<h1[^>]*>([\s\S]*?)<\/h1>/);
+  if (h1) fields.paTitle = stripHtml(h1[1]);
+
   const introByClass = html.match(/<p[^>]*class="[^"]*pa-intro[^"]*"[^>]*>([\s\S]*?)<\/p>/);
   if (introByClass) {
     fields.paIntro = stripHtml(introByClass[1]);
@@ -738,6 +742,9 @@ export async function getPracticeAreaFields(slug: string): Promise<PracticeAreaF
 
   const acfFields = data.pageBy.practiceAreaFields ?? null;
   const parsedFields = parsePracticeAreaContent(data.pageBy.content || "");
+  if (!parsedFields.paTitle && data.pageBy.title) {
+    parsedFields.paTitle = data.pageBy.title;
+  }
   const merged = mergeFields<PracticeAreaFields>(parsedFields, acfFields);
 
   if (merged) {
