@@ -36,8 +36,7 @@ export default function About() {
                 </span>
               </div>
               <h1 className="text-5xl md:text-6xl font-serif mb-8 leading-tight" data-testid="text-about-hero-heading">
-                Compassionate Texas <br/>
-                <span className="text-secondary italic">Medical Malpractice</span> Lawyers
+                {cms(d, "aboutHeroHeading", "Compassionate Texas Medical Malpractice Lawyers")}
               </h1>
               <p className="text-xl text-white/80 leading-relaxed font-light" data-testid="text-about-hero-text">
                 {cms(d, "aboutHeroText", "We Care, and Our Dedication Shines Through. Representing our clients in the pursuit of justice is both an honor and a privilege.")}

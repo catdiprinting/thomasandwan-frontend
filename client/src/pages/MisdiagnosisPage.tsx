@@ -2,6 +2,7 @@ import { ArrowRight, Search, Heart, Brain, ShieldAlert, Clock, AlertTriangle } f
 import { Link } from "wouter";
 import PageShell from "@/components/PageShell";
 import SEO, { createPracticeAreaSchema } from "@/components/SEO";
+import { usePracticeAreaData, cms } from "@/hooks/useCmsData";
 
 const caseTypes = [
   { icon: Search, title: "Failure to Diagnose Cancer", desc: "Missing the symptoms and indicators that point to a cancer diagnosis, delaying critical treatment." },
@@ -19,6 +20,7 @@ const warningSigns = [
 ];
 
 export default function MisdiagnosisPage() {
+  const { data: d } = usePracticeAreaData("misdiagnosis");
   const schema = createPracticeAreaSchema(
     "Misdiagnosis Lawyers",
     "Houston misdiagnosis attorneys at Thomas & Wan represent patients harmed by failure to diagnose cancer, heart attack, stroke, and delayed diagnosis.",
@@ -38,12 +40,12 @@ export default function MisdiagnosisPage() {
           <div className="grid lg:grid-cols-12 gap-12">
             <div className="lg:col-span-5">
               <p className="text-lg text-slate-600 leading-relaxed font-light">
-                Navigating the medical landscape can be daunting, more so when you're faced with the potential of a misdiagnosis. At Thomas & Wan, we understand the gravity of these situations and are committed to helping victims of misdiagnosis understand their rights and pursue justice.
+                {cms(d, "paIntro", "Navigating the medical landscape can be daunting, more so when you're faced with the potential of a misdiagnosis. At Thomas & Wan, we understand the gravity of these situations and are committed to helping victims of misdiagnosis understand their rights and pursue justice.")}
               </p>
               <div className="mt-8 bg-[#F9F7F5] border border-gray-100 p-8">
-                <h3 className="font-serif text-2xl text-primary mb-4">Misdiagnosis cases we handle:</h3>
+                <h3 className="font-serif text-2xl text-primary mb-4">{cms(d, "paSidebarHeading", "Misdiagnosis cases we handle:")}</h3>
                 <p className="text-slate-600 leading-relaxed">
-                  Claims against negligent doctors, specialists, and hospitals whose diagnostic failures caused preventable patient harm.
+                  {cms(d, "paSidebarText", "Claims against negligent doctors, specialists, and hospitals whose diagnostic failures caused preventable patient harm.")}
                 </p>
                 <Link
                   href="/contact-us"
@@ -87,9 +89,9 @@ export default function MisdiagnosisPage() {
           </div>
 
           <div className="mt-16 bg-primary text-white p-10 border-t-4 border-secondary">
-            <h2 className="text-3xl md:text-4xl font-serif mb-4">Call Us Now For a Free Consultation</h2>
+            <h2 className="text-3xl md:text-4xl font-serif mb-4">{cms(d, "paCtaHeading", "Call Us Now For a Free Consultation")}</h2>
             <p className="text-white/80 leading-relaxed mb-8">
-              Call us today for a free consultation—we will discuss what your legal options are for your misdiagnosis case. If you have medical records, you can send them to us for a free review with no obligation.
+              {cms(d, "paCtaText", "Call us today for a free consultation—we will discuss what your legal options are for your misdiagnosis case. If you have medical records, you can send them to us for a free review with no obligation.")}
             </p>
             <a
               href="/contact-us"

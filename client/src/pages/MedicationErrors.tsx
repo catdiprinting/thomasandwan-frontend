@@ -2,6 +2,7 @@ import { ArrowRight, Pill, AlertTriangle, Beaker, Building2, Activity } from "lu
 import { Link } from "wouter";
 import PageShell from "@/components/PageShell";
 import SEO, { createPracticeAreaSchema } from "@/components/SEO";
+import { usePracticeAreaData, cms } from "@/hooks/useCmsData";
 
 const caseTypes = [
   { icon: Pill, title: "Wrong Medication", desc: "When healthcare providers mistakenly give a patient a drug meant for another patient, or simply the wrong drug." },
@@ -19,6 +20,7 @@ const warningSigns = [
 ];
 
 export default function MedicationErrorsPage() {
+  const { data: d } = usePracticeAreaData("medication-errors");
   const schema = createPracticeAreaSchema(
     "Medication Error Lawyers",
     "Houston medication error attorneys at Thomas & Wan represent patients harmed by wrong medications, overdoses, drug interactions, and pharmacy errors.",
@@ -38,12 +40,12 @@ export default function MedicationErrorsPage() {
           <div className="grid lg:grid-cols-12 gap-12">
             <div className="lg:col-span-5">
               <p className="text-lg text-slate-600 leading-relaxed font-light">
-                At Thomas & Wan, we believe in the importance of safe, effective medication practices. Unfortunately, medication errors are common and can lead to severe health consequences. We fight for patients who have been harmed by preventable medication mistakes.
+                {cms(d, "paIntro", "At Thomas & Wan, we believe in the importance of safe, effective medication practices. Unfortunately, medication errors are common and can lead to severe health consequences. We fight for patients who have been harmed by preventable medication mistakes.")}
               </p>
               <div className="mt-8 bg-[#F9F7F5] border border-gray-100 p-8">
-                <h3 className="font-serif text-2xl text-primary mb-4">Medication error cases we handle:</h3>
+                <h3 className="font-serif text-2xl text-primary mb-4">{cms(d, "paSidebarHeading", "Medication error cases we handle:")}</h3>
                 <p className="text-slate-600 leading-relaxed">
-                  Claims against negligent doctors, pharmacists, nurses, and hospitals whose medication errors caused preventable patient harm.
+                  {cms(d, "paSidebarText", "Claims against negligent doctors, pharmacists, nurses, and hospitals whose medication errors caused preventable patient harm.")}
                 </p>
                 <Link
                   href="/contact-us"
@@ -87,9 +89,9 @@ export default function MedicationErrorsPage() {
           </div>
 
           <div className="mt-16 bg-primary text-white p-10 border-t-4 border-secondary">
-            <h2 className="text-3xl md:text-4xl font-serif mb-4">Call Us Now For a Free Consultation</h2>
+            <h2 className="text-3xl md:text-4xl font-serif mb-4">{cms(d, "paCtaHeading", "Call Us Now For a Free Consultation")}</h2>
             <p className="text-white/80 leading-relaxed mb-8">
-              Call us today for a free consultation—we will discuss what your legal options are for your medication error case. If you have medical records, you can send them to us for a free review with no obligation.
+              {cms(d, "paCtaText", "Call us today for a free consultation—we will discuss what your legal options are for your medication error case. If you have medical records, you can send them to us for a free review with no obligation.")}
             </p>
             <a
               href="/contact-us"

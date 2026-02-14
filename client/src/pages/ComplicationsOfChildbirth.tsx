@@ -5,6 +5,7 @@ import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { Link } from "wouter";
 import SEO, { createPracticeAreaSchema } from "@/components/SEO";
+import { usePracticeAreaData, cms } from "@/hooks/useCmsData";
 
 const complications = [
   "Preeclampsia and eclampsia",
@@ -23,6 +24,7 @@ const complications = [
 ];
 
 export default function ComplicationsOfChildbirth() {
+  const { data: d } = usePracticeAreaData("complications-of-childbirth");
   const schema = createPracticeAreaSchema(
     "Childbirth Complications Lawyers",
     "Houston attorneys representing mothers injured during pregnancy and childbirth due to medical negligence. Preeclampsia, C-section injuries, postpartum hemorrhage cases.",
@@ -59,7 +61,7 @@ export default function ComplicationsOfChildbirth() {
                 Complications of <span className="text-secondary italic">Childbirth</span>
               </h1>
               <p className="text-xl text-white/80 leading-relaxed font-light">
-                At Thomas & Wan, we have helped families dealing with the devastating loss of a mother or serious permanent brain damage due to gross negligence during pregnancy and childbirth.
+                {cms(d, "paIntro", "At Thomas & Wan, we have helped families dealing with the devastating loss of a mother or serious permanent brain damage due to gross negligence during pregnancy and childbirth.")}
               </p>
             </motion.div>
           </div>
@@ -71,7 +73,7 @@ export default function ComplicationsOfChildbirth() {
             <div className="grid lg:grid-cols-2 gap-12 items-center max-w-6xl mx-auto">
               <div>
                 <p className="text-lg text-slate-600 leading-relaxed mb-6">
-                  For an expectant mother, childbirth is an exciting and nerve-wracking time. Most of the time, doctors, midwives and nurses do an excellent job of keeping mom and baby safe during labor and delivery.
+                  {cms(d, "paSidebarText", "For an expectant mother, childbirth is an exciting and nerve-wracking time. Most of the time, doctors, midwives and nurses do an excellent job of keeping mom and baby safe during labor and delivery.")}
                 </p>
                 <p className="text-lg text-slate-600 leading-relaxed mb-6">
                   Sometimes, however, medical providers can be grossly negligent in their medical care to the laboring mother. Thomas & Wan represent mothers who have been injured or made ill due to malpractice by a doctor, midwife, nurse or other health care professional during pregnancy, labor and delivery, or after delivery.
@@ -134,9 +136,9 @@ export default function ComplicationsOfChildbirth() {
         {/* Call to Action */}
         <section className="bg-primary text-white py-20">
           <div className="container mx-auto px-4 max-w-4xl text-center">
-            <h2 className="text-4xl md:text-5xl font-serif mb-6">Call Us Now For a Free Consultation</h2>
+            <h2 className="text-4xl md:text-5xl font-serif mb-6">{cms(d, "paCtaHeading", "Call Us Now For a Free Consultation")}</h2>
             <p className="text-xl text-white/80 mb-10 leading-relaxed">
-              Call us today for a free consultation—we will discuss what your legal options are for your medical malpractice case. If you have the medical records, you can send them to us for a free review with no obligation to you. Remember, in Texas there are strict deadlines for filing a medical malpractice lawsuit.
+              {cms(d, "paCtaText", "Call us today for a free consultation—we will discuss what your legal options are for your medical malpractice case. If you have the medical records, you can send them to us for a free review with no obligation to you. Remember, in Texas there are strict deadlines for filing a medical malpractice lawsuit.")}
             </p>
             <Link href="/contact-us">
               <Button size="lg" className="bg-secondary hover:bg-secondary/90 text-white font-bold py-8 px-10 text-xl rounded-none">

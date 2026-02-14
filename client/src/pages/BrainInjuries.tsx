@@ -2,6 +2,7 @@ import { ArrowRight, Brain, Syringe, Scissors, AlertTriangle, Search } from "luc
 import { Link } from "wouter";
 import PageShell from "@/components/PageShell";
 import SEO, { createPracticeAreaSchema } from "@/components/SEO";
+import { usePracticeAreaData, cms } from "@/hooks/useCmsData";
 
 const caseTypes = [
   { icon: Syringe, title: "Anesthesia Errors", desc: "Improper management during anesthesia can lead to brain damage. Oxygen deprivation and improper medication are some of the causes." },
@@ -19,6 +20,7 @@ const warningSigns = [
 ];
 
 export default function BrainInjuriesPage() {
+  const { data: d } = usePracticeAreaData("brain-injuries");
   const schema = createPracticeAreaSchema(
     "Brain Injury Lawyers",
     "Houston brain injury attorneys at Thomas & Wan represent victims of medical negligence including anesthesia errors, surgical mistakes, and failure to diagnose stroke.",
@@ -38,12 +40,12 @@ export default function BrainInjuriesPage() {
           <div className="grid lg:grid-cols-12 gap-12">
             <div className="lg:col-span-5">
               <p className="text-lg text-slate-600 leading-relaxed font-light">
-                At Thomas & Wan, we are deeply committed to representing individuals and families affected by brain injuries as a result of medical negligence. We understand that brain injuries can be life-altering, affecting every aspect of life. Compassionate, diligent, and thorough — we work to unravel the complex circumstances surrounding the incidents to seek justice for our clients.
+                {cms(d, "paIntro", "At Thomas & Wan, we are deeply committed to representing individuals and families affected by brain injuries as a result of medical negligence. We understand that brain injuries can be life-altering, affecting every aspect of life. Compassionate, diligent, and thorough — we work to unravel the complex circumstances surrounding the incidents to seek justice for our clients.")}
               </p>
               <div className="mt-8 bg-[#F9F7F5] border border-gray-100 p-8">
-                <h3 className="font-serif text-2xl text-primary mb-4">Brain injury cases we handle:</h3>
+                <h3 className="font-serif text-2xl text-primary mb-4">{cms(d, "paSidebarHeading", "Brain injury cases we handle:")}</h3>
                 <p className="text-slate-600 leading-relaxed">
-                  Claims against negligent hospitals, nurses, doctors, and other providers whose actions caused preventable brain injuries.
+                  {cms(d, "paSidebarText", "Claims against negligent hospitals, nurses, doctors, and other providers whose actions caused preventable brain injuries.")}
                 </p>
                 <Link
                   href="/contact-us"
@@ -87,9 +89,9 @@ export default function BrainInjuriesPage() {
           </div>
 
           <div className="mt-16 bg-primary text-white p-10 border-t-4 border-secondary">
-            <h2 className="text-3xl md:text-4xl font-serif mb-4">Call Us Now For a Free Consultation</h2>
+            <h2 className="text-3xl md:text-4xl font-serif mb-4">{cms(d, "paCtaHeading", "Call Us Now For a Free Consultation")}</h2>
             <p className="text-white/80 leading-relaxed mb-8">
-              Call us today for a free consultation—we will discuss what your legal options are for your brain injury case. If you have medical records, you can send them to us for a free review with no obligation.
+              {cms(d, "paCtaText", "Call us today for a free consultation—we will discuss what your legal options are for your brain injury case. If you have medical records, you can send them to us for a free review with no obligation.")}
             </p>
             <a
               href="/contact-us"

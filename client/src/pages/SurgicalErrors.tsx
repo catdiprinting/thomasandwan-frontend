@@ -2,6 +2,7 @@ import { ArrowRight, Syringe, Users, MapPin, Wrench, ShieldAlert, AlertTriangle 
 import { Link } from "wouter";
 import PageShell from "@/components/PageShell";
 import SEO, { createPracticeAreaSchema } from "@/components/SEO";
+import { usePracticeAreaData, cms } from "@/hooks/useCmsData";
 
 const caseTypes = [
   { icon: Syringe, title: "Anesthesia Complications", desc: "These can range from incorrect dosages to failure in monitoring vital signs, leading to serious patient harm." },
@@ -19,6 +20,7 @@ const warningSigns = [
 ];
 
 export default function SurgicalErrorsPage() {
+  const { data: d } = usePracticeAreaData("surgical-errors");
   const schema = createPracticeAreaSchema(
     "Surgical Error Lawyers",
     "Houston surgical error attorneys at Thomas & Wan handle wrong-site surgery, retained instruments, anesthesia complications, and post-surgical infection cases.",
@@ -38,12 +40,12 @@ export default function SurgicalErrorsPage() {
           <div className="grid lg:grid-cols-12 gap-12">
             <div className="lg:col-span-5">
               <p className="text-lg text-slate-600 leading-relaxed font-light">
-                Surgical procedures carry inherent risks. However, preventable errors due to the negligence of healthcare providers can lead to grave consequences for patients. At Thomas & Wan, we strive to hold these professionals accountable for their actions.
+                {cms(d, "paIntro", "Surgical procedures carry inherent risks. However, preventable errors due to the negligence of healthcare providers can lead to grave consequences for patients. At Thomas & Wan, we strive to hold these professionals accountable for their actions.")}
               </p>
               <div className="mt-8 bg-[#F9F7F5] border border-gray-100 p-8">
-                <h3 className="font-serif text-2xl text-primary mb-4">Surgical error cases we handle:</h3>
+                <h3 className="font-serif text-2xl text-primary mb-4">{cms(d, "paSidebarHeading", "Surgical error cases we handle:")}</h3>
                 <p className="text-slate-600 leading-relaxed">
-                  Claims against negligent surgeons, anesthesiologists, nurses, and hospitals whose errors caused preventable surgical harm.
+                  {cms(d, "paSidebarText", "Claims against negligent surgeons, anesthesiologists, nurses, and hospitals whose errors caused preventable surgical harm.")}
                 </p>
                 <Link
                   href="/contact-us"
@@ -87,9 +89,9 @@ export default function SurgicalErrorsPage() {
           </div>
 
           <div className="mt-16 bg-primary text-white p-10 border-t-4 border-secondary">
-            <h2 className="text-3xl md:text-4xl font-serif mb-4">Call Us Now For a Free Consultation</h2>
+            <h2 className="text-3xl md:text-4xl font-serif mb-4">{cms(d, "paCtaHeading", "Call Us Now For a Free Consultation")}</h2>
             <p className="text-white/80 leading-relaxed mb-8">
-              Call us today for a free consultation—we will discuss what your legal options are for your surgical error case. If you have medical records, you can send them to us for a free review with no obligation.
+              {cms(d, "paCtaText", "Call us today for a free consultation—we will discuss what your legal options are for your surgical error case. If you have medical records, you can send them to us for a free review with no obligation.")}
             </p>
             <a
               href="/contact-us"

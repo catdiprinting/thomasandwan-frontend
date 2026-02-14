@@ -5,6 +5,7 @@ import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { Link } from "wouter";
 import SEO, { createPracticeAreaSchema } from "@/components/SEO";
+import { usePracticeAreaData, cms } from "@/hooks/useCmsData";
 
 const birthInjuryTypes = [
   "Hypoxic ischemic encephalopathy",
@@ -43,6 +44,7 @@ const hieSymptoms = [
 ];
 
 export default function BirthInjuries() {
+  const { data: d } = usePracticeAreaData("birth-injuries");
   const schema = createPracticeAreaSchema(
     "Birth Injury Lawyers",
     "Houston birth injury attorneys representing families whose babies suffered injuries due to medical negligence during labor and delivery. Free consultation.",
@@ -79,7 +81,7 @@ export default function BirthInjuries() {
                 Birth <span className="text-secondary italic">Injuries</span>
               </h1>
               <p className="text-xl text-white/80 leading-relaxed font-light">
-                Sometimes babies are born with medical problems that don't match their parents' expectations. Sometimes it is because the baby is a victim of a birth injury that occurs during labor and delivery.
+                {cms(d, "paIntro", "Sometimes babies are born with medical problems that don't match their parents' expectations. Sometimes it is because the baby is a victim of a birth injury that occurs during labor and delivery.")}
               </p>
             </motion.div>
           </div>
@@ -91,7 +93,7 @@ export default function BirthInjuries() {
             <div className="grid lg:grid-cols-2 gap-12 items-center max-w-6xl mx-auto">
               <div>
                 <p className="text-lg text-slate-600 leading-relaxed mb-6">
-                  Giving birth is one of the most exciting events in a mother's life. Parents prepare for the big day when their new baby is born, and they hope and pray for a healthy baby. At Thomas & Wan, our lawyers have represented many Texas families who have suffered injuries to their baby as a result of gross negligence and malpractice.
+                  {cms(d, "paSidebarText", "Giving birth is one of the most exciting events in a mother's life. Parents prepare for the big day when their new baby is born, and they hope and pray for a healthy baby. At Thomas & Wan, our lawyers have represented many Texas families who have suffered injuries to their baby as a result of gross negligence and malpractice.")}
                 </p>
                 <p className="text-lg text-slate-600 leading-relaxed mb-6">
                   We are very familiar with the medicine, the law and the policies of hospitals all across Texas concerning the need for monitoring and possible emergency delivery of laboring moms to prevent injuries to babies. Many times these injuries are preventable if hospitals only ensured that safety policies were followed by their labor nurses, midwives and doctors.
@@ -222,9 +224,9 @@ export default function BirthInjuries() {
         <section className="bg-primary text-white py-20">
           <div className="container mx-auto px-4 max-w-4xl text-center">
             <Heart className="w-16 h-16 text-secondary mx-auto mb-6" />
-            <h2 className="text-4xl md:text-5xl font-serif mb-6">Legal Help for The Youngest Victims</h2>
+            <h2 className="text-4xl md:text-5xl font-serif mb-6">{cms(d, "paCtaHeading", "Legal Help for The Youngest Victims")}</h2>
             <p className="text-xl text-white/80 mb-10 leading-relaxed">
-              At Thomas & Wan, we have the training, experience and knowledge to sue grossly negligent hospitals, doctors, nurses and midwives for birth injuries. Please call us today for free—we are here to listen to you.
+              {cms(d, "paCtaText", "At Thomas & Wan, we have the training, experience and knowledge to sue grossly negligent hospitals, doctors, nurses and midwives for birth injuries. Please call us today for free—we are here to listen to you.")}
             </p>
             <Link href="/contact-us">
               <Button size="lg" className="bg-secondary hover:bg-secondary/90 text-white font-bold py-8 px-10 text-xl rounded-none">
