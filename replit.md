@@ -23,7 +23,11 @@ Preferred communication style: Simple, everyday language.
 - **Runtime**: Node.js with Express
 - **Build Tool**: Vite for development, esbuild for production server bundling
 - **API Pattern**: RESTful endpoints prefixed with `/api`
-- **WordPress Integration**: Hybrid headless CMS — WordPress at `wp.thomasandwan.com` is source of truth, content cached in PostgreSQL with in-memory TTL layer, instant webhook-based cache refresh
+- **WordPress Integration**: Dual-layer headless CMS architecture:
+  - **Blog posts**: Fetched via REST API (`/wp-json/wp/v2`), cached in PostgreSQL, rendered with DOMPurify (rich HTML content)
+  - **Page content (CMS text)**: Fetched via WPGraphQL (`/graphql`) as structured ACF field values, fed into React components as plain text props — React controls all layout/design, WordPress only supplies editable text
+  - **Caching**: PostgreSQL DB cache + in-memory TTL cache (300s default), auto-sync every 5 minutes, instant webhook purge/refresh
+  - **Safe updates**: Changing text in WordPress ACF fields cannot break site design since React components always control rendering
 
 ### Data Storage
 - **ORM**: Drizzle ORM configured for PostgreSQL
@@ -48,6 +52,7 @@ server/           # Express backend
   routes.ts       # API endpoint definitions
   wordpress.ts    # WordPress DB cache queries (read layer)
   wp-content.ts   # In-memory TTL cache + WP REST API fetch layer + purge/warm
+  wp-graphql.ts   # WPGraphQL client for ACF structured content (CMS text fields)
   wp-sync.ts      # Full WordPress sync (initial + periodic 5-min refresh)
   storage.ts      # Data access layer
 shared/           # Shared code between client/server
@@ -63,7 +68,7 @@ shared/           # Shared code between client/server
 - **Click-to-Call CTAs**: All "Call Us Now" sections across practice area pages use direct tel: links
 
 ### Key Design Decisions
-1. **Headless WordPress CMS**: Blog content is fetched from an existing WordPress installation via REST API, allowing the law firm to continue using their familiar CMS while the frontend is built with React
+1. **Headless WordPress CMS**: Dual-layer approach — blog posts use REST API (rich HTML), page content uses WPGraphQL + ACF (structured plain text props). React components always control design; WordPress only supplies editable text values, so CMS edits can never break the site layout
 2. **Server-side API Proxy**: WordPress requests go through the Express server to handle CORS and add caching capabilities
 3. **HTML Export**: Posts can be exported as standalone HTML files for static hosting or offline use
 4. **Component Library**: Shadcn/ui provides accessible, customizable components without the overhead of a full design system
@@ -80,6 +85,12 @@ shared/           # Shared code between client/server
 - `GET /api/export/post/:slug` - Export a post as standalone HTML file
 - `GET /api/export/page/:slug` - Export a page as standalone HTML file
 - `GET /api/export/all-posts` - Export all posts as JSON with HTML content
+
+### CMS Content Endpoints (GraphQL/ACF)
+- `GET /api/cms/homepage` - Structured text fields for the homepage (hero, trust bar, team, practice areas, FAQ, testimonials, etc.)
+- `GET /api/cms/about` - Structured text fields for the about page (firm story, attorney bios, values)
+- `GET /api/cms/practice-area/:slug` - Structured text fields for a specific practice area page
+- `GET /api/cms/purge` - Purge the in-memory CMS content cache
 
 ### Webhook Endpoints
 - `POST /webhooks/wp` - WordPress webhook receiver; requires `x-webhook-secret` header matching `WP_WEBHOOK_SECRET` env var; body: `{ type: "post"|"page", slug: "..." }`; purges cached content and immediately refetches from WordPress
@@ -101,6 +112,7 @@ shared/           # Shared code between client/server
 
 ### Third-Party Services
 - **WordPress REST API**: External CMS at `wp.thomasandwan.com/wp-json/wp/v2` provides blog posts, pages, and media (env: `WP_BASE_URL`)
+- **WPGraphQL + ACF**: Structured page content via `wp.thomasandwan.com/graphql` — ACF custom fields supply plain text values to React components (plugins: WPGraphQL, ACF, WPGraphQL for ACF)
 - **WordPress Webhook**: Incoming `POST /webhooks/wp` for instant content updates (env: `WP_WEBHOOK_SECRET`)
 - **OpenAI Assistants API**: Connected via user's own API key and Assistant ID for content creation (secrets: `OPENAI_API_KEY`, `OPENAI_ASSISTANT_ID`)
 - **Google Fonts**: Typography loaded from fonts.googleapis.com
