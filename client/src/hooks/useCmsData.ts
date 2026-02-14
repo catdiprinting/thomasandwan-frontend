@@ -35,6 +35,16 @@ export function usePracticeAreaData(slug: string) {
   });
 }
 
+export function usePageCms(slug: string) {
+  return useQuery({
+    queryKey: ["cms", "page", slug],
+    queryFn: () => fetchCmsData<Record<string, string>>(`/api/cms/page/${slug}`),
+    staleTime: 5 * 60 * 1000,
+    retry: 1,
+    enabled: !!slug,
+  });
+}
+
 export function cms(data: Record<string, string> | null | undefined, key: string, fallback: string): string {
   return data?.[key] || fallback;
 }

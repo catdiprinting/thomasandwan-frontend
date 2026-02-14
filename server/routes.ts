@@ -551,6 +551,22 @@ export async function registerRoutes(
     }
   });
 
+  app.get("/api/cms/page/:slug", async (req: Request, res: Response) => {
+    try {
+      const slug = req.params.slug;
+      const { getGenericPageFields } = await import("./wp-graphql");
+      const fields = await getGenericPageFields(slug);
+      if (!fields) {
+        res.json({ source: "default", fields: null });
+        return;
+      }
+      res.json({ source: "wordpress", fields });
+    } catch (error: any) {
+      console.error("Error fetching page CMS fields:", error);
+      res.json({ source: "default", fields: null });
+    }
+  });
+
   app.post("/api/cms/purge", async (_req: Request, res: Response) => {
     purgeCmsCache();
     res.json({ success: true, message: "CMS cache purged" });

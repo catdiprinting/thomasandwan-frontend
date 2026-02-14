@@ -599,6 +599,89 @@ export async function getAboutFields(): Promise<AboutFields | null> {
   return merged;
 }
 
+export interface GenericPageFields {
+  pageHeading: string;
+  pageSubheading: string;
+  pageIntro: string;
+  pageCtaHeading: string;
+  pageCtaText: string;
+  [key: string]: string;
+}
+
+const GENERIC_PAGE_QUERY = `
+  query GetPage($slug: String!) {
+    pageBy(uri: $slug) {
+      title
+      content
+    }
+  }
+`;
+
+interface GenericPageData {
+  pageBy: { title: string; content: string } | null;
+}
+
+function parseGenericPageContent(html: string): Partial<GenericPageFields> {
+  if (!html) return {};
+  const fields: Partial<GenericPageFields> = {};
+
+  const h1 = html.match(/<h1[^>]*>([\s\S]*?)<\/h1>/);
+  if (h1) fields.pageHeading = stripHtml(h1[1]);
+
+  const h2 = html.match(/<h2[^>]*>([\s\S]*?)<\/h2>/);
+  if (h2) fields.pageSubheading = stripHtml(h2[1]);
+
+  const paragraphs = html.match(/<p>([\s\S]*?)<\/p>/g) || [];
+  if (paragraphs[0]) fields.pageIntro = stripHtml(paragraphs[0]);
+
+  const h3s = html.match(/<h3[^>]*>([\s\S]*?)<\/h3>/g) || [];
+  const allP = html.match(/<p>([\s\S]*?)<\/p>/g) || [];
+
+  const h3Texts: string[] = h3s.map(h => stripHtml(h));
+  const pTexts: string[] = allP.map(p => stripHtml(p));
+
+  for (let i = 0; i < h3Texts.length; i++) {
+    fields[`section${i + 1}Heading`] = h3Texts[i];
+  }
+
+  for (let i = 0; i < pTexts.length; i++) {
+    fields[`paragraph${i + 1}`] = pTexts[i];
+  }
+
+  const blockquotes = html.match(/<blockquote[^>]*>[\s\S]*?<p>([\s\S]*?)<\/p>[\s\S]*?<\/blockquote>/g) || [];
+  for (let i = 0; i < blockquotes.length; i++) {
+    const pMatch = blockquotes[i].match(/<p>([\s\S]*?)<\/p>/g) || [];
+    const quoteTexts = pMatch.map(p => stripHtml(p));
+    fields[`quote${i + 1}`] = quoteTexts.join(" ");
+    const cite = blockquotes[i].match(/<cite>([\s\S]*?)<\/cite>/);
+    if (cite) fields[`quote${i + 1}Author`] = stripHtml(cite[1]);
+  }
+
+  return fields;
+}
+
+export async function getGenericPageFields(slug: string): Promise<GenericPageFields | null> {
+  const cacheKey = `page:${slug}`;
+  const cached = getCmsCache<GenericPageFields>(cacheKey);
+  if (cached) {
+    log(`[wp-graphql] Page "${slug}" served from cache`, "wp-graphql");
+    return cached;
+  }
+
+  const data = await graphqlQuery<GenericPageData>(GENERIC_PAGE_QUERY, { slug });
+  if (!data?.pageBy) return null;
+
+  const parsed = parseGenericPageContent(data.pageBy.content);
+  const fields = parsed as GenericPageFields;
+
+  if (Object.keys(fields).length > 0) {
+    setCmsCache(cacheKey, fields);
+    log(`[wp-graphql] Page "${slug}" content parsed and cached`, "wp-graphql");
+  }
+
+  return fields;
+}
+
 export async function getPracticeAreaFields(slug: string): Promise<PracticeAreaFields | null> {
   const cacheKey = `practice:${slug}`;
   const cached = getCmsCache<PracticeAreaFields>(cacheKey);
