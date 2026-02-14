@@ -70,9 +70,7 @@ export default function WomenOwnedSection({
               {label}
             </span>
             <h2 className="text-4xl md:text-5xl font-serif text-primary mb-8" data-testid="text-about-heading">
-              {heading.includes("You Work") ? (
-                <>When You Hire Us, <br/><span className="text-muted-foreground italic font-alt">You Work with Us.</span></>
-              ) : heading}
+              {heading}
             </h2>
             
             <div className="space-y-6 text-lg text-slate-600 leading-relaxed font-light">

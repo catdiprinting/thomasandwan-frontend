@@ -61,8 +61,7 @@ export default function PracticeAreas({
             {label}
           </span>
           <h2 className="text-4xl md:text-5xl font-serif text-primary mb-6" data-testid="text-practice-heading">
-            Focused Exclusively on <br/>
-            <span className="italic font-alt text-secondary">Medical Malpractice</span>
+            {heading}
           </h2>
           <p className="text-lg text-muted-foreground font-light" data-testid="text-practice-subtext">
             {subtext}

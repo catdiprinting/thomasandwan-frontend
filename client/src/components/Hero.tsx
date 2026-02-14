@@ -43,9 +43,7 @@ export default function Hero({
           </div>
           
           <h1 className="text-4xl md:text-6xl lg:text-7xl font-serif text-primary leading-[1.1]" data-testid="text-hero-heading">
-            Hurt by a Doctor<br/>
-            or Hospital? <span className="italic text-secondary">We Help<br/>
-            Families</span> Get Answers.
+            {heading}
           </h1>
           
           <p className="text-lg md:text-xl text-muted-foreground font-light max-w-lg leading-relaxed" data-testid="text-hero-text">
