@@ -6,6 +6,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
+import { usePageCms, cms } from "@/hooks/useCmsData";
 
 const faqs = [
   {
@@ -47,6 +48,8 @@ const faqs = [
 ];
 
 export default function FAQ() {
+  const { data: d } = usePageCms("faq");
+  const displayFaqs = d ? Array.from({length: 9}, (_, i) => ({ q: cms(d, `section${i+1}Heading`, faqs[i]?.q || ""), a: cms(d, `paragraph${i+2}`, faqs[i]?.a || "") })).filter(f => f.q) : faqs;
   return (
     <PageShell title="Frequently Asked Questions" subtitle="What to Expect">
       <SEO 
@@ -62,7 +65,7 @@ export default function FAQ() {
               <div className="bg-[#F9F7F5] border border-gray-100 p-8">
                 <h2 className="font-serif text-2xl text-primary mb-4">Clear answers. Real guidance.</h2>
                 <p className="text-slate-600 leading-relaxed">
-                  This page is designed to be easier to scan and more helpful than the typical FAQ. If you don’t see your question here, call us.
+                  {cms(d, "pageIntro", "This page is designed to be easier to scan and more helpful than the typical FAQ. If you don’t see your question here, call us.")}
                 </p>
                 <a
                   href="tel:713-529-1177"
@@ -84,7 +87,7 @@ export default function FAQ() {
 
             <div className="lg:col-span-8">
               <Accordion type="single" collapsible className="w-full">
-                {faqs.map((f, idx) => (
+                {displayFaqs.map((f, idx) => (
                   <AccordionItem key={idx} value={`faq-${idx}`} className="border-b border-gray-100">
                     <AccordionTrigger className="text-left text-xl font-serif text-primary hover:text-secondary transition-colors py-6">
                       {f.q}

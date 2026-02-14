@@ -3,6 +3,7 @@ import { Link } from "wouter";
 import PageShell from "@/components/PageShell";
 import SEO from "@/components/SEO";
 import LeadCaptureForm from "@/components/LeadCaptureForm";
+import { usePageCms, cms } from "@/hooks/useCmsData";
 
 const cards = [
   {
@@ -48,6 +49,7 @@ const caseLinks = [
 ];
 
 export default function Cases() {
+  const { data: d } = usePageCms("cases-we-handle");
   return (
     <PageShell title="Cases We Handle" subtitle="Medical Malpractice Focus">
       <SEO 
@@ -60,14 +62,14 @@ export default function Cases() {
           <div className="grid lg:grid-cols-12 gap-12 items-start">
             <div className="lg:col-span-5">
               <h2 className="text-3xl md:text-4xl font-serif text-primary mb-6">
-                Advocating for You and Your Family
+                {cms(d, "pageSubheading", "Advocating for You and Your Family")}
               </h2>
               <div className="space-y-6 text-lg text-slate-600 leading-relaxed font-light">
                 <p>
-                  If you're in need of legal guidance and support, you've come to the right place. Meet the dedicated team at Thomas & Wan, who bring 60 years of experience to the table.
+                  {cms(d, "paragraph1", "If you're in need of legal guidance and support, you've come to the right place. Meet the dedicated team at Thomas & Wan, who bring 60 years of experience to the table.")}
                 </p>
                 <p>
-                  We've successfully handled numerous multi-million dollar cases related to serious medical malpractice and wrongful death issues across the nation. We're not afraid to take on challenging cases, and our commitment to justice is unwavering.
+                  {cms(d, "paragraph2", "We've successfully handled numerous multi-million dollar cases related to serious medical malpractice and wrongful death issues across the nation. We're not afraid to take on challenging cases, and our commitment to justice is unwavering.")}
                 </p>
               </div>
               <div className="mt-10">

@@ -5,6 +5,7 @@ import SEO from "@/components/SEO";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
+import { usePageCms, cms } from "@/hooks/useCmsData";
 
 interface FormState {
   name: string;
@@ -28,6 +29,7 @@ export default function Contact() {
   });
   const [status, setStatus] = useState<SubmitStatus>("idle");
   const [errorMessage, setErrorMessage] = useState("");
+  const { data: d } = usePageCms("contact-us");
 
   const quickTopics = useMemo(
     () => [
@@ -107,10 +109,10 @@ export default function Contact() {
               <div className="space-y-8">
                 <div className="space-y-4">
                   <h2 className="text-3xl md:text-4xl font-serif text-primary leading-tight" data-testid="text-contact-heading">
-                    Speak with a medical malpractice attorney.
+                    {cms(d, "pageSubheading", "Speak with a medical malpractice attorney.")}
                   </h2>
                   <p className="text-base md:text-lg text-slate-600 leading-relaxed font-light" data-testid="text-contact-subheading">
-                    Tell us what happened. We'll review your situation and explain your options—no obligation.
+                    {cms(d, "pageIntro", "Tell us what happened. We'll review your situation and explain your options—no obligation.")}
                   </p>
 
                   <div className="grid sm:grid-cols-3 gap-3">

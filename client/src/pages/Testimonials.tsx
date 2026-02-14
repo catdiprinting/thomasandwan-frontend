@@ -5,6 +5,7 @@ import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { Link } from "wouter";
 import SEO, { createReviewSchema } from "@/components/SEO";
+import { usePageCms, cms } from "@/hooks/useCmsData";
 
 const testimonials = [
   {
@@ -41,6 +42,8 @@ const testimonials = [
 ];
 
 export default function Testimonials() {
+  const { data: d } = usePageCms("testimonials");
+  const displayTestimonials = d ? testimonials.map((t, i) => ({ ...t, quote: cms(d, `quote${i+1}`, t.quote), author: cms(d, `quote${i+1}Author`, t.author) })) : testimonials;
   return (
     <div className="min-h-screen bg-background font-sans text-foreground overflow-x-hidden selection:bg-secondary selection:text-primary">
       <SEO 
@@ -72,7 +75,7 @@ export default function Testimonials() {
                 <span className="text-secondary italic">Justice & Hope</span>
               </h1>
               <p className="text-xl text-white/80 leading-relaxed font-light">
-                Don't just take our word for it. Read what our clients have to say about their experience working with Thomas & Wan.
+                {cms(d, "pageIntro", "Don't just take our word for it. Read what our clients have to say about their experience working with Thomas & Wan.")}
               </p>
             </motion.div>
           </div>
@@ -82,7 +85,7 @@ export default function Testimonials() {
         <section className="py-24 bg-white">
           <div className="container mx-auto px-4 md:px-6">
             <div className="grid md:grid-cols-2 gap-8">
-              {testimonials.map((testimonial, index) => (
+              {displayTestimonials.map((testimonial, index) => (
                 <motion.div
                   key={index}
                   initial={{ opacity: 0, y: 20 }}
