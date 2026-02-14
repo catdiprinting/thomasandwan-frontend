@@ -446,13 +446,19 @@ export async function registerRoutes(
     });
   });
 
+  async function nukeAndRefreshAll(): Promise<{ success: boolean; message: string }> {
+    console.log(`[nuke] Purging ALL caches...`);
+    purgeAllCache();
+    purgeCmsCache();
+    console.log(`[nuke] All memory caches cleared. Refreshing from WordPress...`);
+    const { refreshWordPressCache } = await import("./wp-sync");
+    const result = await refreshWordPressCache();
+    console.log(`[nuke] Full refresh complete: ${result.postsUpdated} posts updated, ${result.pagesUpdated} pages updated, ${result.mediaUpdated} media`);
+    return { success: true, message: "All caches nuked and content refreshed from WordPress" };
+  }
+
   app.post("/webhooks/wp", async (req: Request, res: Response) => {
     console.log(`[webhook] === INCOMING REQUEST ===`);
-    console.log(`[webhook] Headers: ${JSON.stringify({
-      'content-type': req.headers['content-type'],
-      'x-webhook-secret': req.headers['x-webhook-secret'] ? '***provided***' : 'MISSING',
-      'user-agent': req.headers['user-agent'],
-    })}`);
     console.log(`[webhook] Body: ${JSON.stringify(req.body)}`);
 
     const secret = req.headers["x-webhook-secret"] as string;
@@ -465,41 +471,35 @@ export async function registerRoutes(
     }
 
     if (!secret || secret !== expectedSecret) {
-      console.warn(`[webhook] Unauthorized — secret mismatch (provided: "${secret || 'none'}", expected length: ${expectedSecret.length})`);
-      res.status(401).json({ error: "Unauthorized: invalid x-webhook-secret" });
+      console.warn(`[webhook] Unauthorized`);
+      res.status(401).json({ error: "Unauthorized" });
       return;
     }
-
-    const { type, slug } = req.body || {};
-
-    if (!type || !slug) {
-      console.warn(`[webhook] Bad request — missing type or slug. Body: ${JSON.stringify(req.body)}`);
-      res.status(400).json({ error: "Missing required fields: type and slug" });
-      return;
-    }
-
-    if (type !== "post" && type !== "page") {
-      console.warn(`[webhook] Unknown type "${type}"`);
-      res.status(400).json({ error: 'type must be "post" or "page"' });
-      return;
-    }
-
-    console.log(`[webhook] Valid request: type="${type}", slug="${slug}"`);
 
     try {
-      const result = await purgeAndWarm(type, slug);
-      purgeCmsCache();
-      console.log(`[webhook] SUCCESS: type="${type}", slug="${slug}" — purged=${result.purged}, warmed=${result.warmed}, cms cache cleared`);
-      res.json({
-        success: true,
-        type,
-        slug,
-        purged: result.purged,
-        warmed: result.warmed,
-      });
+      const result = await nukeAndRefreshAll();
+      res.json(result);
     } catch (err: any) {
-      console.error(`[webhook] Error processing ${type} "${slug}":`, err);
-      res.status(500).json({ error: "Failed to process webhook", details: err.message });
+      console.error(`[webhook] Error:`, err);
+      res.status(500).json({ error: "Failed to refresh", details: err.message });
+    }
+  });
+
+  app.get("/api/revalidate-all", async (req: Request, res: Response) => {
+    const secret = req.query.secret as string;
+    const expectedSecret = process.env.WP_WEBHOOK_SECRET;
+
+    if (!expectedSecret || !secret || secret !== expectedSecret) {
+      res.status(401).json({ error: "Unauthorized" });
+      return;
+    }
+
+    try {
+      const result = await nukeAndRefreshAll();
+      res.json(result);
+    } catch (err: any) {
+      console.error(`[revalidate-all] Error:`, err);
+      res.status(500).json({ error: "Failed to refresh", details: err.message });
     }
   });
 
