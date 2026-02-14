@@ -488,7 +488,8 @@ export async function registerRoutes(
 
     try {
       const result = await purgeAndWarm(type, slug);
-      console.log(`[webhook] SUCCESS: type="${type}", slug="${slug}" — purged=${result.purged}, warmed=${result.warmed}`);
+      purgeCmsCache();
+      console.log(`[webhook] SUCCESS: type="${type}", slug="${slug}" — purged=${result.purged}, warmed=${result.warmed}, cms cache cleared`);
       res.json({
         success: true,
         type,
