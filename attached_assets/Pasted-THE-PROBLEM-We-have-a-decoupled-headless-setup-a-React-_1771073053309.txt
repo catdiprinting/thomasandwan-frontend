@@ -1,0 +1,52 @@
+THE PROBLEM
+We have a decoupled/headless setup: a React + Node.js front end with WordPress as the CMS (source of truth). Right now, when content editors update text in WordPress and the front end pulls that content, it doesn't just get the new text — it gets all of WordPress's HTML markup along with it. This includes WordPress's own div wrappers, paragraph tags, class names, inline styles, and layout code.
+When this raw HTML gets injected into our React components, it overrides and breaks the front-end design. Every time someone makes a simple text change in WordPress, we end up having to manually clean up the front end to fix the broken layout. This is costing us significant time and money.
+In short: we only want the content (the actual words) to pass through. We do not want WordPress's HTML structure coming along for the ride.
+
+THE NEW APPROACH: WPGraphQL + ACF
+We are replacing the WordPress REST API with WPGraphQL combined with Advanced Custom Fields (ACF).
+Currently, the front end calls the WP REST API, which returns content as rendered HTML blobs (the content.rendered field). The front end injects this raw HTML using dangerouslySetInnerHTML, and WordPress's HTML structure clashes with our design system, breaking layouts.
+With the new approach, we install the WPGraphQL plugin on WordPress, which gives it a GraphQL endpoint. We structure all editable content as individual ACF text fields — one field per content block (hero heading, hero subtext, CTA button label, section body text, etc.). The WPGraphQL for ACF companion plugin exposes these fields via GraphQL. The React front end then queries GraphQL and receives clean, structured data — plain text strings, not HTML blobs. Each text string slots directly into our own styled React components. No HTML injection. No dangerouslySetInnerHTML. No design conflicts.
+The result: content editors update plain text fields in WordPress. Those text values flow into our React components as data. Our CSS and layout are never touched or overridden by WordPress markup.
+
+WHAT NEEDS TO HAPPEN ON THE WORDPRESS SIDE
+
+Install the WPGraphQL plugin (free, by Jason Bahl / WP Engine). This creates a GraphQL API endpoint at /graphql on the WordPress site.
+Install the WPGraphQL for ACF companion plugin. This exposes ACF custom fields through the GraphQL API.
+Restructure content into ACF fields. For each page template, create an ACF Field Group with individual text fields for every editable content block. For example, a homepage might have: hero_heading (Text), hero_subtext (Text Area), cta_button_text (Text), cta_button_link (URL), section_one_title (Text), section_one_body (Text Area). The key rule: if the client needs to edit it, it should be its own field — not inside a WYSIWYG rich text editor.
+Enable GraphQL on each Field Group. In each ACF Field Group's settings, toggle on "Show in GraphQL" so the fields become queryable.
+Configure CORS. Since the React front end runs on a different domain (Replit), the WordPress site needs to allow cross-origin requests to the /graphql endpoint from the Replit app's domain.
+Verify the endpoint using the built-in GraphiQL IDE (appears in the WP admin sidebar after installing WPGraphQL) to confirm queries return structured data correctly.
+
+
+WHAT NEEDS TO HAPPEN ON THE REPLIT / FRONT-END SIDE
+
+Install a GraphQL client library. We need Apollo Client (the standard React GraphQL client) added to the project dependencies.
+Set up the GraphQL client. Create an Apollo Client instance configured to point at our WordPress GraphQL endpoint. The endpoint URL should be stored as an environment variable using Replit's Secrets feature, not hardcoded.
+Wrap the app with ApolloProvider so all components can access GraphQL data.
+Write GraphQL queries for each page/template. Instead of calling the REST API, create GraphQL queries that request only the specific fields we need (title, slug, custom field values, featured image URL). These queries should never request the rendered HTML content field.
+Update components to use query data. Replace any current REST API fetch calls and dangerouslySetInnerHTML usage with Apollo's useQuery hook. Components should receive plain text strings from GraphQL and render them inside our own styled JSX elements.
+Remove all dangerouslySetInnerHTML for CMS content. Once we're pulling structured data instead of HTML blobs, there should be zero instances of this in the codebase for CMS page content.
+
+
+HOW CONTENT UPDATES SHOULD WORK AFTER THIS
+
+Client updates text in WordPress — they go to the page, change the ACF text field value, and click Update.
+Front end reflects the change automatically — the next time the React app fetches from GraphQL, the new text appears inside our existing styled components. Nothing else changes.
+Design stays completely intact — because the data is just plain text (not HTML), our CSS, layout, and component structure are never affected.
+
+No more back-and-forth. No more fixing broken HTML after a content update.
+
+EDGE CASE: WHEN RICH FORMATTING IS ACTUALLY NEEDED
+For content areas that genuinely require bold, italics, or hyperlinks (like a blog post body), we can use an ACF WYSIWYG field. However, on the React side, this HTML must be sanitized before rendering — stripping out everything except a safe whitelist of tags (bold, italic, links, line breaks, paragraphs, lists). A library like DOMPurify handles this. This should be the exception, not the rule.
+
+ACCEPTANCE CRITERIA (How we know this is done)
+
+WPGraphQL is installed and active on WordPress with a working /graphql endpoint.
+All editable content is structured as individual ACF text fields with "Show in GraphQL" enabled.
+The React front end uses Apollo Client to query GraphQL instead of the REST API.
+All CMS-driven components render content from structured GraphQL data (plain strings), not HTML blobs.
+There are zero instances of dangerouslySetInnerHTML for CMS page content (except for sanitized rich text in blog bodies if applicable).
+A content editor can change any text field in WordPress and the updated text appears correctly on the front end with no layout or styling issues.
+CORS is configured so the Replit-hosted front end can reach the WordPress GraphQL endpoint without errors.
+The WordPress GraphQL URL is stored as an environment variable, not hardcoded.
