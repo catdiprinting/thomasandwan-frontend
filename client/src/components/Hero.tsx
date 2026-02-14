@@ -43,7 +43,17 @@ export default function Hero({
           </div>
           
           <h1 className="text-4xl md:text-6xl lg:text-7xl font-serif text-primary leading-[1.1]" data-testid="text-hero-heading">
-            {heading}
+            {(() => {
+              const match = heading.match(/(.*?)(We\s+Help\s+Families\S*)(.*)/i);
+              if (match) {
+                return (
+                  <>
+                    {match[1]}<span className="italic text-secondary">{match[2]}</span>{match[3]}
+                  </>
+                );
+              }
+              return heading;
+            })()}
           </h1>
           
           <p className="text-lg md:text-xl text-muted-foreground font-light max-w-lg leading-relaxed" data-testid="text-hero-text">
