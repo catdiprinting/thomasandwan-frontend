@@ -34,15 +34,15 @@ export default function Hero({
           initial={{ opacity: 0, x: -50 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.8, ease: "easeOut" }}
-          className="order-2 md:order-1 space-y-6 relative z-10"
+          className="order-2 md:order-1 space-y-4 md:space-y-5 relative z-10"
         >
-          <div className="inline-block border-b-2 border-secondary pb-1 mb-4 md:mb-6">
+          <div className="inline-block border-b-2 border-secondary pb-1 mb-2 md:mb-4">
             <span className="text-secondary font-bold tracking-widest uppercase text-xs md:text-sm" data-testid="text-hero-label">
               {label}
             </span>
           </div>
           
-          <h1 className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-serif text-primary leading-[1.15] pb-1" data-testid="text-hero-heading">
+          <h1 className="text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-serif text-primary leading-[1.15] pb-1" data-testid="text-hero-heading">
             {(() => {
               const match = heading.match(/(.*?)(We\s+Help\s+Families\S*)(.*)/i);
               if (match) {
@@ -56,11 +56,11 @@ export default function Hero({
             })()}
           </h1>
           
-          <p className="text-lg md:text-xl text-muted-foreground font-light max-w-lg leading-relaxed" data-testid="text-hero-text">
+          <p className="text-base md:text-lg text-muted-foreground font-light max-w-lg leading-relaxed" data-testid="text-hero-text">
             {text}
           </p>
           
-          <div className="flex flex-col sm:flex-row gap-4 pt-4">
+          <div className="flex flex-col sm:flex-row gap-4 pt-2">
             <Link href={ctaLink} className="md:hidden w-full sm:w-auto">
               <Button size="lg" className="w-full bg-secondary hover:bg-secondary/90 text-white rounded-none h-14 px-8 text-base tracking-wide border-0" data-testid="button-hero-cta">
                 {ctaText}
@@ -78,14 +78,14 @@ export default function Hero({
             </Link>
           </div>
 
-          <div className="pt-4 md:pt-8 flex items-center gap-6 text-muted-foreground">
+          <div className="pt-2 md:pt-4 flex items-center gap-6 text-muted-foreground">
              <div className="flex items-center gap-2">
                <span className="w-3 h-3 rounded-full bg-secondary"></span>
-               <span className="text-lg font-medium text-primary" data-testid="text-hero-badge1">{badge1}</span>
+               <span className="text-base font-medium text-primary" data-testid="text-hero-badge1">{badge1}</span>
              </div>
              <div className="flex items-center gap-2">
                <span className="w-3 h-3 rounded-full bg-secondary"></span>
-               <span className="text-lg font-medium text-primary" data-testid="text-hero-badge2">{badge2}</span>
+               <span className="text-base font-medium text-primary" data-testid="text-hero-badge2">{badge2}</span>
              </div>
           </div>
         </motion.div>
