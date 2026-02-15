@@ -28,7 +28,7 @@ export default function Breadcrumbs({ items }: BreadcrumbsProps) {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaData) }}
       />
-      <nav aria-label="Breadcrumb" className="py-3 bg-primary/95 border-b border-white/10">
+      <nav aria-label="Breadcrumb" className="py-3 bg-gray-900 border-b border-white/15">
         <div className="container mx-auto px-4 md:px-6">
           <ol className="flex items-center gap-1.5 text-xs text-white/60 flex-wrap" data-testid="breadcrumbs">
             {items.map((item, index) => (
