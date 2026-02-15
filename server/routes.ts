@@ -44,6 +44,16 @@ import { eq } from "drizzle-orm";
 import { getPostBySlug, getPageBySlug, purgeAndWarm, getCacheStats, purgeAllCache } from "./wp-content";
 import { getHomepageFields, getAboutFields, getPracticeAreaFields, purgeCmsCache } from "./wp-graphql";
 
+function isBot(userAgent: string): boolean {
+  const bots = [
+    'googlebot', 'bingbot', 'yandexbot', 'duckduckbot', 'slurp',
+    'baiduspider', 'facebookexternalhit', 'twitterbot', 'linkedinbot',
+    'whatsapp', 'telegram', 'applebot', 'pinterest', 'semrushbot',
+    'ahrefsbot', 'mj12bot', 'dotbot', 'petalbot', 'bytespider'
+  ];
+  const ua = userAgent.toLowerCase();
+  return bots.some(bot => ua.includes(bot));
+}
 
 export async function registerRoutes(
   httpServer: Server,
@@ -830,83 +840,112 @@ Sitemap: https://thomasandwan.com/sitemap.xml`;
     }
   });
 
-  // SSR Routes - serve full HTML content to all visitors
+  // SSR Routes - serve to bots and ?ssr=true, regular users get React app
   app.get("/", async (req: Request, res: Response, next: Function) => {
+    const ua = req.headers['user-agent'] || '';
+    if (req.query.ssr !== 'true' && !isBot(ua)) return next();
     res.setHeader("Content-Type", "text/html");
     res.send(await renderHomepage());
   });
 
   app.get("/about-thomas-wan-llp", async (req: Request, res: Response, next: Function) => {
+    const ua = req.headers['user-agent'] || '';
+    if (req.query.ssr !== 'true' && !isBot(ua)) return next();
     res.setHeader("Content-Type", "text/html");
     res.send(await renderAbout());
   });
 
   app.get("/contact-us", async (req: Request, res: Response, next: Function) => {
+    const ua = req.headers['user-agent'] || '';
+    if (req.query.ssr !== 'true' && !isBot(ua)) return next();
     res.setHeader("Content-Type", "text/html");
     res.send(await renderContact());
   });
 
   app.get("/faq", async (req: Request, res: Response, next: Function) => {
+    const ua = req.headers['user-agent'] || '';
+    if (req.query.ssr !== 'true' && !isBot(ua)) return next();
     res.setHeader("Content-Type", "text/html");
     res.send(await renderFAQ());
   });
 
   app.get("/testimonials", async (req: Request, res: Response, next: Function) => {
+    const ua = req.headers['user-agent'] || '';
+    if (req.query.ssr !== 'true' && !isBot(ua)) return next();
     res.setHeader("Content-Type", "text/html");
     res.send(await renderTestimonials());
   });
 
   app.get("/blog", async (req: Request, res: Response, next: Function) => {
+    const ua = req.headers['user-agent'] || '';
+    if (req.query.ssr !== 'true' && !isBot(ua)) return next();
     res.setHeader("Content-Type", "text/html");
     res.send(await renderBlogIndex());
   });
 
   app.get("/cases-we-handle", async (req: Request, res: Response, next: Function) => {
+    const ua = req.headers['user-agent'] || '';
+    if (req.query.ssr !== 'true' && !isBot(ua)) return next();
     res.setHeader("Content-Type", "text/html");
     res.send(await renderCases());
   });
 
   app.get("/cases-we-handle/medical-malpractice", async (req: Request, res: Response, next: Function) => {
+    const ua = req.headers['user-agent'] || '';
+    if (req.query.ssr !== 'true' && !isBot(ua)) return next();
     res.setHeader("Content-Type", "text/html");
     res.send(await renderMedicalMalpractice());
   });
 
   app.get("/cases-we-handle/birth-injuries", async (req: Request, res: Response, next: Function) => {
+    const ua = req.headers['user-agent'] || '';
+    if (req.query.ssr !== 'true' && !isBot(ua)) return next();
     res.setHeader("Content-Type", "text/html");
     res.send(await renderBirthInjuries());
   });
 
   app.get("/cases-we-handle/complications-of-childbirth", async (req: Request, res: Response, next: Function) => {
+    const ua = req.headers['user-agent'] || '';
+    if (req.query.ssr !== 'true' && !isBot(ua)) return next();
     res.setHeader("Content-Type", "text/html");
     res.send(await renderComplicationsOfChildbirth());
   });
 
   app.get("/cases-we-handle/brain-injuries", async (req: Request, res: Response, next: Function) => {
+    const ua = req.headers['user-agent'] || '';
+    if (req.query.ssr !== 'true' && !isBot(ua)) return next();
     res.setHeader("Content-Type", "text/html");
     res.send(await renderBrainInjuries());
   });
 
   app.get("/cases-we-handle/surgical-errors", async (req: Request, res: Response, next: Function) => {
+    const ua = req.headers['user-agent'] || '';
+    if (req.query.ssr !== 'true' && !isBot(ua)) return next();
     res.setHeader("Content-Type", "text/html");
     res.send(await renderSurgicalErrors());
   });
 
   app.get("/cases-we-handle/medication-errors", async (req: Request, res: Response, next: Function) => {
+    const ua = req.headers['user-agent'] || '';
+    if (req.query.ssr !== 'true' && !isBot(ua)) return next();
     res.setHeader("Content-Type", "text/html");
     res.send(await renderMedicationErrors());
   });
 
   app.get("/cases-we-handle/misdiagnosis", async (req: Request, res: Response, next: Function) => {
+    const ua = req.headers['user-agent'] || '';
+    if (req.query.ssr !== 'true' && !isBot(ua)) return next();
     res.setHeader("Content-Type", "text/html");
     res.send(await renderMisdiagnosis());
   });
 
   app.get("/author/:slug", async (req: Request, res: Response, next: Function) => {
     try {
+      const ua = req.headers['user-agent'] || '';
+      if (req.query.ssr !== 'true' && !isBot(ua)) return next();
       const slug = req.params.slug as string;
       const html = await renderAuthorPage(slug);
       if (!html) return next();
-      
       res.setHeader("Content-Type", "text/html");
       res.send(html);
     } catch (error) {
@@ -917,10 +956,11 @@ Sitemap: https://thomasandwan.com/sitemap.xml`;
 
   app.get("/category/:slug", async (req: Request, res: Response, next: Function) => {
     try {
+      const ua = req.headers['user-agent'] || '';
+      if (req.query.ssr !== 'true' && !isBot(ua)) return next();
       const slug = req.params.slug as string;
       const html = await renderCategoryPage(slug);
       if (!html) return next();
-      
       res.setHeader("Content-Type", "text/html");
       res.send(html);
     } catch (error) {
@@ -929,13 +969,13 @@ Sitemap: https://thomasandwan.com/sitemap.xml`;
     }
   });
 
-  // Blog post SSR route - /blog/:slug path
   app.get("/blog/:slug", async (req: Request, res: Response, next: Function) => {
     try {
+      const ua = req.headers['user-agent'] || '';
+      if (req.query.ssr !== 'true' && !isBot(ua)) return next();
       const slug = req.params.slug as string;
       const html = await renderBlogPost(slug);
       if (!html) return next();
-      
       res.setHeader("Content-Type", "text/html");
       res.send(html);
     } catch (error) {
@@ -944,19 +984,16 @@ Sitemap: https://thomasandwan.com/sitemap.xml`;
     }
   });
 
-  // Dynamic blog post route - SSR for blog posts at root level
   app.get("/:slug", async (req: Request, res: Response, next: Function) => {
     try {
+      const ua = req.headers['user-agent'] || '';
+      if (!isBot(ua)) return next();
       const slug = req.params.slug as string;
-      
       if (slug.includes('.') || ['api', 'assets', 'src', 'node_modules'].includes(slug)) {
         return next();
       }
-      
       const html = await renderBlogPost(slug);
-      if (!html) {
-        return next();
-      }
+      if (!html) return next();
       res.setHeader("Content-Type", "text/html");
       res.send(html);
     } catch (error) {
