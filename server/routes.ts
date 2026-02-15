@@ -29,6 +29,10 @@ import {
   renderMedicalMalpractice,
   renderBirthInjuries,
   renderComplicationsOfChildbirth,
+  renderBrainInjuries,
+  renderSurgicalErrors,
+  renderMedicationErrors,
+  renderMisdiagnosis,
   renderBlogIndex,
   renderAuthorPage,
   renderCategoryPage
@@ -875,12 +879,12 @@ Sitemap: https://thomasandwan.com/sitemap.xml`;
   });
 
   // Add ?ssr=true to force SSR for testing
-  app.get("/testimonials", (req: Request, res: Response, next: Function) => {
+  app.get("/testimonials", async (req: Request, res: Response, next: Function) => {
     const ua = req.headers['user-agent'] || '';
     const forceSSR = req.query.ssr === 'true';
     if (!forceSSR && !isBot(ua)) return next();
     res.setHeader("Content-Type", "text/html");
-    res.send(renderTestimonials());
+    res.send(await renderTestimonials());
   });
 
   // Add ?ssr=true to force SSR for testing
@@ -902,30 +906,66 @@ Sitemap: https://thomasandwan.com/sitemap.xml`;
   });
 
   // Add ?ssr=true to force SSR for testing
-  app.get("/cases-we-handle/medical-malpractice", (req: Request, res: Response, next: Function) => {
+  app.get("/cases-we-handle/medical-malpractice", async (req: Request, res: Response, next: Function) => {
     const ua = req.headers['user-agent'] || '';
     const forceSSR = req.query.ssr === 'true';
     if (!forceSSR && !isBot(ua)) return next();
     res.setHeader("Content-Type", "text/html");
-    res.send(renderMedicalMalpractice());
+    res.send(await renderMedicalMalpractice());
   });
 
   // Add ?ssr=true to force SSR for testing
-  app.get("/cases-we-handle/birth-injuries", (req: Request, res: Response, next: Function) => {
+  app.get("/cases-we-handle/birth-injuries", async (req: Request, res: Response, next: Function) => {
     const ua = req.headers['user-agent'] || '';
     const forceSSR = req.query.ssr === 'true';
     if (!forceSSR && !isBot(ua)) return next();
     res.setHeader("Content-Type", "text/html");
-    res.send(renderBirthInjuries());
+    res.send(await renderBirthInjuries());
   });
 
   // Add ?ssr=true to force SSR for testing
-  app.get("/cases-we-handle/complications-of-childbirth", (req: Request, res: Response, next: Function) => {
+  app.get("/cases-we-handle/complications-of-childbirth", async (req: Request, res: Response, next: Function) => {
     const ua = req.headers['user-agent'] || '';
     const forceSSR = req.query.ssr === 'true';
     if (!forceSSR && !isBot(ua)) return next();
     res.setHeader("Content-Type", "text/html");
-    res.send(renderComplicationsOfChildbirth());
+    res.send(await renderComplicationsOfChildbirth());
+  });
+
+  // Add ?ssr=true to force SSR for testing
+  app.get("/cases-we-handle/brain-injuries", async (req: Request, res: Response, next: Function) => {
+    const ua = req.headers['user-agent'] || '';
+    const forceSSR = req.query.ssr === 'true';
+    if (!forceSSR && !isBot(ua)) return next();
+    res.setHeader("Content-Type", "text/html");
+    res.send(await renderBrainInjuries());
+  });
+
+  // Add ?ssr=true to force SSR for testing
+  app.get("/cases-we-handle/surgical-errors", async (req: Request, res: Response, next: Function) => {
+    const ua = req.headers['user-agent'] || '';
+    const forceSSR = req.query.ssr === 'true';
+    if (!forceSSR && !isBot(ua)) return next();
+    res.setHeader("Content-Type", "text/html");
+    res.send(await renderSurgicalErrors());
+  });
+
+  // Add ?ssr=true to force SSR for testing
+  app.get("/cases-we-handle/medication-errors", async (req: Request, res: Response, next: Function) => {
+    const ua = req.headers['user-agent'] || '';
+    const forceSSR = req.query.ssr === 'true';
+    if (!forceSSR && !isBot(ua)) return next();
+    res.setHeader("Content-Type", "text/html");
+    res.send(await renderMedicationErrors());
+  });
+
+  // Add ?ssr=true to force SSR for testing
+  app.get("/cases-we-handle/misdiagnosis", async (req: Request, res: Response, next: Function) => {
+    const ua = req.headers['user-agent'] || '';
+    const forceSSR = req.query.ssr === 'true';
+    if (!forceSSR && !isBot(ua)) return next();
+    res.setHeader("Content-Type", "text/html");
+    res.send(await renderMisdiagnosis());
   });
 
   // Add ?ssr=true to force SSR for testing

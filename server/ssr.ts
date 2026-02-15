@@ -883,7 +883,11 @@ export async function renderFAQ(): Promise<string> {
   );
 }
 
-export function renderTestimonials(): string {
+export async function renderTestimonials(): Promise<string> {
+  let fields: GenericPageFields | null = null;
+  try { fields = await getGenericPageFields("testimonials"); } catch (e) { console.error("CMS fetch failed for testimonials:", e); }
+  const f = (val: string | undefined, fallback: string) => decodeEntities(val || fallback);
+
   const testimonials = [
     { quote: "After a heart transplant in August 2016, Ernest \"Chris\" Keys can't talk or walk. The Houston hospital is under pressure for the quality of its once-renowned heart program. Now it is being sued by Mr. Keys's family.", author: "Houston Chronicle", date: "July 5, 2018" },
     { quote: "Thomas & Wan represented my baby who was seriously harmed by nurses at a hospital who did not know what they were doing. Linda and Michelle were able to guide us through what to do in getting help for my baby for the rest of his life.", author: "Stephanie S" },
@@ -909,7 +913,7 @@ export function renderTestimonials(): string {
       <div class="container">
         <div class="meta" style="color: #F59E0B;">Client Stories</div>
         <h1 style="font-size: 3rem;">Voices of <span class="text-secondary" style="font-style: italic;">Justice & Hope</span></h1>
-        <p style="font-size: 1.25rem; margin-top: 16px;">Don't just take our word for it. Read what our clients have to say about their experience working with Thomas & Wan.</p>
+        <p style="font-size: 1.25rem; margin-top: 16px;">${f(fields?.pageSubheading, "Don't just take our word for it. Read what our clients have to say about their experience working with Thomas & Wan.")}</p>
       </div>
     </div>
 
@@ -923,7 +927,7 @@ export function renderTestimonials(): string {
 
     <section class="section section-dark" style="text-align: center;">
       <div class="container" style="max-width: 800px;">
-        <h2 style="font-size: 2.5rem; color: #fff;">Let Us Fight for Your Family Too</h2>
+        <h2 style="font-size: 2.5rem; color: #fff;">${f(fields?.section1Heading || fields?.pageHeading, "Let Us Fight for Your Family Too")}</h2>
         <p style="color: rgba(255,255,255,0.8); margin: 16px 0 32px; font-size: 1.125rem;">
           If you or a loved one has suffered due to medical negligence, we are here to listen. Contact us today for a free, confidential consultation.
         </p>
@@ -940,7 +944,11 @@ export function renderTestimonials(): string {
   );
 }
 
-export function renderMedicalMalpractice(): string {
+export async function renderMedicalMalpractice(): Promise<string> {
+  let fields: PracticeAreaFields | null = null;
+  try { fields = await getPracticeAreaFields("medical-malpractice"); } catch (e) { console.error("CMS fetch failed for medical-malpractice:", e); }
+  const f = (val: string | undefined, fallback: string) => decodeEntities(val || fallback);
+
   const examples = [
     { title: "Surgical Errors", desc: "Operating on the wrong part of the body, leaving instruments inside the body, or removing the wrong organ." },
     { title: "Failure to Diagnose", desc: "Failing to diagnose a disease or injury; ignoring obvious signs of infection, stroke, heart attack, or respiratory arrest." },
@@ -961,7 +969,7 @@ export function renderMedicalMalpractice(): string {
     <div class="hero">
       <div class="container">
         <div class="meta" style="color: #F59E0B;">Cases We Handle</div>
-        <h1 style="font-size: 3rem;">Medical Malpractice</h1>
+        <h1 style="font-size: 3rem;">${f(fields?.paTitle, "Medical Malpractice")}</h1>
       </div>
     </div>
 
@@ -970,12 +978,12 @@ export function renderMedicalMalpractice(): string {
         <div class="grid-2" style="gap: 64px;">
           <div>
             <p style="font-size: 1.125rem; color: #64748b; line-height: 1.8; margin-bottom: 32px;">
-              We have successfully resolved numerous multi-million dollar matters for serious medical malpractice and wrongful death across the nation.
+              ${f(fields?.paIntro, "We have successfully resolved numerous multi-million dollar matters for serious medical malpractice and wrongful death across the nation.")}
             </p>
             <div class="card-alt">
-              <h3 style="margin-bottom: 16px;">Medical negligence can include:</h3>
+              <h3 style="margin-bottom: 16px;">${f(fields?.paSidebarHeading, "Medical negligence can include:")}</h3>
               <p style="color: #64748b; line-height: 1.8;">
-                Claims against negligent hospitals, nurses, doctors, pharmacists, medical technicians, and other providers.
+                ${f(fields?.paSidebarText, "Claims against negligent hospitals, nurses, doctors, pharmacists, medical technicians, and other providers.")}
               </p>
               <a href="/contact-us" class="btn" style="margin-top: 24px;">Request Free Consultation</a>
             </div>
@@ -986,8 +994,8 @@ export function renderMedicalMalpractice(): string {
         </div>
 
         <div class="cta" style="margin-top: 64px; text-align: left;">
-          <h3>Call Us Now For a Free Consultation</h3>
-          <p>Call us today for a free consultation—we will discuss what your legal options are for your medical malpractice case. If you have medical records, you can send them to us for a free review with no obligation.</p>
+          <h3>${f(fields?.paCtaHeading, "Call Us Now For a Free Consultation")}</h3>
+          <p>${f(fields?.paCtaText, "Call us today for a free consultation\u2014we will discuss what your legal options are for your medical malpractice case. If you have medical records, you can send them to us for a free review with no obligation.")}</p>
           <a href="/contact-us">Contact Us</a>
         </div>
       </div>
@@ -1002,7 +1010,11 @@ export function renderMedicalMalpractice(): string {
   );
 }
 
-export function renderBirthInjuries(): string {
+export async function renderBirthInjuries(): Promise<string> {
+  let fields: PracticeAreaFields | null = null;
+  try { fields = await getPracticeAreaFields("birth-injuries"); } catch (e) { console.error("CMS fetch failed for birth-injuries:", e); }
+  const f = (val: string | undefined, fallback: string) => decodeEntities(val || fallback);
+
   const birthInjuryTypes = [
     "Hypoxic ischemic encephalopathy", "Cerebral palsy", "Forceps/vacuum injuries", "Induction problems",
     "Gestational Diabetes mismanagement", "Preeclampsia mismanagement", "Shoulder Dystocia/Erb's palsy",
@@ -1032,7 +1044,7 @@ export function renderBirthInjuries(): string {
     <div class="hero">
       <div class="container">
         <div class="meta" style="color: #F59E0B;">Cases We Handle</div>
-        <h1 style="font-size: 3rem;">Birth <span class="text-secondary" style="font-style: italic;">Injuries</span></h1>
+        <h1 style="font-size: 3rem;">${f(fields?.paTitle, "Birth Injuries")}</h1>
         <p style="font-size: 1.25rem; margin-top: 16px;">Sometimes babies are born with medical problems that don't match their parents' expectations. Sometimes it is because the baby is a victim of a birth injury that occurs during labor and delivery.</p>
       </div>
     </div>
@@ -1042,7 +1054,7 @@ export function renderBirthInjuries(): string {
         <div class="grid-2" style="gap: 64px;">
           <div>
             <p style="font-size: 1.125rem; color: #64748b; line-height: 1.8; margin-bottom: 24px;">
-              Giving birth is one of the most exciting events in a mother's life. Parents prepare for the big day when their new baby is born, and they hope and pray for a healthy baby. At Thomas & Wan, our lawyers have represented many Texas families who have suffered injuries to their baby as a result of gross negligence and malpractice.
+              ${f(fields?.paIntro, "Giving birth is one of the most exciting events in a mother's life. Parents prepare for the big day when their new baby is born, and they hope and pray for a healthy baby. At Thomas & Wan, our lawyers have represented many Texas families who have suffered injuries to their baby as a result of gross negligence and malpractice.")}
             </p>
             <p style="font-size: 1.125rem; color: #64748b; line-height: 1.8;">
               We are very familiar with the medicine, the law and the policies of hospitals all across Texas concerning the need for monitoring and possible emergency delivery of laboring moms to prevent injuries to babies. Many times these injuries are preventable if hospitals only ensured that safety policies were followed by their labor nurses, midwives and doctors.
@@ -1110,9 +1122,9 @@ export function renderBirthInjuries(): string {
 
     <section class="section section-dark" style="text-align: center;">
       <div class="container" style="max-width: 800px;">
-        <h2 style="font-size: 2.5rem; color: #fff;">Legal Help for The Youngest Victims</h2>
+        <h2 style="font-size: 2.5rem; color: #fff;">${f(fields?.paCtaHeading, "Legal Help for The Youngest Victims")}</h2>
         <p style="color: rgba(255,255,255,0.8); margin: 16px 0 32px; font-size: 1.125rem;">
-          At Thomas & Wan, we have the training, experience and knowledge to sue grossly negligent hospitals, doctors, nurses and midwives for birth injuries. Please call us today for free—we are here to listen to you.
+          ${f(fields?.paCtaText, "At Thomas & Wan, we have the training, experience and knowledge to sue grossly negligent hospitals, doctors, nurses and midwives for birth injuries. Please call us today for free\u2014we are here to listen to you.")}
         </p>
         <a href="tel:713-529-1177" class="btn" style="font-size: 1.25rem; padding: 20px 40px;">Call (713) 529-1177</a>
       </div>
@@ -1127,7 +1139,11 @@ export function renderBirthInjuries(): string {
   );
 }
 
-export function renderComplicationsOfChildbirth(): string {
+export async function renderComplicationsOfChildbirth(): Promise<string> {
+  let fields: PracticeAreaFields | null = null;
+  try { fields = await getPracticeAreaFields("complications-of-childbirth"); } catch (e) { console.error("CMS fetch failed for complications-of-childbirth:", e); }
+  const f = (val: string | undefined, fallback: string) => decodeEntities(val || fallback);
+
   const complications = [
     "Preeclampsia and eclampsia", "Obstetrical complications for the mother or obstetrical nurse negligence",
     "C-section injuries", "Postpartum hemorrhage", "Infections", "Prolapsed umbilical cord",
@@ -1147,7 +1163,7 @@ export function renderComplicationsOfChildbirth(): string {
     <div class="hero">
       <div class="container">
         <div class="meta" style="color: #F59E0B;">Cases We Handle</div>
-        <h1 style="font-size: 3rem;">Complications of <span class="text-secondary" style="font-style: italic;">Childbirth</span></h1>
+        <h1 style="font-size: 3rem;">${f(fields?.paTitle, "Complications of Childbirth")}</h1>
         <p style="font-size: 1.25rem; margin-top: 16px;">At Thomas & Wan, we have helped families dealing with the devastating loss of a mother or serious permanent brain damage due to gross negligence during pregnancy and childbirth.</p>
       </div>
     </div>
@@ -1157,7 +1173,7 @@ export function renderComplicationsOfChildbirth(): string {
         <div class="grid-2" style="gap: 64px;">
           <div>
             <p style="font-size: 1.125rem; color: #64748b; line-height: 1.8; margin-bottom: 24px;">
-              For an expectant mother, childbirth is an exciting and nerve-wracking time. Most of the time, doctors, midwives and nurses do an excellent job of keeping mom and baby safe during labor and delivery.
+              ${f(fields?.paIntro, "For an expectant mother, childbirth is an exciting and nerve-wracking time. Most of the time, doctors, midwives and nurses do an excellent job of keeping mom and baby safe during labor and delivery.")}
             </p>
             <p style="font-size: 1.125rem; color: #64748b; line-height: 1.8;">
               Sometimes, however, medical providers can be grossly negligent in their medical care to the laboring mother. Thomas & Wan represent mothers who have been injured or made ill due to malpractice by a doctor, midwife, nurse or other health care professional during pregnancy, labor and delivery, or after delivery.
@@ -1191,9 +1207,9 @@ export function renderComplicationsOfChildbirth(): string {
 
     <section class="section section-dark" style="text-align: center;">
       <div class="container" style="max-width: 800px;">
-        <h2 style="font-size: 2.5rem; color: #fff;">Call Us Now For a Free Consultation</h2>
+        <h2 style="font-size: 2.5rem; color: #fff;">${f(fields?.paCtaHeading, "Call Us Now For a Free Consultation")}</h2>
         <p style="color: rgba(255,255,255,0.8); margin: 16px 0 32px; font-size: 1.125rem;">
-          Call us today for a free consultation—we will discuss what your legal options are for your medical malpractice case. If you have the medical records, you can send them to us for a free review with no obligation to you. Remember, in Texas there are strict deadlines for filing a medical malpractice lawsuit.
+          ${f(fields?.paCtaText, "Call us today for a free consultation\u2014we will discuss what your legal options are for your medical malpractice case. If you have the medical records, you can send them to us for a free review with no obligation to you. Remember, in Texas there are strict deadlines for filing a medical malpractice lawsuit.")}
         </p>
         <a href="tel:713-529-1177" class="btn" style="font-size: 1.25rem; padding: 20px 40px;">Call Today - Don't Delay</a>
       </div>
@@ -1205,6 +1221,354 @@ export function renderComplicationsOfChildbirth(): string {
     "Complications of Childbirth Lawyers in Houston",
     "Texas attorneys at Thomas & Wan represent mothers who suffered injuries due to medical negligence during pregnancy and childbirth. Free consultation.",
     { canonicalPath: "/cases-we-handle/complications-of-childbirth" }
+  );
+}
+
+export async function renderBrainInjuries(): Promise<string> {
+  let fields: PracticeAreaFields | null = null;
+  try { fields = await getPracticeAreaFields("brain-injuries"); } catch (e) { console.error("CMS fetch failed for brain-injuries:", e); }
+  const f = (val: string | undefined, fallback: string) => decodeEntities(val || fallback);
+
+  const caseTypes = [
+    { title: "Anesthesia Errors", desc: "Improper management during anesthesia can lead to brain damage. Oxygen deprivation and improper medication are some of the causes." },
+    { title: "Birth-Related Brain Injury", desc: "Proper care is critical during childbirth. Negligence can result in serious brain injury with lifelong consequences for the child." },
+    { title: "Surgical Errors", desc: "Wrong site surgery, poor surgical technique, among others can result in traumatic brain injuries." },
+    { title: "Emergency Room Negligence", desc: "Delays in assessments or treatments in emergency rooms can lead to preventable brain injuries." },
+    { title: "Misdiagnosis of Stroke or Tumor", desc: "Incorrect or delayed diagnosis of a condition like stroke or brain tumor can lead to severe brain injuries." },
+  ];
+
+  const warningSigns = [
+    "Sudden changes in cognitive function or behavior",
+    "Long-term or worsening headache",
+    "Frequent dizziness or loss of balance",
+    "Prolonged periods of unconsciousness",
+  ];
+
+  const casesHtml = caseTypes.map(e => `
+    <div class="card" style="padding: 28px;">
+      <h3 style="font-size: 1.5rem; margin-bottom: 12px;">${e.title}</h3>
+      <p style="color: #64748b;">${e.desc}</p>
+    </div>
+  `).join("");
+
+  const warningsHtml = warningSigns.map(s => `
+    <div style="display: flex; gap: 12px; margin-bottom: 12px;"><span style="color: #F59E0B;">⚠</span><p style="color: #64748b;">${s}</p></div>
+  `).join("");
+
+  const content = `
+    <div class="hero">
+      <div class="container">
+        <div class="meta" style="color: #F59E0B;">Cases We Handle</div>
+        <h1 style="font-size: 3rem;">${f(fields?.paTitle, "Brain Injuries")}</h1>
+      </div>
+    </div>
+
+    <section class="section section-light">
+      <div class="container">
+        <div class="grid-2" style="gap: 64px;">
+          <div>
+            <p style="font-size: 1.125rem; color: #64748b; line-height: 1.8; margin-bottom: 32px;">
+              ${f(fields?.paIntro, "At Thomas & Wan, we are deeply committed to representing individuals and families affected by brain injuries as a result of medical negligence. We understand that brain injuries can be life-altering, affecting every aspect of life. Compassionate, diligent, and thorough \u2014 we work to unravel the complex circumstances surrounding the incidents to seek justice for our clients.")}
+            </p>
+            <div class="card-alt">
+              <h3 style="margin-bottom: 16px;">${f(fields?.paSidebarHeading, "Brain injury cases we handle:")}</h3>
+              <p style="color: #64748b; line-height: 1.8;">
+                ${f(fields?.paSidebarText, "Claims against negligent hospitals, nurses, doctors, and other providers whose actions caused preventable brain injuries.")}
+              </p>
+              <a href="/contact-us" class="btn" style="margin-top: 24px;">Free Case Review</a>
+            </div>
+          </div>
+          <div class="grid-2" style="gap: 20px;">
+            ${casesHtml}
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-alt">
+      <div class="container" style="max-width: 900px;">
+        <h2 style="font-size: 2.5rem; margin-bottom: 32px;">Warning Signs of Brain Injury</h2>
+        ${warningsHtml}
+      </div>
+    </section>
+
+    <section class="section section-dark" style="text-align: center;">
+      <div class="container" style="max-width: 800px;">
+        <h2 style="font-size: 2.5rem; color: #fff;">${f(fields?.paCtaHeading, "Call Us Now For a Free Consultation")}</h2>
+        <p style="color: rgba(255,255,255,0.8); margin: 16px 0 32px; font-size: 1.125rem;">
+          ${f(fields?.paCtaText, "If you or a loved one has suffered a brain injury due to medical negligence, contact Thomas & Wan today. We will discuss your legal options and provide a free case review.")}
+        </p>
+        <a href="tel:713-529-1177" class="btn" style="font-size: 1.25rem; padding: 20px 40px;">Call (713) 529-1177</a>
+      </div>
+    </section>
+  `;
+
+  return wrapInLayout(
+    content,
+    "Brain Injury Lawyers in Houston",
+    "Houston brain injury attorneys at Thomas & Wan represent victims of medical negligence including anesthesia errors, surgical mistakes, and failure to diagnose stroke. Free consultation.",
+    { canonicalPath: "/cases-we-handle/brain-injuries" }
+  );
+}
+
+export async function renderSurgicalErrors(): Promise<string> {
+  let fields: PracticeAreaFields | null = null;
+  try { fields = await getPracticeAreaFields("surgical-errors"); } catch (e) { console.error("CMS fetch failed for surgical-errors:", e); }
+  const f = (val: string | undefined, fallback: string) => decodeEntities(val || fallback);
+
+  const caseTypes = [
+    { title: "Anesthesia Complications", desc: "Errors in administering anesthesia can lead to serious complications including brain damage, nerve injury, or death." },
+    { title: "Wrong Patient Surgery", desc: "Performing a surgical procedure on the wrong patient is a devastating error that should never occur." },
+    { title: "Wrong Site Surgery", desc: "Operating on the wrong body part or side can cause irreversible harm and unnecessary suffering." },
+    { title: "Retained Surgical Instruments", desc: "Leaving surgical tools, sponges, or other instruments inside the patient after surgery can cause infection and organ damage." },
+    { title: "Post-Surgical Infections", desc: "Failure to maintain sterile conditions or properly monitor patients after surgery can lead to life-threatening infections." },
+  ];
+
+  const warningSigns = [
+    "Unexpected severe pain post-surgery",
+    "Alarming changes at surgery site",
+    "Symptoms unconnected to known risks",
+    "Lack of improvement post-surgery",
+  ];
+
+  const casesHtml = caseTypes.map(e => `
+    <div class="card" style="padding: 28px;">
+      <h3 style="font-size: 1.5rem; margin-bottom: 12px;">${e.title}</h3>
+      <p style="color: #64748b;">${e.desc}</p>
+    </div>
+  `).join("");
+
+  const warningsHtml = warningSigns.map(s => `
+    <div style="display: flex; gap: 12px; margin-bottom: 12px;"><span style="color: #F59E0B;">⚠</span><p style="color: #64748b;">${s}</p></div>
+  `).join("");
+
+  const content = `
+    <div class="hero">
+      <div class="container">
+        <div class="meta" style="color: #F59E0B;">Cases We Handle</div>
+        <h1 style="font-size: 3rem;">${f(fields?.paTitle, "Surgical Errors")}</h1>
+      </div>
+    </div>
+
+    <section class="section section-light">
+      <div class="container">
+        <div class="grid-2" style="gap: 64px;">
+          <div>
+            <p style="font-size: 1.125rem; color: #64748b; line-height: 1.8; margin-bottom: 32px;">
+              ${f(fields?.paIntro, "Surgical procedures carry inherent risks. However, preventable errors due to the negligence of healthcare providers can lead to grave consequences for patients. At Thomas & Wan, we strive to hold these professionals accountable for their actions.")}
+            </p>
+            <div class="card-alt">
+              <h3 style="margin-bottom: 16px;">${f(fields?.paSidebarHeading, "Surgical error cases we handle:")}</h3>
+              <p style="color: #64748b; line-height: 1.8;">
+                ${f(fields?.paSidebarText, "Claims against negligent surgeons, anesthesiologists, nurses, and hospitals whose errors caused preventable surgical harm.")}
+              </p>
+              <a href="/contact-us" class="btn" style="margin-top: 24px;">Free Case Review</a>
+            </div>
+          </div>
+          <div class="grid-2" style="gap: 20px;">
+            ${casesHtml}
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-alt">
+      <div class="container" style="max-width: 900px;">
+        <h2 style="font-size: 2.5rem; margin-bottom: 32px;">Warning Signs of Surgical Errors</h2>
+        ${warningsHtml}
+      </div>
+    </section>
+
+    <section class="section section-dark" style="text-align: center;">
+      <div class="container" style="max-width: 800px;">
+        <h2 style="font-size: 2.5rem; color: #fff;">${f(fields?.paCtaHeading, "Call Us Now For a Free Consultation")}</h2>
+        <p style="color: rgba(255,255,255,0.8); margin: 16px 0 32px; font-size: 1.125rem;">
+          ${f(fields?.paCtaText, "If you or a loved one has suffered harm due to a surgical error, contact Thomas & Wan today. We will discuss your legal options and provide a free case review.")}
+        </p>
+        <a href="tel:713-529-1177" class="btn" style="font-size: 1.25rem; padding: 20px 40px;">Call (713) 529-1177</a>
+      </div>
+    </section>
+  `;
+
+  return wrapInLayout(
+    content,
+    "Surgical Error Lawyers in Houston",
+    "Houston surgical error attorneys at Thomas & Wan represent victims of surgical negligence including wrong site surgery, retained instruments, and anesthesia errors. Free consultation.",
+    { canonicalPath: "/cases-we-handle/surgical-errors" }
+  );
+}
+
+export async function renderMedicationErrors(): Promise<string> {
+  let fields: PracticeAreaFields | null = null;
+  try { fields = await getPracticeAreaFields("medication-errors"); } catch (e) { console.error("CMS fetch failed for medication-errors:", e); }
+  const f = (val: string | undefined, fallback: string) => decodeEntities(val || fallback);
+
+  const caseTypes = [
+    { title: "Wrong Medication", desc: "Prescribing or administering the wrong medication can cause severe adverse reactions, organ damage, or death." },
+    { title: "Overdose", desc: "Administering too much of a medication can lead to toxic effects, organ failure, and life-threatening complications." },
+    { title: "Drug Interactions", desc: "Failure to check for dangerous drug interactions can cause serious harm when multiple medications are prescribed." },
+    { title: "Pharmacy Errors", desc: "Dispensing errors at pharmacies including wrong medication, wrong dosage, or incorrect labeling can endanger patients." },
+    { title: "Failure to Monitor Side Effects", desc: "Healthcare providers must monitor patients for adverse reactions and adjust treatment accordingly to prevent harm." },
+  ];
+
+  const warningSigns = [
+    "Unexpected severe side effects",
+    "Medication looks different",
+    "Receive unrecognized medication",
+    "No improvements",
+  ];
+
+  const casesHtml = caseTypes.map(e => `
+    <div class="card" style="padding: 28px;">
+      <h3 style="font-size: 1.5rem; margin-bottom: 12px;">${e.title}</h3>
+      <p style="color: #64748b;">${e.desc}</p>
+    </div>
+  `).join("");
+
+  const warningsHtml = warningSigns.map(s => `
+    <div style="display: flex; gap: 12px; margin-bottom: 12px;"><span style="color: #F59E0B;">⚠</span><p style="color: #64748b;">${s}</p></div>
+  `).join("");
+
+  const content = `
+    <div class="hero">
+      <div class="container">
+        <div class="meta" style="color: #F59E0B;">Cases We Handle</div>
+        <h1 style="font-size: 3rem;">${f(fields?.paTitle, "Medication Errors")}</h1>
+      </div>
+    </div>
+
+    <section class="section section-light">
+      <div class="container">
+        <div class="grid-2" style="gap: 64px;">
+          <div>
+            <p style="font-size: 1.125rem; color: #64748b; line-height: 1.8; margin-bottom: 32px;">
+              ${f(fields?.paIntro, "At Thomas & Wan, we believe in the importance of safe, effective medication practices. Unfortunately, medication errors are common and can lead to severe health consequences. We fight for patients who have been harmed by preventable medication mistakes.")}
+            </p>
+            <div class="card-alt">
+              <h3 style="margin-bottom: 16px;">${f(fields?.paSidebarHeading, "Medication error cases we handle:")}</h3>
+              <p style="color: #64748b; line-height: 1.8;">
+                ${f(fields?.paSidebarText, "Claims against negligent doctors, pharmacists, nurses, and hospitals whose medication errors caused preventable patient harm.")}
+              </p>
+              <a href="/contact-us" class="btn" style="margin-top: 24px;">Free Case Review</a>
+            </div>
+          </div>
+          <div class="grid-2" style="gap: 20px;">
+            ${casesHtml}
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-alt">
+      <div class="container" style="max-width: 900px;">
+        <h2 style="font-size: 2.5rem; margin-bottom: 32px;">Warning Signs of Medication Errors</h2>
+        ${warningsHtml}
+      </div>
+    </section>
+
+    <section class="section section-dark" style="text-align: center;">
+      <div class="container" style="max-width: 800px;">
+        <h2 style="font-size: 2.5rem; color: #fff;">${f(fields?.paCtaHeading, "Call Us Now For a Free Consultation")}</h2>
+        <p style="color: rgba(255,255,255,0.8); margin: 16px 0 32px; font-size: 1.125rem;">
+          ${f(fields?.paCtaText, "If you or a loved one has been harmed by a medication error, contact Thomas & Wan today. We will discuss your legal options and provide a free case review.")}
+        </p>
+        <a href="tel:713-529-1177" class="btn" style="font-size: 1.25rem; padding: 20px 40px;">Call (713) 529-1177</a>
+      </div>
+    </section>
+  `;
+
+  return wrapInLayout(
+    content,
+    "Medication Error Lawyers in Houston",
+    "Houston medication error attorneys at Thomas & Wan represent victims of pharmacy errors, wrong medication, overdose, and drug interaction negligence. Free consultation.",
+    { canonicalPath: "/cases-we-handle/medication-errors" }
+  );
+}
+
+export async function renderMisdiagnosis(): Promise<string> {
+  let fields: PracticeAreaFields | null = null;
+  try { fields = await getPracticeAreaFields("misdiagnosis"); } catch (e) { console.error("CMS fetch failed for misdiagnosis:", e); }
+  const f = (val: string | undefined, fallback: string) => decodeEntities(val || fallback);
+
+  const caseTypes = [
+    { title: "Failure to Diagnose Cancer", desc: "Delayed or missed cancer diagnosis can allow the disease to progress to advanced stages, significantly reducing survival rates." },
+    { title: "Misdiagnosed Heart Attack", desc: "Failing to recognize heart attack symptoms can lead to delayed treatment, permanent heart damage, or death." },
+    { title: "Misdiagnosed Stroke", desc: "Time is critical in stroke treatment. A misdiagnosis can result in permanent brain damage and disability." },
+    { title: "Misdiagnosed Infection", desc: "Untreated infections can spread rapidly, leading to sepsis, organ failure, and potentially fatal complications." },
+    { title: "Delayed Diagnosis", desc: "When a correct diagnosis is unreasonably delayed, patients miss the window for effective treatment and suffer preventable harm." },
+  ];
+
+  const warningSigns = [
+    "Symptoms persist despite treatment",
+    "Diagnosis without comprehensive testing",
+    "Provider dismisses concerns",
+    "Second opinion differs significantly",
+  ];
+
+  const casesHtml = caseTypes.map(e => `
+    <div class="card" style="padding: 28px;">
+      <h3 style="font-size: 1.5rem; margin-bottom: 12px;">${e.title}</h3>
+      <p style="color: #64748b;">${e.desc}</p>
+    </div>
+  `).join("");
+
+  const warningsHtml = warningSigns.map(s => `
+    <div style="display: flex; gap: 12px; margin-bottom: 12px;"><span style="color: #F59E0B;">⚠</span><p style="color: #64748b;">${s}</p></div>
+  `).join("");
+
+  const content = `
+    <div class="hero">
+      <div class="container">
+        <div class="meta" style="color: #F59E0B;">Cases We Handle</div>
+        <h1 style="font-size: 3rem;">${f(fields?.paTitle, "Misdiagnosis")}</h1>
+      </div>
+    </div>
+
+    <section class="section section-light">
+      <div class="container">
+        <div class="grid-2" style="gap: 64px;">
+          <div>
+            <p style="font-size: 1.125rem; color: #64748b; line-height: 1.8; margin-bottom: 32px;">
+              ${f(fields?.paIntro, "Navigating the medical landscape can be daunting, more so when you're faced with the potential of a misdiagnosis. At Thomas & Wan, we understand the gravity of these situations and are committed to helping victims of misdiagnosis understand their rights and pursue justice.")}
+            </p>
+            <div class="card-alt">
+              <h3 style="margin-bottom: 16px;">${f(fields?.paSidebarHeading, "Misdiagnosis cases we handle:")}</h3>
+              <p style="color: #64748b; line-height: 1.8;">
+                ${f(fields?.paSidebarText, "Claims against negligent doctors, specialists, and hospitals whose diagnostic failures caused preventable patient harm.")}
+              </p>
+              <a href="/contact-us" class="btn" style="margin-top: 24px;">Free Case Review</a>
+            </div>
+          </div>
+          <div class="grid-2" style="gap: 20px;">
+            ${casesHtml}
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-alt">
+      <div class="container" style="max-width: 900px;">
+        <h2 style="font-size: 2.5rem; margin-bottom: 32px;">Warning Signs of Misdiagnosis</h2>
+        ${warningsHtml}
+      </div>
+    </section>
+
+    <section class="section section-dark" style="text-align: center;">
+      <div class="container" style="max-width: 800px;">
+        <h2 style="font-size: 2.5rem; color: #fff;">${f(fields?.paCtaHeading, "Call Us Now For a Free Consultation")}</h2>
+        <p style="color: rgba(255,255,255,0.8); margin: 16px 0 32px; font-size: 1.125rem;">
+          ${f(fields?.paCtaText, "If you or a loved one has suffered due to a misdiagnosis, contact Thomas & Wan today. We will discuss your legal options and provide a free case review.")}
+        </p>
+        <a href="tel:713-529-1177" class="btn" style="font-size: 1.25rem; padding: 20px 40px;">Call (713) 529-1177</a>
+      </div>
+    </section>
+  `;
+
+  return wrapInLayout(
+    content,
+    "Misdiagnosis Lawyers in Houston",
+    "Houston misdiagnosis attorneys at Thomas & Wan represent victims of diagnostic failures including missed cancer, heart attack, stroke, and infection diagnoses. Free consultation.",
+    { canonicalPath: "/cases-we-handle/misdiagnosis" }
   );
 }
 
