@@ -1,5 +1,6 @@
 import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { Link } from "wouter";
 
 interface TeamSectionProps {
   label?: string;
@@ -36,49 +37,57 @@ export default function TeamSection({
 
         <div className="grid md:grid-cols-2 gap-12 lg:gap-24 items-start max-w-5xl mx-auto">
           <div className="group">
-            <div className="relative mb-8 overflow-hidden">
-              <div className="absolute inset-0 bg-primary/0 group-hover:bg-primary/10 transition-colors duration-500 z-10" />
-              <img 
-                src="/images/partner-thomas.jpg" 
-                alt={partner1Name}
-                className="w-full aspect-[3/4] object-cover filter grayscale group-hover:grayscale-0 transition-all duration-700"
-              />
-              <div className="absolute bottom-0 left-0 bg-primary text-white p-4 min-w-[200px] z-20">
-                <h3 className="font-serif text-xl" data-testid="text-team-partner1-name">{partner1Name}</h3>
-                <p className="text-secondary text-sm uppercase tracking-wider" data-testid="text-team-partner1-title">{partner1Title}</p>
+            <Link href="/about-thomas-wan-llp">
+              <div className="relative mb-8 overflow-hidden cursor-pointer">
+                <div className="absolute inset-0 bg-primary/0 group-hover:bg-primary/10 transition-colors duration-500 z-10" />
+                <img 
+                  src="/images/partner-thomas.jpg" 
+                  alt={partner1Name}
+                  className="w-full aspect-[3/4] object-cover filter grayscale group-hover:grayscale-0 transition-all duration-700"
+                />
+                <div className="absolute bottom-0 left-0 bg-primary text-white p-4 min-w-[200px] z-20">
+                  <h3 className="font-serif text-xl" data-testid="text-team-partner1-name">{partner1Name}</h3>
+                  <p className="text-secondary text-sm uppercase tracking-wider" data-testid="text-team-partner1-title">{partner1Title}</p>
+                </div>
               </div>
-            </div>
+            </Link>
             
             <p className="text-lg text-slate-600 leading-relaxed mb-6 font-light" data-testid="text-team-partner1-bio">
               {partner1Bio}
             </p>
             
-            <Button variant="link" className="text-primary font-bold uppercase tracking-wide p-0 h-auto hover:text-secondary group-hover:translate-x-2 transition-transform">
-              View Profile <ArrowRight className="ml-2 w-4 h-4" />
-            </Button>
+            <Link href="/about-thomas-wan-llp" data-testid="link-profile-thomas">
+              <Button variant="link" className="text-primary font-bold uppercase tracking-wide p-0 h-auto hover:text-secondary group-hover:translate-x-2 transition-transform">
+                View Profile <ArrowRight className="ml-2 w-4 h-4" />
+              </Button>
+            </Link>
           </div>
 
           <div className="group md:mt-16">
-            <div className="relative mb-8 overflow-hidden">
-              <div className="absolute inset-0 bg-primary/0 group-hover:bg-primary/10 transition-colors duration-500 z-10" />
-              <img 
-                src="/images/partner-wan.jpg" 
-                alt={partner2Name}
-                className="w-full aspect-[3/4] object-cover filter grayscale group-hover:grayscale-0 transition-all duration-700"
-              />
-              <div className="absolute bottom-0 left-0 bg-primary text-white p-4 min-w-[200px] z-20">
-                <h3 className="font-serif text-xl" data-testid="text-team-partner2-name">{partner2Name}</h3>
-                <p className="text-secondary text-sm uppercase tracking-wider" data-testid="text-team-partner2-title">{partner2Title}</p>
+            <Link href="/about-thomas-wan-llp">
+              <div className="relative mb-8 overflow-hidden cursor-pointer">
+                <div className="absolute inset-0 bg-primary/0 group-hover:bg-primary/10 transition-colors duration-500 z-10" />
+                <img 
+                  src="/images/partner-wan.jpg" 
+                  alt={partner2Name}
+                  className="w-full aspect-[3/4] object-cover filter grayscale group-hover:grayscale-0 transition-all duration-700"
+                />
+                <div className="absolute bottom-0 left-0 bg-primary text-white p-4 min-w-[200px] z-20">
+                  <h3 className="font-serif text-xl" data-testid="text-team-partner2-name">{partner2Name}</h3>
+                  <p className="text-secondary text-sm uppercase tracking-wider" data-testid="text-team-partner2-title">{partner2Title}</p>
+                </div>
               </div>
-            </div>
+            </Link>
             
             <p className="text-lg text-slate-600 leading-relaxed mb-6 font-light" data-testid="text-team-partner2-bio">
               {partner2Bio}
             </p>
             
-            <Button variant="link" className="text-primary font-bold uppercase tracking-wide p-0 h-auto hover:text-secondary group-hover:translate-x-2 transition-transform">
-              View Profile <ArrowRight className="ml-2 w-4 h-4" />
-            </Button>
+            <Link href="/about-thomas-wan-llp" data-testid="link-profile-wan">
+              <Button variant="link" className="text-primary font-bold uppercase tracking-wide p-0 h-auto hover:text-secondary group-hover:translate-x-2 transition-transform">
+                View Profile <ArrowRight className="ml-2 w-4 h-4" />
+              </Button>
+            </Link>
           </div>
         </div>
       </div>

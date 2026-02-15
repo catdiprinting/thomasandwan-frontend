@@ -21,6 +21,18 @@ const faqs = [
   {
     question: "Why should we hire you?",
     answer: "There are very few attorneys in Texas who specialize in medical malpractice, and those are the only kind of cases we do. Linda Thomas and Michelle Wan have over 60 years of combined experience. If we take your case, we work on your case ourselves; we don't \"flip\" it to another firm."
+  },
+  {
+    question: "How long does a medical malpractice case take?",
+    answer: "Every case is different. Some cases can be resolved in several months, while others may take a year or longer, especially if the case goes to trial. We work efficiently to move your case forward while being thorough enough to build the strongest possible case."
+  },
+  {
+    question: "What medical records do I need?",
+    answer: "You don't need to have your medical records ready before contacting us. We can help you obtain all the necessary records from the hospital or medical provider. If you do have records, you can send them to us for a free, no-obligation review."
+  },
+  {
+    question: "Is there a deadline to file a medical malpractice lawsuit in Texas?",
+    answer: "Yes. In Texas, you generally have two years from the date of the malpractice to file a lawsuit. However, there are exceptions that may shorten or extend this deadline. It is important to contact an attorney as soon as possible so your rights are protected."
   }
 ];
 

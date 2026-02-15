@@ -8,7 +8,7 @@ import TeamSection from "@/components/TeamSection";
 import FAQSection from "@/components/FAQSection";
 import BlogSection from "@/components/BlogSection";
 import Footer from "@/components/Footer";
-import LeadCaptureForm from "@/components/LeadCaptureForm";
+
 import SEO, { lawFirmSchema } from "@/components/SEO";
 import { useHomepageData, cms } from "@/hooks/useCmsData";
 
@@ -115,14 +115,6 @@ export default function Home() {
           heading={cms(d, "faqHeading", "Frequently Asked Questions")}
           subtext={cms(d, "faqSubtext", "Navigating medical malpractice claims can be confusing. Here are answers to some of the most common questions our clients ask.")}
         />
-
-        <section className="py-16 md:py-20 bg-slate-50">
-          <div className="container mx-auto px-4 md:px-6">
-            <div className="max-w-2xl mx-auto">
-              <LeadCaptureForm variant="card" />
-            </div>
-          </div>
-        </section>
 
         <BlogSection />
 
