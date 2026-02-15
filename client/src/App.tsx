@@ -22,7 +22,6 @@ import CategoryPage from "@/pages/CategoryPage";
 import ContentAssistant from "@/pages/ContentAssistant";
 import NotFound from "@/pages/not-found";
 import StickyMobileCTA from "@/components/StickyMobileCTA";
-import FloatingWidget from "@/components/FloatingWidget";
 
 function Router() {
   return (
@@ -56,7 +55,6 @@ function App() {
       <Toaster />
       <Router />
       <StickyMobileCTA />
-      <FloatingWidget />
     </QueryClientProvider>
   );
 }
