@@ -99,16 +99,18 @@ function extractTOC(html: string): TOCItem[] {
 
 function processContent(html: string): string {
   let processed = html;
-  processed = processed.replace(/href="https?:\/\/wp\.thomasandwan\.com\//g, 'href="/blog/');
-  processed = processed.replace(/href="https?:\/\/thomasandwan\.com\/test\//g, 'href="/blog/');
+  processed = processed.replace(/href="https?:\/\/wp\.thomasandwan\.com\/([^"]*)/g, (_, path) => {
+    const slug = path.replace(/\/$/, '');
+    return `href="/blog/${slug}`;
+  });
+  processed = processed.replace(/href="https?:\/\/thomasandwan\.com\/test\/([^"]*)/g, (_, path) => {
+    const slug = path.replace(/\/$/, '');
+    return `href="/blog/${slug}`;
+  });
   processed = processed.replace(/<li>\s*<\/li>/g, '');
-  processed = processed.replace(
-    /(<h2[^>]*>[\s\S]*?<\/h2>)\s*(<p>[\s\S]*?<\/p>)/g,
-    (match, heading, firstPara) => {
-      const text = firstPara.replace(/<[^>]*>/g, "").trim();
-      return `${heading}\n<div class="key-point"><p>${text}</p></div>`;
-    }
-  );
+  processed = processed.replace(/<p>\s*<\/p>/g, '');
+  processed = processed.replace(/(<figure[^>]*class="wp-block-image[^"]*"[^>]*>)\s*<a[^>]*>\s*(<img[^>]*>)\s*<\/a>/g, '$1$2');
+  processed = processed.replace(/<strong>(\s*)<\/strong>/g, '$1');
   return processed;
 }
 
