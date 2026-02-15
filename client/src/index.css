@@ -178,20 +178,33 @@
 
 .wp-content img {
   max-width: 100%;
+  width: auto;
   height: auto;
   border-radius: 0.5rem;
-  margin: 1.5em 0;
+  margin: 1.5em auto;
+  display: block;
 }
 
 .wp-content figure {
   margin: 2em 0;
+  max-width: 100%;
+}
+
+.wp-content figure img {
+  margin: 0 auto;
+}
+
+.wp-content figure a {
+  display: block;
+  text-decoration: none;
 }
 
 .wp-content figcaption {
-  font-size: 0.875rem;
-  color: hsl(215 28% 50%);
+  font-size: 0.8rem;
+  color: hsl(215 16% 55%);
   text-align: center;
-  margin-top: 0.75em;
+  margin-top: 0.5em;
+  font-style: italic;
 }
 
 .wp-content table {
@@ -222,13 +235,37 @@
 /* WordPress block styles */
 .wp-content .wp-block-image {
   margin: 2em 0;
+  text-align: center;
+}
+.wp-content .wp-block-image.size-full,
+.wp-content .wp-block-image.size-large {
+  max-width: 100%;
+}
+.wp-content .wp-block-image.size-full img,
+.wp-content .wp-block-image.size-large img {
+  width: 100%;
+  border-radius: 0.5rem;
+}
+.wp-content .wp-block-image.aligncenter {
+  text-align: center;
+}
+.wp-content .wp-block-image.alignleft {
+  float: left;
+  margin: 0.5em 1.5em 1em 0;
+  max-width: 50%;
+}
+.wp-content .wp-block-image.alignright {
+  float: right;
+  margin: 0.5em 0 1em 1.5em;
+  max-width: 50%;
 }
 
 .wp-content .wp-block-quote {
   border-left: 4px solid hsl(35 92% 50%);
   padding: 1em 1.5em;
-  background: hsl(215 20% 98%);
+  background: hsl(45 100% 96%);
   margin: 2em 0;
+  border-radius: 0 0.5rem 0.5rem 0;
 }
 
 .wp-content .wp-block-list {
@@ -243,27 +280,27 @@
   padding: 0.25em 0;
 }
 
-.wp-content .key-point {
-  background: hsl(45 100% 96%);
-  border: 1px solid hsl(48 96% 78%);
-  padding: 1.25em 1.5em;
-  margin: 1.5em 0;
-  border-radius: 0.5rem;
-  display: flex;
-  gap: 1em;
-  align-items: flex-start;
+.wp-content .wp-block-list .wp-block-list {
+  background: transparent;
+  border: none;
+  padding: 0.5em 0 0.5em 1.5em;
+  margin: 0.5em 0;
 }
 
-.wp-content .key-point::before {
-  content: "⚖️";
-  font-size: 1.5rem;
-  flex-shrink: 0;
+.wp-content .wp-block-heading strong {
+  font-weight: inherit;
 }
 
-.wp-content .key-point p {
-  margin: 0;
-  color: hsl(28 73% 35%);
-  font-weight: 500;
+@media (max-width: 640px) {
+  .wp-content h2 { font-size: 1.5rem; }
+  .wp-content h3 { font-size: 1.25rem; }
+  .wp-content { font-size: 1rem; }
+  .wp-content .wp-block-image.alignleft,
+  .wp-content .wp-block-image.alignright {
+    float: none;
+    max-width: 100%;
+    margin: 1.5em 0;
+  }
 }
 
 /* Practice area page layout styles */
