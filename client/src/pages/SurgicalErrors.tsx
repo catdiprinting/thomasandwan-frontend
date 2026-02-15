@@ -1,6 +1,7 @@
 import { ArrowRight, Syringe, Users, MapPin, Wrench, ShieldAlert, AlertTriangle } from "lucide-react";
 import { Link } from "wouter";
 import PageShell from "@/components/PageShell";
+import RelatedPracticeAreas from "@/components/RelatedPracticeAreas";
 import SEO, { createPracticeAreaSchema } from "@/components/SEO";
 import { usePracticeAreaData, cms } from "@/hooks/useCmsData";
 
@@ -28,7 +29,7 @@ export default function SurgicalErrorsPage() {
   );
 
   return (
-    <PageShell title={cms(d, "paTitle", "Surgical Errors")} subtitle="Cases We Handle">
+    <PageShell title={cms(d, "paTitle", "Surgical Errors")} subtitle="Cases We Handle" breadcrumbs={[{ label: "Home", href: "/" }, { label: "Cases We Handle", href: "/cases-we-handle" }, { label: "Surgical Errors" }]}>
       <SEO
         title="Surgical Error Lawyers in Houston"
         description="Houston surgical error attorneys at Thomas & Wan handle wrong-site surgery, retained instruments, anesthesia complications, and post-surgical infection cases. Free consultation."
@@ -103,6 +104,7 @@ export default function SurgicalErrorsPage() {
           </div>
         </div>
       </section>
+      <RelatedPracticeAreas currentSlug="surgical-errors" />
     </PageShell>
   );
 }

@@ -1,11 +1,11 @@
 import { motion } from "framer-motion";
 import { AlertCircle, Heart, Phone } from "lucide-react";
-import Navigation from "@/components/Navigation";
-import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { Link } from "wouter";
 import SEO, { createPracticeAreaSchema } from "@/components/SEO";
 import { usePracticeAreaData, cms } from "@/hooks/useCmsData";
+import PageShell from "@/components/PageShell";
+import RelatedPracticeAreas from "@/components/RelatedPracticeAreas";
 
 const complications = [
   "Preeclampsia and eclampsia",
@@ -32,40 +32,13 @@ export default function ComplicationsOfChildbirth() {
   );
 
   return (
-    <div className="min-h-screen bg-background font-sans text-foreground overflow-x-hidden selection:bg-secondary selection:text-primary">
+    <PageShell title={cms(d, "paTitle", "Complications of Childbirth")} subtitle="Cases We Handle" breadcrumbs={[{ label: "Home", href: "/" }, { label: "Cases We Handle", href: "/cases-we-handle" }, { label: "Complications of Childbirth" }]}>
       <SEO 
         title="Complications of Childbirth Lawyers in Houston"
         description="Texas attorneys at Thomas & Wan represent mothers who suffered injuries due to medical negligence during pregnancy and childbirth. Free consultation."
         canonical="https://thomasandwan.com/cases-we-handle/complications-of-childbirth"
         schema={schema}
       />
-      <Navigation />
-      
-      <main className="pt-20">
-        {/* Hero Section */}
-        <section className="bg-primary text-white py-24 relative overflow-hidden">
-          <div className="absolute top-0 right-0 w-1/2 h-full bg-secondary/5 -skew-x-12 transform origin-top translate-x-1/4" />
-          <div className="container mx-auto px-4 md:px-6 relative z-10">
-            <motion.div 
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8 }}
-              className="max-w-3xl"
-            >
-              <div className="inline-block border-b-2 border-secondary pb-1 mb-6">
-                <span className="text-secondary font-bold tracking-widest uppercase text-sm">
-                  Cases We Handle
-                </span>
-              </div>
-              <h1 className="text-5xl md:text-6xl font-serif mb-8 leading-tight">
-                {cms(d, "paTitle", "Complications of Childbirth")}
-              </h1>
-              <p className="text-xl text-white/80 leading-relaxed font-light">
-                {cms(d, "paIntro", "At Thomas & Wan, we have helped families dealing with the devastating loss of a mother or serious permanent brain damage due to gross negligence during pregnancy and childbirth.")}
-              </p>
-            </motion.div>
-          </div>
-        </section>
 
         {/* Introduction */}
         <section className="py-20 bg-white">
@@ -148,8 +121,7 @@ export default function ComplicationsOfChildbirth() {
           </div>
         </section>
 
-      </main>
-      <Footer />
-    </div>
+        <RelatedPracticeAreas currentSlug="complications-of-childbirth" />
+    </PageShell>
   );
 }

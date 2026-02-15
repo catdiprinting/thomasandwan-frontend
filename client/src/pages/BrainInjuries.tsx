@@ -1,6 +1,7 @@
 import { ArrowRight, Brain, Syringe, Scissors, AlertTriangle, Search } from "lucide-react";
 import { Link } from "wouter";
 import PageShell from "@/components/PageShell";
+import RelatedPracticeAreas from "@/components/RelatedPracticeAreas";
 import SEO, { createPracticeAreaSchema } from "@/components/SEO";
 import { usePracticeAreaData, cms } from "@/hooks/useCmsData";
 
@@ -28,7 +29,7 @@ export default function BrainInjuriesPage() {
   );
 
   return (
-    <PageShell title={cms(d, "paTitle", "Brain Injuries")} subtitle="Cases We Handle">
+    <PageShell title={cms(d, "paTitle", "Brain Injuries")} subtitle="Cases We Handle" breadcrumbs={[{ label: "Home", href: "/" }, { label: "Cases We Handle", href: "/cases-we-handle" }, { label: "Brain Injuries" }]}>
       <SEO
         title="Brain Injury Lawyers in Houston"
         description="Houston brain injury attorneys at Thomas & Wan represent victims of medical negligence including anesthesia errors, surgical mistakes, and failure to diagnose stroke. Free consultation."
@@ -103,6 +104,7 @@ export default function BrainInjuriesPage() {
           </div>
         </div>
       </section>
+      <RelatedPracticeAreas currentSlug="brain-injuries" />
     </PageShell>
   );
 }

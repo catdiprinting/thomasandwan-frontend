@@ -1,11 +1,11 @@
 import { motion } from "framer-motion";
 import { AlertTriangle, Baby, Heart, Phone } from "lucide-react";
-import Navigation from "@/components/Navigation";
-import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { Link } from "wouter";
 import SEO, { createPracticeAreaSchema } from "@/components/SEO";
 import { usePracticeAreaData, cms } from "@/hooks/useCmsData";
+import PageShell from "@/components/PageShell";
+import RelatedPracticeAreas from "@/components/RelatedPracticeAreas";
 
 const birthInjuryTypes = [
   "Hypoxic ischemic encephalopathy",
@@ -52,40 +52,13 @@ export default function BirthInjuries() {
   );
 
   return (
-    <div className="min-h-screen bg-background font-sans text-foreground overflow-x-hidden selection:bg-secondary selection:text-primary">
+    <PageShell title={cms(d, "paTitle", "Birth Injuries")} subtitle="Cases We Handle" breadcrumbs={[{ label: "Home", href: "/" }, { label: "Cases We Handle", href: "/cases-we-handle" }, { label: "Birth Injuries" }]}>
       <SEO 
         title="Birth Injury Lawyers in Houston"
         description="Texas birth injury attorneys at Thomas & Wan represent families whose babies were harmed by medical negligence. We handle HIE, cerebral palsy, Erb's palsy cases. Free consultation."
         canonical="https://thomasandwan.com/cases-we-handle/birth-injuries"
         schema={schema}
       />
-      <Navigation />
-      
-      <main className="pt-20">
-        {/* Hero Section */}
-        <section className="bg-primary text-white py-24 relative overflow-hidden">
-          <div className="absolute top-0 right-0 w-1/2 h-full bg-secondary/5 -skew-x-12 transform origin-top translate-x-1/4" />
-          <div className="container mx-auto px-4 md:px-6 relative z-10">
-            <motion.div 
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8 }}
-              className="max-w-3xl"
-            >
-              <div className="inline-block border-b-2 border-secondary pb-1 mb-6">
-                <span className="text-secondary font-bold tracking-widest uppercase text-sm">
-                  Cases We Handle
-                </span>
-              </div>
-              <h1 className="text-5xl md:text-6xl font-serif mb-8 leading-tight">
-                {cms(d, "paTitle", "Birth Injuries")}
-              </h1>
-              <p className="text-xl text-white/80 leading-relaxed font-light">
-                {cms(d, "paIntro", "Sometimes babies are born with medical problems that don't match their parents' expectations. Sometimes it is because the baby is a victim of a birth injury that occurs during labor and delivery.")}
-              </p>
-            </motion.div>
-          </div>
-        </section>
 
         {/* Introduction */}
         <section className="py-20 bg-white">
@@ -236,8 +209,7 @@ export default function BirthInjuries() {
           </div>
         </section>
 
-      </main>
-      <Footer />
-    </div>
+        <RelatedPracticeAreas currentSlug="birth-injuries" />
+    </PageShell>
   );
 }

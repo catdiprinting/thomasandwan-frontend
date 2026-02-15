@@ -1,6 +1,7 @@
 import { ArrowRight, Pill, AlertTriangle, Beaker, Building2, Activity } from "lucide-react";
 import { Link } from "wouter";
 import PageShell from "@/components/PageShell";
+import RelatedPracticeAreas from "@/components/RelatedPracticeAreas";
 import SEO, { createPracticeAreaSchema } from "@/components/SEO";
 import { usePracticeAreaData, cms } from "@/hooks/useCmsData";
 
@@ -28,7 +29,7 @@ export default function MedicationErrorsPage() {
   );
 
   return (
-    <PageShell title={cms(d, "paTitle", "Medication Errors")} subtitle="Cases We Handle">
+    <PageShell title={cms(d, "paTitle", "Medication Errors")} subtitle="Cases We Handle" breadcrumbs={[{ label: "Home", href: "/" }, { label: "Cases We Handle", href: "/cases-we-handle" }, { label: "Medication Errors" }]}>
       <SEO
         title="Medication Error Lawyers in Houston"
         description="Houston medication error attorneys at Thomas & Wan represent patients harmed by wrong medications, overdoses, drug interactions, and pharmacy errors. Free consultation."
@@ -103,6 +104,7 @@ export default function MedicationErrorsPage() {
           </div>
         </div>
       </section>
+      <RelatedPracticeAreas currentSlug="medication-errors" />
     </PageShell>
   );
 }

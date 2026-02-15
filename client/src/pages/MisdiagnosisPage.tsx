@@ -1,6 +1,7 @@
 import { ArrowRight, Search, Heart, Brain, ShieldAlert, Clock, AlertTriangle } from "lucide-react";
 import { Link } from "wouter";
 import PageShell from "@/components/PageShell";
+import RelatedPracticeAreas from "@/components/RelatedPracticeAreas";
 import SEO, { createPracticeAreaSchema } from "@/components/SEO";
 import { usePracticeAreaData, cms } from "@/hooks/useCmsData";
 
@@ -28,7 +29,7 @@ export default function MisdiagnosisPage() {
   );
 
   return (
-    <PageShell title={cms(d, "paTitle", "Misdiagnosis")} subtitle="Cases We Handle">
+    <PageShell title={cms(d, "paTitle", "Misdiagnosis")} subtitle="Cases We Handle" breadcrumbs={[{ label: "Home", href: "/" }, { label: "Cases We Handle", href: "/cases-we-handle" }, { label: "Misdiagnosis" }]}>
       <SEO
         title="Misdiagnosis Lawyers in Houston"
         description="Houston misdiagnosis attorneys at Thomas & Wan represent patients harmed by failure to diagnose cancer, heart attack, stroke, and delayed diagnosis. Free consultation."
@@ -103,6 +104,7 @@ export default function MisdiagnosisPage() {
           </div>
         </div>
       </section>
+      <RelatedPracticeAreas currentSlug="misdiagnosis" />
     </PageShell>
   );
 }

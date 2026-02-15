@@ -1,5 +1,6 @@
 import { ArrowRight, ShieldAlert, Stethoscope, Pill, Activity, Scissors, Scale } from "lucide-react";
 import PageShell from "@/components/PageShell";
+import RelatedPracticeAreas from "@/components/RelatedPracticeAreas";
 import LeadCaptureForm from "@/components/LeadCaptureForm";
 import SEO, { createPracticeAreaSchema } from "@/components/SEO";
 import { usePracticeAreaData, cms } from "@/hooks/useCmsData";
@@ -22,7 +23,7 @@ export default function MedicalMalpractice() {
   );
 
   return (
-    <PageShell title={cms(d, "paTitle", "Medical Malpractice")} subtitle="Cases We Handle">
+    <PageShell title={cms(d, "paTitle", "Medical Malpractice")} subtitle="Cases We Handle" breadcrumbs={[{ label: "Home", href: "/" }, { label: "Cases We Handle", href: "/cases-we-handle" }, { label: "Medical Malpractice" }]}>
       <SEO 
         title="Medical Malpractice Lawyers in Houston"
         description="Thomas & Wan medical malpractice attorneys handle surgical errors, misdiagnosis, medication errors, anesthesia negligence, and hospital malpractice cases. Free consultation."
@@ -91,6 +92,7 @@ export default function MedicalMalpractice() {
           </div>
         </div>
       </section>
+      <RelatedPracticeAreas currentSlug="medical-malpractice" />
     </PageShell>
   );
 }
