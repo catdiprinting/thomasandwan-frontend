@@ -7,6 +7,7 @@ import { Link } from "wouter";
 import SEO, { createReviewSchema } from "@/components/SEO";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import { usePageCms, cms } from "@/hooks/useCmsData";
+import ContentLoader from "@/components/ContentLoader";
 
 const testimonials = [
   {
@@ -43,7 +44,7 @@ const testimonials = [
 ];
 
 export default function Testimonials() {
-  const { data: d } = usePageCms("testimonials");
+  const { data: d, isLoading } = usePageCms("testimonials");
   const displayTestimonials = d ? testimonials.map((t, i) => ({ ...t, quote: cms(d, `quote${i+1}`, t.quote), author: cms(d, `quote${i+1}Author`, t.author) })) : testimonials;
   return (
     <div className="min-h-screen bg-background font-sans text-foreground overflow-x-hidden selection:bg-secondary selection:text-primary">
@@ -83,6 +84,7 @@ export default function Testimonials() {
         </section>
         <Breadcrumbs items={[{ label: "Home", href: "/" }, { label: "Testimonials" }]} />
 
+        <ContentLoader isLoading={isLoading}>
         {/* Testimonials Grid */}
         <section className="py-24 bg-white">
           <div className="container mx-auto px-4 md:px-6">
@@ -140,6 +142,7 @@ export default function Testimonials() {
             </Link>
           </div>
         </section>
+        </ContentLoader>
 
       </main>
       <Footer />

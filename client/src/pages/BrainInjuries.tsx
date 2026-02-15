@@ -4,6 +4,7 @@ import PageShell from "@/components/PageShell";
 import RelatedPracticeAreas from "@/components/RelatedPracticeAreas";
 import SEO, { createPracticeAreaSchema } from "@/components/SEO";
 import { usePracticeAreaData, cms } from "@/hooks/useCmsData";
+import ContentLoader from "@/components/ContentLoader";
 
 const caseTypes = [
   { icon: Syringe, title: "Anesthesia Errors", desc: "Improper management during anesthesia can lead to brain damage. Oxygen deprivation and improper medication are some of the causes." },
@@ -21,7 +22,7 @@ const warningSigns = [
 ];
 
 export default function BrainInjuriesPage() {
-  const { data: d } = usePracticeAreaData("brain-injuries");
+  const { data: d, isLoading } = usePracticeAreaData("brain-injuries");
   const schema = createPracticeAreaSchema(
     "Brain Injury Lawyers",
     "Houston brain injury attorneys at Thomas & Wan represent victims of medical negligence including anesthesia errors, surgical mistakes, and failure to diagnose stroke.",
@@ -36,6 +37,7 @@ export default function BrainInjuriesPage() {
         canonical="https://thomasandwan.com/cases-we-handle/brain-injuries"
         schema={schema}
       />
+      <ContentLoader isLoading={isLoading}>
       <section className="py-16 md:py-20 bg-white">
         <div className="container mx-auto px-4 md:px-6">
           <div className="grid lg:grid-cols-12 gap-12">
@@ -105,6 +107,7 @@ export default function BrainInjuriesPage() {
         </div>
       </section>
       <RelatedPracticeAreas currentSlug="brain-injuries" />
+      </ContentLoader>
     </PageShell>
   );
 }

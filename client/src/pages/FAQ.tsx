@@ -7,6 +7,7 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import { usePageCms, cms } from "@/hooks/useCmsData";
+import ContentLoader from "@/components/ContentLoader";
 
 const faqs = [
   {
@@ -48,10 +49,11 @@ const faqs = [
 ];
 
 export default function FAQ() {
-  const { data: d } = usePageCms("faq");
+  const { data: d, isLoading } = usePageCms("faq");
   const displayFaqs = d ? Array.from({length: 9}, (_, i) => ({ q: cms(d, `section${i+1}Heading`, faqs[i]?.q || ""), a: cms(d, `paragraph${i+2}`, faqs[i]?.a || "") })).filter(f => f.q) : faqs;
   return (
     <PageShell title={cms(d, "pageHeading", "Frequently Asked Questions")} subtitle="What to Expect" breadcrumbs={[{ label: "Home", href: "/" }, { label: "FAQ" }]}>
+      <ContentLoader isLoading={isLoading}>
       <SEO 
         title="Frequently Asked Questions"
         description="Get answers to common questions about medical malpractice claims, attorney fees, the lawsuit process, depositions, mediation, and trial — from Thomas & Wan in Houston, TX."
@@ -116,6 +118,7 @@ export default function FAQ() {
           </div>
         </div>
       </section>
+      </ContentLoader>
     </PageShell>
   );
 }

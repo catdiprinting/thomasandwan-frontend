@@ -99,8 +99,17 @@ export default function BlogIndex() {
           </div>
 
           {isLoading && (
-            <div className="flex items-center justify-center py-20">
-              <Loader2 className="h-8 w-8 animate-spin text-secondary" />
+            <div className="grid md:grid-cols-3 gap-8">
+              {[1, 2, 3, 4, 5, 6].map((i) => (
+                <div key={i} className="animate-pulse">
+                  <div className="aspect-[16/10] bg-slate-200 rounded mb-6" />
+                  <div className="h-3 bg-slate-200 rounded w-1/3 mb-3" />
+                  <div className="h-5 bg-slate-200 rounded w-full mb-2" />
+                  <div className="h-5 bg-slate-200 rounded w-3/4 mb-4" />
+                  <div className="h-3 bg-slate-200 rounded w-full mb-2" />
+                  <div className="h-3 bg-slate-200 rounded w-5/6" />
+                </div>
+              ))}
             </div>
           )}
 

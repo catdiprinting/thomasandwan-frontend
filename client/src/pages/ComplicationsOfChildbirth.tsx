@@ -6,6 +6,7 @@ import SEO, { createPracticeAreaSchema } from "@/components/SEO";
 import { usePracticeAreaData, cms } from "@/hooks/useCmsData";
 import PageShell from "@/components/PageShell";
 import RelatedPracticeAreas from "@/components/RelatedPracticeAreas";
+import ContentLoader from "@/components/ContentLoader";
 
 const complications = [
   "Preeclampsia and eclampsia",
@@ -24,7 +25,7 @@ const complications = [
 ];
 
 export default function ComplicationsOfChildbirth() {
-  const { data: d } = usePracticeAreaData("complications-of-childbirth");
+  const { data: d, isLoading } = usePracticeAreaData("complications-of-childbirth");
   const schema = createPracticeAreaSchema(
     "Childbirth Complications Lawyers",
     "Houston attorneys representing mothers injured during pregnancy and childbirth due to medical negligence. Preeclampsia, C-section injuries, postpartum hemorrhage cases.",
@@ -40,6 +41,7 @@ export default function ComplicationsOfChildbirth() {
         schema={schema}
       />
 
+      <ContentLoader isLoading={isLoading}>
         {/* Introduction */}
         <section className="py-20 bg-white">
           <div className="container mx-auto px-4 md:px-6">
@@ -122,6 +124,7 @@ export default function ComplicationsOfChildbirth() {
         </section>
 
         <RelatedPracticeAreas currentSlug="complications-of-childbirth" />
+      </ContentLoader>
     </PageShell>
   );
 }

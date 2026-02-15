@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { usePageCms, cms } from "@/hooks/useCmsData";
+import ContentLoader from "@/components/ContentLoader";
 
 interface FormState {
   name: string;
@@ -29,7 +30,7 @@ export default function Contact() {
   });
   const [status, setStatus] = useState<SubmitStatus>("idle");
   const [errorMessage, setErrorMessage] = useState("");
-  const { data: d } = usePageCms("contact-us");
+  const { data: d, isLoading } = usePageCms("contact-us");
 
   const quickTopics = useMemo(
     () => [
@@ -92,6 +93,7 @@ export default function Contact() {
 
   return (
     <PageShell title={cms(d, "pageHeading", "Contact")} subtitle="Free consultation · No fee unless we win" breadcrumbs={[{ label: "Home", href: "/" }, { label: "Contact Us" }]}>
+      <ContentLoader isLoading={isLoading}>
       <SEO 
         title="Contact Us"
         description="Contact Thomas & Wan for a free medical malpractice consultation. Call (713) 529-1177 or visit our Houston office at 1710 Sunset Blvd, Houston, TX 77005."
@@ -402,6 +404,7 @@ export default function Contact() {
           </div>
         </div>
       </section>
+      </ContentLoader>
     </PageShell>
   );
 }

@@ -4,6 +4,7 @@ import PageShell from "@/components/PageShell";
 import RelatedPracticeAreas from "@/components/RelatedPracticeAreas";
 import SEO, { createPracticeAreaSchema } from "@/components/SEO";
 import { usePracticeAreaData, cms } from "@/hooks/useCmsData";
+import ContentLoader from "@/components/ContentLoader";
 
 const caseTypes = [
   { icon: Search, title: "Failure to Diagnose Cancer", desc: "Missing the symptoms and indicators that point to a cancer diagnosis, delaying critical treatment." },
@@ -21,7 +22,7 @@ const warningSigns = [
 ];
 
 export default function MisdiagnosisPage() {
-  const { data: d } = usePracticeAreaData("misdiagnosis");
+  const { data: d, isLoading } = usePracticeAreaData("misdiagnosis");
   const schema = createPracticeAreaSchema(
     "Misdiagnosis Lawyers",
     "Houston misdiagnosis attorneys at Thomas & Wan represent patients harmed by failure to diagnose cancer, heart attack, stroke, and delayed diagnosis.",
@@ -36,6 +37,7 @@ export default function MisdiagnosisPage() {
         canonical="https://thomasandwan.com/cases-we-handle/misdiagnosis"
         schema={schema}
       />
+      <ContentLoader isLoading={isLoading}>
       <section className="py-16 md:py-20 bg-white">
         <div className="container mx-auto px-4 md:px-6">
           <div className="grid lg:grid-cols-12 gap-12">
@@ -105,6 +107,7 @@ export default function MisdiagnosisPage() {
         </div>
       </section>
       <RelatedPracticeAreas currentSlug="misdiagnosis" />
+      </ContentLoader>
     </PageShell>
   );
 }

@@ -7,9 +7,10 @@ import { Link } from "wouter";
 import SEO, { lawFirmSchema, attorneySchemas } from "@/components/SEO";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import { useAboutData, cms } from "@/hooks/useCmsData";
+import ContentLoader from "@/components/ContentLoader";
 
 export default function About() {
-  const { data: d } = useAboutData();
+  const { data: d, isLoading } = useAboutData();
 
   return (
     <div className="min-h-screen bg-background font-sans text-foreground overflow-x-hidden selection:bg-secondary selection:text-primary">
@@ -47,6 +48,7 @@ export default function About() {
         </section>
         <Breadcrumbs items={[{ label: "Home", href: "/" }, { label: "About" }]} />
 
+        <ContentLoader isLoading={isLoading}>
         <section className="py-24 bg-white">
           <div className="container mx-auto px-4 md:px-6">
             <div className="grid lg:grid-cols-2 gap-16 items-start">
@@ -230,6 +232,7 @@ export default function About() {
             </Link>
           </div>
         </section>
+        </ContentLoader>
 
       </main>
       <Footer />

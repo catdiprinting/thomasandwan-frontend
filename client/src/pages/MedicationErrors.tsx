@@ -4,6 +4,7 @@ import PageShell from "@/components/PageShell";
 import RelatedPracticeAreas from "@/components/RelatedPracticeAreas";
 import SEO, { createPracticeAreaSchema } from "@/components/SEO";
 import { usePracticeAreaData, cms } from "@/hooks/useCmsData";
+import ContentLoader from "@/components/ContentLoader";
 
 const caseTypes = [
   { icon: Pill, title: "Wrong Medication", desc: "When healthcare providers mistakenly give a patient a drug meant for another patient, or simply the wrong drug." },
@@ -21,7 +22,7 @@ const warningSigns = [
 ];
 
 export default function MedicationErrorsPage() {
-  const { data: d } = usePracticeAreaData("medication-errors");
+  const { data: d, isLoading } = usePracticeAreaData("medication-errors");
   const schema = createPracticeAreaSchema(
     "Medication Error Lawyers",
     "Houston medication error attorneys at Thomas & Wan represent patients harmed by wrong medications, overdoses, drug interactions, and pharmacy errors.",
@@ -36,6 +37,7 @@ export default function MedicationErrorsPage() {
         canonical="https://thomasandwan.com/cases-we-handle/medication-errors"
         schema={schema}
       />
+      <ContentLoader isLoading={isLoading}>
       <section className="py-16 md:py-20 bg-white">
         <div className="container mx-auto px-4 md:px-6">
           <div className="grid lg:grid-cols-12 gap-12">
@@ -105,6 +107,7 @@ export default function MedicationErrorsPage() {
         </div>
       </section>
       <RelatedPracticeAreas currentSlug="medication-errors" />
+      </ContentLoader>
     </PageShell>
   );
 }

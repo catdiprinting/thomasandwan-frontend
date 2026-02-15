@@ -4,6 +4,7 @@ import PageShell from "@/components/PageShell";
 import SEO from "@/components/SEO";
 import LeadCaptureForm from "@/components/LeadCaptureForm";
 import { usePageCms, cms } from "@/hooks/useCmsData";
+import ContentLoader from "@/components/ContentLoader";
 
 const cards = [
   {
@@ -49,9 +50,10 @@ const caseLinks = [
 ];
 
 export default function Cases() {
-  const { data: d } = usePageCms("cases-we-handle");
+  const { data: d, isLoading } = usePageCms("cases-we-handle");
   return (
     <PageShell title={cms(d, "pageHeading", "Cases We Handle")} subtitle="Medical Malpractice Focus" breadcrumbs={[{ label: "Home", href: "/" }, { label: "Cases We Handle" }]}>
+      <ContentLoader isLoading={isLoading}>
       <SEO 
         title="Cases We Handle"
         description="Thomas & Wan handles medical malpractice, birth injuries, brain injuries, surgical errors, medication errors, misdiagnosis, and more. Free case review in Houston, TX."
@@ -147,6 +149,7 @@ export default function Cases() {
           </div>
         </div>
       </section>
+      </ContentLoader>
     </PageShell>
   );
 }

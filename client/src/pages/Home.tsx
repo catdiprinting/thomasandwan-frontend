@@ -10,10 +10,11 @@ import BlogSection from "@/components/BlogSection";
 import Footer from "@/components/Footer";
 
 import SEO, { lawFirmSchema } from "@/components/SEO";
+import ContentLoader from "@/components/ContentLoader";
 import { useHomepageData, cms } from "@/hooks/useCmsData";
 
 export default function Home() {
-  const { data: d } = useHomepageData();
+  const { data: d, isLoading } = useHomepageData();
 
   return (
     <div className="min-h-screen bg-background font-sans text-foreground overflow-x-hidden selection:bg-secondary selection:text-primary pb-20 md:pb-0">
@@ -25,6 +26,7 @@ export default function Home() {
       />
       <Navigation />
       <main>
+        <ContentLoader isLoading={isLoading}>
         <Hero
           label={cms(d, "heroLabel", "Medical Malpractice Attorneys")}
           heading={cms(d, "heroHeading", "Hurt by a Doctor or Hospital? We Help Families Get Answers.")}
@@ -115,6 +117,7 @@ export default function Home() {
           heading={cms(d, "faqHeading", "Frequently Asked Questions")}
           subtext={cms(d, "faqSubtext", "Navigating medical malpractice claims can be confusing. Here are answers to some of the most common questions our clients ask.")}
         />
+        </ContentLoader>
 
         <BlogSection />
 

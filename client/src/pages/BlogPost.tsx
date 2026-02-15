@@ -176,8 +176,18 @@ export default function BlogPost() {
   if (isLoading) {
     return (
       <PageShell title="Loading..." subtitle="Article">
-        <div className="flex items-center justify-center py-40">
-          <Loader2 className="h-8 w-8 animate-spin text-secondary" />
+        <div className="container mx-auto px-4 py-12 max-w-4xl">
+          <div className="animate-pulse">
+            <div className="h-4 bg-slate-200 rounded w-1/4 mb-6" />
+            <div className="h-10 bg-slate-200 rounded w-3/4 mb-4" />
+            <div className="h-10 bg-slate-200 rounded w-1/2 mb-8" />
+            <div className="aspect-[16/9] bg-slate-200 rounded mb-8" />
+            <div className="space-y-3">
+              {[1, 2, 3, 4, 5, 6, 7, 8].map((i) => (
+                <div key={i} className="h-4 bg-slate-200 rounded" style={{ width: `${85 + (i % 3) * 5}%` }} />
+              ))}
+            </div>
+          </div>
         </div>
       </PageShell>
     );

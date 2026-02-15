@@ -6,6 +6,7 @@ import SEO, { createPracticeAreaSchema } from "@/components/SEO";
 import { usePracticeAreaData, cms } from "@/hooks/useCmsData";
 import PageShell from "@/components/PageShell";
 import RelatedPracticeAreas from "@/components/RelatedPracticeAreas";
+import ContentLoader from "@/components/ContentLoader";
 
 const birthInjuryTypes = [
   "Hypoxic ischemic encephalopathy",
@@ -44,7 +45,7 @@ const hieSymptoms = [
 ];
 
 export default function BirthInjuries() {
-  const { data: d } = usePracticeAreaData("birth-injuries");
+  const { data: d, isLoading } = usePracticeAreaData("birth-injuries");
   const schema = createPracticeAreaSchema(
     "Birth Injury Lawyers",
     "Houston birth injury attorneys representing families whose babies suffered injuries due to medical negligence during labor and delivery. Free consultation.",
@@ -60,6 +61,7 @@ export default function BirthInjuries() {
         schema={schema}
       />
 
+      <ContentLoader isLoading={isLoading}>
         {/* Introduction */}
         <section className="py-20 bg-white">
           <div className="container mx-auto px-4 md:px-6">
@@ -210,6 +212,7 @@ export default function BirthInjuries() {
         </section>
 
         <RelatedPracticeAreas currentSlug="birth-injuries" />
+      </ContentLoader>
     </PageShell>
   );
 }

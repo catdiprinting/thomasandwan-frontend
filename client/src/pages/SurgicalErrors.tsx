@@ -4,6 +4,7 @@ import PageShell from "@/components/PageShell";
 import RelatedPracticeAreas from "@/components/RelatedPracticeAreas";
 import SEO, { createPracticeAreaSchema } from "@/components/SEO";
 import { usePracticeAreaData, cms } from "@/hooks/useCmsData";
+import ContentLoader from "@/components/ContentLoader";
 
 const caseTypes = [
   { icon: Syringe, title: "Anesthesia Complications", desc: "These can range from incorrect dosages to failure in monitoring vital signs, leading to serious patient harm." },
@@ -21,7 +22,7 @@ const warningSigns = [
 ];
 
 export default function SurgicalErrorsPage() {
-  const { data: d } = usePracticeAreaData("surgical-errors");
+  const { data: d, isLoading } = usePracticeAreaData("surgical-errors");
   const schema = createPracticeAreaSchema(
     "Surgical Error Lawyers",
     "Houston surgical error attorneys at Thomas & Wan handle wrong-site surgery, retained instruments, anesthesia complications, and post-surgical infection cases.",
@@ -36,6 +37,7 @@ export default function SurgicalErrorsPage() {
         canonical="https://thomasandwan.com/cases-we-handle/surgical-errors"
         schema={schema}
       />
+      <ContentLoader isLoading={isLoading}>
       <section className="py-16 md:py-20 bg-white">
         <div className="container mx-auto px-4 md:px-6">
           <div className="grid lg:grid-cols-12 gap-12">
@@ -105,6 +107,7 @@ export default function SurgicalErrorsPage() {
         </div>
       </section>
       <RelatedPracticeAreas currentSlug="surgical-errors" />
+      </ContentLoader>
     </PageShell>
   );
 }
