@@ -8,6 +8,19 @@ import {
 } from "@/components/ui/accordion";
 import { usePageCms, cms } from "@/hooks/useCmsData";
 import ContentLoader from "@/components/ContentLoader";
+import { Link } from "wouter";
+import { ArrowRight } from "lucide-react";
+
+const relatedArticles = [
+  { slug: "choosing-the-right-medical-malpractice-lawyer-thomas-and-wan", title: "Choosing the Right Medical Malpractice Lawyer" },
+  { slug: "what-is-medical-malpractice", title: "What Is Medical Malpractice?" },
+  { slug: "understanding-a-contingent-fee-contract-some-frequently-asked-questions", title: "Understanding a Contingent Fee Contract" },
+  { slug: "how-has-tort-reform-changed-medical-malpractice-in-texas", title: "How Has Tort Reform Changed Medical Malpractice in Texas?" },
+  { slug: "role-of-expert-witnesses", title: "Role of Expert Witnesses in Medical Malpractice Cases" },
+  { slug: "birth-injury-compensation-calculation-guide", title: "How Birth Injury Compensation Is Calculated" },
+  { slug: "why-does-it-take-so-long-to-file-a-lawsuit", title: "Why Does It Take So Long to File a Lawsuit?" },
+  { slug: "are-you-afraid-to-sue-for-malpractice-2", title: "Are You Afraid to Sue for Malpractice?" },
+];
 
 const faqs = [
   {
@@ -101,7 +114,31 @@ export default function FAQ() {
                 ))}
               </Accordion>
 
-              <div className="mt-12 bg-primary text-white p-10 border-t-4 border-secondary">
+              <div className="mt-12 bg-[#F9F7F5] border border-gray-100 p-8">
+                <h3 className="font-serif text-2xl text-primary mb-6">Related Articles</h3>
+                <div className="grid sm:grid-cols-2 gap-x-6 gap-y-1">
+                  {relatedArticles.map((article, idx) => (
+                    <Link
+                      key={idx}
+                      href={`/blog/${article.slug}`}
+                      className="group flex items-start gap-2 py-3 border-b border-gray-200 last:border-0 text-slate-700 hover:text-secondary transition-colors"
+                      data-testid={`link-faq-article-${idx}`}
+                    >
+                      <ArrowRight className="w-4 h-4 mt-0.5 flex-shrink-0 text-secondary opacity-60 group-hover:opacity-100 transition-opacity" />
+                      <span className="text-[0.95rem] leading-snug">{article.title}</span>
+                    </Link>
+                  ))}
+                </div>
+                <Link
+                  href="/blog"
+                  className="mt-6 inline-flex items-center gap-2 text-primary font-bold uppercase tracking-wide text-sm hover:text-secondary transition-colors"
+                  data-testid="link-faq-all-articles"
+                >
+                  View All Articles <ArrowRight className="w-4 h-4" />
+                </Link>
+              </div>
+
+              <div className="mt-8 bg-primary text-white p-10 border-t-4 border-secondary">
                 <h3 className="text-2xl md:text-3xl font-serif mb-4">Call Us Now For a Free Consultation</h3>
                 <p className="text-white/80 leading-relaxed mb-8">
                   Call us today for a free consultation—we will discuss what your legal options are for your medical malpractice case. If you have the medical records, you can send them to us for a free review with no obligation.
