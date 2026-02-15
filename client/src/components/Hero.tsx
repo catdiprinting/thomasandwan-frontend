@@ -27,7 +27,7 @@ export default function Hero({
   badge2 = "No Win, No Fee",
 }: HeroProps) {
   return (
-    <section className="relative overflow-x-hidden bg-white pt-8 md:pt-0">
+    <section className="relative overflow-x-hidden bg-white pt-28 md:pt-36">
       <div className="container mx-auto px-4 md:px-6 grid md:grid-cols-2 gap-8 md:gap-12 items-center py-8 md:py-12">
         
         <motion.div
