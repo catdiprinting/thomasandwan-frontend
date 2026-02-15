@@ -839,39 +839,39 @@ Sitemap: https://thomasandwan.com/sitemap.xml`;
 
   // SSR Routes - serve to bots only, regular users get React app
   // Add ?ssr=true to force SSR for testing
-  app.get("/", (req: Request, res: Response, next: Function) => {
+  app.get("/", async (req: Request, res: Response, next: Function) => {
     const ua = req.headers['user-agent'] || '';
     const forceSSR = req.query.ssr === 'true';
     if (!forceSSR && !isBot(ua)) return next();
     res.setHeader("Content-Type", "text/html");
-    res.send(renderHomepage());
+    res.send(await renderHomepage());
   });
 
   // Add ?ssr=true to force SSR for testing
-  app.get("/about-thomas-wan-llp", (req: Request, res: Response, next: Function) => {
+  app.get("/about-thomas-wan-llp", async (req: Request, res: Response, next: Function) => {
     const ua = req.headers['user-agent'] || '';
     const forceSSR = req.query.ssr === 'true';
     if (!forceSSR && !isBot(ua)) return next();
     res.setHeader("Content-Type", "text/html");
-    res.send(renderAbout());
+    res.send(await renderAbout());
   });
 
   // Add ?ssr=true to force SSR for testing
-  app.get("/contact-us", (req: Request, res: Response, next: Function) => {
+  app.get("/contact-us", async (req: Request, res: Response, next: Function) => {
     const ua = req.headers['user-agent'] || '';
     const forceSSR = req.query.ssr === 'true';
     if (!forceSSR && !isBot(ua)) return next();
     res.setHeader("Content-Type", "text/html");
-    res.send(renderContact());
+    res.send(await renderContact());
   });
 
   // Add ?ssr=true to force SSR for testing
-  app.get("/faq", (req: Request, res: Response, next: Function) => {
+  app.get("/faq", async (req: Request, res: Response, next: Function) => {
     const ua = req.headers['user-agent'] || '';
     const forceSSR = req.query.ssr === 'true';
     if (!forceSSR && !isBot(ua)) return next();
     res.setHeader("Content-Type", "text/html");
-    res.send(renderFAQ());
+    res.send(await renderFAQ());
   });
 
   // Add ?ssr=true to force SSR for testing
@@ -893,12 +893,12 @@ Sitemap: https://thomasandwan.com/sitemap.xml`;
   });
 
   // Add ?ssr=true to force SSR for testing
-  app.get("/cases-we-handle", (req: Request, res: Response, next: Function) => {
+  app.get("/cases-we-handle", async (req: Request, res: Response, next: Function) => {
     const ua = req.headers['user-agent'] || '';
     const forceSSR = req.query.ssr === 'true';
     if (!forceSSR && !isBot(ua)) return next();
     res.setHeader("Content-Type", "text/html");
-    res.send(renderCases());
+    res.send(await renderCases());
   });
 
   // Add ?ssr=true to force SSR for testing

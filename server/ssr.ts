@@ -1,4 +1,21 @@
 import { fetchPosts, fetchPostBySlug, fetchMedia, fetchPostsWithMedia, fetchAuthor, fetchAuthorBySlug, fetchCategoryBySlug, fetchCategoriesByIds, fetchPostsByAuthorWithMedia, fetchPostsByCategoryWithMedia, type WPPost, type WPAuthor, type WPCategory, type WPMedia } from "./wordpress";
+import { getHomepageFields, getAboutFields, getPracticeAreaFields, getGenericPageFields, type HomepageFields, type AboutFields, type PracticeAreaFields, type GenericPageFields } from "./wp-graphql";
+
+function decodeEntities(text: string): string {
+  return text
+    .replace(/&amp;/g, "&")
+    .replace(/&lt;/g, "<")
+    .replace(/&gt;/g, ">")
+    .replace(/&quot;/g, '"')
+    .replace(/&#039;/g, "'")
+    .replace(/&rsquo;/g, "\u2019")
+    .replace(/&ldquo;/g, "\u201C")
+    .replace(/&rdquo;/g, "\u201D")
+    .replace(/&mdash;/g, "\u2014")
+    .replace(/&ndash;/g, "\u2013")
+    .replace(/&hellip;/g, "\u2026")
+    .replace(/&nbsp;/g, " ");
+}
 
 function escapeHtml(text: string): string {
   return text
@@ -292,27 +309,28 @@ export async function renderBlogIndex(): Promise<string> {
   );
 }
 
-export function renderHomepage(): string {
+export async function renderHomepage(): Promise<string> {
+  let fields: HomepageFields | null = null;
+  try { fields = await getHomepageFields(); } catch (e) {}
+  const f = (val: string | undefined, fallback: string) => val ? decodeEntities(val) : fallback;
+
   const content = `
     <section class="hero-home">
       <div class="container">
         <div style="max-width: 600px;">
-          <div class="meta" style="color: #F59E0B;">Medical Malpractice Attorneys</div>
+          <div class="meta" style="color: #F59E0B;">${f(fields?.heroLabel, 'Medical Malpractice Attorneys')}</div>
           <h1 style="font-size: 3.5rem; color: #1F2937;">
-            Dedicated to <br/>
-            <span class="text-secondary" style="font-style: italic;">Justice</span> for <br/>
-            Your Family.
+            ${f(fields?.heroHeading, 'Dedicated to <br/><span class="text-secondary" style="font-style: italic;">Justice</span> for <br/>Your Family.')}
           </h1>
           <p style="font-size: 1.25rem; color: #64748b; margin: 24px 0; line-height: 1.8;">
-            With over 60+ years of combined experience in medical malpractice, 
-            Linda Thomas and Michelle Wan fight for the answers and compensation you deserve.
+            ${f(fields?.heroText, 'With over 60+ years of combined experience in medical malpractice, Linda Thomas and Michelle Wan fight for the answers and compensation you deserve.')}
           </p>
           <div style="display: flex; gap: 16px; margin-top: 32px;">
-            <a href="/contact-us" class="btn">Schedule Free Consultation</a>
+            <a href="${f(fields?.heroCtaLink, '/contact-us')}" class="btn">${f(fields?.heroCtaText, 'Schedule Free Consultation')}</a>
           </div>
           <div style="display: flex; gap: 24px; margin-top: 32px; color: #1F2937;">
-            <span>● Available 24/7</span>
-            <span>● No Win, No Fee</span>
+            <span>● ${f(fields?.heroBadge1, 'Available 24/7')}</span>
+            <span>● ${f(fields?.heroBadge2, 'No Win, No Fee')}</span>
           </div>
         </div>
       </div>
@@ -321,9 +339,9 @@ export function renderHomepage(): string {
     <section class="section-alt section">
       <div class="container">
         <div style="text-align: center; max-width: 800px; margin: 0 auto 48px;">
-          <div class="meta" style="color: #F59E0B;">Our Expertise</div>
-          <h2 style="font-size: 2.5rem;">Focused Exclusively on <span class="text-secondary" style="font-style: italic;">Medical Malpractice</span></h2>
-          <p style="color: #64748b; margin-top: 16px;">We don't handle car accidents or divorces. Our sole focus is mastering the complex realm of medical malpractice to win for you.</p>
+          <div class="meta" style="color: #F59E0B;">${f(fields?.practiceLabel, 'Our Expertise')}</div>
+          <h2 style="font-size: 2.5rem;">${f(fields?.practiceHeading, 'Focused Exclusively on <span class="text-secondary" style="font-style: italic;">Medical Malpractice</span>')}</h2>
+          <p style="color: #64748b; margin-top: 16px;">${f(fields?.practiceSubtext, "We don't handle car accidents or divorces. Our sole focus is mastering the complex realm of medical malpractice to win for you.")}</p>
         </div>
         <div class="grid-3">
           <div class="card">
@@ -347,9 +365,9 @@ export function renderHomepage(): string {
             <p style="color: #64748b;">Seeking justice for the loss of a loved one due to medical carelessness.</p>
           </div>
           <div class="card" style="background: #1F2937; color: #fff;">
-            <h3 style="font-size: 1.5rem; margin-bottom: 12px; color: #fff;">Do You Have a Case?</h3>
-            <p style="color: rgba(255,255,255,0.8); margin-bottom: 16px;">Get a free review of your medical records by our expert team.</p>
-            <a href="/contact-us" class="btn">Contact Us Today</a>
+            <h3 style="font-size: 1.5rem; margin-bottom: 12px; color: #fff;">${f(fields?.practiceCtaHeading, 'Do You Have a Case?')}</h3>
+            <p style="color: rgba(255,255,255,0.8); margin-bottom: 16px;">${f(fields?.practiceCtaText, 'Get a free review of your medical records by our expert team.')}</p>
+            <a href="/contact-us" class="btn">${f(fields?.practiceCtaButton, 'Contact Us Today')}</a>
           </div>
         </div>
       </div>
@@ -359,20 +377,17 @@ export function renderHomepage(): string {
       <div class="container">
         <div class="grid-2" style="align-items: center; gap: 64px;">
           <div>
-            <div class="meta" style="color: #F59E0B;">Why Choose Us</div>
-            <h2 style="font-size: 2.5rem;">A Women-Owned Firm <br/><span style="color: #64748b; font-style: italic;">Fighting for Families</span></h2>
+            <div class="meta" style="color: #F59E0B;">${f(fields?.aboutLabel, 'Why Choose Us')}</div>
+            <h2 style="font-size: 2.5rem;">${f(fields?.aboutHeading, 'A Women-Owned Firm <br/><span style="color: #64748b; font-style: italic;">Fighting for Families</span>')}</h2>
             <p style="color: #64748b; margin: 24px 0; line-height: 1.8;">
-              At Thomas & Wan, we bring a unique perspective to medical malpractice law. 
-              As a women-owned firm, we understand the deep emotional toll that medical negligence takes on families.
-              We don't just see a case; we see a mother, a child, a family that has been wronged.
+              ${f(fields?.aboutText1, "At Thomas & Wan, we bring a unique perspective to medical malpractice law. As a women-owned firm, we understand the deep emotional toll that medical negligence takes on families. We don't just see a case; we see a mother, a child, a family that has been wronged.")}
             </p>
             <p style="color: #64748b; line-height: 1.8;">
-              With over 55 years of combined experience, we have successfully resolved cases for millions of dollars 
-              against major hospitals throughout Texas. But what truly sets us apart is our personal commitment.
+              ${f(fields?.aboutText2, 'With over 55 years of combined experience, we have successfully resolved cases for millions of dollars against major hospitals throughout Texas. But what truly sets us apart is our personal commitment.')}
             </p>
             <div style="margin-top: 32px;">
               <p style="font-style: italic; font-family: 'Playfair Display', serif; font-size: 1.25rem; color: #1F2937; border-left: 4px solid #F59E0B; padding-left: 20px;">
-                "We don't refer cases out. When you hire Thomas & Wan, you get Thomas & Wan."
+                "${f(fields?.aboutQuote, "We don't refer cases out. When you hire Thomas & Wan, you get Thomas & Wan.")}"
               </p>
             </div>
           </div>
@@ -405,16 +420,16 @@ export function renderHomepage(): string {
       <div class="container">
         <div class="grid-3" style="text-align: center;">
           <div class="stat">
-            <div class="stat-number">55+</div>
-            <div class="stat-label">Years Combined Experience</div>
+            <div class="stat-number">${f(fields?.stat1Number, '55+')}</div>
+            <div class="stat-label">${f(fields?.stat1Label, 'Years Combined Experience')}</div>
           </div>
           <div class="stat">
-            <div class="stat-number">$50M+</div>
-            <div class="stat-label">Recovered for Clients</div>
+            <div class="stat-number">${f(fields?.stat2Number, '$50M+')}</div>
+            <div class="stat-label">${f(fields?.stat2Label, 'Recovered for Clients')}</div>
           </div>
           <div class="stat">
-            <div class="stat-number">100%</div>
-            <div class="stat-label">Medical Malpractice Focus</div>
+            <div class="stat-number">${f(fields?.stat3Number, '100%')}</div>
+            <div class="stat-label">${f(fields?.stat3Label, 'Medical Malpractice Focus')}</div>
           </div>
         </div>
       </div>
@@ -424,9 +439,9 @@ export function renderHomepage(): string {
       <div class="container">
         <div class="grid-2" style="gap: 64px;">
           <div>
-            <div class="meta" style="color: #F59E0B;">Common Questions</div>
-            <h2 style="font-size: 2.5rem;">Frequently Asked Questions</h2>
-            <p style="color: #64748b; margin: 16px 0;">Navigating medical malpractice claims can be confusing. Here are answers to some of the most common questions our clients ask.</p>
+            <div class="meta" style="color: #F59E0B;">${f(fields?.faqLabel, 'Common Questions')}</div>
+            <h2 style="font-size: 2.5rem;">${f(fields?.faqHeading, 'Frequently Asked Questions')}</h2>
+            <p style="color: #64748b; margin: 16px 0;">${f(fields?.faqSubtext, 'Navigating medical malpractice claims can be confusing. Here are answers to some of the most common questions our clients ask.')}</p>
             <div class="cta" style="margin-top: 32px; text-align: left;">
               <h3>Still have questions?</h3>
               <p>We are available 24/7 to answer your questions and help you understand your rights.</p>
@@ -457,11 +472,11 @@ export function renderHomepage(): string {
 
     <section class="section section-dark" style="text-align: center;">
       <div class="container" style="max-width: 800px;">
-        <h2 style="font-size: 2.5rem; color: #fff;">Ready to Discuss Your Case?</h2>
+        <h2 style="font-size: 2.5rem; color: #fff;">${f(fields?.leadHeading, 'Ready to Discuss Your Case?')}</h2>
         <p style="color: rgba(255,255,255,0.8); margin: 16px 0 32px; font-size: 1.125rem;">
-          Call us today for a free consultation. If you have the medical records, you can send them to us for a free review with no obligation.
+          ${f(fields?.leadText, 'Call us today for a free consultation. If you have the medical records, you can send them to us for a free review with no obligation.')}
         </p>
-        <a href="tel:713-529-1177" class="btn" style="font-size: 1.25rem; padding: 20px 40px;">Call (713) 529-1177</a>
+        <a href="tel:713-529-1177" class="btn" style="font-size: 1.25rem; padding: 20px 40px;">${f(fields?.leadButton, 'Call (713) 529-1177')}</a>
       </div>
     </section>
   `;
@@ -474,13 +489,17 @@ export function renderHomepage(): string {
   );
 }
 
-export function renderAbout(): string {
+export async function renderAbout(): Promise<string> {
+  let fields: AboutFields | null = null;
+  try { fields = await getAboutFields(); } catch (e) {}
+  const f = (val: string | undefined, fallback: string) => val ? decodeEntities(val) : fallback;
+
   const content = `
     <div class="hero">
       <div class="container">
-        <div class="meta" style="color: #F59E0B;">About Our Firm</div>
-        <h1 style="font-size: 3rem;">Compassionate Texas <br/><span class="text-secondary" style="font-style: italic;">Medical Malpractice</span> Lawyers</h1>
-        <p style="font-size: 1.25rem;">We Care, and Our Dedication Shines Through. Representing our clients in the pursuit of justice is both an honor and a privilege.</p>
+        <div class="meta" style="color: #F59E0B;">${f(fields?.aboutHeroLabel, 'About Our Firm')}</div>
+        <h1 style="font-size: 3rem;">${f(fields?.aboutHeroHeading, 'Compassionate Texas <br/><span class="text-secondary" style="font-style: italic;">Medical Malpractice</span> Lawyers')}</h1>
+        <p style="font-size: 1.25rem;">${f(fields?.aboutHeroText, 'We Care, and Our Dedication Shines Through. Representing our clients in the pursuit of justice is both an honor and a privilege.')}</p>
       </div>
     </div>
 
@@ -488,17 +507,16 @@ export function renderAbout(): string {
       <div class="container">
         <div class="grid-2" style="gap: 64px;">
           <div>
-            <h2 style="font-size: 2rem;">Empowering Citizens through the Legal System</h2>
+            <h2 style="font-size: 2rem;">${f(fields?.aboutMissionHeading, 'Empowering Citizens through the Legal System')}</h2>
             <p style="color: #64748b; margin: 24px 0; line-height: 1.8;">
-              We firmly believe that juries play a pivotal role in safeguarding the rights of citizens. 
-              In the courtroom, an injured individual stands on equal ground with even the largest hospital corporations.
+              ${f(fields?.aboutMissionText1, 'We firmly believe that juries play a pivotal role in safeguarding the rights of citizens. In the courtroom, an injured individual stands on equal ground with even the largest hospital corporations.')}
             </p>
             <p style="color: #64748b; line-height: 1.8;">
-              Whether your case can be resolved amicably without the need for a lawsuit or requires a tenacious battle that extends all the way to trial, we're here to stand by your side. Every client, without exception, deserves the highest standard of legal representation and an equitable opportunity to present their case in court.
+              ${f(fields?.aboutMissionText2, "Whether your case can be resolved amicably without the need for a lawsuit or requires a tenacious battle that extends all the way to trial, we're here to stand by your side. Every client, without exception, deserves the highest standard of legal representation and an equitable opportunity to present their case in court.")}
             </p>
           </div>
           <div class="card-alt">
-            <h3 style="margin-bottom: 24px;">Why Choose Thomas & Wan</h3>
+            <h3 style="margin-bottom: 24px;">${f(fields?.aboutWhyHeading, 'Why Choose Thomas & Wan')}</h3>
             <div style="margin-bottom: 20px;">
               <h4 style="color: #1F2937; margin-bottom: 4px;">Unwavering Dedication</h4>
               <p style="color: #64748b;">Our commitment to seeking justice knows no bounds. We ensure our clients receive the compensation they deserve.</p>
@@ -527,8 +545,7 @@ export function renderAbout(): string {
             <h2 style="font-size: 2.5rem;">Linda Laurent Thomas</h2>
             <p class="meta" style="color: #F59E0B;">Partner | Since 1987</p>
             <p style="color: #64748b; margin: 24px 0; line-height: 1.8;">
-              Since 1987, Linda Laurent Thomas has pursued aggressive legal representation on behalf of injury victims. 
-              Whether the wrongdoer is a Fortune 500 corporate giant or a reckless driver, Thomas has dedicated her career to fighting for individuals to obtain the maximum amount of damages available under the law.
+              ${f(fields?.aboutThomasBio, "Since 1987, Linda Laurent Thomas has pursued aggressive legal representation on behalf of injury victims. Whether the wrongdoer is a Fortune 500 corporate giant or a reckless driver, Thomas has dedicated her career to fighting for individuals to obtain the maximum amount of damages available under the law.")}
             </p>
             <p style="color: #64748b; line-height: 1.8;">
               Every case that the firm takes on is handled with the highest level of care and attention. This representation involves all phases of a complex personal injury action: early and thorough factual investigation, retention of expert witnesses, thorough case value assessment, aggressive pre-trial discovery, and proactive negotiations.
@@ -561,8 +578,7 @@ export function renderAbout(): string {
             <h2 style="font-size: 2.5rem;">Michelle W. Wan</h2>
             <p class="meta" style="color: #F59E0B;">Partner</p>
             <p style="color: #64748b; margin: 24px 0; line-height: 1.8;">
-              Michelle W. Wan has worked exclusively representing clients in personal injury matters, handling numerous matters involving toxic exposures, medical negligence, and product defects. 
-              Like Thomas, Wan has dedicated her career to fighting on behalf of persons injured by the negligence of others.
+              ${f(fields?.aboutWanBio, "Michelle W. Wan has worked exclusively representing clients in personal injury matters, handling numerous matters involving toxic exposures, medical negligence, and product defects. Like Thomas, Wan has dedicated her career to fighting on behalf of persons injured by the negligence of others.")}
             </p>
             <p style="color: #64748b; line-height: 1.8;">
               Wan and Thomas work as a team in trial. Wan enjoys the ability to stand in front of juries and bring her clients' side of the story to the light of a courtroom. 
@@ -595,9 +611,9 @@ export function renderAbout(): string {
 
     <section class="section section-dark" style="text-align: center;">
       <div class="container" style="max-width: 800px;">
-        <h2 style="font-size: 2.5rem; color: #fff;">Do You Have a Medical Malpractice Case?</h2>
+        <h2 style="font-size: 2.5rem; color: #fff;">${f(fields?.aboutCtaHeading, 'Do You Have a Medical Malpractice Case?')}</h2>
         <p style="color: rgba(255,255,255,0.8); margin: 16px 0 32px; font-size: 1.125rem;">
-          Call us today for a free consultation. If you have the medical records, you can send them to us for a free review with no obligation. Remember, strict deadlines apply.
+          ${f(fields?.aboutCtaText, 'Call us today for a free consultation. If you have the medical records, you can send them to us for a free review with no obligation. Remember, strict deadlines apply.')}
         </p>
         <a href="tel:713-529-1177" class="btn" style="font-size: 1.25rem; padding: 20px 40px;">Call (713) 529-1177</a>
       </div>
@@ -612,12 +628,16 @@ export function renderAbout(): string {
   );
 }
 
-export function renderCases(): string {
+export async function renderCases(): Promise<string> {
+  let fields: GenericPageFields | null = null;
+  try { fields = await getGenericPageFields('cases-we-handle'); } catch (e) {}
+  const f = (val: string | undefined, fallback: string) => val ? decodeEntities(val) : fallback;
+
   const content = `
     <div class="hero">
       <div class="container">
-        <div class="meta" style="color: #F59E0B;">Medical Malpractice Focus</div>
-        <h1 style="font-size: 3rem;">Cases We Handle</h1>
+        <div class="meta" style="color: #F59E0B;">${f(fields?.pageSubheading, 'Medical Malpractice Focus')}</div>
+        <h1 style="font-size: 3rem;">${f(fields?.pageHeading, 'Cases We Handle')}</h1>
       </div>
     </div>
 
@@ -625,40 +645,40 @@ export function renderCases(): string {
       <div class="container">
         <div class="grid-2" style="gap: 64px;">
           <div>
-            <h2 style="font-size: 2rem;">Advocating for You and Your Family</h2>
+            <h2 style="font-size: 2rem;">${f(fields?.section1Heading, 'Advocating for You and Your Family')}</h2>
             <p style="color: #64748b; margin: 24px 0; line-height: 1.8;">
-              If you're in need of legal guidance and support, you've come to the right place. Meet the dedicated team at Thomas & Wan, who bring 55 years of experience to the table.
+              ${f(fields?.paragraph1, "If you're in need of legal guidance and support, you've come to the right place. Meet the dedicated team at Thomas & Wan, who bring 55 years of experience to the table.")}
             </p>
             <p style="color: #64748b; line-height: 1.8;">
-              We've successfully handled numerous multi-million dollar cases related to serious medical malpractice and wrongful death issues across the nation. We're not afraid to take on challenging cases, and our commitment to justice is unwavering.
+              ${f(fields?.paragraph2, "We've successfully handled numerous multi-million dollar cases related to serious medical malpractice and wrongful death issues across the nation. We're not afraid to take on challenging cases, and our commitment to justice is unwavering.")}
             </p>
             <a href="/contact-us" class="btn" style="margin-top: 32px;">Request a Free Consultation</a>
           </div>
           <div>
             <div class="grid-2" style="gap: 16px;">
               <div class="card-alt">
-                <h3 style="font-size: 1.25rem; margin-bottom: 8px;">Brain Injuries</h3>
-                <p style="color: #64748b; font-size: 0.9rem;">We understand the physical, emotional, and financial toll brain injuries can take on individuals and their families.</p>
+                <h3 style="font-size: 1.25rem; margin-bottom: 8px;">${f(fields?.section2Heading, 'Brain Injuries')}</h3>
+                <p style="color: #64748b; font-size: 0.9rem;">${f(fields?.paragraph3, 'We understand the physical, emotional, and financial toll brain injuries can take on individuals and their families.')}</p>
               </div>
               <div class="card-alt">
-                <h3 style="font-size: 1.25rem; margin-bottom: 8px;">Birth Injuries</h3>
-                <p style="color: #64748b; font-size: 0.9rem;">When things go wrong due to medical negligence, the consequences can be devastating. We help families protect a child's future.</p>
+                <h3 style="font-size: 1.25rem; margin-bottom: 8px;">${f(fields?.section3Heading, 'Birth Injuries')}</h3>
+                <p style="color: #64748b; font-size: 0.9rem;">${f(fields?.paragraph4, "When things go wrong due to medical negligence, the consequences can be devastating. We help families protect a child's future.")}</p>
               </div>
               <div class="card-alt">
-                <h3 style="font-size: 1.25rem; margin-bottom: 8px;">Surgical Errors</h3>
-                <p style="color: #64748b; font-size: 0.9rem;">Surgical procedures are meant to improve your health. When errors occur, the results can be catastrophic. We fight for your rights.</p>
+                <h3 style="font-size: 1.25rem; margin-bottom: 8px;">${f(fields?.section4Heading, 'Surgical Errors')}</h3>
+                <p style="color: #64748b; font-size: 0.9rem;">${f(fields?.paragraph5, 'Surgical procedures are meant to improve your health. When errors occur, the results can be catastrophic. We fight for your rights.')}</p>
               </div>
               <div class="card-alt">
-                <h3 style="font-size: 1.25rem; margin-bottom: 8px;">Medication Errors</h3>
-                <p style="color: #64748b; font-size: 0.9rem;">Mistakes in medication administration can have severe consequences. Our team seeks justice on your behalf.</p>
+                <h3 style="font-size: 1.25rem; margin-bottom: 8px;">${f(fields?.section5Heading, 'Medication Errors')}</h3>
+                <p style="color: #64748b; font-size: 0.9rem;">${f(fields?.paragraph6, 'Mistakes in medication administration can have severe consequences. Our team seeks justice on your behalf.')}</p>
               </div>
               <div class="card-alt">
-                <h3 style="font-size: 1.25rem; margin-bottom: 8px;">Misdiagnosis</h3>
-                <p style="color: #64748b; font-size: 0.9rem;">A misdiagnosis can delay proper treatment and exacerbate health issues. We pursue accountability and compensation.</p>
+                <h3 style="font-size: 1.25rem; margin-bottom: 8px;">${f(fields?.section6Heading, 'Misdiagnosis')}</h3>
+                <p style="color: #64748b; font-size: 0.9rem;">${f(fields?.paragraph7, 'A misdiagnosis can delay proper treatment and exacerbate health issues. We pursue accountability and compensation.')}</p>
               </div>
               <div class="card-alt">
                 <h3 style="font-size: 1.25rem; margin-bottom: 8px;">More Complex Harms</h3>
-                <p style="color: #64748b; font-size: 0.9rem;">Including burns, cerebral palsy, paralysis, hospital-acquired infections, HIE, anesthesia errors, wrong-site surgery, pulmonary embolism, stroke, and failure to diagnose or treat disease.</p>
+                <p style="color: #64748b; font-size: 0.9rem;">${f(fields?.paragraph8, 'Including burns, cerebral palsy, paralysis, hospital-acquired infections, HIE, anesthesia errors, wrong-site surgery, pulmonary embolism, stroke, and failure to diagnose or treat disease.')}</p>
               </div>
             </div>
           </div>
@@ -668,9 +688,9 @@ export function renderCases(): string {
 
     <section class="section section-dark" style="text-align: center;">
       <div class="container" style="max-width: 800px;">
-        <h2 style="font-size: 2.5rem; color: #fff;">Call Us Now For a Free Consultation</h2>
+        <h2 style="font-size: 2.5rem; color: #fff;">${f(fields?.pageCtaHeading, 'Call Us Now For a Free Consultation')}</h2>
         <p style="color: rgba(255,255,255,0.8); margin: 16px 0 32px; font-size: 1.125rem;">
-          Call us today for a free consultation—we will discuss what your legal options are for your medical malpractice case. If you have the medical records, you can send them to us for a free review with no obligation.
+          ${f(fields?.pageCtaText, "Call us today for a free consultation\u2014we will discuss what your legal options are for your medical malpractice case. If you have the medical records, you can send them to us for a free review with no obligation.")}
         </p>
         <a href="/contact-us" class="btn">Contact Us</a>
       </div>
@@ -685,12 +705,16 @@ export function renderCases(): string {
   );
 }
 
-export function renderContact(): string {
+export async function renderContact(): Promise<string> {
+  let fields: GenericPageFields | null = null;
+  try { fields = await getGenericPageFields('contact-us'); } catch (e) {}
+  const f = (val: string | undefined, fallback: string) => val ? decodeEntities(val) : fallback;
+
   const content = `
     <div class="hero">
       <div class="container">
-        <div class="meta" style="color: #F59E0B;">Free consultation · No fee unless we win</div>
-        <h1 style="font-size: 3rem;">Contact Us</h1>
+        <div class="meta" style="color: #F59E0B;">${f(fields?.pageSubheading, 'Free consultation · No fee unless we win')}</div>
+        <h1 style="font-size: 3rem;">${f(fields?.pageHeading, 'Contact Us')}</h1>
       </div>
     </div>
 
@@ -698,9 +722,9 @@ export function renderContact(): string {
       <div class="container">
         <div class="grid-2" style="gap: 64px;">
           <div>
-            <h2 style="font-size: 2rem;">Speak with a medical malpractice attorney.</h2>
+            <h2 style="font-size: 2rem;">${f(fields?.section1Heading, 'Speak with a medical malpractice attorney.')}</h2>
             <p style="color: #64748b; margin: 16px 0; line-height: 1.8;">
-              Tell us what happened. We'll review your situation and explain your options—no obligation.
+              ${f(fields?.pageIntro, "Tell us what happened. We'll review your situation and explain your options\u2014no obligation.")}
             </p>
 
             <div class="grid-3" style="gap: 16px; margin: 32px 0;">
@@ -721,8 +745,8 @@ export function renderContact(): string {
             <div class="card-alt" style="margin-top: 32px;">
               <h3 style="margin-bottom: 24px;">Our Office</h3>
               <div style="margin-bottom: 16px;">
-                <strong style="color: #1F2937;">Thomas & Wan – Medical Malpractice Attorneys</strong><br>
-                <a href="https://maps.app.goo.gl/dZzpBComUgnyvp5f6" style="color: #64748b;">1710 Sunset Blvd, Houston, TX 77005</a>
+                <strong style="color: #1F2937;">Thomas & Wan \u2013 Medical Malpractice Attorneys</strong><br>
+                <a href="https://maps.app.goo.gl/dZzpBComUgnyvp5f6" style="color: #64748b;">${f(fields?.paragraph1, '1710 Sunset Blvd, Houston, TX 77005')}</a>
               </div>
               <div style="margin-bottom: 16px;">
                 <strong>Phone:</strong> <a href="tel:713-529-1177" style="color: #F59E0B;">(713) 529-1177</a>
@@ -757,8 +781,8 @@ export function renderContact(): string {
             </p>
 
             <div class="cta" style="margin-top: 32px;">
-              <h3>Prefer to talk?</h3>
-              <p>Call for a free consultation—we'll discuss your options and next steps. If you already have medical records, we can review them.</p>
+              <h3>${f(fields?.pageCtaHeading, 'Prefer to talk?')}</h3>
+              <p>${f(fields?.pageCtaText, "Call for a free consultation\u2014we'll discuss your options and next steps. If you already have medical records, we can review them.")}</p>
               <a href="tel:713-529-1177">Call (713) 529-1177</a>
             </div>
           </div>
@@ -775,8 +799,12 @@ export function renderContact(): string {
   );
 }
 
-export function renderFAQ(): string {
-  const faqs = [
+export async function renderFAQ(): Promise<string> {
+  let fields: GenericPageFields | null = null;
+  try { fields = await getGenericPageFields('faq'); } catch (e) {}
+  const f = (val: string | undefined, fallback: string) => val ? decodeEntities(val) : fallback;
+
+  const defaultFaqs = [
     { q: "I think I have a legal claim. What do I do now?", a: "If you think you have a legal claim, your first step is finding a lawyer to represent you. You can contact Thomas & Wan to discuss your claim by filling out a form or by calling 713.529.1177. A lawyer will evaluate your case." },
     { q: "How do I know which lawyer to use?", a: "Use an attorney who has experience dealing with your type of claim and a proven track record of success. Ask about experience, how long they've practiced, how much time they spend on cases like yours, and whether they will personally handle the case or refer it to another firm." },
     { q: "Why should I hire Thomas & Wan?", a: "Linda Laurent Thomas and Michelle Wan have extensive experience handling personal injury matters and are routinely asked to handle difficult cases by other law firms. They approach practicing law as a profession, not a factory. They handle cases with personal service and focus on results, keeping you informed of your options." },
@@ -788,18 +816,32 @@ export function renderFAQ(): string {
     { q: "What if my case goes to trial?", a: "A judge or jury determines responsibility and damages. If Thomas & Wan wins a settlement or verdict, the fee is taken from that recovery." },
   ];
 
-  const faqHtml = faqs.map(f => `
+  const faqs: Array<{q: string; a: string}> = [];
+  if (fields) {
+    for (let i = 1; i <= 9; i++) {
+      const q = fields[`section${i}Heading`];
+      const a = fields[`paragraph${i + 1}`] || fields[`paragraph${i}`];
+      if (q) {
+        faqs.push({ q: decodeEntities(q), a: a ? decodeEntities(a) : (defaultFaqs[i - 1]?.a || '') });
+      }
+    }
+  }
+  if (faqs.length === 0) {
+    faqs.push(...defaultFaqs);
+  }
+
+  const faqHtml = faqs.map(faq => `
     <div class="faq-item">
-      <div class="faq-q">${f.q}</div>
-      <div class="faq-a">${f.a}</div>
+      <div class="faq-q">${faq.q}</div>
+      <div class="faq-a">${faq.a}</div>
     </div>
   `).join("");
 
   const content = `
     <div class="hero">
       <div class="container">
-        <div class="meta" style="color: #F59E0B;">What to Expect</div>
-        <h1 style="font-size: 3rem;">Frequently Asked Questions</h1>
+        <div class="meta" style="color: #F59E0B;">${f(fields?.pageSubheading, 'What to Expect')}</div>
+        <h1 style="font-size: 3rem;">${f(fields?.pageHeading, 'Frequently Asked Questions')}</h1>
       </div>
     </div>
 
@@ -810,7 +852,7 @@ export function renderFAQ(): string {
             <div class="card-alt">
               <h2 style="font-size: 1.5rem; margin-bottom: 16px;">Clear answers. Real guidance.</h2>
               <p style="color: #64748b; line-height: 1.8;">
-                This page is designed to be easier to scan and more helpful than the typical FAQ. If you don't see your question here, call us.
+                ${f(fields?.pageIntro, "This page is designed to be easier to scan and more helpful than the typical FAQ. If you don't see your question here, call us.")}
               </p>
               <a href="/contact-us" class="btn" style="margin-top: 24px;">Contact Us</a>
             </div>
@@ -823,8 +865,8 @@ export function renderFAQ(): string {
           <div>
             ${faqHtml}
             <div class="cta" style="margin-top: 48px; text-align: left;">
-              <h3>Call Us Now For a Free Consultation</h3>
-              <p>Call us today for a free consultation—we will discuss what your legal options are for your medical malpractice case. If you have the medical records, you can send them to us for a free review with no obligation.</p>
+              <h3>${f(fields?.pageCtaHeading, 'Call Us Now For a Free Consultation')}</h3>
+              <p>${f(fields?.pageCtaText, "Call us today for a free consultation\u2014we will discuss what your legal options are for your medical malpractice case. If you have the medical records, you can send them to us for a free review with no obligation.")}</p>
               <a href="/contact-us">Contact Us</a>
             </div>
           </div>
