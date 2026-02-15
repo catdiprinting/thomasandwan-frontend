@@ -56,6 +56,53 @@ function processContent(html: string): string {
   return processed;
 }
 
+const ALL_PRACTICE_AREAS = [
+  { title: "Medical Malpractice", slug: "medical-malpractice" },
+  { title: "Birth Injuries", slug: "birth-injuries" },
+  { title: "Complications of Childbirth", slug: "complications-of-childbirth" },
+  { title: "Brain Injuries", slug: "brain-injuries" },
+  { title: "Surgical Errors", slug: "surgical-errors" },
+  { title: "Medication Errors", slug: "medication-errors" },
+  { title: "Misdiagnosis", slug: "misdiagnosis" },
+];
+
+function renderBreadcrumb(pageTitle: string): string {
+  return `
+    <nav style="background: rgba(31,41,55,0.95); border-bottom: 1px solid rgba(255,255,255,0.1); padding: 12px 20px;">
+      <div class="container" style="font-size: 0.75rem; color: rgba(255,255,255,0.6);">
+        <a href="/" style="color: rgba(255,255,255,0.6); text-decoration: none;">Home</a>
+        <span style="margin: 0 6px;">›</span>
+        <a href="/cases-we-handle" style="color: rgba(255,255,255,0.6); text-decoration: none;">Cases We Handle</a>
+        <span style="margin: 0 6px;">›</span>
+        <span style="color: rgba(255,255,255,0.9); font-weight: 500;">${pageTitle}</span>
+      </div>
+    </nav>`;
+}
+
+function renderRelatedPracticeAreas(currentSlug: string): string {
+  const related = ALL_PRACTICE_AREAS.filter(a => a.slug !== currentSlug);
+  const linksHtml = related.map(a => `
+      <a href="/cases-we-handle/${a.slug}" style="display: flex; align-items: center; gap: 12px; background: #fff; padding: 16px 20px; border: 1px solid #e5e7eb; text-decoration: none; color: #1F2937; font-weight: 600; font-size: 0.9rem;">
+        ${a.title}
+        <span style="margin-left: auto; color: #F59E0B;">→</span>
+      </a>`).join("");
+  return `
+    <section class="section section-alt">
+      <div class="container">
+        <div style="text-align: center; margin-bottom: 32px;">
+          <div class="meta" style="color: #F59E0B;">Other Cases We Handle</div>
+          <h2 style="font-size: 2rem;">Related Practice Areas</h2>
+        </div>
+        <div class="grid-3" style="gap: 16px; max-width: 900px; margin: 0 auto;">
+          ${linksHtml}
+        </div>
+        <div style="text-align: center; margin-top: 24px;">
+          <a href="/cases-we-handle" style="color: #1F2937; font-weight: bold; text-transform: uppercase; letter-spacing: 0.05em; font-size: 0.8rem; text-decoration: none;">View All Cases →</a>
+        </div>
+      </div>
+    </section>`;
+}
+
 const BASE_STYLES = `
   * { margin: 0; padding: 0; box-sizing: border-box; }
   body { font-family: 'Lato', system-ui, sans-serif; line-height: 1.7; color: #334155; background: #fff; }
@@ -134,10 +181,12 @@ const BASE_STYLES = `
   .faq-item { border-bottom: 1px solid #e5e7eb; padding: 24px 0; }
   .faq-q { font-family: 'Playfair Display', Georgia, serif; font-size: 1.25rem; color: #1F2937; margin-bottom: 12px; }
   .faq-a { color: #64748b; line-height: 1.7; }
+  .footer-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 40px; }
   @media (max-width: 768px) {
     .grid-2, .grid-3 { grid-template-columns: 1fr; }
     .hero h1 { font-size: 2rem; }
     .nav-links { display: none; }
+    .footer-grid { grid-template-columns: 1fr; }
   }
 `;
 
@@ -189,15 +238,68 @@ function wrapInLayout(content: string, title: string, description: string, optio
       <div class="nav-links">
         <a href="/about-thomas-wan-llp">About</a>
         <a href="/cases-we-handle">Cases</a>
+        <a href="/testimonials">Testimonials</a>
+        <a href="/faq">FAQ</a>
         <a href="/blog">Blog</a>
         <a href="/contact-us">Contact</a>
       </div>
     </div>
   </nav>
   ${content}
-  <footer class="footer">
-    <p>&copy; ${new Date().getFullYear()} Thomas & Wan LLP. All rights reserved.</p>
-    <p style="margin-top: 8px;">1710 Sunset Blvd, Houston, TX 77005 | (713) 529-1177</p>
+  <footer class="footer" style="padding: 60px 20px 30px; text-align: left;">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <h3 style="font-family: 'Playfair Display', Georgia, serif; font-size: 1.25rem; color: #fff; margin-bottom: 16px;">Thomas & Wan LLP</h3>
+          <p style="color: rgba(255,255,255,0.6); font-size: 0.875rem; line-height: 1.7;">Houston medical malpractice attorneys with over 60 years of combined experience fighting for families and justice.</p>
+          <a href="/contact-us" style="display: inline-block; background: #F59E0B; color: #fff; padding: 12px 24px; text-decoration: none; text-transform: uppercase; font-weight: bold; letter-spacing: 0.1em; font-size: 0.75rem; border-radius: 4px; margin-top: 16px;">Free Case Review</a>
+        </div>
+        <div>
+          <h4 style="color: #fff; font-size: 0.875rem; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 16px;">Practice Areas</h4>
+          <div style="display: flex; flex-direction: column; gap: 8px;">
+            <a href="/cases-we-handle/medical-malpractice" style="color: rgba(255,255,255,0.6); text-decoration: none; font-size: 0.875rem;">Medical Malpractice</a>
+            <a href="/cases-we-handle/birth-injuries" style="color: rgba(255,255,255,0.6); text-decoration: none; font-size: 0.875rem;">Birth Injuries</a>
+            <a href="/cases-we-handle/brain-injuries" style="color: rgba(255,255,255,0.6); text-decoration: none; font-size: 0.875rem;">Brain Injuries</a>
+            <a href="/cases-we-handle/surgical-errors" style="color: rgba(255,255,255,0.6); text-decoration: none; font-size: 0.875rem;">Surgical Errors</a>
+            <a href="/cases-we-handle/medication-errors" style="color: rgba(255,255,255,0.6); text-decoration: none; font-size: 0.875rem;">Medication Errors</a>
+            <a href="/cases-we-handle/misdiagnosis" style="color: rgba(255,255,255,0.6); text-decoration: none; font-size: 0.875rem;">Misdiagnosis</a>
+            <a href="/cases-we-handle/complications-of-childbirth" style="color: rgba(255,255,255,0.6); text-decoration: none; font-size: 0.875rem;">Complications of Childbirth</a>
+          </div>
+        </div>
+        <div>
+          <h4 style="color: #fff; font-size: 0.875rem; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 16px;">Quick Links</h4>
+          <div style="display: flex; flex-direction: column; gap: 8px;">
+            <a href="/" style="color: rgba(255,255,255,0.6); text-decoration: none; font-size: 0.875rem;">Home</a>
+            <a href="/about-thomas-wan-llp" style="color: rgba(255,255,255,0.6); text-decoration: none; font-size: 0.875rem;">About</a>
+            <a href="/cases-we-handle" style="color: rgba(255,255,255,0.6); text-decoration: none; font-size: 0.875rem;">Cases</a>
+            <a href="/testimonials" style="color: rgba(255,255,255,0.6); text-decoration: none; font-size: 0.875rem;">Testimonials</a>
+            <a href="/faq" style="color: rgba(255,255,255,0.6); text-decoration: none; font-size: 0.875rem;">FAQ</a>
+            <a href="/blog" style="color: rgba(255,255,255,0.6); text-decoration: none; font-size: 0.875rem;">Blog</a>
+            <a href="/contact-us" style="color: rgba(255,255,255,0.6); text-decoration: none; font-size: 0.875rem;">Contact</a>
+          </div>
+        </div>
+        <div>
+          <h4 style="color: #fff; font-size: 0.875rem; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 16px;">Contact</h4>
+          <div style="display: flex; flex-direction: column; gap: 12px; font-size: 0.875rem;">
+            <div>
+              <div style="color: rgba(255,255,255,0.4); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 4px;">Phone</div>
+              <a href="tel:713-529-1177" style="color: #F59E0B; text-decoration: none; font-weight: bold;">(713) 529-1177</a>
+            </div>
+            <div>
+              <div style="color: rgba(255,255,255,0.4); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 4px;">Email</div>
+              <a href="mailto:info@thomasandwan.com" style="color: rgba(255,255,255,0.6); text-decoration: none;">info@thomasandwan.com</a>
+            </div>
+            <div>
+              <div style="color: rgba(255,255,255,0.4); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 4px;">Address</div>
+              <span style="color: rgba(255,255,255,0.6);">1710 Sunset Blvd<br>Houston, TX 77005</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div style="border-top: 1px solid rgba(255,255,255,0.1); margin-top: 40px; padding-top: 24px; text-align: center;">
+        <p style="color: rgba(255,255,255,0.4); font-size: 0.8rem;">&copy; ${new Date().getFullYear()} Thomas & Wan LLP. All rights reserved.</p>
+      </div>
+    </div>
   </footer>
 </body>
 </html>`;
@@ -344,31 +446,34 @@ export async function renderHomepage(): Promise<string> {
           <p style="color: #64748b; margin-top: 16px;">${f(fields?.practiceSubtext, "We don't handle car accidents or divorces. Our sole focus is mastering the complex realm of medical malpractice to win for you.")}</p>
         </div>
         <div class="grid-3">
-          <div class="card">
+          <a href="/cases-we-handle/birth-injuries" style="text-decoration: none; color: inherit;"><div class="card">
             <h3 style="font-size: 1.5rem; margin-bottom: 12px;">Birth Injuries</h3>
             <p style="color: #64748b;">Cerebral palsy, hypoxia, shoulder dystocia, and preventable birth trauma.</p>
-          </div>
-          <div class="card">
+          </div></a>
+          <a href="/cases-we-handle/surgical-errors" style="text-decoration: none; color: inherit;"><div class="card">
             <h3 style="font-size: 1.5rem; margin-bottom: 12px;">Surgical Errors</h3>
             <p style="color: #64748b;">Mistakes during surgery, anesthesia errors, and post-operative negligence.</p>
-          </div>
-          <div class="card">
+          </div></a>
+          <a href="/cases-we-handle/brain-injuries" style="text-decoration: none; color: inherit;"><div class="card">
             <h3 style="font-size: 1.5rem; margin-bottom: 12px;">Brain Injuries</h3>
             <p style="color: #64748b;">Traumatic brain injuries resulting from medical negligence or malpractice.</p>
-          </div>
-          <div class="card">
+          </div></a>
+          <a href="/cases-we-handle/misdiagnosis" style="text-decoration: none; color: inherit;"><div class="card">
             <h3 style="font-size: 1.5rem; margin-bottom: 12px;">Misdiagnosis</h3>
             <p style="color: #64748b;">Failure to diagnose cancer, heart attacks, strokes, and critical conditions.</p>
-          </div>
-          <div class="card">
+          </div></a>
+          <a href="/cases-we-handle/medical-malpractice" style="text-decoration: none; color: inherit;"><div class="card">
             <h3 style="font-size: 1.5rem; margin-bottom: 12px;">Wrongful Death</h3>
             <p style="color: #64748b;">Seeking justice for the loss of a loved one due to medical carelessness.</p>
-          </div>
+          </div></a>
           <div class="card" style="background: #1F2937; color: #fff;">
             <h3 style="font-size: 1.5rem; margin-bottom: 12px; color: #fff;">${f(fields?.practiceCtaHeading, 'Do You Have a Case?')}</h3>
             <p style="color: rgba(255,255,255,0.8); margin-bottom: 16px;">${f(fields?.practiceCtaText, 'Get a free review of your medical records by our expert team.')}</p>
             <a href="/contact-us" class="btn">${f(fields?.practiceCtaButton, 'Contact Us Today')}</a>
           </div>
+        </div>
+        <div style="text-align: center; margin-top: 32px;">
+          <a href="/cases-we-handle" style="color: #1F2937; font-weight: bold; text-transform: uppercase; letter-spacing: 0.05em; font-size: 0.875rem; text-decoration: none;">View All Cases We Handle →</a>
         </div>
       </div>
     </section>
@@ -972,6 +1077,7 @@ export async function renderMedicalMalpractice(): Promise<string> {
         <h1 style="font-size: 3rem;">${f(fields?.paTitle, "Medical Malpractice")}</h1>
       </div>
     </div>
+    ${renderBreadcrumb("Medical Malpractice")}
 
     <section class="section section-light">
       <div class="container">
@@ -1000,6 +1106,8 @@ export async function renderMedicalMalpractice(): Promise<string> {
         </div>
       </div>
     </section>
+
+    ${renderRelatedPracticeAreas("medical-malpractice")}
   `;
 
   return wrapInLayout(
@@ -1048,6 +1156,7 @@ export async function renderBirthInjuries(): Promise<string> {
         <p style="font-size: 1.25rem; margin-top: 16px;">Sometimes babies are born with medical problems that don't match their parents' expectations. Sometimes it is because the baby is a victim of a birth injury that occurs during labor and delivery.</p>
       </div>
     </div>
+    ${renderBreadcrumb("Birth Injuries")}
 
     <section class="section section-light">
       <div class="container">
@@ -1120,6 +1229,8 @@ export async function renderBirthInjuries(): Promise<string> {
       </div>
     </section>
 
+    ${renderRelatedPracticeAreas("birth-injuries")}
+
     <section class="section section-dark" style="text-align: center;">
       <div class="container" style="max-width: 800px;">
         <h2 style="font-size: 2.5rem; color: #fff;">${f(fields?.paCtaHeading, "Legal Help for The Youngest Victims")}</h2>
@@ -1167,6 +1278,7 @@ export async function renderComplicationsOfChildbirth(): Promise<string> {
         <p style="font-size: 1.25rem; margin-top: 16px;">At Thomas & Wan, we have helped families dealing with the devastating loss of a mother or serious permanent brain damage due to gross negligence during pregnancy and childbirth.</p>
       </div>
     </div>
+    ${renderBreadcrumb("Complications of Childbirth")}
 
     <section class="section section-light">
       <div class="container">
@@ -1204,6 +1316,8 @@ export async function renderComplicationsOfChildbirth(): Promise<string> {
         </p>
       </div>
     </section>
+
+    ${renderRelatedPracticeAreas("complications-of-childbirth")}
 
     <section class="section section-dark" style="text-align: center;">
       <div class="container" style="max-width: 800px;">
@@ -1262,6 +1376,7 @@ export async function renderBrainInjuries(): Promise<string> {
         <h1 style="font-size: 3rem;">${f(fields?.paTitle, "Brain Injuries")}</h1>
       </div>
     </div>
+    ${renderBreadcrumb("Brain Injuries")}
 
     <section class="section section-light">
       <div class="container">
@@ -1291,6 +1406,8 @@ export async function renderBrainInjuries(): Promise<string> {
         ${warningsHtml}
       </div>
     </section>
+
+    ${renderRelatedPracticeAreas("brain-injuries")}
 
     <section class="section section-dark" style="text-align: center;">
       <div class="container" style="max-width: 800px;">
@@ -1349,6 +1466,7 @@ export async function renderSurgicalErrors(): Promise<string> {
         <h1 style="font-size: 3rem;">${f(fields?.paTitle, "Surgical Errors")}</h1>
       </div>
     </div>
+    ${renderBreadcrumb("Surgical Errors")}
 
     <section class="section section-light">
       <div class="container">
@@ -1378,6 +1496,8 @@ export async function renderSurgicalErrors(): Promise<string> {
         ${warningsHtml}
       </div>
     </section>
+
+    ${renderRelatedPracticeAreas("surgical-errors")}
 
     <section class="section section-dark" style="text-align: center;">
       <div class="container" style="max-width: 800px;">
@@ -1436,6 +1556,7 @@ export async function renderMedicationErrors(): Promise<string> {
         <h1 style="font-size: 3rem;">${f(fields?.paTitle, "Medication Errors")}</h1>
       </div>
     </div>
+    ${renderBreadcrumb("Medication Errors")}
 
     <section class="section section-light">
       <div class="container">
@@ -1465,6 +1586,8 @@ export async function renderMedicationErrors(): Promise<string> {
         ${warningsHtml}
       </div>
     </section>
+
+    ${renderRelatedPracticeAreas("medication-errors")}
 
     <section class="section section-dark" style="text-align: center;">
       <div class="container" style="max-width: 800px;">
@@ -1523,6 +1646,7 @@ export async function renderMisdiagnosis(): Promise<string> {
         <h1 style="font-size: 3rem;">${f(fields?.paTitle, "Misdiagnosis")}</h1>
       </div>
     </div>
+    ${renderBreadcrumb("Misdiagnosis")}
 
     <section class="section section-light">
       <div class="container">
@@ -1552,6 +1676,8 @@ export async function renderMisdiagnosis(): Promise<string> {
         ${warningsHtml}
       </div>
     </section>
+
+    ${renderRelatedPracticeAreas("misdiagnosis")}
 
     <section class="section section-dark" style="text-align: center;">
       <div class="container" style="max-width: 800px;">
