@@ -60,6 +60,13 @@ shared/           # Shared code between client/server
   schema.ts       # Drizzle database schema
 ```
 
+### Internal Linking & Navigation Components
+- **Footer**: Comprehensive 4-column footer with Practice Areas links (7), Quick Links (7), Contact info, and Free Case Review CTA
+- **Breadcrumbs**: `Breadcrumbs` component with JSON-LD BreadcrumbList schema markup; integrated into `PageShell` via `breadcrumbs` prop
+- **RelatedPracticeAreas**: Cross-links to sibling practice areas on every practice area page, excluding current page
+- **PracticeAreas (homepage)**: All 5 practice area cards link to their pages; includes "View All Cases" link to /cases-we-handle
+- **PageShell**: Shared layout wrapper for most pages; supports optional `breadcrumbs` prop
+
 ### Lead Generation Features
 - **StickyMobileCTA**: Fixed call bar at bottom on mobile with tap-to-call (713) 529-1177 and "Free Review" link
 - **SmartCTA**: Reusable component that shows tel: link on mobile, /contact-us link on desktop
