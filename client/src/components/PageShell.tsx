@@ -1,13 +1,21 @@
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
+import Breadcrumbs from "@/components/Breadcrumbs";
+
+interface BreadcrumbItem {
+  label: string;
+  href?: string;
+}
 
 export default function PageShell({
   title,
   subtitle,
+  breadcrumbs,
   children,
 }: {
   title: string;
   subtitle?: string;
+  breadcrumbs?: BreadcrumbItem[];
   children: React.ReactNode;
 }) {
   return (
@@ -29,6 +37,7 @@ export default function PageShell({
             </div>
           </div>
         </header>
+        {breadcrumbs && <Breadcrumbs items={breadcrumbs} />}
         {children}
       </main>
       <Footer />
