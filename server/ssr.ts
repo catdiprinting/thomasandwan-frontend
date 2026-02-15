@@ -568,7 +568,19 @@ export async function renderHomepage(): Promise<string> {
             </div>
             <div class="faq-item">
               <div class="faq-q">Why should we hire you?</div>
-              <div class="faq-a">There are very few attorneys in Texas who specialize in medical malpractice, and those are the only kind of cases we do. Linda Thomas and Michelle Wan have over 55 years of combined experience. If we take your case, we work on your case ourselves; we don't "flip" it to another firm.</div>
+              <div class="faq-a">There are very few attorneys in Texas who specialize in medical malpractice, and those are the only kind of cases we do. Linda Thomas and Michelle Wan have over 60 years of combined experience. If we take your case, we work on your case ourselves; we don't "flip" it to another firm.</div>
+            </div>
+            <div class="faq-item">
+              <div class="faq-q">How long does a medical malpractice case take?</div>
+              <div class="faq-a">Every case is different. Some cases can be resolved in several months, while others may take a year or longer, especially if the case goes to trial. We work efficiently to move your case forward while being thorough enough to build the strongest possible case.</div>
+            </div>
+            <div class="faq-item">
+              <div class="faq-q">What medical records do I need?</div>
+              <div class="faq-a">You don't need to have your medical records ready before contacting us. We can help you obtain all the necessary records from the hospital or medical provider. If you do have records, you can send them to us for a free, no-obligation review.</div>
+            </div>
+            <div class="faq-item">
+              <div class="faq-q">Is there a deadline to file a medical malpractice lawsuit in Texas?</div>
+              <div class="faq-a">Yes. In Texas, you generally have two years from the date of the malpractice to file a lawsuit. However, there are exceptions that may shorten or extend this deadline. It is important to contact an attorney as soon as possible so your rights are protected.</div>
             </div>
           </div>
         </div>
