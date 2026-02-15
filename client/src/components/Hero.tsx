@@ -27,14 +27,14 @@ export default function Hero({
   badge2 = "No Win, No Fee",
 }: HeroProps) {
   return (
-    <section className="relative min-h-[90vh] flex items-start pt-20 md:pt-8 overflow-x-hidden bg-white">
-      <div className="container mx-auto px-4 md:px-6 grid md:grid-cols-2 gap-12 items-center">
+    <section className="relative min-h-[auto] md:min-h-[90vh] flex items-start pt-20 md:pt-8 pb-12 md:pb-0 overflow-x-hidden bg-white">
+      <div className="container mx-auto px-4 md:px-6 grid md:grid-cols-2 gap-8 md:gap-12 items-center">
         
         <motion.div
           initial={{ opacity: 0, x: -50 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.8, ease: "easeOut" }}
-          className="order-2 md:order-1 space-y-6 relative z-10"
+          className="order-1 md:order-1 space-y-6 relative z-10"
         >
           <div className="inline-block border-b-2 border-secondary pb-1 mb-4 md:mb-6">
             <span className="text-secondary font-bold tracking-widest uppercase text-xs md:text-sm" data-testid="text-hero-label">
@@ -94,7 +94,7 @@ export default function Hero({
           initial={{ opacity: 0, scale: 0.95 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 1, delay: 0.2 }}
-          className="order-1 md:order-2 relative"
+          className="order-2 md:order-2 relative"
         >
           <div className="relative z-10">
             <div className="absolute -top-6 -right-6 w-full h-full border-2 border-secondary/30 z-0 hidden md:block" />
