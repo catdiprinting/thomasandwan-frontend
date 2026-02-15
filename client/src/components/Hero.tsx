@@ -27,14 +27,14 @@ export default function Hero({
   badge2 = "No Win, No Fee",
 }: HeroProps) {
   return (
-    <section className="relative overflow-x-hidden bg-white">
-      <div className="container mx-auto px-4 md:px-6 grid md:grid-cols-2 gap-8 md:gap-0 items-stretch py-8 md:py-0">
+    <section className="relative overflow-x-hidden bg-white pt-8 md:pt-0">
+      <div className="container mx-auto px-4 md:px-6 grid md:grid-cols-2 gap-8 md:gap-12 items-center py-8 md:py-12">
         
         <motion.div
           initial={{ opacity: 0, x: -50 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.8, ease: "easeOut" }}
-          className="order-2 md:order-1 space-y-6 relative z-10 flex flex-col justify-center md:py-16 lg:py-20 md:pr-12 lg:pr-16"
+          className="order-2 md:order-1 space-y-6 relative z-10"
         >
           <div className="inline-block border-b-2 border-secondary pb-1 mb-4 md:mb-6">
             <span className="text-secondary font-bold tracking-widest uppercase text-xs md:text-sm" data-testid="text-hero-label">
@@ -78,7 +78,7 @@ export default function Hero({
             </Link>
           </div>
 
-          <div className="pt-4 md:pt-6 flex items-center gap-6 text-muted-foreground">
+          <div className="pt-4 md:pt-8 flex items-center gap-6 text-muted-foreground">
              <div className="flex items-center gap-2">
                <span className="w-3 h-3 rounded-full bg-secondary"></span>
                <span className="text-lg font-medium text-primary" data-testid="text-hero-badge1">{badge1}</span>
@@ -96,27 +96,29 @@ export default function Hero({
           transition={{ duration: 1, delay: 0.2 }}
           className="order-1 md:order-2 relative"
         >
-          <div className="relative z-10 h-full">
-            <div className="aspect-[3/2] md:aspect-auto md:h-full overflow-hidden shadow-2xl relative bg-white md:bg-transparent md:shadow-none">
+          <div className="relative z-10">
+            <div className="absolute -top-6 -right-6 w-full h-full border-2 border-secondary/30 z-0 hidden md:block" />
+            <div className="overflow-hidden shadow-2xl relative bg-white p-2 border border-gray-100">
                <img 
                  src="/images/partners-hero.jpg" 
                  alt="Linda Thomas and Michelle Wan" 
-                 className="w-full h-full object-cover object-top md:object-[center_15%]"
+                 className="w-full h-auto object-contain"
                />
-               <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent pt-16 pb-4 px-4">
-                 <div className="flex justify-between items-end">
-                   <div>
-                     <p className="font-serif text-base md:text-lg leading-tight text-white">Linda Laurent Thomas</p>
-                     <p className="text-secondary text-xs uppercase tracking-wider">Partner</p>
-                   </div>
-                   <div className="text-right">
-                     <p className="font-serif text-base md:text-lg leading-tight text-white">Michelle W. Wan</p>
-                     <p className="text-secondary text-xs uppercase tracking-wider">Partner</p>
-                   </div>
+               <div className="absolute bottom-2 left-2 right-2 flex justify-between items-end z-10 pointer-events-none">
+                 <div className="bg-primary/85 backdrop-blur-sm text-white px-3 py-1.5 md:px-4 md:py-2">
+                   <p className="font-serif text-sm md:text-lg leading-tight">Linda Laurent Thomas</p>
+                   <p className="text-secondary text-[10px] md:text-xs uppercase tracking-wider">Partner</p>
+                 </div>
+                 <div className="bg-primary/85 backdrop-blur-sm text-white px-3 py-1.5 md:px-4 md:py-2 text-right">
+                   <p className="font-serif text-sm md:text-lg leading-tight">Michelle W. Wan</p>
+                   <p className="text-secondary text-[10px] md:text-xs uppercase tracking-wider">Partner</p>
                  </div>
                </div>
             </div>
           </div>
+          
+          <div className="absolute -bottom-10 -left-10 w-40 h-40 bg-secondary/10 rounded-full blur-3xl -z-10" />
+          <div className="absolute top-10 right-10 w-60 h-60 bg-primary/5 rounded-full blur-3xl -z-10" />
         </motion.div>
       </div>
     </section>
