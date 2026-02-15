@@ -56,7 +56,6 @@ export default function Testimonials() {
       <Navigation />
       
       <main className="pt-20">
-        <Breadcrumbs items={[{ label: "Home", href: "/" }, { label: "Testimonials" }]} />
         {/* Hero Section */}
         <section className="bg-primary text-white py-24 relative overflow-hidden">
           <div className="absolute top-0 right-0 w-1/2 h-full bg-secondary/5 -skew-x-12 transform origin-top translate-x-1/4" />
@@ -82,6 +81,7 @@ export default function Testimonials() {
             </motion.div>
           </div>
         </section>
+        <Breadcrumbs items={[{ label: "Home", href: "/" }, { label: "Testimonials" }]} />
 
         {/* Testimonials Grid */}
         <section className="py-24 bg-white">
