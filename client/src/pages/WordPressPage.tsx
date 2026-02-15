@@ -144,7 +144,7 @@ export default function WordPressPage({
         />
         <Navigation />
         <main className="pt-20">
-          <section className="bg-primary text-white py-18 md:py-24 relative overflow-hidden">
+          <section className="bg-primary text-white py-18 md:py-24 relative overflow-x-hidden">
             <div className="absolute top-0 right-0 w-1/2 h-full bg-secondary/5 -skew-x-12 transform origin-top translate-x-1/4" />
             <div className="container mx-auto px-4 md:px-6 relative z-10">
               <motion.div
@@ -159,7 +159,7 @@ export default function WordPressPage({
                   </span>
                 </div>
                 <h1
-                  className="text-5xl md:text-6xl font-serif mb-8 leading-tight"
+                  className="text-5xl md:text-6xl font-serif mb-8 leading-tight pb-1"
                   dangerouslySetInnerHTML={{ __html: page.title.rendered }}
                 />
               </motion.div>
@@ -205,7 +205,7 @@ export default function WordPressPage({
       <Navigation />
 
       <main className="pt-20">
-        <section className="bg-primary text-white py-24 relative overflow-hidden">
+        <section className="bg-primary text-white py-24 relative overflow-x-hidden">
           <div className="absolute top-0 right-0 w-1/2 h-full bg-secondary/5 -skew-x-12 transform origin-top translate-x-1/4" />
           <div className="container mx-auto px-4 md:px-6 relative z-10">
             <motion.div
@@ -220,7 +220,7 @@ export default function WordPressPage({
                 </span>
               </div>
               <h1
-                className="text-5xl md:text-6xl font-serif mb-8 leading-tight"
+                className="text-5xl md:text-6xl font-serif mb-8 leading-tight pb-1"
                 dangerouslySetInnerHTML={{ __html: page.title.rendered }}
               />
             </motion.div>

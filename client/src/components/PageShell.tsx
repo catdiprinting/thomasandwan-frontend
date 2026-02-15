@@ -22,7 +22,7 @@ export default function PageShell({
     <div className="min-h-screen bg-background font-sans text-foreground overflow-x-hidden selection:bg-secondary selection:text-primary pb-20 md:pb-0">
       <Navigation />
       <main className="pt-20">
-        <header className="bg-primary text-white py-18 md:py-24 relative overflow-hidden">
+        <header className="bg-primary text-white py-18 md:py-24 relative overflow-x-hidden">
           <div className="absolute top-0 right-0 w-1/2 h-full bg-secondary/5 -skew-x-12 transform origin-top translate-x-1/4" />
           <div className="container mx-auto px-4 md:px-6 relative z-10">
             <div className="max-w-4xl">
@@ -31,7 +31,7 @@ export default function PageShell({
                   {subtitle ?? "Thomas & Wan"}
                 </span>
               </div>
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-serif mb-4 leading-tight">
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-serif mb-4 leading-tight pb-1">
                 {title}
               </h1>
             </div>

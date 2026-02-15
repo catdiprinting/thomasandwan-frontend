@@ -69,7 +69,7 @@ export default function PracticeAreas({
           <span className="text-secondary font-bold tracking-widest uppercase text-sm mb-4 block" data-testid="text-practice-label">
             {label}
           </span>
-          <h2 className="text-4xl md:text-5xl font-serif text-primary mb-6" data-testid="text-practice-heading">
+          <h2 className="text-4xl md:text-5xl font-serif text-primary mb-6 pb-1" data-testid="text-practice-heading">
             {heading}
           </h2>
           <p className="text-lg text-muted-foreground font-light" data-testid="text-practice-subtext">

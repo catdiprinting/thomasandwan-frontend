@@ -27,7 +27,7 @@ export default function Hero({
   badge2 = "No Win, No Fee",
 }: HeroProps) {
   return (
-    <section className="relative min-h-[90vh] flex items-start pt-20 md:pt-8 overflow-hidden bg-white">
+    <section className="relative min-h-[90vh] flex items-start pt-20 md:pt-8 overflow-x-hidden bg-white">
       <div className="container mx-auto px-4 md:px-6 grid md:grid-cols-2 gap-12 items-center">
         
         <motion.div
@@ -42,7 +42,7 @@ export default function Hero({
             </span>
           </div>
           
-          <h1 className="text-4xl md:text-6xl lg:text-7xl font-serif text-primary leading-[1.1]" data-testid="text-hero-heading">
+          <h1 className="text-4xl md:text-6xl lg:text-7xl font-serif text-primary leading-[1.15] pb-1" data-testid="text-hero-heading">
             {(() => {
               const match = heading.match(/(.*?)(We\s+Help\s+Families\S*)(.*)/i);
               if (match) {

@@ -58,7 +58,7 @@ export default function Testimonials() {
       
       <main className="pt-20">
         {/* Hero Section */}
-        <section className="bg-primary text-white py-24 relative overflow-hidden">
+        <section className="bg-primary text-white py-24 relative overflow-x-hidden">
           <div className="absolute top-0 right-0 w-1/2 h-full bg-secondary/5 -skew-x-12 transform origin-top translate-x-1/4" />
           <div className="container mx-auto px-4 md:px-6 relative z-10">
             <motion.div 
@@ -72,7 +72,7 @@ export default function Testimonials() {
                   Client Stories
                 </span>
               </div>
-              <h1 className="text-5xl md:text-6xl font-serif mb-8 leading-tight">
+              <h1 className="text-5xl md:text-6xl font-serif mb-8 leading-tight pb-1">
                 Voices of <br/>
                 <span className="text-secondary italic">Justice & Hope</span>
               </h1>

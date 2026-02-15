@@ -23,7 +23,7 @@ export default function About() {
       <Navigation />
       
       <main className="pt-20">
-        <section className="bg-primary text-white py-24 relative overflow-hidden">
+        <section className="bg-primary text-white py-24 relative overflow-x-hidden">
           <div className="absolute top-0 right-0 w-1/2 h-full bg-secondary/5 -skew-x-12 transform origin-top translate-x-1/4" />
           <div className="container mx-auto px-4 md:px-6 relative z-10">
             <motion.div 
@@ -37,7 +37,7 @@ export default function About() {
                   {cms(d, "aboutHeroLabel", "About Our Firm")}
                 </span>
               </div>
-              <h1 className="text-5xl md:text-6xl font-serif mb-8 leading-tight" data-testid="text-about-hero-heading">
+              <h1 className="text-5xl md:text-6xl font-serif mb-8 leading-tight pb-1" data-testid="text-about-hero-heading">
                 {cms(d, "aboutHeroHeading", "Compassionate Texas Medical Malpractice Lawyers")}
               </h1>
               <p className="text-xl text-white/80 leading-relaxed font-light" data-testid="text-about-hero-text">
