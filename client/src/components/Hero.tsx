@@ -104,6 +104,16 @@ export default function Hero({
                  alt="Linda Thomas and Michelle Wan" 
                  className="w-full h-full object-cover object-top hover:scale-105 transition-transform duration-700"
                />
+               <div className="absolute bottom-2 left-2 right-2 flex justify-between items-end z-10 pointer-events-none">
+                 <div className="bg-primary/85 backdrop-blur-sm text-white px-4 py-2">
+                   <p className="font-serif text-base md:text-lg leading-tight">Linda Laurent Thomas</p>
+                   <p className="text-secondary text-xs uppercase tracking-wider">Partner</p>
+                 </div>
+                 <div className="bg-primary/85 backdrop-blur-sm text-white px-4 py-2 text-right">
+                   <p className="font-serif text-base md:text-lg leading-tight">Michelle W. Wan</p>
+                   <p className="text-secondary text-xs uppercase tracking-wider">Partner</p>
+                 </div>
+               </div>
             </div>
           </div>
           
