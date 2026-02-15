@@ -37,7 +37,7 @@ export default function TeamSection({
 
         <div className="grid md:grid-cols-2 gap-12 lg:gap-24 items-start max-w-5xl mx-auto">
           <div className="group">
-            <Link href="/about-thomas-wan-llp">
+            <Link href="/about-thomas-wan-llp#linda-thomas">
               <div className="relative mb-8 overflow-hidden cursor-pointer">
                 <div className="absolute inset-0 bg-primary/0 group-hover:bg-primary/10 transition-colors duration-500 z-10" />
                 <img 
@@ -56,7 +56,7 @@ export default function TeamSection({
               {partner1Bio}
             </p>
             
-            <Link href="/about-thomas-wan-llp" data-testid="link-profile-thomas">
+            <Link href="/about-thomas-wan-llp#linda-thomas" data-testid="link-profile-thomas">
               <Button variant="link" className="text-primary font-bold uppercase tracking-wide p-0 h-auto hover:text-secondary group-hover:translate-x-2 transition-transform">
                 View Profile <ArrowRight className="ml-2 w-4 h-4" />
               </Button>
@@ -64,7 +64,7 @@ export default function TeamSection({
           </div>
 
           <div className="group md:mt-16">
-            <Link href="/about-thomas-wan-llp">
+            <Link href="/about-thomas-wan-llp#michelle-wan">
               <div className="relative mb-8 overflow-hidden cursor-pointer">
                 <div className="absolute inset-0 bg-primary/0 group-hover:bg-primary/10 transition-colors duration-500 z-10" />
                 <img 
@@ -83,7 +83,7 @@ export default function TeamSection({
               {partner2Bio}
             </p>
             
-            <Link href="/about-thomas-wan-llp" data-testid="link-profile-wan">
+            <Link href="/about-thomas-wan-llp#michelle-wan" data-testid="link-profile-wan">
               <Button variant="link" className="text-primary font-bold uppercase tracking-wide p-0 h-auto hover:text-secondary group-hover:translate-x-2 transition-transform">
                 View Profile <ArrowRight className="ml-2 w-4 h-4" />
               </Button>

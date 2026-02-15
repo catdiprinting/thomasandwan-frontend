@@ -105,7 +105,7 @@ export default function About() {
         <section className="py-24 bg-[#F9F7F5]">
           <div className="container mx-auto px-4 md:px-6 space-y-24">
             
-            <div className="grid lg:grid-cols-12 gap-12 items-start">
+            <div id="linda-thomas" className="grid lg:grid-cols-12 gap-12 items-start scroll-mt-24">
               <div className="lg:col-span-4 relative">
                 <div className="aspect-[3/4] relative z-10">
                   <img 
@@ -157,7 +157,7 @@ export default function About() {
               </div>
             </div>
 
-            <div className="grid lg:grid-cols-12 gap-12 items-start">
+            <div id="michelle-wan" className="grid lg:grid-cols-12 gap-12 items-start scroll-mt-24">
               <div className="lg:col-span-4 lg:order-2 relative">
                 <div className="aspect-[3/4] relative z-10">
                   <img 
