@@ -58,7 +58,7 @@ export default function BlogIndex() {
   };
 
   return (
-    <PageShell title="Resource Center" subtitle="Knowledge & Insights">
+    <PageShell title="Resource Center" subtitle="Knowledge & Insights" breadcrumbs={[{ label: "Home", href: "/" }, { label: "Blog" }]}>
       <SEO 
         title="Medical Malpractice Blog"
         description="Expert articles on medical malpractice law, birth injuries, surgical errors, and patient rights from Houston attorneys Linda Thomas and Michelle Wan."

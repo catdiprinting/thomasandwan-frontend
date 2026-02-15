@@ -5,6 +5,7 @@ import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { Link } from "wouter";
 import SEO, { lawFirmSchema, attorneySchemas } from "@/components/SEO";
+import Breadcrumbs from "@/components/Breadcrumbs";
 import { useAboutData, cms } from "@/hooks/useCmsData";
 
 export default function About() {
@@ -21,6 +22,7 @@ export default function About() {
       <Navigation />
       
       <main className="pt-20">
+        <Breadcrumbs items={[{ label: "Home", href: "/" }, { label: "About" }]} />
         <section className="bg-primary text-white py-24 relative overflow-hidden">
           <div className="absolute top-0 right-0 w-1/2 h-full bg-secondary/5 -skew-x-12 transform origin-top translate-x-1/4" />
           <div className="container mx-auto px-4 md:px-6 relative z-10">

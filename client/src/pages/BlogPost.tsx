@@ -200,7 +200,7 @@ export default function BlogPost() {
   }
 
   return (
-    <PageShell title={post.title.rendered} subtitle="Article">
+    <PageShell title={post.title.rendered} subtitle="Article" breadcrumbs={[{ label: "Home", href: "/" }, { label: "Blog", href: "/blog" }, { label: decodeHtmlEntities(post.title.rendered) }]}>
       <SEO 
         title={decodeHtmlEntities(post.title.rendered)}
         description={post.excerpt.rendered.replace(/<[^>]*>/g, '').trim().slice(0, 160)}

@@ -69,6 +69,7 @@ export default function CategoryPage() {
     <PageShell 
       title={data?.category?.name || "Category"} 
       subtitle={data ? `${data.category.count} Article${data.category.count !== 1 ? 's' : ''}` : "Articles"}
+      breadcrumbs={[{ label: "Home", href: "/" }, { label: "Blog", href: "/blog" }, { label: data?.category?.name || "Category" }]}
     >
       <section className="py-16 md:py-20 bg-white">
         <div className="container mx-auto px-4 md:px-6">

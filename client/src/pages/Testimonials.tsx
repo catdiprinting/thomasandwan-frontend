@@ -5,6 +5,7 @@ import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { Link } from "wouter";
 import SEO, { createReviewSchema } from "@/components/SEO";
+import Breadcrumbs from "@/components/Breadcrumbs";
 import { usePageCms, cms } from "@/hooks/useCmsData";
 
 const testimonials = [
@@ -55,6 +56,7 @@ export default function Testimonials() {
       <Navigation />
       
       <main className="pt-20">
+        <Breadcrumbs items={[{ label: "Home", href: "/" }, { label: "Testimonials" }]} />
         {/* Hero Section */}
         <section className="bg-primary text-white py-24 relative overflow-hidden">
           <div className="absolute top-0 right-0 w-1/2 h-full bg-secondary/5 -skew-x-12 transform origin-top translate-x-1/4" />

@@ -60,6 +60,7 @@ export default function AuthorPage() {
     <PageShell 
       title={data?.author?.name || "Author"} 
       subtitle={data ? `${data.posts.length} Article${data.posts.length !== 1 ? 's' : ''} Published` : "Articles"}
+      breadcrumbs={[{ label: "Home", href: "/" }, { label: "Blog", href: "/blog" }, { label: data?.author?.name || "Author" }]}
     >
       <section className="py-16 md:py-20 bg-white">
         <div className="container mx-auto px-4 md:px-6">
