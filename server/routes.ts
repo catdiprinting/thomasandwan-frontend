@@ -607,11 +607,20 @@ export async function registerRoutes(
   });
 
   // OpenAI Assistant API
-  const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
+  const hasOpenAIKey = !!process.env.OPENAI_API_KEY;
+  const openai = hasOpenAIKey ? new OpenAI({ apiKey: process.env.OPENAI_API_KEY }) : null;
   const assistantId = process.env.OPENAI_ASSISTANT_ID || "";
+
+  if (!hasOpenAIKey) {
+    console.log("[assistant] OPENAI_API_KEY not set — AI assistant endpoints disabled");
+  }
 
   app.post("/api/assistant/thread", async (req: Request, res: Response) => {
     try {
+      if (!openai) {
+        res.status(503).json({ error: "AI assistant is not configured" });
+        return;
+      }
       const thread = await openai.beta.threads.create();
       res.json({ threadId: thread.id });
     } catch (error: any) {
@@ -622,6 +631,10 @@ export async function registerRoutes(
 
   app.post("/api/assistant/message", async (req: Request, res: Response) => {
     try {
+      if (!openai) {
+        res.status(503).json({ error: "AI assistant is not configured" });
+        return;
+      }
       const { threadId, message } = req.body;
       if (!threadId || !message) {
         res.status(400).json({ error: "threadId and message are required" });
@@ -677,6 +690,10 @@ export async function registerRoutes(
 
   app.get("/api/assistant/history/:threadId", async (req: Request, res: Response) => {
     try {
+      if (!openai) {
+        res.status(503).json({ error: "AI assistant is not configured" });
+        return;
+      }
       const threadId = req.params.threadId as string;
       const messages = await openai.beta.threads.messages.list(threadId);
       
