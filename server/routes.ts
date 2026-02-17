@@ -215,13 +215,54 @@ export async function registerRoutes(
   // Contact form submission - proxies to Contact Form 7 on main site
   app.post("/api/contact", async (req: Request, res: Response) => {
     try {
-      const { name, email, phone, address, message } = req.body;
+      const sanitize = (str: string | undefined): string => {
+        if (!str) return "";
+        return str
+          .replace(/[<>]/g, "")
+          .replace(/javascript:/gi, "")
+          .replace(/on\w+=/gi, "")
+          .replace(/data:/gi, "")
+          .trim()
+          .slice(0, 1000);
+      };
 
-      // Validate required fields
+      const validateEmail = (email: string): boolean => {
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return emailRegex.test(email) && email.length <= 254;
+      };
+
+      const validatePhone = (phone: string): boolean => {
+        if (!phone) return true;
+        const cleaned = phone.replace(/[\s\-().+]/g, "");
+        return /^\d{7,15}$/.test(cleaned);
+      };
+
+      const name = sanitize(req.body.name);
+      const email = sanitize(req.body.email);
+      const phone = sanitize(req.body.phone);
+      const address = sanitize(req.body.address);
+      const message = sanitize(req.body.message);
+
       if (!name || !email || !message) {
         res.status(400).json({ 
           success: false, 
           message: "Please fill in all required fields (name, email, message)." 
+        });
+        return;
+      }
+
+      if (!validateEmail(email)) {
+        res.status(400).json({ 
+          success: false, 
+          message: "Please provide a valid email address." 
+        });
+        return;
+      }
+
+      if (phone && !validatePhone(phone)) {
+        res.status(400).json({ 
+          success: false, 
+          message: "Please provide a valid phone number." 
         });
         return;
       }
@@ -641,9 +682,19 @@ export async function registerRoutes(
         return;
       }
 
+      const sanitizedMessage = String(message)
+        .replace(/[<>]/g, "")
+        .trim()
+        .slice(0, 2000);
+
+      if (!sanitizedMessage) {
+        res.status(400).json({ error: "Message cannot be empty" });
+        return;
+      }
+
       await openai.beta.threads.messages.create(threadId, {
         role: "user",
-        content: message,
+        content: sanitizedMessage,
       });
 
       const run = await openai.beta.threads.runs.create(threadId, {
