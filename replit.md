@@ -75,6 +75,15 @@ shared/           # Shared code between client/server
 - **Trust Badges**: Shield/Award/Scale icons with "No Fee Unless We Win", "55+ Years Experience", "$50M+ Recovered" displayed on lead capture cards
 - **Click-to-Call CTAs**: All "Call Us Now" sections across practice area pages use direct tel: links
 
+### Security Features
+- **Helmet.js**: Security headers (Content-Security-Policy, X-Frame-Options, HSTS, referrer policy, etc.)
+- **Rate Limiting**: API endpoints rate-limited (100 req/15min for assistant, 5 submissions/hr for contact form, 3 req/5min for cache refresh)
+- **CORS Restrictions**: Only allows requests from thomasandwan.com, www.thomasandwan.com, one.thomaswan.com
+- **Input Sanitization**: All user-facing inputs (contact form, AI chat) stripped of HTML tags, JS injection attempts, and length-limited
+- **Request Size Limits**: JSON and URL-encoded bodies capped at 10kb
+- **Server Fingerprint Removal**: `x-powered-by` header disabled to hide server technology
+- **Email & Phone Validation**: Contact form validates email format and phone number patterns
+
 ### Key Design Decisions
 1. **Headless WordPress CMS**: Dual-layer approach — blog posts use REST API (rich HTML), page content uses WPGraphQL + ACF (structured plain text props). React components always control design; WordPress only supplies editable text values, so CMS edits can never break the site layout
 2. **Server-side API Proxy**: WordPress requests go through the Express server to handle CORS and add caching capabilities
