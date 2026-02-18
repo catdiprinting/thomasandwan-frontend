@@ -63,7 +63,7 @@ export default function TeamSection({
             </Link>
           </div>
 
-          <div className="group md:mt-16">
+          <div className="group">
             <Link href="/about-thomas-wan-llp#michelle-wan">
               <div className="relative mb-8 overflow-hidden cursor-pointer">
                 <div className="absolute inset-0 bg-primary/0 group-hover:bg-primary/10 transition-colors duration-500 z-10" />
