@@ -89,6 +89,7 @@ export default function Hero({
                <span className="text-base font-bold text-primary" data-testid="text-hero-badge2">{badge2}</span>
              </div>
           </div>
+          </div>
         </motion.div>
 
         <motion.div
