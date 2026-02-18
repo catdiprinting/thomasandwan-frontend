@@ -92,22 +92,22 @@ export default function TestimonialsAndResults({
             </h2>
           </div>
 
-          <div className="max-w-4xl mx-auto pb-10">
+          <div className="max-w-4xl mx-auto px-4 pb-10">
             <Carousel opts={{ align: "start", loop: true }}>
-              <CarouselContent>
+              <CarouselContent className="-ml-4">
                 {testimonials.map((t, idx) => (
-                  <CarouselItem key={idx} className="md:basis-1/2 lg:basis-1/1 pl-8 pt-8 pb-4">
+                  <CarouselItem key={idx} className="basis-full pl-4 pt-6 pb-4">
                      <Card className="border-none shadow-lg bg-white h-full relative overflow-visible">
                         <div className="absolute -top-4 -left-4 bg-secondary text-white p-3 rounded-full shadow-lg">
                            <Quote className="w-6 h-6 fill-current" />
                         </div>
-                        <CardContent className="pt-10 pb-8 px-8 flex flex-col h-full items-center text-center">
-                           <div className="flex gap-1 mb-6">
+                        <CardContent className="pt-10 pb-8 px-6 md:px-8 flex flex-col h-full items-center text-center">
+                           <div className="flex gap-1 mb-4 md:mb-6">
                              {[...Array(t.rating)].map((_, i) => (
                                <Star key={i} className="w-5 h-5 text-secondary fill-current" />
                              ))}
                            </div>
-                           <p className="text-lg text-slate-600 italic font-serif leading-relaxed mb-6 flex-grow">
+                           <p className="text-base md:text-lg text-slate-600 italic font-serif leading-relaxed mb-4 md:mb-6 flex-grow">
                              "{t.text}"
                            </p>
                            <div>
@@ -119,6 +119,10 @@ export default function TestimonialsAndResults({
                   </CarouselItem>
                 ))}
               </CarouselContent>
+              <div className="flex justify-center gap-4 mt-6 md:hidden">
+                <CarouselPrevious className="static translate-y-0 border-primary text-primary hover:bg-primary hover:text-white" />
+                <CarouselNext className="static translate-y-0 border-primary text-primary hover:bg-primary hover:text-white" />
+              </div>
               <div className="hidden md:block">
                 <CarouselPrevious className="-left-12 border-primary text-primary hover:bg-primary hover:text-white" />
                 <CarouselNext className="-right-12 border-primary text-primary hover:bg-primary hover:text-white" />

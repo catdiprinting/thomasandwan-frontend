@@ -8,7 +8,7 @@ const blogPosts = [
     excerpt: "Birth injuries can be devastating for families. Learn about your rights and the legal process for seeking justice in Texas.",
     date: "January 15, 2026",
     category: "Birth Injury",
-    image: "https://images.unsplash.com/photo-1519823551278-64ac927accc9?auto=format&fit=crop&q=80&w=600"
+    image: "https://images.unsplash.com/photo-1584515933487-779824d29309?auto=format&fit=crop&q=80&w=600"
   },
   {
     id: 2,

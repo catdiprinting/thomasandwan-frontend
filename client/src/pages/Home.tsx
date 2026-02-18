@@ -38,12 +38,6 @@ export default function Home() {
           badge1={cms(d, "heroBadge1", "Available 24/7")}
           badge2={cms(d, "heroBadge2", "No Win, No Fee")}
         />
-        <TrustBar
-          rating={cms(d, "trustRating", "5.0")}
-          ratingLabel={cms(d, "trustRatingLabel", "Google Reviews")}
-          avTitle={cms(d, "trustAvTitle", "AV Preeminent®")}
-          avSubtitle={cms(d, "trustAvSubtitle", "Peer Rated for Highest Level of Excellence")}
-        />
         
         <PracticeAreas
           label={cms(d, "practiceLabel", "Our Expertise")}
@@ -60,6 +54,13 @@ export default function Home() {
           text1={cms(d, "aboutText1", "At Thomas & Wan, you will work directly with Linda Thomas and Michelle Wan. We do not pass your case to junior associates. We do not refer cases out to other attorneys. We prepare every case as if it will go to trial.")}
           text2={cms(d, "aboutText2", "With over 60 years of combined experience, we have held major Texas hospitals accountable over and over again.")}
           quote={cms(d, "aboutQuote", "We don't refer cases out. When you hire Thomas & Wan, you get Thomas & Wan.")}
+        />
+
+        <TrustBar
+          rating={cms(d, "trustRating", "5.0")}
+          ratingLabel={cms(d, "trustRatingLabel", "Google Reviews")}
+          avTitle={cms(d, "trustAvTitle", "AV Preeminent®")}
+          avSubtitle={cms(d, "trustAvSubtitle", "Peer Rated for Highest Level of Excellence")}
         />
         
         <TeamSection
