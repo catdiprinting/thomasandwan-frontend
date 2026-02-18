@@ -78,14 +78,14 @@ export default function Hero({
             </Link>
           </div>
 
-          <div className="pt-2 md:pt-4 flex items-center gap-6 text-muted-foreground">
+          <div className="pt-2 md:pt-4 flex items-center justify-center gap-6 text-muted-foreground">
              <div className="flex items-center gap-2">
                <span className="w-3 h-3 rounded-full bg-secondary"></span>
                <span className="text-base font-medium text-primary" data-testid="text-hero-badge1">{badge1}</span>
              </div>
              <div className="flex items-center gap-2">
                <span className="w-3 h-3 rounded-full bg-secondary"></span>
-               <span className="text-base font-medium text-primary" data-testid="text-hero-badge2">{badge2}</span>
+               <span className="text-base font-bold text-primary" data-testid="text-hero-badge2">{badge2}</span>
              </div>
           </div>
         </motion.div>
