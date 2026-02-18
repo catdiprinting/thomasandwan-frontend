@@ -135,10 +135,19 @@ export default function BlogIndex() {
                           src={p.featured_image.source_url}
                           alt={p.featured_image.alt_text || p.title.rendered}
                           className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                          onError={(e) => {
+                            const target = e.target as HTMLImageElement;
+                            target.style.display = 'none';
+                            target.parentElement!.classList.add('flex', 'items-center', 'justify-center');
+                            const placeholder = document.createElement('div');
+                            placeholder.className = 'flex flex-col items-center justify-center text-slate-300';
+                            placeholder.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="3" rx="2" ry="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"/></svg>';
+                            target.parentElement!.appendChild(placeholder);
+                          }}
                         />
                       ) : (
-                        <div className="w-full h-full flex items-center justify-center text-slate-400">
-                          No image
+                        <div className="w-full h-full flex flex-col items-center justify-center bg-gradient-to-br from-slate-50 to-slate-100 text-slate-300">
+                          <BookOpen className="w-12 h-12 mb-2" />
                         </div>
                       )}
                     </div>

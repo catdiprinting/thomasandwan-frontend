@@ -278,6 +278,10 @@ export default function BlogPost() {
                     alt={post.featured_image.alt_text || post.title.rendered}
                     className="w-full h-full object-cover"
                     data-testid="img-post-featured"
+                    onError={(e) => {
+                      const target = e.target as HTMLImageElement;
+                      target.style.display = 'none';
+                    }}
                   />
                 </div>
               )}
