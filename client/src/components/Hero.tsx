@@ -60,25 +60,26 @@ export default function Hero({
             {text}
           </p>
           
-          <div className="flex flex-col sm:flex-row gap-4 pt-2">
-            <Link href={ctaLink} className="md:hidden w-full sm:w-auto">
-              <Button size="lg" className="w-full bg-secondary hover:bg-secondary/90 text-white rounded-none h-14 px-8 text-base tracking-wide border-0" data-testid="button-hero-cta">
-                {ctaText}
-              </Button>
-            </Link>
-            <Link href={ctaLink} className="hidden md:inline-flex w-auto">
-              <Button size="lg" className="w-full bg-secondary hover:bg-secondary/90 text-white rounded-none h-14 px-8 text-base tracking-wide border-0" data-testid="button-hero-cta-desktop">
-                {ctaText}
-              </Button>
-            </Link>
-            <Link href={secondaryLink} className="w-full sm:w-auto">
-              <Button variant="outline" size="lg" className="w-full border-2 border-primary text-primary hover:bg-primary hover:text-white rounded-none h-14 px-8 text-base tracking-wide group" data-testid="button-hero-secondary">
-                {secondaryText} <ArrowRight className="ml-2 w-4 h-4 transition-transform group-hover:translate-x-1" />
-              </Button>
-            </Link>
-          </div>
+          <div className="flex flex-col items-center sm:items-start pt-2">
+            <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
+              <Link href={ctaLink} className="md:hidden w-full sm:w-auto">
+                <Button size="lg" className="w-full bg-secondary hover:bg-secondary/90 text-white rounded-none h-14 px-8 text-base tracking-wide border-0" data-testid="button-hero-cta">
+                  {ctaText}
+                </Button>
+              </Link>
+              <Link href={ctaLink} className="hidden md:inline-flex w-auto">
+                <Button size="lg" className="w-full bg-secondary hover:bg-secondary/90 text-white rounded-none h-14 px-8 text-base tracking-wide border-0" data-testid="button-hero-cta-desktop">
+                  {ctaText}
+                </Button>
+              </Link>
+              <Link href={secondaryLink} className="w-full sm:w-auto">
+                <Button variant="outline" size="lg" className="w-full border-2 border-primary text-primary hover:bg-primary hover:text-white rounded-none h-14 px-8 text-base tracking-wide group" data-testid="button-hero-secondary">
+                  {secondaryText} <ArrowRight className="ml-2 w-4 h-4 transition-transform group-hover:translate-x-1" />
+                </Button>
+              </Link>
+            </div>
 
-          <div className="pt-2 md:pt-4 flex items-center justify-center gap-6 text-muted-foreground">
+            <div className="pt-2 md:pt-4 flex items-center justify-center gap-6 text-muted-foreground w-full sm:w-auto">
              <div className="flex items-center gap-2">
                <span className="w-3 h-3 rounded-full bg-secondary"></span>
                <span className="text-base font-bold text-primary" data-testid="text-hero-badge1">{badge1}</span>
