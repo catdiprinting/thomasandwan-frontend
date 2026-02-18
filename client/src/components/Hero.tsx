@@ -103,7 +103,7 @@ export default function Hero({
                  src="/images/partners-hero.jpg" 
                  alt="Linda Thomas and Michelle Wan" 
                  className="block w-full h-auto object-cover"
-                 style={{ margin: "-1% -7%", width: "114%", maxWidth: "114%" }}
+                 style={{ margin: "-1% -7% -1% 0%", width: "114%", maxWidth: "114%", clipPath: "inset(0 12% 0 0)" }}
                />
             </div>
           </div>
