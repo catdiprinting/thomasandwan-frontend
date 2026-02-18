@@ -5,7 +5,6 @@ import WomenOwnedSection from "@/components/WomenOwnedSection";
 import PracticeAreas from "@/components/PracticeAreas";
 import TestimonialsAndResults from "@/components/Testimonials";
 import TeamSection from "@/components/TeamSection";
-import WereYouIgnored from "@/components/WereYouIgnored";
 import FAQSection from "@/components/FAQSection";
 import BlogSection from "@/components/BlogSection";
 import Footer from "@/components/Footer";
@@ -96,8 +95,6 @@ export default function Home() {
           ]}
         />
 
-        <WereYouIgnored />
-        
         <section className="bg-primary py-16 text-white border-y border-secondary/30">
           <div className="container mx-auto px-4 grid md:grid-cols-3 gap-8 text-center divide-y md:divide-y-0 md:divide-x divide-white/10">
             <div className="p-4">

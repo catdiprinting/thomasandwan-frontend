@@ -102,7 +102,8 @@ export default function Hero({
                <img 
                  src="/images/partners-hero.jpg" 
                  alt="Linda Thomas and Michelle Wan" 
-                 className="w-full h-auto object-contain"
+                 className="w-full h-auto object-cover"
+                 style={{ margin: "0 -3%", width: "106%", maxWidth: "106%" }}
                />
             </div>
           </div>
