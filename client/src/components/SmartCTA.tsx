@@ -20,10 +20,8 @@ export default function SmartCTA({
       <a href="tel:713-529-1177" className={`md:hidden ${className}`} data-testid={testId}>
         {mobileText || children}
       </a>
-      <Link href="/contact-us">
-        <a className={`hidden md:inline-flex ${className}`} data-testid={testId}>
-          {desktopText || children}
-        </a>
+      <Link href="/contact-us" className={`hidden md:inline-flex ${className}`} data-testid={testId}>
+        {desktopText || children}
       </Link>
     </>
   );
