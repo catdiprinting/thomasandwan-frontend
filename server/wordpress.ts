@@ -89,6 +89,10 @@ function rewriteUrls(html: string): string {
   for (const domain of WP_DOMAINS) {
     result = result.replaceAll(domain, LIVE_DOMAIN);
   }
+  result = result.replace(
+    new RegExp(LIVE_DOMAIN.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + '(/wp-content/uploads/[^"\'\\s)]*)', 'g'),
+    'https://wp.thomasandwan.com$1'
+  );
   return result;
 }
 
