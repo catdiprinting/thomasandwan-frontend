@@ -216,7 +216,7 @@ export default function PracticeAreas({
         </section>
       )}
 
-      <section className="py-24 bg-[#F9F7F5]">
+      <section className="py-24 bg-white">
         <div className="container mx-auto px-4 md:px-6">
           {!parsed && (
             <div className="text-center max-w-3xl mx-auto mb-16">
