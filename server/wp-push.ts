@@ -607,7 +607,7 @@ function buildCasesContent(): string {
 <!-- /wp:heading -->
 
 <!-- wp:paragraph -->
-<p>If you're in need of legal guidance and support, you've come to the right place. Meet the dedicated team at Thomas &amp; Wan, who bring 55 years of experience to the table.</p>
+<p>If you're in need of legal guidance and support, you've come to the right place. Meet the dedicated team at Thomas &amp; Wan, who bring 60+ years of experience to the table.</p>
 <!-- /wp:paragraph -->
 
 <!-- wp:paragraph -->

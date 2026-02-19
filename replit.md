@@ -72,7 +72,7 @@ shared/           # Shared code between client/server
 - **SmartCTA**: Reusable component that shows tel: link on mobile, /contact-us link on desktop
 - **LeadCaptureForm**: Compact lead form (name, phone, message) in 3 variants (inline, card, sidebar) - submits to Contact Form 7 via /api/contact
 - **FloatingWidget**: Bottom-right floating button with Quick Contact form tab and AI Assistant chat tab (uses OpenAI assistant API)
-- **Trust Badges**: Shield/Award/Scale icons with "No Fee Unless We Win", "55+ Years Experience", "$50M+ Recovered" displayed on lead capture cards
+- **Trust Badges**: Shield/Award/Scale icons with "No Fee Unless We Win", "60+ Years Experience", "$50M+ Recovered" displayed on lead capture cards
 - **Click-to-Call CTAs**: All "Call Us Now" sections across practice area pages use direct tel: links
 
 ### Security Features

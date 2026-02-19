@@ -488,7 +488,7 @@ export async function renderHomepage(): Promise<string> {
               ${f(fields?.aboutText1, "At Thomas & Wan, we bring a unique perspective to medical malpractice law. As a women-owned firm, we understand the deep emotional toll that medical negligence takes on families. We don't just see a case; we see a mother, a child, a family that has been wronged.")}
             </p>
             <p style="color: #64748b; line-height: 1.8;">
-              ${f(fields?.aboutText2, 'With over 55 years of combined experience, we have successfully resolved cases for millions of dollars against major hospitals throughout Texas. But what truly sets us apart is our personal commitment.')}
+              ${f(fields?.aboutText2, 'With over 60 years of combined experience, we have successfully resolved cases for millions of dollars against major hospitals throughout Texas. But what truly sets us apart is our personal commitment.')}
             </p>
             <div style="margin-top: 32px;">
               <p style="font-style: italic; font-family: 'Playfair Display', serif; font-size: 1.25rem; color: #1F2937; border-left: 4px solid #F59E0B; padding-left: 20px;">
@@ -740,7 +740,7 @@ export async function renderAbout(): Promise<string> {
   return wrapInLayout(
     content,
     "About Our Firm - Medical Malpractice Attorneys",
-    "Linda Thomas and Michelle Wan are compassionate Texas medical malpractice lawyers with over 55 years of combined experience fighting for families.",
+    "Linda Thomas and Michelle Wan are compassionate Texas medical malpractice lawyers with over 60 years of combined experience fighting for families.",
     { canonicalPath: "/about-thomas-wan-llp" }
   );
 }
@@ -764,7 +764,7 @@ export async function renderCases(): Promise<string> {
           <div>
             <h2 style="font-size: 2rem;">${f(fields?.section1Heading, 'Advocating for You and Your Family')}</h2>
             <p style="color: #64748b; margin: 24px 0; line-height: 1.8;">
-              ${f(fields?.paragraph1, "If you're in need of legal guidance and support, you've come to the right place. Meet the dedicated team at Thomas & Wan, who bring 55 years of experience to the table.")}
+              ${f(fields?.paragraph1, "If you're in need of legal guidance and support, you've come to the right place. Meet the dedicated team at Thomas & Wan, who bring 60+ years of experience to the table.")}
             </p>
             <p style="color: #64748b; line-height: 1.8;">
               ${f(fields?.paragraph2, "We've successfully handled numerous multi-million dollar cases related to serious medical malpractice and wrongful death issues across the nation. We're not afraid to take on challenging cases, and our commitment to justice is unwavering.")}
