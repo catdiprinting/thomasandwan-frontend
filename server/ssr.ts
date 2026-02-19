@@ -438,7 +438,7 @@ export async function renderHomepage(): Promise<string> {
       </div>
     </section>
 
-    <section class="section-alt section">
+    <section class="section-light section">
       <div class="container">
         <div style="text-align: center; max-width: 800px; margin: 0 auto 48px;">
           <div class="meta" style="color: #F59E0B;">${f(fields?.practiceLabel, 'Our Expertise')}</div>
