@@ -7,6 +7,9 @@ on:
 
 env:
   TARGET_IP: "163.245.214.46"
+  APP_DIR: "/home/thomaswan-one/htdocs/one.thomaswan.com"
+  APP_NAME: "thomaswan"
+  PORT: "5000"
 
 jobs:
   test-ssh:
@@ -23,6 +26,41 @@ jobs:
           chmod 600 ~/.ssh/id_rsa
           ssh-keyscan -H $TARGET_IP >> ~/.ssh/known_hosts
 
-      - name: Test SSH connection
+      - name: Deploy to VPS
         run: |
-          ssh -o StrictHostKeyChecking=no thomaswan-one@$TARGET_IP "echo 'SSH OK'"
+          ssh thomaswan-one@$TARGET_IP << EOF
+            set -e
+
+            export NVM_DIR="/home/thomaswan-one/.nvm"
+            . "/home/thomaswan-one/.nvm/nvm.sh"
+
+            nvm use 22
+            node -v
+
+            cd $APP_DIR
+
+            echo "Pull latest code..."
+            git fetch origin
+            git reset --hard origin/main
+
+            echo "Installing dependencies..."
+            npm ci
+
+            echo "Build project..."
+            npm run build
+
+            echo "Restart PM2..."
+            if pm2 describe $APP_NAME > /dev/null 2>&1; then
+              pm2 restart $APP_NAME
+            else
+              pm2 start dist/index.cjs --name $APP_NAME
+            fi
+
+            pm2 save
+
+            echo "Wait 5 seconds..."
+            sleep 5
+
+            echo "Health check on port $PORT..."
+            curl -I http://localhost:$PORT || exit 1
+          EOF
