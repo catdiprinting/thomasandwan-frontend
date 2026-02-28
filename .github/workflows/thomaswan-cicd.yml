@@ -1,0 +1,28 @@
+name: CI/CD for ThomasWan
+
+on:
+  push:
+    branches:
+      - main
+
+env:
+  TARGET_IP: "163.245.214.46"
+
+jobs:
+  test-ssh:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup SSH key
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          ssh-keyscan -H $TARGET_IP >> ~/.ssh/known_hosts
+
+      - name: Test SSH connection
+        run: |
+          ssh -o StrictHostKeyChecking=no catdi@$TARGET_IP "echo 'SSH OK'"
