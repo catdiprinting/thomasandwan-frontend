@@ -1,3 +1,4 @@
+import 'dotenv/config'
 import type { Express, Request, Response } from "express";
 import { createServer, type Server } from "http";
 import OpenAI from "openai";
@@ -18,13 +19,13 @@ import {
   type WPPost,
   type WPPage,
 } from "./wordpress";
-import { 
-  renderBlogPost, 
-  renderHomepage, 
-  renderAbout, 
-  renderContact, 
-  renderFAQ, 
-  renderTestimonials, 
+import {
+  renderBlogPost,
+  renderHomepage,
+  renderAbout,
+  renderContact,
+  renderFAQ,
+  renderTestimonials,
   renderCases,
   renderMedicalMalpractice,
   renderBirthInjuries,
@@ -180,11 +181,11 @@ export async function registerRoutes(
         res.status(404).json({ error: "Author not found" });
         return;
       }
-      
+
       const perPage = parseInt(req.query.per_page as string) || 12;
       const page = parseInt(req.query.page as string) || 1;
       const posts = await fetchPostsByAuthorWithMedia(author.id, { per_page: perPage, page });
-      
+
       res.json({ author, posts });
     } catch (error) {
       console.error("Error fetching author:", error);
@@ -200,11 +201,11 @@ export async function registerRoutes(
         res.status(404).json({ error: "Category not found" });
         return;
       }
-      
+
       const perPage = parseInt(req.query.per_page as string) || 12;
       const page = parseInt(req.query.page as string) || 1;
       const posts = await fetchPostsByCategoryWithMedia(category.id, { per_page: perPage, page });
-      
+
       res.json({ category, posts });
     } catch (error) {
       console.error("Error fetching category posts:", error);
@@ -244,25 +245,25 @@ export async function registerRoutes(
       const message = sanitize(req.body.message);
 
       if (!name || !email || !message) {
-        res.status(400).json({ 
-          success: false, 
-          message: "Please fill in all required fields (name, email, message)." 
+        res.status(400).json({
+          success: false,
+          message: "Please fill in all required fields (name, email, message)."
         });
         return;
       }
 
       if (!validateEmail(email)) {
-        res.status(400).json({ 
-          success: false, 
-          message: "Please provide a valid email address." 
+        res.status(400).json({
+          success: false,
+          message: "Please provide a valid email address."
         });
         return;
       }
 
       if (phone && !validatePhone(phone)) {
-        res.status(400).json({ 
-          success: false, 
-          message: "Please provide a valid phone number." 
+        res.status(400).json({
+          success: false,
+          message: "Please provide a valid phone number."
         });
         return;
       }
@@ -296,32 +297,32 @@ export async function registerRoutes(
       const cf7Result = await cf7Response.json();
 
       if (cf7Result.status === "mail_sent") {
-        res.json({ 
-          success: true, 
-          message: "Your message has been sent successfully." 
+        res.json({
+          success: true,
+          message: "Your message has been sent successfully."
         });
       } else if (cf7Result.status === "validation_failed") {
-        res.status(400).json({ 
-          success: false, 
-          message: cf7Result.message || "Please check your form and try again." 
+        res.status(400).json({
+          success: false,
+          message: cf7Result.message || "Please check your form and try again."
         });
       } else if (cf7Result.status === "spam") {
-        res.status(400).json({ 
-          success: false, 
-          message: "Your message was flagged as spam. Please try calling us instead." 
+        res.status(400).json({
+          success: false,
+          message: "Your message was flagged as spam. Please try calling us instead."
         });
       } else {
         console.error("CF7 unexpected response:", cf7Result);
-        res.status(500).json({ 
-          success: false, 
-          message: "Unable to send message. Please try calling us at (713) 529-1177." 
+        res.status(500).json({
+          success: false,
+          message: "Unable to send message. Please try calling us at (713) 529-1177."
         });
       }
     } catch (error) {
       console.error("Error submitting contact form:", error);
-      res.status(500).json({ 
-        success: false, 
-        message: "Unable to send message. Please try calling us at (713) 529-1177." 
+      res.status(500).json({
+        success: false,
+        message: "Unable to send message. Please try calling us at (713) 529-1177."
       });
     }
   });
@@ -403,7 +404,7 @@ export async function registerRoutes(
       console.log("Starting static site export...");
       const outputDir = "./static-export";
       const result = await exportStaticSite(outputDir);
-      
+
       if (result.success) {
         res.json({
           success: true,
@@ -429,12 +430,12 @@ export async function registerRoutes(
     try {
       const outputDir = "./static-export";
       const fs = await import("fs");
-      
+
       if (!fs.existsSync(outputDir)) {
         res.json({ exists: false, files: [] });
         return;
       }
-      
+
       const files: string[] = [];
       const readDir = (dir: string, prefix: string = "") => {
         const entries = fs.readdirSync(dir, { withFileTypes: true });
@@ -447,7 +448,7 @@ export async function registerRoutes(
         }
       };
       readDir(outputDir);
-      
+
       res.json({ exists: true, files });
     } catch (error) {
       console.error("Error checking export status:", error);
@@ -482,8 +483,8 @@ export async function registerRoutes(
 
   app.get("/webhooks/wp/test", async (_req: Request, res: Response) => {
     console.log(`[webhook] Test endpoint hit`);
-    res.json({ 
-      status: "ok", 
+    res.json({
+      status: "ok",
       message: "Webhook endpoint is reachable",
       timestamp: new Date().toISOString(),
       secretConfigured: !!process.env.WP_WEBHOOK_SECRET,
@@ -540,7 +541,7 @@ export async function registerRoutes(
 
     try {
       const result = await nukeAndRefreshAll();
-      notifyProductionRefresh().catch(() => {});
+      notifyProductionRefresh().catch(() => { });
       res.json(result);
     } catch (err: any) {
       console.error(`[webhook] Error:`, err);
@@ -747,7 +748,7 @@ export async function registerRoutes(
       }
       const threadId = req.params.threadId as string;
       const messages = await openai.beta.threads.messages.list(threadId);
-      
+
       const history = messages.data
         .map((m) => ({
           role: m.role,
